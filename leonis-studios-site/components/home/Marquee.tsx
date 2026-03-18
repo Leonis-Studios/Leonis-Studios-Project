@@ -1,6 +1,3 @@
-// No "use client" needed — this is purely CSS animation,
-// no JavaScript or browser APIs required.
-
 export default function Marquee() {
   const items = [
     "Web Design",
@@ -11,16 +8,25 @@ export default function Marquee() {
     "Performance Auditing",
   ];
 
-  // We duplicate the items array so the marquee loops
-  // seamlessly — when the first set scrolls out of view,
-  // the identical second set is already in place.
   const doubled = [...items, ...items];
 
   return (
     <div
-      className="bg-crimson border-y border-crimson py-4 overflow-hidden"
+      className="py-5 overflow-hidden"
+      style={{ background: "#c41e3a", minHeight: "48px" }}
       aria-hidden="true"
     >
+      {/* ── Keyframe defined inline ───────────────────────────
+          Defining it here guarantees it's available regardless
+          of how Tailwind v4 processes globals.css at build time.
+      ──────────────────────────────────────────────────────── */}
+      <style>{`
+        @keyframes marquee {
+          from { transform: translateX(0); }
+          to   { transform: translateX(-50%); }
+        }
+      `}</style>
+
       <div
         className="flex whitespace-nowrap"
         style={{ animation: "marquee 30s linear infinite" }}
@@ -32,11 +38,16 @@ export default function Marquee() {
             style={{ fontFamily: "var(--font-display)", fontWeight: 600 }}
           >
             <span
-              className="text-white text-xs tracking-[0.2em] uppercase px-8"
+              className="text-xs tracking-[0.2em] uppercase px-8"
+              style={{
+                color: i % 2 === 0 ? "#ffffff" : "rgba(255,255,255,0.6)",
+              }}
             >
               {item}
             </span>
-            <span className="text-white/50 text-xs">◆</span>
+            <span style={{ color: "rgba(255,255,255,0.4)", fontSize: "10px" }}>
+              ◆
+            </span>
           </span>
         ))}
       </div>
