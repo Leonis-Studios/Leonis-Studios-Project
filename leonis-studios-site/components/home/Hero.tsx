@@ -1,18 +1,6 @@
-"use client";
-
-import { useEffect, useState } from "react";
 import Link from "next/link";
 
 export default function Hero() {
-  const [loaded, setLoaded] = useState(false);
-
-  // Small delay before triggering animations so the
-  // browser has time to paint the initial layout first
-  useEffect(() => {
-    const t = setTimeout(() => setLoaded(true), 100);
-    return () => clearTimeout(t);
-  }, []);
-
   return (
     <section className="relative min-h-screen flex flex-col justify-center overflow-hidden bg-black">
 
