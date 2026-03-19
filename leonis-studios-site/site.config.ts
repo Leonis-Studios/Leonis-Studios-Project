@@ -10,14 +10,14 @@
 // everywhere automatically.
 
 const siteConfig = {
-  name:     "Leonis Studios",
-  tagline:  "Bold digital craft.",
+  name: "Leonis Studios",
+  tagline: "Bold digital craft.",
   description:
     "Leonis Studios builds high-performance websites, drives search growth, and maintains digital infrastructure for businesses that refuse to settle.",
 
-  url:      "https://leonistudios.com",   // update when your domain is live
-  email:    "hello@leonistudios.com",
-  location: "New Jersey, USA",
+  url: "https://leonisstudios.com", // update when your domain is live
+  email: "hassan.shirazi@leonisstudios.com",
+  location: "New York, NY",
 
   // Used for social sharing previews (Open Graph).
   // You'll drop a 1200×630px image in /public and name it og-default.png
@@ -25,18 +25,18 @@ const siteConfig = {
 
   // Social links — set to "" to hide a platform
   social: {
-    twitter:  "",
-    github:   "https://github.com/leonis-studios",
+    twitter: "",
+    github: "https://github.com/leonis-studios",
     linkedin: "",
   },
 
   // These drive the Navbar links — add or remove items here
   // and the Navbar updates automatically. No touching component code.
   nav: [
-    { label: "Work",     href: "/work" },
+    { label: "Work", href: "/work" },
     { label: "Services", href: "/#services" },
-    { label: "About",    href: "/about" },
-    { label: "Contact",  href: "/contact" },
+    { label: "About", href: "/about" },
+    { label: "Contact", href: "/contact" },
   ],
 } as const;
 //  ^ "as const" tells TypeScript to treat every value as a

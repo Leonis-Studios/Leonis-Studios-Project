@@ -3,18 +3,14 @@ import Link from "next/link";
 import { useState, useEffect } from "react";
 
 export default function Hero() {
-  const [pastHero, setPastHero] = useState(true); // starts hidden
+  const [pastHero, setPastHero] = useState(false);
 
   useEffect(() => {
-    console.log("useEffect fired");
-
     const onScroll = () => {
-      console.log("scrollY:", window.scrollY);
       setPastHero(window.scrollY > window.innerHeight * 0.8);
     };
 
-    window.addEventListener("scroll", onScroll);
-
+    window.addEventListener("scroll", onScroll, { passive: true });
     return () => window.removeEventListener("scroll", onScroll);
   }, []);
 
@@ -202,11 +198,33 @@ export default function Hero() {
           position: "fixed",
           bottom: "32px",
           left: "48px",
-          zIndex: 9999,
+          display: "flex",
+          alignItems: "center",
+          gap: "12px",
+          opacity: pastHero ? 0 : 1,
+          transition: "opacity 0.4s ease",
+          zIndex: 10,
+          pointerEvents: "none",
         }}
       >
-        <span style={{ color: "red", fontSize: "20px" }}>
-          {pastHero ? "PAST" : "HERE"}
+        <div
+          style={{
+            width: "1px",
+            height: "40px",
+            background: "linear-gradient(to bottom, transparent, #c41e3a)",
+          }}
+        />
+        <span
+          style={{
+            fontFamily: "var(--font-display)",
+            fontSize: "10px",
+            fontWeight: 500,
+            letterSpacing: "0.2em",
+            textTransform: "uppercase",
+            color: "#888888",
+          }}
+        >
+          Scroll
         </span>
       </div>
     </section>

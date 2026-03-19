@@ -17,11 +17,81 @@ import siteConfig   from "@/site.config";
 export const metadata: Metadata = {
   title:       siteConfig.name,
   description: siteConfig.description,
+  keywords: [
+    "web design studio",
+    "Next.js development agency",
+    "SEO optimization services",
+    "website maintenance",
+    "web design New Jersey",
+    "web developer NJ",
+    "high-performance websites",
+    "small business web design",
+  ],
+  openGraph: {
+    title:       `${siteConfig.name} — ${siteConfig.tagline}`,
+    description: siteConfig.description,
+    url:         siteConfig.url,
+    type:        "website",
+    images:      [{ url: siteConfig.ogImage, width: 1200, height: 630 }],
+  },
+  twitter: {
+    card:        "summary_large_image",
+    title:       `${siteConfig.name} — ${siteConfig.tagline}`,
+    description: siteConfig.description,
+  },
+  alternates: {
+    canonical: siteConfig.url,
+  },
 };
 
 export default function HomePage() {
+  // ── JSON-LD structured data ──────────────────────────────
+  const organizationSchema = {
+    "@context":   "https://schema.org",
+    "@type":      "Organization",
+    name:         siteConfig.name,
+    url:          siteConfig.url,
+    logo:         `${siteConfig.url}/og-default.png`,
+    description:  siteConfig.description,
+    email:        siteConfig.email,
+    address: {
+      "@type":         "PostalAddress",
+      addressLocality: "New Jersey",
+      addressRegion:   "NJ",
+      addressCountry:  "US",
+    },
+    areaServed:   "United States",
+    serviceType: [
+      "Web Design",
+      "Web Development",
+      "SEO Optimization",
+      "Website Maintenance",
+    ],
+  };
+
+  const websiteSchema = {
+    "@context": "https://schema.org",
+    "@type":    "WebSite",
+    name:       siteConfig.name,
+    url:        siteConfig.url,
+    description: siteConfig.description,
+    potentialAction: {
+      "@type":       "SearchAction",
+      target:        `${siteConfig.url}/work?q={search_term_string}`,
+      "query-input": "required name=search_term_string",
+    },
+  };
+
   return (
     <>
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(organizationSchema) }}
+      />
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(websiteSchema) }}
+      />
       <Hero />
       <Marquee />
       <Services />

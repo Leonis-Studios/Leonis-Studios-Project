@@ -1,11 +1,11 @@
-"use client";
+// Server Component — fetches data directly from Sanity.
+// Hover interactivity is handled by the child FeaturedWorkGrid client component.
 
-import Link from "next/link";
-import Image from "next/image";
-import { client } from "@/sanity/lib/client";
+import Link                            from "next/link"; // used for "View All Work" header link
+import { client }                      from "@/sanity/lib/client";
 import { FEATURED_CASE_STUDIES_QUERY } from "@/sanity/lib/queries";
-import { urlFor } from "@/sanity/lib/image";
-import type { CaseStudyCard } from "@/lib/types";
+import type { CaseStudyCard }          from "@/lib/types";
+import FeaturedWorkGrid                from "@/components/home/FeaturedWorkGrid";
 
 export default async function FeaturedWork() {
   const projects: CaseStudyCard[] = await client.fetch(
@@ -58,83 +58,8 @@ export default async function FeaturedWork() {
           </Link>
         </div>
 
-        {/* ── Project cards ────────────────────────────────── */}
-        <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
-          {projects.map((project) => (
-            <Link
-              key={project._id}
-              href={`/work/${project.slug}`}
-              className="group block bg-white border border-neutral-200 hover:border-crimson transition-colors duration-300"
-            >
-              {/* Cover image */}
-              <div className="aspect-video bg-neutral-100 overflow-hidden">
-                {project.coverImage?.url ? (
-  <Image
-    src={project.coverImage.url}
-    alt={project.coverImage.alt}
-    width={800}
-    height={450}
-    className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
-  />
-) : (
-  <div className="w-full h-full flex items-center justify-center">
-    <div className="w-12 h-12 bg-neutral-200" />
-  </div>
-)}
-              </div>
-
-              {/* Card content */}
-              <div className="p-8">
-                <div className="flex items-start justify-between gap-4 mb-4">
-                  <div>
-                    <p
-                      className="text-neutral-600 text-xs tracking-[0.15em] uppercase mb-2"
-                      style={{ fontFamily: "var(--font-display)", fontWeight: 500 }}
-                    >
-                      {project.client} · {project.year}
-                    </p>
-                    <h3
-                      className="text-black group-hover:text-crimson transition-colors duration-300"
-                      style={{
-                        fontFamily:    "var(--font-display)",
-                        fontSize:      "clamp(18px, 2vw, 24px)",
-                        fontWeight:    700,
-                        letterSpacing: "-0.015em",
-                      }}
-                    >
-                      {project.title}
-                    </h3>
-                  </div>
-                  <span className="text-crimson text-xl group-hover:translate-x-1 group-hover:-translate-y-1 transition-transform duration-200 shrink-0">
-                    ↗
-                  </span>
-                </div>
-
-                <p
-                  className="text-neutral-600 text-sm leading-relaxed mb-6"
-                  style={{ fontFamily: "var(--font-body)", fontWeight: 300 }}
-                >
-                  {project.summary}
-                </p>
-
-                {/* Tags */}
-                {project.tags && project.tags.length > 0 && (
-                  <div className="flex flex-wrap gap-2">
-                    {project.tags.map((tag) => (
-                      <span
-                        key={tag}
-                        className="px-2 py-1 bg-white border border-neutral-200 text-neutral-600 text-xs tracking-wideset"
-                        style={{ fontFamily: "var(--font-display)", fontWeight: 500 }}
-                      >
-                        {tag}
-                      </span>
-                    ))}
-                  </div>
-                )}
-              </div>
-            </Link>
-          ))}
-        </div>
+        {/* ── Project cards (client component handles hover) ── */}
+        <FeaturedWorkGrid projects={projects} />
 
       </div>
     </section>
