@@ -9,6 +9,7 @@
 
 import { useState, useEffect } from "react";
 import Link from "next/link";
+import Image from "next/image";
 import { usePathname } from "next/navigation";
 import siteConfig from "@/site.config";
 
@@ -45,19 +46,21 @@ export default function Navbar() {
         <div className="flex items-center justify-between h-16">
 
           {/* ── Logo ───────────────────────────────────────── */}
-          <Link href="/" className="flex items-center gap-3 group">
-            {/* The crimson square is the Leonis visual mark —
-                a simple geometric shape that's instantly
-                recognisable and scales to any size */}
-            <div className="w-7 h-7 bg-crimson group-hover:scale-90 transition-transform duration-200" />
-            <span
-              className="text-white text-sm tracking-[0.15em] uppercase"
-              style={{ fontFamily: "var(--font-display)", fontWeight: 700 }}
-            >
-              Leonis
-              <span className="text-crimson ml-1">Studios</span>
-            </span>
-          </Link>
+          {(() => {
+            const useDarkLogo = !scrolled && pathname !== "/";
+            return (
+              <Link href="/">
+                <Image
+                  src={useDarkLogo ? "/logo-dark.png" : "/logo-white.png"}
+                  alt="Leonis Studios"
+                  width={140}
+                  height={40}
+                  priority
+                  style={{ height: "36px", width: "auto", objectFit: "contain" }}
+                />
+              </Link>
+            );
+          })()}
 
           {/* ── Desktop Nav ─────────────────────────────────── */}
           <nav className="hidden md:flex items-center gap-8">

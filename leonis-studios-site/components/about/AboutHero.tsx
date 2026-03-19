@@ -1,4 +1,9 @@
-export default function AboutHero() {
+interface Props {
+  headline?:   string;
+  subheading?: string;
+}
+
+export default function AboutHero({ headline, subheading }: Props) {
   return (
     <section
       className="relative overflow-hidden py-32 pt-40"
@@ -67,8 +72,12 @@ export default function AboutHero() {
             animation:     "fadeUp 0.8s cubic-bezier(0.16, 1, 0.3, 1) 0.25s forwards",
           }}
         >
-          The studio<br />
-          <span style={{ color: "#c41e3a" }}>behind the work.</span>
+          {headline ?? (
+            <>
+              The studio<br />
+              <span style={{ color: "#c41e3a" }}>behind the work.</span>
+            </>
+          )}
         </h1>
 
         {/* Subheading */}
@@ -85,9 +94,8 @@ export default function AboutHero() {
             animation:  "fadeUp 0.8s cubic-bezier(0.16, 1, 0.3, 1) 0.4s forwards",
           }}
         >
-          Leonis Studios is a one-person web design studio based in New Jersey.
-          We build high-performance websites for businesses that care about doing
-          things properly.
+          {subheading ??
+            "Leonis Studios is a one-person web design studio based in New Jersey. We build high-performance websites for businesses that care about doing things properly."}
         </p>
 
       </div>

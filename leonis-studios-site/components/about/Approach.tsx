@@ -1,3 +1,7 @@
+interface Props {
+  approachHeadline?: string;
+}
+
 const steps = [
   {
     number: "01",
@@ -26,7 +30,7 @@ const steps = [
   },
 ];
 
-export default function Approach() {
+export default function Approach({ approachHeadline }: Props) {
   return (
     <section
       className="py-24 lg:py-32"
@@ -61,7 +65,7 @@ export default function Approach() {
             maxWidth:      "600px",
           }}
         >
-          A process built around your success.
+          {approachHeadline ?? "A process built around your success."}
         </h2>
 
         {/* Steps */}
@@ -71,16 +75,16 @@ export default function Approach() {
               key={step.number}
               className="flex flex-col gap-4 py-8 lg:py-0 lg:px-6"
               style={{
-                borderTop:   "1px solid #1c1c1c",
-                borderLeft:  i > 0 ? "1px solid #1c1c1c" : undefined,
+                borderTop:  "1px solid #1c1c1c",
+                borderLeft: i > 0 ? "1px solid #1c1c1c" : undefined,
               }}
             >
               <span
                 style={{
-                  fontFamily: "var(--font-display)",
-                  fontSize:   "12px",
-                  fontWeight: 600,
-                  color:      "#c41e3a",
+                  fontFamily:    "var(--font-display)",
+                  fontSize:      "12px",
+                  fontWeight:    600,
+                  color:         "#c41e3a",
                   letterSpacing: "0.1em",
                 }}
               >

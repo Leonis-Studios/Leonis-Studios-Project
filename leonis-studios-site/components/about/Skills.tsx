@@ -1,4 +1,8 @@
-const technologies = [
+interface Props {
+  techStack?: string[];
+}
+
+const DEFAULT_TECHNOLOGIES = [
   "Next.js",
   "TypeScript",
   "React",
@@ -22,7 +26,9 @@ const services = [
   "Email Infrastructure",
 ];
 
-export default function Skills() {
+export default function Skills({ techStack }: Props) {
+  const technologies = (techStack && techStack.length > 0) ? techStack : DEFAULT_TECHNOLOGIES;
+
   return (
     <section
       className="py-24 lg:py-32"
@@ -66,15 +72,15 @@ export default function Skills() {
                 <span
                   key={tech}
                   style={{
-                    fontFamily:  "var(--font-display)",
-                    fontSize:    "12px",
-                    fontWeight:  600,
+                    fontFamily:    "var(--font-display)",
+                    fontSize:      "12px",
+                    fontWeight:    600,
                     letterSpacing: "0.08em",
                     textTransform: "uppercase" as const,
-                    color:       "#0a0a0a",
-                    border:      "1px solid #0a0a0a",
-                    padding:     "8px 16px",
-                    display:     "inline-block",
+                    color:         "#0a0a0a",
+                    border:        "1px solid #0a0a0a",
+                    padding:       "8px 16px",
+                    display:       "inline-block",
                   }}
                 >
                   {tech}
@@ -102,15 +108,15 @@ export default function Skills() {
                 <span
                   key={service}
                   style={{
-                    fontFamily:  "var(--font-display)",
-                    fontSize:    "12px",
-                    fontWeight:  600,
+                    fontFamily:    "var(--font-display)",
+                    fontSize:      "12px",
+                    fontWeight:    600,
                     letterSpacing: "0.08em",
                     textTransform: "uppercase" as const,
-                    color:       "#c41e3a",
-                    border:      "1px solid #c41e3a",
-                    padding:     "8px 16px",
-                    display:     "inline-block",
+                    color:         "#c41e3a",
+                    border:        "1px solid #c41e3a",
+                    padding:       "8px 16px",
+                    display:       "inline-block",
                   }}
                 >
                   {service}

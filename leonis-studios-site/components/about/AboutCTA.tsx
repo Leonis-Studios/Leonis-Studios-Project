@@ -1,6 +1,11 @@
 import Link from "next/link";
 
-export default function AboutCTA() {
+interface Props {
+  ctaHeadline?: string;
+  ctaSubtext?:  string;
+}
+
+export default function AboutCTA({ ctaHeadline, ctaSubtext }: Props) {
   return (
     <section
       className="py-24 lg:py-32"
@@ -33,8 +38,12 @@ export default function AboutCTA() {
                 color:         "#f2f2f0",
               }}
             >
-              Ready to work<br />
-              <span style={{ color: "#c41e3a" }}>together?</span>
+              {ctaHeadline ?? (
+                <>
+                  Ready to work<br />
+                  <span style={{ color: "#c41e3a" }}>together?</span>
+                </>
+              )}
             </h2>
           </div>
 
@@ -49,8 +58,8 @@ export default function AboutCTA() {
                 lineHeight: 1.75,
               }}
             >
-              Tell me about your project and I&apos;ll get back to you
-              within 24 hours with a plan and a quote.
+              {ctaSubtext ??
+                "Tell me about your project and I\u2019ll get back to you within 24 hours with a plan and a quote."}
             </p>
             <div className="flex flex-col sm:flex-row gap-4">
               <Link

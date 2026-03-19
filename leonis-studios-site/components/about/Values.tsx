@@ -1,31 +1,34 @@
-const values = [
+interface Value {
+  title:       string;
+  description: string;
+}
+
+interface Props {
+  values?: Value[];
+}
+
+const DEFAULT_VALUES: Value[] = [
   {
-    number:      "01",
-    name:        "Craft",
-    description:
-      "Every pixel, every line of code, every word on the page is deliberate. Good enough isn't good enough.",
+    title:       "Craft",
+    description: "Every pixel, every line of code, every word on the page is deliberate. Good enough isn't good enough.",
   },
   {
-    number:      "02",
-    name:        "Transparency",
-    description:
-      "No hidden scope creep. No vague timelines. You'll always know what's being built, when, and why.",
+    title:       "Transparency",
+    description: "No hidden scope creep. No vague timelines. You'll always know what's being built, when, and why.",
   },
   {
-    number:      "03",
-    name:        "Performance",
-    description:
-      "Fast sites rank higher, convert better, and create better impressions. Performance is a feature, not an afterthought.",
+    title:       "Performance",
+    description: "Fast sites rank higher, convert better, and create better impressions. Performance is a feature, not an afterthought.",
   },
   {
-    number:      "04",
-    name:        "Partnership",
-    description:
-      "I don't disappear after launch. Your growth is the measure of whether the work succeeded.",
+    title:       "Partnership",
+    description: "I don't disappear after launch. Your growth is the measure of whether the work succeeded.",
   },
 ];
 
-export default function Values() {
+export default function Values({ values }: Props) {
+  const items = (values && values.length > 0) ? values : DEFAULT_VALUES;
+
   return (
     <section
       className="py-24 lg:py-32"
@@ -65,9 +68,9 @@ export default function Values() {
           }
         `}</style>
         <div>
-          {values.map((value, i) => (
+          {items.map((value, i) => (
             <div
-              key={value.number}
+              key={value.title}
               className="value-row py-10"
               style={{
                 borderTop:    i === 0 ? "1px solid #cccccc" : undefined,
@@ -85,7 +88,7 @@ export default function Values() {
                   color:         "#cccccc",
                 }}
               >
-                {value.number}
+                {String(i + 1).padStart(2, "0")}
               </span>
 
               {/* Name */}
@@ -98,7 +101,7 @@ export default function Values() {
                   color:         "#0a0a0a",
                 }}
               >
-                {value.name}
+                {value.title}
               </h3>
 
               {/* Description */}

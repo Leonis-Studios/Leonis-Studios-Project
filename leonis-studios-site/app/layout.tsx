@@ -1,27 +1,37 @@
 import type { Metadata } from "next";
 import "./globals.css";
-import siteConfig from "@/site.config";
+import { client }              from "@/sanity/lib/client";
+import { SITE_SETTINGS_QUERY } from "@/sanity/lib/queries";
+import type { SiteSettings }   from "@/lib/types";
+import siteConfig              from "@/site.config";
 
-export const metadata: Metadata = {
-  metadataBase: new URL(siteConfig.url),
-  title: {
-    default:  `${siteConfig.name} — ${siteConfig.tagline}`,
-    template: `%s — ${siteConfig.name}`,
-  },
-  description: siteConfig.description,
-  openGraph: {
-    type:     "website",
-    siteName: siteConfig.name,
-    images:   [{ url: siteConfig.ogImage, width: 1200, height: 630 }],
-  },
-  twitter: {
-    card: "summary_large_image",
-  },
-  robots: {
-    index:  true,
-    follow: true,
-  },
-};
+export async function generateMetadata(): Promise<Metadata> {
+  const settings: SiteSettings | null = await client
+    .fetch(SITE_SETTINGS_QUERY, {}, { next: { revalidate: 3600 } })
+    .catch(() => null);
+
+  const name        = settings?.siteName        ?? siteConfig.name;
+  const tagline     = settings?.tagline         ?? siteConfig.tagline;
+  const description = settings?.metaDescription ?? siteConfig.description;
+  const ogImage     = settings?.ogImage         ?? siteConfig.ogImage;
+  const url         = siteConfig.url;
+
+  return {
+    metadataBase: new URL(url),
+    title: {
+      default:  `${name} — ${tagline}`,
+      template: `%s — ${name}`,
+    },
+    description,
+    openGraph: {
+      type:     "website",
+      siteName: name,
+      images:   [{ url: ogImage, width: 1200, height: 630 }],
+    },
+    twitter: { card: "summary_large_image" },
+    robots:  { index: true, follow: true },
+  };
+}
 
 export default function RootLayout({
   children,

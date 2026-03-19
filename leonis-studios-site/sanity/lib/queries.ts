@@ -107,3 +107,36 @@ export const CASE_STUDY_BY_SLUG_QUERY = `
 export const ALL_CASE_STUDY_SLUGS_QUERY = `
   *[_type == "caseStudy"] { "slug": slug.current }
 `;
+
+// Fetches the single site settings document
+export const SITE_SETTINGS_QUERY = `
+  *[_type == "siteSettings"][0] {
+    siteName,
+    tagline,
+    metaDescription,
+    email,
+    location,
+    social,
+    "ogImage": ogImage.asset->url
+  }
+`;
+
+// Fetches the single about page document
+export const ABOUT_PAGE_QUERY = `
+  *[_type == "aboutPage"][0] {
+    heroHeadline,
+    heroSubheading,
+    storyHeadline,
+    storyBody,
+    "profilePhoto": profilePhoto {
+      "url": asset->url,
+      alt
+    },
+    values,
+    approachHeadline,
+    approachBody,
+    techStack,
+    ctaHeadline,
+    ctaSubtext
+  }
+`;

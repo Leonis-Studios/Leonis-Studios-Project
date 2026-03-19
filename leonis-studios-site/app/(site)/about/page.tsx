@@ -1,5 +1,8 @@
 import type { Metadata }  from "next";
 import siteConfig          from "@/site.config";
+import { client }          from "@/sanity/lib/client";
+import { ABOUT_PAGE_QUERY } from "@/sanity/lib/queries";
+import type { AboutPageData } from "@/lib/types";
 import AboutHero           from "@/components/about/AboutHero";
 import Story               from "@/components/about/Story";
 import Values              from "@/components/about/Values";
@@ -39,7 +42,11 @@ export const metadata: Metadata = {
   },
 };
 
-export default function AboutPage() {
+export default async function AboutPage() {
+  const data: AboutPageData | null = await client
+    .fetch(ABOUT_PAGE_QUERY, {}, { next: { revalidate: 3600 } })
+    .catch(() => null);
+
   // ── JSON-LD structured data ──────────────────────────────
   const personSchema = {
     "@context": "https://schema.org",
@@ -106,12 +113,26 @@ export default function AboutPage() {
         type="application/ld+json"
         dangerouslySetInnerHTML={{ __html: JSON.stringify(localBusinessSchema) }}
       />
-      <AboutHero />
-      <Story />
-      <Values />
-      <Approach />
-      <Skills />
-      <AboutCTA />
+      <AboutHero
+        headline={data?.heroHeadline}
+        subheading={data?.heroSubheading}
+      />
+      <Story
+        storyBody={data?.storyBody}
+      />
+      <Values
+        values={data?.values}
+      />
+      <Approach
+        approachHeadline={data?.approachHeadline}
+      />
+      <Skills
+        techStack={data?.techStack}
+      />
+      <AboutCTA
+        ctaHeadline={data?.ctaHeadline}
+        ctaSubtext={data?.ctaSubtext}
+      />
     </>
   );
 }

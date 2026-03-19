@@ -79,3 +79,41 @@ export interface CaseStudy extends CaseStudyCard {
     value: string;
   }[];
 }
+
+// ── Site Settings ─────────────────────────────────────────
+export interface SiteSettings {
+  siteName?:        string;
+  tagline?:         string;
+  metaDescription?: string;
+  email?:           string;
+  location?:        string;
+  social?: {
+    twitter?:   string;
+    github?:    string;
+    linkedin?:  string;
+    instagram?: string;
+  };
+  ogImage?: string;
+}
+
+// ── About Page ────────────────────────────────────────────
+export interface AboutPageData {
+  heroHeadline?:   string;
+  heroSubheading?: string;
+  storyHeadline?:  string;
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  storyBody?:      any[];
+  profilePhoto?: {
+    url: string;
+    alt: string;
+  };
+  values?: {
+    title:       string;
+    description: string;
+  }[];
+  approachHeadline?: string;
+  approachBody?:     string;
+  techStack?:        string[];
+  ctaHeadline?:      string;
+  ctaSubtext?:       string;
+}

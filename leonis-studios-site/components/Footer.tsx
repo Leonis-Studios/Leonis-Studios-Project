@@ -1,4 +1,5 @@
 import Link from "next/link";
+import Image from "next/image";
 import siteConfig from "@/site.config";
 
 // Footer is a Server Component (no "use client") because it
@@ -17,15 +18,15 @@ export default function Footer() {
 
           {/* ── Brand ───────────────────────────────────────── */}
           <div className="md:col-span-1">
-            <div className="flex items-center gap-3 mb-4">
-              <div className="w-6 h-6 bg-crimson" />
-              <span
-                className="text-white text-sm tracking-[0.15em] uppercase"
-                style={{ fontFamily: "var(--font-display)", fontWeight: 700 }}
-              >
-                Leonis <span className="text-crimson">Studios</span>
-              </span>
-            </div>
+            <Link href="/" className="inline-block mb-4">
+              <Image
+                src="/logo-white.png"
+                alt="Leonis Studios"
+                width={140}
+                height={40}
+                style={{ height: "40px", width: "auto" }}
+              />
+            </Link>
             <p
               className="text-neutral-400 text-sm leading-relaxed max-w-xs"
               style={{ fontFamily: "var(--font-body)", fontWeight: 300 }}
