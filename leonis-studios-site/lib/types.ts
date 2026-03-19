@@ -37,15 +37,30 @@ export interface SanityImage {
 }
 
 // ── Service ───────────────────────────────────────────────
+export interface RetainerSummary {
+  _id:            string;
+  name:           string;
+  slug?:          string;
+  startingPrice?: number;
+  priceLabel?:    string;
+  billingPeriod?: string;
+}
+
 export interface Service {
-  _id:        string;
-  name:       string;
-  slug:       string;
-  tagline?:   string;
-  description: string;
-  features?:  string[];
-  price?:     number;
-  featured?:  boolean;
+  _id:                  string;
+  name:                 string;
+  slug:                 string;
+  category:             "package" | "retainer" | "seo" | "addon";
+  tier?:                "starter" | "growth" | "studio" | "essential" | "authority" | "na";
+  tagline?:             string;
+  description:          string;
+  startingPrice?:       number;
+  priceLabel?:          string;
+  billingPeriod?:       string;
+  features?:            string[];
+  notIncluded?:         string[];
+  featured?:            boolean;
+  recommendedRetainer?: RetainerSummary;
 }
 
 // ── Case Study (card) ─────────────────────────────────────

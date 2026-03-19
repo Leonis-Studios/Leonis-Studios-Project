@@ -20,16 +20,88 @@
 //   ↑ a parameter — passed in when you call the query,
 //     keeps queries reusable and prevents injection
 
+// All active services grouped by category
 export const ALL_SERVICES_QUERY = `
-  *[_type == "service"] | order(order asc) {
+  *[_type == "service" && active == true] | order(order asc) {
     _id,
     name,
     "slug": slug.current,
+    category,
+    tier,
     tagline,
     description,
+    startingPrice,
+    priceLabel,
+    billingPeriod,
     features,
-    price,
+    notIncluded,
+    featured,
+    "recommendedRetainer": recommendedRetainer-> {
+      _id,
+      name,
+      "slug": slug.current,
+      startingPrice,
+      priceLabel,
+      billingPeriod
+    }
+  }
+`;
+
+// Website packages only — for home page services section
+export const PACKAGE_SERVICES_QUERY = `
+  *[_type == "service" && category == "package" && active == true]
+  | order(order asc) {
+    _id,
+    name,
+    "slug": slug.current,
+    tier,
+    tagline,
+    description,
+    startingPrice,
+    priceLabel,
+    billingPeriod,
+    features,
+    notIncluded,
+    featured,
+    "recommendedRetainer": recommendedRetainer-> {
+      _id,
+      name,
+      startingPrice,
+      priceLabel,
+      billingPeriod
+    }
+  }
+`;
+
+// Retainers only
+export const RETAINER_SERVICES_QUERY = `
+  *[_type == "service" && category == "retainer" && active == true]
+  | order(order asc) {
+    _id,
+    name,
+    "slug": slug.current,
+    tier,
+    tagline,
+    description,
+    startingPrice,
+    priceLabel,
+    billingPeriod,
+    features,
+    notIncluded,
     featured
+  }
+`;
+
+// Add-ons only
+export const ADDON_SERVICES_QUERY = `
+  *[_type == "service" && category == "addon" && active == true]
+  | order(order asc) {
+    _id,
+    name,
+    startingPrice,
+    priceLabel,
+    billingPeriod,
+    description
   }
 `;
 

@@ -1,8 +1,14 @@
 "use client";
 
-import { useState }  from "react";
-import Link          from "next/link";
+import { useState }     from "react";
+import Link             from "next/link";
 import type { Service } from "@/lib/types";
+
+function formatPrice(service: Service): string {
+  if (service.priceLabel) return service.priceLabel;
+  if (service.startingPrice) return `From $${service.startingPrice.toLocaleString()}`;
+  return "Custom quote";
+}
 
 export default function ServicesGrid({ services }: { services: Service[] }) {
   const [hoveredId, setHoveredId] = useState<string | null>(null);
@@ -19,13 +25,32 @@ export default function ServicesGrid({ services }: { services: Service[] }) {
             key={service._id}
             className="p-10 flex flex-col"
             style={{
-              background:  hovered ? "#e8e8e8" : "#ffffff",
-              transition:  "background 0.3s",
-              cursor:      "default",
+              background: hovered ? "#e8e8e8" : "#ffffff",
+              transition: "background 0.3s",
+              cursor:     "default",
+              borderTop:  service.featured ? "2px solid #c41e3a" : undefined,
             }}
             onMouseEnter={() => setHoveredId(service._id)}
             onMouseLeave={() => setHoveredId(null)}
           >
+            {/* Featured label */}
+            {service.featured && (
+              <div className="mb-4">
+                <span
+                  style={{
+                    fontFamily:    "var(--font-display)",
+                    fontSize:      "10px",
+                    fontWeight:    700,
+                    letterSpacing: "0.15em",
+                    textTransform: "uppercase",
+                    color:         "#c41e3a",
+                  }}
+                >
+                  Most Popular
+                </span>
+              </div>
+            )}
+
             {/* Service number */}
             <p
               className="mb-6"
@@ -85,7 +110,7 @@ export default function ServicesGrid({ services }: { services: Service[] }) {
 
             {/* Features list */}
             {service.features && service.features.length > 0 && (
-              <ul className="space-y-2 mb-8">
+              <ul className="space-y-2 mb-4">
                 {service.features.map((feat) => (
                   <li
                     key={feat}
@@ -96,11 +121,28 @@ export default function ServicesGrid({ services }: { services: Service[] }) {
                       color:      "#3d3d3d",
                     }}
                   >
-                    <div
-                      className="w-1 h-1 shrink-0"
-                      style={{ background: "#c41e3a" }}
-                    />
+                    <div className="w-1 h-1 shrink-0" style={{ background: "#c41e3a" }} />
                     {feat}
+                  </li>
+                ))}
+              </ul>
+            )}
+
+            {/* Not included */}
+            {service.notIncluded && service.notIncluded.length > 0 && (
+              <ul className="space-y-2 mb-8">
+                {service.notIncluded.map((item) => (
+                  <li
+                    key={item}
+                    className="flex items-center gap-3 text-sm"
+                    style={{
+                      fontFamily: "var(--font-body)",
+                      fontWeight: 300,
+                      color:      "#999",
+                    }}
+                  >
+                    <span style={{ color: "#bbb" }}>—</span>
+                    {item}
                   </li>
                 ))}
               </ul>
@@ -108,34 +150,62 @@ export default function ServicesGrid({ services }: { services: Service[] }) {
 
             {/* Price + Enquire */}
             <div
-              className="flex items-center justify-between mt-auto pt-6"
-              style={{
-                borderTop:  "1px solid #e8e8e8",
-                transition: "border-color 0.3s",
-              }}
+              className="flex items-start justify-between mt-auto pt-6"
+              style={{ borderTop: "1px solid #e8e8e8" }}
             >
-              <p
-                style={{
-                  fontFamily: "var(--font-display)",
-                  fontSize:   "20px",
-                  fontWeight: 700,
-                  color:      "#0a0a0a",
-                }}
-              >
-                {service.price
-                  ? `From $${service.price.toLocaleString()}`
-                  : "Custom quote"}
-              </p>
+              <div>
+                <p
+                  style={{
+                    fontFamily: "var(--font-display)",
+                    fontSize:   "20px",
+                    fontWeight: 700,
+                    color:      "#0a0a0a",
+                  }}
+                >
+                  {formatPrice(service)}
+                </p>
+                {service.billingPeriod && (
+                  <p
+                    style={{
+                      fontFamily: "var(--font-body)",
+                      fontSize:   "12px",
+                      fontWeight: 300,
+                      color:      "#888",
+                      marginTop:  "2px",
+                    }}
+                  >
+                    /{service.billingPeriod}
+                  </p>
+                )}
+                {/* Retainer pairing callout */}
+                {service.recommendedRetainer && (
+                  <p
+                    style={{
+                      fontFamily: "var(--font-body)",
+                      fontSize:   "11px",
+                      fontWeight: 400,
+                      color:      "#888",
+                      marginTop:  "6px",
+                    }}
+                  >
+                    Pairs with{" "}
+                    <span style={{ color: "#555" }}>{service.recommendedRetainer.name}</span>
+                    {service.recommendedRetainer.startingPrice
+                      ? ` from $${service.recommendedRetainer.startingPrice.toLocaleString()}/mo`
+                      : ""}
+                  </p>
+                )}
+              </div>
               <Link
                 href="/contact"
                 className="flex items-center gap-2"
                 style={{
-                  fontFamily:    "var(--font-display)",
-                  fontSize:      "12px",
-                  fontWeight:    600,
-                  letterSpacing: "0.12em",
-                  textTransform: "uppercase",
-                  color:         "#c41e3a",
+                  fontFamily:     "var(--font-display)",
+                  fontSize:       "12px",
+                  fontWeight:     600,
+                  letterSpacing:  "0.12em",
+                  textTransform:  "uppercase",
+                  color:          "#c41e3a",
                   textDecoration: "none",
                 }}
               >
