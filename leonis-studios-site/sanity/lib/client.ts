@@ -12,7 +12,7 @@ import { createClient } from "next-sanity";
 
 export const client = createClient({
   projectId: process.env.NEXT_PUBLIC_SANITY_PROJECT_ID!,
-  dataset:   process.env.NEXT_PUBLIC_SANITY_DATASET!,
+  dataset: process.env.NEXT_PUBLIC_SANITY_DATASET!,
 
   // API version is a date string — Sanity versions its API
   // by date so old queries never break when the API updates.
