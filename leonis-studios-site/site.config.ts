@@ -19,10 +19,6 @@ const siteConfig = {
   email: "hassan.shirazi@leonisstudios.com",
   location: "New York, NY",
 
-  // Used for social sharing previews (Open Graph).
-  // You'll drop a 1200×630px image in /public and name it og-default.png
-  ogImage: "/og-default.png",
-
   // Social links — set to "" to hide a platform
   social: {
     twitter: "",
