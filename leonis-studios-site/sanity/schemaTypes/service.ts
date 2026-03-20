@@ -170,7 +170,7 @@ export const serviceSchema = defineType({
       title:    "name",
       subtitle: "category",
     },
-    prepare({ title, subtitle }: { title: string; subtitle: string }) {
+    prepare(selection: { title?: string; subtitle?: string }) {
       const labels: Record<string, string> = {
         package:  "📦 Website Package",
         retainer: "🔄 Monthly Retainer",
@@ -178,8 +178,8 @@ export const serviceSchema = defineType({
         addon:    "➕ Add-on",
       };
       return {
-        title,
-        subtitle: labels[subtitle] ?? subtitle,
+        title:    selection.title ?? "",
+        subtitle: labels[selection.subtitle ?? ""] ?? selection.subtitle ?? "",
       };
     },
   },
