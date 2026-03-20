@@ -5,8 +5,6 @@ export const siteSettingsSchema = defineType({
   title: "Site Settings",
   type: "document",
   icon: () => "⚙️",
-  // Prevents creating more than one — singleton pattern
-  __experimental_actions: ["update", "publish"],
   fields: [
     defineField({
       name: "siteName",

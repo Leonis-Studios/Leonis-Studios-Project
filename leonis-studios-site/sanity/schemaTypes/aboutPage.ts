@@ -5,7 +5,6 @@ export const aboutPageSchema = defineType({
   title: "About Page",
   type:  "document",
   icon:  () => "📖",
-  __experimental_actions: ["update", "publish"],
   fields: [
     // ── Hero section ──────────────────────────────────
     defineField({
