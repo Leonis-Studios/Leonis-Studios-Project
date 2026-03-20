@@ -21,7 +21,6 @@ export const metadata: Metadata = {
       "Ready to hire a web designer? Tell Leonis Studios about your project and get a response within 24 hours.",
     url:         `${siteConfig.url}/contact`,
     type:        "website",
-    images:      [{ url: siteConfig.ogImage, width: 1200, height: 630 }],
   },
   twitter: {
     card:        "summary_large_image",

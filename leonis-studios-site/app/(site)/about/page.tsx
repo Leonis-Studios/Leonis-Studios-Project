@@ -29,7 +29,6 @@ export const metadata: Metadata = {
       "Leonis Studios is a New Jersey web design studio built on craft and performance. Meet Hassan Shirazi, the developer behind every project.",
     url:         `${siteConfig.url}/about`,
     type:        "website",
-    images:      [{ url: siteConfig.ogImage, width: 1200, height: 630 }],
   },
   twitter: {
     card:        "summary_large_image",
