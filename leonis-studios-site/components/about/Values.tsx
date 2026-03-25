@@ -52,70 +52,77 @@ export default function Values({ values }: Props) {
         </div>
 
         {/* Values list */}
-        <style>{`
-          .value-row {
-            display: flex;
-            flex-direction: column;
-            gap: 0.5rem;
-          }
-          @media (min-width: 1024px) {
-            .value-row {
-              display: grid;
-              grid-template-columns: 80px 1fr 2fr;
-              gap: 3rem;
-              align-items: center;
-            }
-          }
-        `}</style>
         <div>
-          {items.map((value, i) => (
+          {items.map((value, index) => (
             <div
-              key={value.title}
-              className="value-row py-10"
+              key={index}
               style={{
-                borderTop:    i === 0 ? "1px solid #cccccc" : undefined,
-                borderBottom: "1px solid #cccccc",
+                position:     "relative",
+                padding:      "32px 0 32px 0",
+                borderBottom: "1px solid #e8e8e8",
+                overflow:     "hidden",
               }}
             >
-              {/* Number */}
+              {/* Large decorative number — absolute, behind content */}
               <span
+                aria-hidden="true"
                 style={{
+                  position:      "absolute",
+                  left:          "-10px",
+                  top:           "8px",
                   fontFamily:    "var(--font-display)",
-                  fontSize:      "clamp(36px, 5vw, 64px)",
+                  fontSize:      "80px",
                   fontWeight:    800,
-                  letterSpacing: "-0.03em",
                   lineHeight:    1,
-                  color:         "#cccccc",
+                  color:         "#e3dfd9",
+                  opacity:       0.6,
+                  letterSpacing: "-0.03em",
+                  userSelect:    "none",
+                  zIndex:        0,
+                  pointerEvents: "none",
                 }}
               >
-                {String(i + 1).padStart(2, "0")}
+                {String(index + 1).padStart(2, "0")}
               </span>
 
-              {/* Name */}
-              <h3
+              {/* Content sits above the number via z-index */}
+              <div
                 style={{
-                  fontFamily:    "var(--font-display)",
-                  fontSize:      "clamp(20px, 2.5vw, 30px)",
-                  fontWeight:    800,
-                  letterSpacing: "-0.02em",
-                  color:         "#0a0a0a",
+                  position:            "relative",
+                  zIndex:              1,
+                  display:             "grid",
+                  gridTemplateColumns: "1fr 2fr",
+                  gap:                 "0 48px",
+                  alignItems:          "start",
+                  paddingLeft:         "0px",
                 }}
               >
-                {value.title}
-              </h3>
-
-              {/* Description */}
-              <p
-                style={{
-                  fontFamily: "var(--font-body)",
-                  fontSize:   "clamp(14px, 1.2vw, 16px)",
-                  fontWeight: 400,
-                  color:      "#3d3d3d",
-                  lineHeight: 1.8,
-                }}
-              >
-                {value.description}
-              </p>
+                <h3
+                  style={{
+                    fontFamily:    "var(--font-display)",
+                    fontSize:      "clamp(18px, 2vw, 24px)",
+                    fontWeight:    700,
+                    color:         "#0a0a0a",
+                    letterSpacing: "-0.015em",
+                    margin:        0,
+                    paddingTop:    "4px",
+                  }}
+                >
+                  {value.title}
+                </h3>
+                <p
+                  style={{
+                    fontFamily: "var(--font-body)",
+                    fontSize:   "15px",
+                    fontWeight: 300,
+                    color:      "#3d3d3d",
+                    lineHeight: 1.7,
+                    margin:     0,
+                  }}
+                >
+                  {value.description}
+                </p>
+              </div>
             </div>
           ))}
         </div>

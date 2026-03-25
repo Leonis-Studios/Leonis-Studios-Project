@@ -53,7 +53,7 @@ export default function Hero() {
             className="text-crimson text-xs tracking-[0.25em] uppercase"
             style={{ fontFamily: "var(--font-display)", fontWeight: 500 }}
           >
-            Web Studio · Est. 2024
+            Web Studio · Est. 2026
           </span>
         </div>
 

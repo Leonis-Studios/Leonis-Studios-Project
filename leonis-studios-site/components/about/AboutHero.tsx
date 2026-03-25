@@ -1,5 +1,5 @@
 interface Props {
-  headline?:   string;
+  headline?: string;
   subheading?: string;
 }
 
@@ -36,13 +36,13 @@ export default function AboutHero({ headline, subheading }: Props) {
       </div>
 
       <div className="max-w-7xl mx-auto px-6 lg:px-12">
-
         {/* Eyebrow label */}
         <div
           className="flex items-center gap-4 mb-8"
           style={{
-            opacity:   0,
-            animation: "fadeUp 0.8s cubic-bezier(0.16, 1, 0.3, 1) 0.1s forwards",
+            opacity: 0,
+            animation:
+              "fadeUp 0.8s cubic-bezier(0.16, 1, 0.3, 1) 0.1s forwards",
           }}
         >
           <div className="w-8 h-px" style={{ background: "#c41e3a" }} />
@@ -51,7 +51,7 @@ export default function AboutHero({ headline, subheading }: Props) {
             style={{
               fontFamily: "var(--font-display)",
               fontWeight: 500,
-              color:      "#c41e3a",
+              color: "#c41e3a",
             }}
           >
             About
@@ -61,20 +61,22 @@ export default function AboutHero({ headline, subheading }: Props) {
         {/* Heading */}
         <h1
           style={{
-            fontFamily:    "var(--font-display)",
-            fontSize:      "clamp(48px, 9vw, 112px)",
-            fontWeight:    800,
-            lineHeight:    0.92,
+            fontFamily: "var(--font-display)",
+            fontSize: "clamp(48px, 9vw, 112px)",
+            fontWeight: 800,
+            lineHeight: 0.92,
             letterSpacing: "-0.03em",
-            color:         "#f2f2f0",
-            maxWidth:      "800px",
-            opacity:       0,
-            animation:     "fadeUp 0.8s cubic-bezier(0.16, 1, 0.3, 1) 0.25s forwards",
+            color: "#f2f2f0",
+            maxWidth: "800px",
+            opacity: 0,
+            animation:
+              "fadeUp 0.8s cubic-bezier(0.16, 1, 0.3, 1) 0.25s forwards",
           }}
         >
           {headline ?? (
             <>
-              The studio<br />
+              The studio
+              <br />
               <span style={{ color: "#c41e3a" }}>behind the work.</span>
             </>
           )}
@@ -85,19 +87,19 @@ export default function AboutHero({ headline, subheading }: Props) {
           className="mt-8"
           style={{
             fontFamily: "var(--font-body)",
-            fontSize:   "clamp(15px, 1.4vw, 18px)",
+            fontSize: "clamp(15px, 1.4vw, 18px)",
             fontWeight: 300,
-            color:      "#888888",
-            maxWidth:   "500px",
+            color: "#888888",
+            maxWidth: "500px",
             lineHeight: 1.75,
-            opacity:    0,
-            animation:  "fadeUp 0.8s cubic-bezier(0.16, 1, 0.3, 1) 0.4s forwards",
+            opacity: 0,
+            animation:
+              "fadeUp 0.8s cubic-bezier(0.16, 1, 0.3, 1) 0.4s forwards",
           }}
         >
           {subheading ??
-            "Leonis Studios is a one-person web design studio based in New Jersey. We build high-performance websites for businesses that care about doing things properly."}
+            "Leonis Studios is a one-person web design studio based in New York. We build high-performance websites for businesses that care about doing things properly."}
         </p>
-
       </div>
     </section>
   );
