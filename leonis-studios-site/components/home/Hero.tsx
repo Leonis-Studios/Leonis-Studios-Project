@@ -1,6 +1,7 @@
 "use client";
 import Link from "next/link";
 import { useState, useEffect } from "react";
+import { colors } from "@/lib/colors";
 
 export default function Hero() {
   const [pastHero, setPastHero] = useState(false);
@@ -33,9 +34,9 @@ export default function Hero() {
         style={{ opacity: 0.4 }}
         aria-hidden="true"
       >
-        <div className="absolute left-0 top-0 bottom-0 w-px bg-crimson opacity-20" />
+        <div className="absolute left-0 top-0 bottom-0 w-px opacity-20" style={{ backgroundColor: colors.accent }} />
         <div className="absolute top-1/2 -translate-y-1/2 left-12 w-64 h-64 border border-neutral-800" />
-        <div className="absolute top-1/2 -translate-y-1/2 left-24 w-32 h-32 border border-crimson opacity-20" />
+        <div className="absolute top-1/2 -translate-y-1/2 left-24 w-32 h-32 border opacity-20" style={{ borderColor: colors.accent }} />
       </div>
 
       <div className="max-w-7xl mx-auto px-6 lg:px-12 w-full flex flex-col justify-center flex-1 pt-32 pb-8">
@@ -48,10 +49,10 @@ export default function Hero() {
               "fadeUp 0.8s cubic-bezier(0.16, 1, 0.3, 1) 0.1s forwards",
           }}
         >
-          <div className="w-8 h-px bg-crimson" />
+          <div className="w-8 h-px" style={{ backgroundColor: colors.accent }} />
           <span
-            className="text-crimson text-xs tracking-[0.25em] uppercase"
-            style={{ fontFamily: "var(--font-display)", fontWeight: 500 }}
+            className="text-xs tracking-[0.25em] uppercase"
+            style={{ color: colors.accent, fontFamily: "var(--font-display)", fontWeight: 500 }}
           >
             Web Studio · Est. 2026
           </span>
@@ -76,7 +77,7 @@ export default function Hero() {
           <br />
           Digital.
           <br />
-          <span style={{ color: "var(--color-crimson)" }}>Craft.</span>
+          <span style={{ color: colors.accent }}>Craft.</span>
         </h1>
 
         {/* ── Sub copy ───────────────────────────────────────── */}
@@ -110,8 +111,9 @@ export default function Hero() {
         >
           <Link
             href="/contact"
-            className="inline-flex items-center justify-center gap-3 px-8 py-4 bg-crimson text-white hover:bg-crimson-dark transition-colors duration-200 group"
+            className="inline-flex items-center justify-center gap-3 px-8 py-4 text-white transition-colors duration-200 group"
             style={{
+              backgroundColor: colors.accent,
               fontFamily: "var(--font-display)",
               fontSize: "13px",
               fontWeight: 600,
@@ -211,7 +213,7 @@ export default function Hero() {
           style={{
             width: "1px",
             height: "40px",
-            background: "linear-gradient(to bottom, transparent, #c41e3a)",
+            background: `linear-gradient(to bottom, transparent, ${colors.accent})`,
           }}
         />
         <span
@@ -221,7 +223,7 @@ export default function Hero() {
             fontWeight: 500,
             letterSpacing: "0.2em",
             textTransform: "uppercase",
-            color: "#888888",
+            color: colors.textNav,
           }}
         >
           Scroll

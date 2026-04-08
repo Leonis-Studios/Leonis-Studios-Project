@@ -1,8 +1,10 @@
+import { colors } from "@/lib/colors";
+
 export default function ContactHero() {
   return (
     <section
       className="relative overflow-hidden py-32 pt-40"
-      style={{ background: "#0a0a0a" }}
+      style={{ background: colors.bgDark }}
     >
       <style>{`
         @keyframes fadeUp {
@@ -18,11 +20,11 @@ export default function ContactHero() {
       >
         <div
           className="absolute left-0 top-0 bottom-0 w-px"
-          style={{ background: "#c41e3a", opacity: 0.2 }}
+          style={{ background: colors.accent, opacity: 0.2 }}
         />
         <div
           className="absolute top-1/2 -translate-y-1/2 left-12 w-48 h-48"
-          style={{ border: "1px solid #1c1c1c" }}
+          style={{ border: `1px solid ${colors.surfaceDark}` }}
         />
       </div>
 
@@ -36,13 +38,13 @@ export default function ContactHero() {
             animation: "fadeUp 0.8s cubic-bezier(0.16, 1, 0.3, 1) 0.1s forwards",
           }}
         >
-          <div className="w-8 h-px" style={{ background: "#c41e3a" }} />
+          <div className="w-8 h-px" style={{ background: colors.accent }} />
           <span
             className="text-xs tracking-[0.25em] uppercase"
             style={{
               fontFamily: "var(--font-display)",
               fontWeight: 500,
-              color:      "#c41e3a",
+              color:      colors.accent,
             }}
           >
             Contact
@@ -57,14 +59,14 @@ export default function ContactHero() {
             fontWeight:    800,
             lineHeight:    0.92,
             letterSpacing: "-0.03em",
-            color:         "#f2f2f0",
+            color:         colors.bgLight,
             maxWidth:      "700px",
             opacity:       0,
             animation:     "fadeUp 0.8s cubic-bezier(0.16, 1, 0.3, 1) 0.25s forwards",
           }}
         >
           Start a<br />
-          <span style={{ color: "#c41e3a" }}>Project.</span>
+          <span style={{ color: colors.accent }}>Project.</span>
         </h1>
 
         {/* Subheading */}
@@ -74,7 +76,7 @@ export default function ContactHero() {
             fontFamily: "var(--font-body)",
             fontSize:   "clamp(15px, 1.4vw, 18px)",
             fontWeight: 300,
-            color:      "#888888",
+            color:      colors.textSecondary,
             maxWidth:   "460px",
             lineHeight: 1.75,
             opacity:    0,

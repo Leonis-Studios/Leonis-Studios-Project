@@ -10,6 +10,7 @@ import Link from "next/link";
 import Image from "next/image";
 import { useState } from "react";
 import type { CaseStudyCard } from "@/lib/types";
+import { colors } from "@/lib/colors";
 
 interface WorkGridProps {
   projects: CaseStudyCard[];
@@ -31,21 +32,21 @@ export default function WorkGrid({ projects }: WorkGridProps) {
       : projects.filter((p) => p.tags?.includes(activeFilter));
 
   return (
-    <section style={{ background: "#f2f2f0" }} className="py-24">
+    <section style={{ background: colors.bgLight }} className="py-24">
       {/* CSS hover rules for card border + title colour.
           Tailwind hover:border-crimson is unreliable in v4
           because the custom token isn't always available as a
           utility class, so we define the rule ourselves. */}
       <style>{`
         .work-card {
-          border: 1px solid #2a2a2a;
+          border: 1px solid ${colors.borderDark};
           transition: border-color 0.3s ease;
         }
         .work-card:hover {
-          border-color: #c41e3a;
+          border-color: ${colors.accent};
         }
         .work-card:hover .work-card-title {
-          color: #c41e3a;
+          color: ${colors.accent};
         }
         .work-card-title {
           transition: color 0.3s ease;
@@ -66,9 +67,9 @@ export default function WorkGrid({ projects }: WorkGridProps) {
                 fontWeight:      600,
                 letterSpacing:   "0.1em",
                 textTransform:   "uppercase",
-                background:      activeFilter === filter ? "#c41e3a" : "transparent",
-                color:           activeFilter === filter ? "#f2f2f0" : "#888888",
-                border:          `1px solid ${activeFilter === filter ? "#c41e3a" : "#2a2a2a"}`,
+                background:      activeFilter === filter ? colors.accent : "transparent",
+                color:           activeFilter === filter ? colors.bgLight : colors.textSecondary,
+                border:          `1px solid ${activeFilter === filter ? colors.accent : colors.borderDark}`,
                 padding:         "8px 20px",
                 cursor:          "pointer",
                 transition:      "all 0.2s ease",
@@ -87,7 +88,7 @@ export default function WorkGrid({ projects }: WorkGridProps) {
                 fontFamily: "var(--font-body)",
                 fontSize:   "16px",
                 fontWeight: 300,
-                color:      "#888888",
+                color:      colors.textSecondary,
               }}
             >
               No projects match that filter yet.
@@ -104,7 +105,7 @@ export default function WorkGrid({ projects }: WorkGridProps) {
                 {/* ── Cover image ──────────────────────────────── */}
                 <div
                   className="aspect-video overflow-hidden"
-                  style={{ background: "#1c1c1c" }}
+                  style={{ background: colors.surfaceDark }}
                 >
                   {project.coverImage?.url ? (
                     <Image
@@ -116,13 +117,13 @@ export default function WorkGrid({ projects }: WorkGridProps) {
                     />
                   ) : (
                     <div className="w-full h-full flex items-center justify-center">
-                      <div className="w-12 h-12" style={{ background: "#2a2a2a" }} />
+                      <div className="w-12 h-12" style={{ background: colors.borderDark }} />
                     </div>
                   )}
                 </div>
 
                 {/* ── Card content ─────────────────────────────── */}
-                <div className="p-8" style={{ background: "#ffffff" }}>
+                <div className="p-8" style={{ background: colors.bgCard }}>
                   <div className="flex items-start justify-between gap-4 mb-4">
                     <div>
                       {/* Client · Year */}
@@ -131,7 +132,7 @@ export default function WorkGrid({ projects }: WorkGridProps) {
                         style={{
                           fontFamily: "var(--font-display)",
                           fontWeight: 500,
-                          color:      "#888888",
+                          color:      colors.textSecondary,
                         }}
                       >
                         {project.client} · {project.year}
@@ -145,7 +146,7 @@ export default function WorkGrid({ projects }: WorkGridProps) {
                           fontSize:      "clamp(18px, 2vw, 24px)",
                           fontWeight:    700,
                           letterSpacing: "-0.015em",
-                          color:         "#0a0a0a",
+                          color:         colors.bgDark,
                         }}
                       >
                         {project.title}
@@ -155,7 +156,7 @@ export default function WorkGrid({ projects }: WorkGridProps) {
                     {/* Arrow */}
                     <span
                       className="group-hover:translate-x-1 group-hover:-translate-y-1 transition-transform duration-200 shrink-0"
-                      style={{ color: "#c41e3a", fontSize: "20px" }}
+                      style={{ color: colors.accent, fontSize: "20px" }}
                     >
                       ↗
                     </span>
@@ -167,7 +168,7 @@ export default function WorkGrid({ projects }: WorkGridProps) {
                     style={{
                       fontFamily: "var(--font-body)",
                       fontWeight: 300,
-                      color:      "#888888",
+                      color:      colors.textSecondary,
                     }}
                   >
                     {project.summary}
@@ -183,8 +184,8 @@ export default function WorkGrid({ projects }: WorkGridProps) {
                           style={{
                             fontFamily: "var(--font-display)",
                             fontWeight: 500,
-                            border:     "1px solid #2a2a2a",
-                            color:      "#888888",
+                            border:     `1px solid ${colors.borderDark}`,
+                            color:      colors.textSecondary,
                           }}
                         >
                           {tag}

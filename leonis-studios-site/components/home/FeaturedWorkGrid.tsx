@@ -4,6 +4,7 @@ import { useState }       from "react";
 import Link               from "next/link";
 import Image              from "next/image";
 import type { CaseStudyCard } from "@/lib/types";
+import { colors }             from "@/lib/colors";
 
 export default function FeaturedWorkGrid({ projects }: { projects: CaseStudyCard[] }) {
   const [hoveredId, setHoveredId] = useState<string | null>(null);
@@ -18,8 +19,8 @@ export default function FeaturedWorkGrid({ projects }: { projects: CaseStudyCard
             href={`/work/${project.slug}`}
             className="block"
             style={{
-              background:  "#ffffff",
-              border:      hovered ? "1px solid #c41e3a" : "1px solid #e8e8e8",
+              background:  colors.bgCard,
+              border:      hovered ? `1px solid ${colors.accent}` : `1px solid ${colors.bgMuted}`,
               transition:  "border-color 0.3s",
               textDecoration: "none",
             }}
@@ -29,7 +30,7 @@ export default function FeaturedWorkGrid({ projects }: { projects: CaseStudyCard
             {/* Cover image */}
             <div
               className="aspect-video overflow-hidden"
-              style={{ background: "#e8e8e8" }}
+              style={{ background: colors.bgMuted }}
             >
               {project.coverImage?.url ? (
                 <Image
@@ -45,7 +46,7 @@ export default function FeaturedWorkGrid({ projects }: { projects: CaseStudyCard
                 />
               ) : (
                 <div className="w-full h-full flex items-center justify-center">
-                  <div className="w-12 h-12" style={{ background: "#cccccc" }} />
+                  <div className="w-12 h-12" style={{ background: colors.borderLight }} />
                 </div>
               )}
             </div>
@@ -59,7 +60,7 @@ export default function FeaturedWorkGrid({ projects }: { projects: CaseStudyCard
                     style={{
                       fontFamily: "var(--font-display)",
                       fontWeight: 500,
-                      color:      "#888888",
+                      color:      colors.textSecondary,
                     }}
                   >
                     {project.client} · {project.year}
@@ -70,7 +71,7 @@ export default function FeaturedWorkGrid({ projects }: { projects: CaseStudyCard
                       fontSize:      "clamp(18px, 2vw, 24px)",
                       fontWeight:    700,
                       letterSpacing: "-0.015em",
-                      color:         hovered ? "#c41e3a" : "#0a0a0a",
+                      color:         hovered ? colors.accent : colors.bgDark,
                       transition:    "color 0.3s",
                     }}
                   >
@@ -80,7 +81,7 @@ export default function FeaturedWorkGrid({ projects }: { projects: CaseStudyCard
                 <span
                   className="text-xl shrink-0"
                   style={{
-                    color:      "#c41e3a",
+                    color:      colors.accent,
                     transform:  hovered ? "translate(2px, -2px)" : "translate(0, 0)",
                     transition: "transform 0.2s",
                     display:    "inline-block",
@@ -95,7 +96,7 @@ export default function FeaturedWorkGrid({ projects }: { projects: CaseStudyCard
                 style={{
                   fontFamily: "var(--font-body)",
                   fontWeight: 300,
-                  color:      "#888888",
+                  color:      colors.textSecondary,
                 }}
               >
                 {project.summary}
@@ -111,9 +112,9 @@ export default function FeaturedWorkGrid({ projects }: { projects: CaseStudyCard
                       style={{
                         fontFamily: "var(--font-display)",
                         fontWeight: 500,
-                        background: "#ffffff",
-                        border:     "1px solid #e8e8e8",
-                        color:      "#888888",
+                        background: colors.bgCard,
+                        border:     `1px solid ${colors.bgMuted}`,
+                        color:      colors.textSecondary,
                       }}
                     >
                       {tag}

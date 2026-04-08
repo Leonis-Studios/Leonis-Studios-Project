@@ -6,6 +6,7 @@ import { client }                      from "@/sanity/lib/client";
 import { FEATURED_CASE_STUDIES_QUERY } from "@/sanity/lib/queries";
 import type { CaseStudyCard }          from "@/lib/types";
 import FeaturedWorkGrid                from "@/components/home/FeaturedWorkGrid";
+import { colors }                      from "@/lib/colors";
 
 export default async function FeaturedWork() {
   const projects: CaseStudyCard[] = await client.fetch(
@@ -20,17 +21,17 @@ export default async function FeaturedWork() {
   if (!projects.length) return null;
 
   return (
-    <section className="py-24" style={{background: "#e8e8e8"}}>
+    <section className="py-24" style={{background: colors.bgMuted}}>
       <div className="max-w-7xl mx-auto px-6 lg:px-12">
 
         {/* ── Section header ───────────────────────────────── */}
         <div className="flex flex-col lg:flex-row lg:items-end lg:justify-between mb-16 gap-6">
           <div>
             <div className="flex items-center gap-4 mb-5">
-              <div className="w-8 h-px bg-crimson" />
+              <div className="w-8 h-px" style={{ background: colors.accent }} />
               <span
-                className="text-crimson text-xs tracking-[0.25em] uppercase"
-                style={{ fontFamily: "var(--font-display)", fontWeight: 500 }}
+                className="text-xs tracking-[0.25em] uppercase"
+                style={{ color: colors.accent, fontFamily: "var(--font-display)", fontWeight: 500 }}
               >
                 Selected Work
               </span>

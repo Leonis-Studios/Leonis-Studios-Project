@@ -1,3 +1,5 @@
+import { colors } from "@/lib/colors";
+
 interface Props {
   headline?: string;
   subheading?: string;
@@ -7,7 +9,7 @@ export default function AboutHero({ headline, subheading }: Props) {
   return (
     <section
       className="relative overflow-hidden py-32 pt-40"
-      style={{ background: "#0a0a0a" }}
+      style={{ background: colors.bgDark }}
     >
       <style>{`
         @keyframes fadeUp {
@@ -23,15 +25,15 @@ export default function AboutHero({ headline, subheading }: Props) {
       >
         <div
           className="absolute left-0 top-0 bottom-0 w-px"
-          style={{ background: "#c41e3a", opacity: 0.2 }}
+          style={{ background: colors.accent, opacity: 0.2 }}
         />
         <div
           className="absolute top-1/2 -translate-y-1/2 left-12 w-48 h-48"
-          style={{ border: "1px solid #1c1c1c" }}
+          style={{ border: `1px solid ${colors.surfaceDark}` }}
         />
         <div
           className="absolute top-1/2 -translate-y-1/2 left-20 w-32 h-32"
-          style={{ border: "1px solid #1c1c1c", opacity: 0.5 }}
+          style={{ border: `1px solid ${colors.surfaceDark}`, opacity: 0.5 }}
         />
       </div>
 
@@ -45,13 +47,13 @@ export default function AboutHero({ headline, subheading }: Props) {
               "fadeUp 0.8s cubic-bezier(0.16, 1, 0.3, 1) 0.1s forwards",
           }}
         >
-          <div className="w-8 h-px" style={{ background: "#c41e3a" }} />
+          <div className="w-8 h-px" style={{ background: colors.accent }} />
           <span
             className="text-xs tracking-[0.25em] uppercase"
             style={{
               fontFamily: "var(--font-display)",
               fontWeight: 500,
-              color: "#c41e3a",
+              color: colors.accent,
             }}
           >
             About
@@ -66,7 +68,7 @@ export default function AboutHero({ headline, subheading }: Props) {
             fontWeight: 800,
             lineHeight: 0.92,
             letterSpacing: "-0.03em",
-            color: "#f2f2f0",
+            color: colors.bgLight,
             maxWidth: "800px",
             opacity: 0,
             animation:
@@ -77,7 +79,7 @@ export default function AboutHero({ headline, subheading }: Props) {
             <>
               The studio
               <br />
-              <span style={{ color: "#c41e3a" }}>behind the work.</span>
+              <span style={{ color: colors.accent }}>behind the work.</span>
             </>
           )}
         </h1>
@@ -89,7 +91,7 @@ export default function AboutHero({ headline, subheading }: Props) {
             fontFamily: "var(--font-body)",
             fontSize: "clamp(15px, 1.4vw, 18px)",
             fontWeight: 300,
-            color: "#888888",
+            color: colors.textSecondary,
             maxWidth: "500px",
             lineHeight: 1.75,
             opacity: 0,

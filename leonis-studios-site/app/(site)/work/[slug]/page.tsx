@@ -17,6 +17,7 @@ import {
 } from "@/sanity/lib/queries";
 import type { CaseStudy }  from "@/lib/types";
 import siteConfig          from "@/site.config";
+import { colors }          from "@/lib/colors";
 
 // ── Static params ──────────────────────────────────────────────
 // Next.js calls this at build time to pre-render every slug.
@@ -93,7 +94,7 @@ export default async function CaseStudyPage(
           Dark strip at the top holds the navigation and the
           full-width cover image so it bleeds edge-to-edge.
       ──────────────────────────────────────────────────────── */}
-      <div style={{ background: "#0a0a0a" }}>
+      <div style={{ background: colors.bgDark }}>
 
         {/* Back navigation */}
         <div className="max-w-7xl mx-auto px-6 lg:px-12 pt-32 pb-8">
@@ -103,7 +104,7 @@ export default async function CaseStudyPage(
             style={{
               fontFamily: "var(--font-display)",
               fontWeight: 500,
-              color:      "#888888",
+              color:      colors.textSecondary,
             }}
           >
             <span>←</span>
@@ -118,7 +119,7 @@ export default async function CaseStudyPage(
             style={{
               fontFamily: "var(--font-display)",
               fontWeight: 500,
-              color:      "#c41e3a",
+              color:      colors.accent,
             }}
           >
             {project.client} · {project.year}
@@ -130,7 +131,7 @@ export default async function CaseStudyPage(
               fontWeight:    800,
               lineHeight:    0.95,
               letterSpacing: "-0.025em",
-              color:         "#f2f2f0",
+              color:         colors.bgLight,
               maxWidth:      "820px",
             }}
           >
@@ -143,7 +144,7 @@ export default async function CaseStudyPage(
                 fontFamily: "var(--font-body)",
                 fontSize:   "clamp(15px, 1.4vw, 18px)",
                 fontWeight: 300,
-                color:      "#888888",
+                color:      colors.textSecondary,
                 maxWidth:   "560px",
                 lineHeight: 1.75,
               }}
@@ -155,7 +156,7 @@ export default async function CaseStudyPage(
 
         {/* Full-width cover image */}
         {project.coverImage?.url && (
-          <div className="w-full aspect-video overflow-hidden" style={{ background: "#1c1c1c" }}>
+          <div className="w-full aspect-video overflow-hidden" style={{ background: colors.surfaceDark }}>
             <Image
               src={project.coverImage.url}
               alt={project.coverImage.alt ?? project.title}
@@ -173,7 +174,7 @@ export default async function CaseStudyPage(
           Left: Portable Text body copy.
           Right: sidebar with meta, services, results.
       ──────────────────────────────────────────────────────── */}
-      <div style={{ background: "#f2f2f0" }}>
+      <div style={{ background: colors.bgLight }}>
         <div className="max-w-7xl mx-auto px-6 lg:px-12 py-20">
           <div className="grid grid-cols-1 lg:grid-cols-3 gap-16">
 
@@ -189,7 +190,7 @@ export default async function CaseStudyPage(
                     fontFamily: "var(--font-body)",
                     fontSize:   "16px",
                     fontWeight: 300,
-                    color:      "#888888",
+                    color:      colors.textSecondary,
                   }}
                 >
                   Full case study coming soon.
@@ -202,13 +203,13 @@ export default async function CaseStudyPage(
 
               {/* Results / metrics — shown first if they exist */}
               {project.results && project.results.length > 0 && (
-                <div className="mb-10 pb-10" style={{ borderBottom: "1px solid #cccccc" }}>
+                <div className="mb-10 pb-10" style={{ borderBottom: `1px solid ${colors.borderLight}` }}>
                   <p
                     className="text-xs tracking-[0.2em] uppercase mb-6"
                     style={{
                       fontFamily: "var(--font-display)",
                       fontWeight: 600,
-                      color:      "#888888",
+                      color:      colors.textSecondary,
                     }}
                   >
                     Results
@@ -223,7 +224,7 @@ export default async function CaseStudyPage(
                             fontWeight:    800,
                             lineHeight:    1,
                             letterSpacing: "-0.02em",
-                            color:         "#c41e3a",
+                            color:         colors.textSubtle,
                           }}
                         >
                           {r.value}
@@ -233,7 +234,7 @@ export default async function CaseStudyPage(
                           style={{
                             fontFamily: "var(--font-display)",
                             fontWeight: 500,
-                            color:      "#888888",
+                            color:      colors.textSecondary,
                           }}
                         >
                           {r.label}
@@ -254,7 +255,7 @@ export default async function CaseStudyPage(
                     style={{
                       fontFamily: "var(--font-display)",
                       fontWeight: 600,
-                      color:      "#888888",
+                      color:      colors.textSecondary,
                     }}
                   >
                     Client
@@ -264,7 +265,7 @@ export default async function CaseStudyPage(
                       fontFamily: "var(--font-display)",
                       fontSize:   "15px",
                       fontWeight: 600,
-                      color:      "#0a0a0a",
+                      color:      colors.bgDark,
                     }}
                   >
                     {project.client}
@@ -278,7 +279,7 @@ export default async function CaseStudyPage(
                     style={{
                       fontFamily: "var(--font-display)",
                       fontWeight: 600,
-                      color:      "#888888",
+                      color:      colors.textSecondary,
                     }}
                   >
                     Year
@@ -288,7 +289,7 @@ export default async function CaseStudyPage(
                       fontFamily: "var(--font-display)",
                       fontSize:   "15px",
                       fontWeight: 600,
-                      color:      "#0a0a0a",
+                      color:      colors.bgDark,
                     }}
                   >
                     {project.year}
@@ -303,7 +304,7 @@ export default async function CaseStudyPage(
                       style={{
                         fontFamily: "var(--font-display)",
                         fontWeight: 600,
-                        color:      "#888888",
+                        color:      colors.textSecondary,
                       }}
                     >
                       Services
@@ -316,7 +317,7 @@ export default async function CaseStudyPage(
                             fontFamily: "var(--font-body)",
                             fontSize:   "14px",
                             fontWeight: 300,
-                            color:      "#3d3d3d",
+                            color:      colors.textSubtle,
                           }}
                         >
                           {s.name}
@@ -334,7 +335,7 @@ export default async function CaseStudyPage(
                       style={{
                         fontFamily: "var(--font-display)",
                         fontWeight: 600,
-                        color:      "#888888",
+                        color:      colors.textSecondary,
                       }}
                     >
                       Live Site
@@ -347,7 +348,7 @@ export default async function CaseStudyPage(
                       style={{
                         fontFamily: "var(--font-display)",
                         fontWeight: 600,
-                        color:      "#c41e3a",
+                        color:      colors.accent,
                       }}
                     >
                       <span>Visit site</span>
@@ -365,7 +366,7 @@ export default async function CaseStudyPage(
       {/* ── Next project CTA ──────────────────────────────────── */}
       <div
         className="py-16 text-center"
-        style={{ background: "#0a0a0a", borderTop: "1px solid #1c1c1c" }}
+        style={{ background: colors.bgDark, borderTop: `1px solid ${colors.surfaceDark}` }}
       >
         <Link
           href="/work"
@@ -373,7 +374,7 @@ export default async function CaseStudyPage(
           style={{
             fontFamily: "var(--font-display)",
             fontWeight: 600,
-            color:      "#888888",
+            color:      colors.textSecondary,
           }}
         >
           <span>← Back to All Work</span>

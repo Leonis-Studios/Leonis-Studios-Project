@@ -11,6 +11,7 @@ import { ALL_CASE_STUDIES_QUERY } from "@/sanity/lib/queries";
 import type { CaseStudyCard }     from "@/lib/types";
 import WorkGrid                   from "@/components/work/WorkGrid";
 import siteConfig                 from "@/site.config";
+import { colors }                 from "@/lib/colors";
 
 export const metadata: Metadata = {
   title:       `Work — ${siteConfig.name}`,
@@ -53,7 +54,7 @@ export default async function WorkPage() {
       ──────────────────────────────────────────────────────── */}
       <section
         className="relative overflow-hidden py-32 pt-40"
-        style={{ background: "#0a0a0a" }}
+        style={{ background: colors.bgDark }}
       >
         <style>{`
           @keyframes fadeUp {
@@ -70,11 +71,11 @@ export default async function WorkPage() {
         >
           <div
             className="absolute left-0 top-0 bottom-0 w-px"
-            style={{ background: "#c41e3a", opacity: 0.2 }}
+            style={{ background: colors.accent, opacity: 0.2 }}
           />
           <div
             className="absolute top-1/2 -translate-y-1/2 left-12 w-48 h-48"
-            style={{ border: "1px solid #1c1c1c" }}
+            style={{ border: `1px solid ${colors.surfaceDark}` }}
           />
         </div>
 
@@ -88,13 +89,13 @@ export default async function WorkPage() {
               animation: "fadeUp 0.8s cubic-bezier(0.16, 1, 0.3, 1) 0.1s forwards",
             }}
           >
-            <div className="w-8 h-px" style={{ background: "#c41e3a" }} />
+            <div className="w-8 h-px" style={{ background: colors.accent }} />
             <span
               className="text-xs tracking-[0.25em] uppercase"
               style={{
                 fontFamily: "var(--font-display)",
                 fontWeight: 500,
-                color:      "#c41e3a",
+                color:      colors.accent,
               }}
             >
               Case Studies
@@ -109,14 +110,14 @@ export default async function WorkPage() {
               fontWeight:    800,
               lineHeight:    0.92,
               letterSpacing: "-0.03em",
-              color:         "#f2f2f0",
+              color:         colors.bgLight,
               maxWidth:      "800px",
               opacity:       0,
               animation:     "fadeUp 0.8s cubic-bezier(0.16, 1, 0.3, 1) 0.25s forwards",
             }}
           >
             Selected<br />
-            <span style={{ color: "#c41e3a" }}>Work.</span>
+            <span style={{ color: colors.accent }}>Work.</span>
           </h1>
 
           {/* Description */}
@@ -126,7 +127,7 @@ export default async function WorkPage() {
               fontFamily: "var(--font-body)",
               fontSize:   "clamp(15px, 1.4vw, 18px)",
               fontWeight: 300,
-              color:      "#888888",
+              color:      colors.textSecondary,
               maxWidth:   "460px",
               lineHeight: 1.75,
               opacity:    0,

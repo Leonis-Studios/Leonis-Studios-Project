@@ -1,4 +1,5 @@
 import { PortableText } from "@portabletext/react";
+import { colors } from "@/lib/colors";
 
 interface Props {
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
@@ -9,7 +10,7 @@ const paragraphStyle = {
   fontFamily: "var(--font-body)",
   fontSize:   "clamp(15px, 1.3vw, 17px)",
   fontWeight: 400,
-  color:      "#2a2a2a",
+  color:      colors.textBody,
   lineHeight: 1.8,
 } as const;
 
@@ -25,19 +26,19 @@ export default function Story({ storyBody }: Props) {
   return (
     <section
       className="py-24 lg:py-32"
-      style={{ background: "#f2f2f0" }}
+      style={{ background: colors.bgLight }}
     >
       <div className="max-w-7xl mx-auto px-6 lg:px-12">
 
         {/* Section label */}
         <div className="flex items-center gap-4 mb-16">
-          <div style={{ width: "32px", height: "1px", background: "#c41e3a" }} />
+          <div style={{ width: "32px", height: "1px", background: colors.textSubtle }} />
           <span
             className="text-xs tracking-[0.25em] uppercase"
             style={{
               fontFamily: "var(--font-display)",
               fontWeight: 500,
-              color:      "#c41e3a",
+              color:      colors.textSubtle,
             }}
           >
             Our Story
@@ -55,14 +56,14 @@ export default function Story({ storyBody }: Props) {
                 fontWeight:    800,
                 lineHeight:    1.1,
                 letterSpacing: "-0.025em",
-                color:         "#0a0a0a",
+                color:         colors.bgDark,
               }}
             >
               Bold work. No fluff.
               <br />
-              <span style={{ color: "#c41e3a" }}>No compromise.</span>
+              <span style={{ color: colors.textSubtle }}>No compromise.</span>
             </blockquote>
-            <div className="mt-8 w-12 h-px" style={{ background: "#c41e3a" }} />
+            <div className="mt-8 w-12 h-px" style={{ background: colors.textSubtle }} />
           </div>
 
           {/* Story paragraphs */}

@@ -1,3 +1,5 @@
+import { colors } from "@/lib/colors";
+
 interface Props {
   techStack?: string[];
 }
@@ -32,19 +34,19 @@ export default function Skills({ techStack }: Props) {
   return (
     <section
       className="py-24 lg:py-32"
-      style={{ background: "#f2f2f0" }}
+      style={{ background: colors.bgLight }}
     >
       <div className="max-w-7xl mx-auto px-6 lg:px-12">
 
         {/* Section label */}
         <div className="flex items-center gap-4 mb-16">
-          <div style={{ width: "32px", height: "1px", background: "#c41e3a" }} />
+          <div style={{ width: "32px", height: "1px", background: colors.textSubtle }} />
           <span
             className="text-xs tracking-[0.25em] uppercase"
             style={{
               fontFamily: "var(--font-display)",
               fontWeight: 500,
-              color:      "#c41e3a",
+              color:      colors.textSubtle,
             }}
           >
             Stack &amp; Services
@@ -62,7 +64,7 @@ export default function Skills({ techStack }: Props) {
                 fontSize:      "clamp(18px, 2vw, 24px)",
                 fontWeight:    700,
                 letterSpacing: "-0.015em",
-                color:         "#0a0a0a",
+                color:         colors.bgDark,
               }}
             >
               Technologies
@@ -77,8 +79,8 @@ export default function Skills({ techStack }: Props) {
                     fontWeight:    600,
                     letterSpacing: "0.08em",
                     textTransform: "uppercase" as const,
-                    color:         "#0a0a0a",
-                    border:        "1px solid #0a0a0a",
+                    color:         colors.bgDark,
+                    border:        `1px solid ${colors.bgDark}`,
                     padding:       "8px 16px",
                     display:       "inline-block",
                   }}
@@ -98,7 +100,7 @@ export default function Skills({ techStack }: Props) {
                 fontSize:      "clamp(18px, 2vw, 24px)",
                 fontWeight:    700,
                 letterSpacing: "-0.015em",
-                color:         "#0a0a0a",
+                color:         colors.bgDark,
               }}
             >
               Services
@@ -113,8 +115,8 @@ export default function Skills({ techStack }: Props) {
                     fontWeight:    600,
                     letterSpacing: "0.08em",
                     textTransform: "uppercase" as const,
-                    color:         "#c41e3a",
-                    border:        "1px solid #c41e3a",
+                    color:         colors.textSubtle,
+                    border:        `1px solid ${colors.textSubtle}`,
                     padding:       "8px 16px",
                     display:       "inline-block",
                   }}

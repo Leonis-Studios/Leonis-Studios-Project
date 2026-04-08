@@ -1,4 +1,5 @@
 import Link from "next/link";
+import { colors } from "@/lib/colors";
 
 export default function CTA() {
   return (
@@ -8,10 +9,10 @@ export default function CTA() {
 
           <div>
             <div className="flex items-center gap-4 mb-6">
-              <div className="w-8 h-px bg-crimson" />
+              <div className="w-8 h-px" style={{ background: colors.accent }} />
               <span
-                className="text-crimson text-xs tracking-[0.25em] uppercase"
-                style={{ fontFamily: "var(--font-display)", fontWeight: 500 }}
+                className="text-xs tracking-[0.25em] uppercase"
+                style={{ color: colors.accent, fontFamily: "var(--font-display)", fontWeight: 500 }}
               >
                 Ready to start?
               </span>
@@ -43,8 +44,8 @@ export default function CTA() {
                 href="/contact"
                 className="
                   inline-flex items-center justify-center gap-3
-                  px-8 py-4 bg-crimson text-white
-                  hover:bg-crimson-dark transition-colors duration-200
+                  px-8 py-4 text-white
+                  transition-colors duration-200
                   group
                 "
                 style={{
@@ -53,6 +54,7 @@ export default function CTA() {
                   fontWeight:    600,
                   letterSpacing: "0.12em",
                   textTransform: "uppercase",
+                  background:    colors.accent,
                 }}
               >
                 <span>Get In Touch</span>

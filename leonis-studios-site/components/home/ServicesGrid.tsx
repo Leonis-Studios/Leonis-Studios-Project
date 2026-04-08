@@ -3,6 +3,7 @@
 import { useState }     from "react";
 import Link             from "next/link";
 import type { Service } from "@/lib/types";
+import { colors }       from "@/lib/colors";
 
 function formatPrice(service: Service): string {
   if (service.priceLabel) return service.priceLabel;
@@ -16,7 +17,7 @@ export default function ServicesGrid({ services }: { services: Service[] }) {
   return (
     <div
       className="grid grid-cols-1 md:grid-cols-2 gap-px"
-      style={{ background: "#e8e8e8" }}
+      style={{ background: colors.bgMuted }}
     >
       {services.map((service, i) => {
         const hovered = hoveredId === service._id;
@@ -25,10 +26,10 @@ export default function ServicesGrid({ services }: { services: Service[] }) {
             key={service._id}
             className="p-10 flex flex-col"
             style={{
-              background: hovered ? "#e8e8e8" : "#ffffff",
+              background: hovered ? colors.bgMuted : colors.bgCard,
               transition: "background 0.3s",
               cursor:     "default",
-              borderTop:  service.featured ? "2px solid #c41e3a" : undefined,
+              borderTop:  service.featured ? `2px solid ${colors.accent}` : undefined,
             }}
             onMouseEnter={() => setHoveredId(service._id)}
             onMouseLeave={() => setHoveredId(null)}
@@ -43,7 +44,7 @@ export default function ServicesGrid({ services }: { services: Service[] }) {
                     fontWeight:    700,
                     letterSpacing: "0.15em",
                     textTransform: "uppercase",
-                    color:         "#c41e3a",
+                    color:         colors.textSubtle,
                   }}
                 >
                   Most Popular
@@ -60,7 +61,7 @@ export default function ServicesGrid({ services }: { services: Service[] }) {
                 fontWeight:    800,
                 lineHeight:    1,
                 letterSpacing: "-0.03em",
-                color:         hovered ? "#c41e3a" : "#cccccc",
+                color:         hovered ? colors.accent : colors.borderLight,
                 transition:    "color 0.3s",
               }}
             >
@@ -75,7 +76,7 @@ export default function ServicesGrid({ services }: { services: Service[] }) {
                 fontSize:      "clamp(18px, 2vw, 24px)",
                 fontWeight:    700,
                 letterSpacing: "-0.015em",
-                color:         hovered ? "#c41e3a" : "#0a0a0a",
+                color:         hovered ? colors.accent : colors.bgDark,
                 transition:    "color 0.3s",
               }}
             >
@@ -89,7 +90,7 @@ export default function ServicesGrid({ services }: { services: Service[] }) {
                 style={{
                   fontFamily: "var(--font-display)",
                   fontWeight: 500,
-                  color:      "#c41e3a",
+                  color:      colors.textSubtle,
                 }}
               >
                 {service.tagline}
@@ -102,7 +103,7 @@ export default function ServicesGrid({ services }: { services: Service[] }) {
               style={{
                 fontFamily: "var(--font-body)",
                 fontWeight: 300,
-                color:      "#3d3d3d",
+                color:      colors.textSubtle,
               }}
             >
               {service.description}
@@ -118,10 +119,10 @@ export default function ServicesGrid({ services }: { services: Service[] }) {
                     style={{
                       fontFamily: "var(--font-body)",
                       fontWeight: 300,
-                      color:      "#3d3d3d",
+                      color:      colors.textSubtle,
                     }}
                   >
-                    <div className="w-1 h-1 shrink-0" style={{ background: "#c41e3a" }} />
+                    <div className="w-1 h-1 shrink-0" style={{ background: colors.accent }} />
                     {feat}
                   </li>
                 ))}
@@ -138,10 +139,10 @@ export default function ServicesGrid({ services }: { services: Service[] }) {
                     style={{
                       fontFamily: "var(--font-body)",
                       fontWeight: 300,
-                      color:      "#999",
+                      color:      colors.textMuted,
                     }}
                   >
-                    <span style={{ color: "#bbb" }}>—</span>
+                    <span style={{ color: colors.textSecondary }}>—</span>
                     {item}
                   </li>
                 ))}
@@ -151,7 +152,7 @@ export default function ServicesGrid({ services }: { services: Service[] }) {
             {/* Price + Enquire */}
             <div
               className="flex items-start justify-between mt-auto pt-6"
-              style={{ borderTop: "1px solid #e8e8e8" }}
+              style={{ borderTop: `1px solid ${colors.bgMuted}` }}
             >
               <div>
                 <p
@@ -159,7 +160,7 @@ export default function ServicesGrid({ services }: { services: Service[] }) {
                     fontFamily: "var(--font-display)",
                     fontSize:   "20px",
                     fontWeight: 700,
-                    color:      "#0a0a0a",
+                    color:      colors.bgDark,
                   }}
                 >
                   {formatPrice(service)}
@@ -170,7 +171,7 @@ export default function ServicesGrid({ services }: { services: Service[] }) {
                       fontFamily: "var(--font-body)",
                       fontSize:   "12px",
                       fontWeight: 300,
-                      color:      "#888",
+                      color:      colors.textSecondary,
                       marginTop:  "2px",
                     }}
                   >
@@ -184,12 +185,12 @@ export default function ServicesGrid({ services }: { services: Service[] }) {
                       fontFamily: "var(--font-body)",
                       fontSize:   "11px",
                       fontWeight: 400,
-                      color:      "#888",
+                      color:      colors.textSecondary,
                       marginTop:  "6px",
                     }}
                   >
                     Pairs with{" "}
-                    <span style={{ color: "#555" }}>{service.recommendedRetainer.name}</span>
+                    <span style={{ color: colors.textMuted }}>{service.recommendedRetainer.name}</span>
                     {service.recommendedRetainer.startingPrice
                       ? ` from $${service.recommendedRetainer.startingPrice.toLocaleString()}/mo`
                       : ""}
@@ -205,7 +206,7 @@ export default function ServicesGrid({ services }: { services: Service[] }) {
                   fontWeight:     600,
                   letterSpacing:  "0.12em",
                   textTransform:  "uppercase",
-                  color:          "#c41e3a",
+                  color:          colors.accent,
                   textDecoration: "none",
                 }}
               >

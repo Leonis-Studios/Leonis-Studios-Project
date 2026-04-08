@@ -8,6 +8,7 @@ import {
 } from "@/sanity/lib/queries";
 import type { Service } from "@/lib/types";
 import Link from "next/link";
+import { colors } from "@/lib/colors";
 
 function formatPrice(
   service: Service | { startingPrice?: number; priceLabel?: string },
@@ -28,18 +29,18 @@ export default async function Pricing() {
     .catch(() => []);
 
   return (
-    <section id="pricing" style={{ background: "#0a0a0a" }} className="py-24">
+    <section id="pricing" style={{ background: colors.bgDark }} className="py-24">
       <div className="max-w-7xl mx-auto px-6 lg:px-12">
         {/* ── Section header ───────────────────────────────── */}
         <div className="mb-16">
           <div className="flex items-center gap-4 mb-5">
-            <div className="w-8 h-px" style={{ background: "#c41e3a" }} />
+            <div className="w-8 h-px" style={{ background: colors.accent }} />
             <span
               className="text-xs tracking-[0.25em] uppercase"
               style={{
                 fontFamily: "var(--font-display)",
                 fontWeight: 500,
-                color: "#c41e3a",
+                color: colors.accent,
               }}
             >
               Investment
@@ -52,7 +53,7 @@ export default async function Pricing() {
               fontWeight: 800,
               lineHeight: 0.95,
               letterSpacing: "-0.025em",
-              color: "#ffffff",
+              color: colors.textPrimary,
               marginBottom: "16px",
             }}
           >
@@ -63,7 +64,7 @@ export default async function Pricing() {
               fontFamily: "var(--font-body)",
               fontSize: "16px",
               fontWeight: 300,
-              color: "#888",
+              color: colors.textSecondary,
               maxWidth: "480px",
             }}
           >
@@ -73,12 +74,12 @@ export default async function Pricing() {
         </div>
 
         {/* ── Package + Retainer rows ───────────────────────── */}
-        <div style={{ borderTop: "1px solid #222" }}>
+        <div style={{ borderTop: `1px solid ${colors.borderDark}` }}>
           {packages.map((pkg) => (
             <div
               key={pkg._id}
               className="py-12"
-              style={{ borderBottom: "1px solid #222" }}
+              style={{ borderBottom: `1px solid ${colors.borderDark}` }}
             >
               <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 lg:gap-16">
                 {/* Left — Package */}
@@ -92,7 +93,7 @@ export default async function Pricing() {
                         fontWeight: 700,
                         letterSpacing: "0.15em",
                         textTransform: "uppercase",
-                        color: "#c41e3a",
+                        color: colors.accent,
                         marginBottom: "12px",
                       }}
                     >
@@ -105,7 +106,7 @@ export default async function Pricing() {
                       fontSize: "clamp(20px, 2.5vw, 28px)",
                       fontWeight: 700,
                       letterSpacing: "-0.02em",
-                      color: "#ffffff",
+                      color: colors.textPrimary,
                       marginBottom: "6px",
                     }}
                   >
@@ -119,7 +120,7 @@ export default async function Pricing() {
                         fontWeight: 500,
                         letterSpacing: "0.12em",
                         textTransform: "uppercase",
-                        color: "#c41e3a",
+                        color: colors.accent,
                         marginBottom: "12px",
                       }}
                     >
@@ -131,7 +132,7 @@ export default async function Pricing() {
                       fontFamily: "var(--font-body)",
                       fontSize: "14px",
                       fontWeight: 300,
-                      color: "#888",
+                      color: colors.textSecondary,
                       lineHeight: 1.6,
                       marginBottom: "20px",
                     }}
@@ -150,12 +151,12 @@ export default async function Pricing() {
                             fontFamily: "var(--font-body)",
                             fontSize: "13px",
                             fontWeight: 300,
-                            color: "#ccc",
+                            color: colors.borderLight,
                           }}
                         >
                           <div
                             className="w-1 h-1 shrink-0"
-                            style={{ background: "#c41e3a" }}
+                            style={{ background: colors.accent }}
                           />
                           {feat}
                         </li>
@@ -174,10 +175,10 @@ export default async function Pricing() {
                             fontFamily: "var(--font-body)",
                             fontSize: "13px",
                             fontWeight: 300,
-                            color: "#555",
+                            color: colors.textMuted,
                           }}
                         >
-                          <span style={{ color: "#444" }}>—</span>
+                          <span style={{ color: colors.textMuted }}>—</span>
                           {item}
                         </li>
                       ))}
@@ -191,7 +192,7 @@ export default async function Pricing() {
                         fontFamily: "var(--font-display)",
                         fontSize: "28px",
                         fontWeight: 800,
-                        color: "#ffffff",
+                        color: colors.textPrimary,
                         letterSpacing: "-0.02em",
                       }}
                     >
@@ -203,7 +204,7 @@ export default async function Pricing() {
                           fontFamily: "var(--font-body)",
                           fontSize: "12px",
                           fontWeight: 300,
-                          color: "#666",
+                          color: colors.textMuted,
                           marginTop: "2px",
                         }}
                       >
@@ -217,7 +218,7 @@ export default async function Pricing() {
                 {pkg.recommendedRetainer ? (
                   <div
                     style={{
-                      background: "#111",
+                      background: colors.surfaceAccent,
                       padding: "32px",
                       position: "relative",
                     }}
@@ -229,7 +230,7 @@ export default async function Pricing() {
                         left: 0,
                         right: 0,
                         height: "2px",
-                        background: "#1e1e1e",
+                        background: colors.borderDark,
                       }}
                     />
                     <p
@@ -239,7 +240,7 @@ export default async function Pricing() {
                         fontWeight: 600,
                         letterSpacing: "0.2em",
                         textTransform: "uppercase",
-                        color: "#555",
+                        color: colors.textMuted,
                         marginBottom: "12px",
                       }}
                     >
@@ -251,7 +252,7 @@ export default async function Pricing() {
                         fontSize: "clamp(16px, 2vw, 22px)",
                         fontWeight: 700,
                         letterSpacing: "-0.015em",
-                        color: "#ffffff",
+                        color: colors.textPrimary,
                         marginBottom: "16px",
                       }}
                     >
@@ -263,7 +264,7 @@ export default async function Pricing() {
                           fontFamily: "var(--font-display)",
                           fontSize: "24px",
                           fontWeight: 800,
-                          color: "#ffffff",
+                          color: colors.textPrimary,
                           letterSpacing: "-0.02em",
                         }}
                       >
@@ -275,7 +276,7 @@ export default async function Pricing() {
                             fontFamily: "var(--font-body)",
                             fontSize: "12px",
                             fontWeight: 300,
-                            color: "#666",
+                            color: colors.textMuted,
                             marginTop: "2px",
                           }}
                         >
@@ -301,7 +302,7 @@ export default async function Pricing() {
                 fontSize: "clamp(20px, 2.5vw, 28px)",
                 fontWeight: 700,
                 letterSpacing: "-0.02em",
-                color: "#ffffff",
+                color: colors.textPrimary,
                 marginBottom: "24px",
               }}
             >
@@ -309,19 +310,19 @@ export default async function Pricing() {
             </h3>
             <div
               className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-px"
-              style={{ background: "#222" }}
+              style={{ background: colors.borderDark }}
             >
               {addons.map((addon) => (
                 <div
                   key={addon._id}
-                  style={{ background: "#0a0a0a", padding: "24px" }}
+                  style={{ background: colors.bgDark, padding: "24px" }}
                 >
                   <p
                     style={{
                       fontFamily: "var(--font-display)",
                       fontSize: "15px",
                       fontWeight: 700,
-                      color: "#ffffff",
+                      color: colors.textPrimary,
                       marginBottom: "6px",
                       letterSpacing: "-0.01em",
                     }}
@@ -334,7 +335,7 @@ export default async function Pricing() {
                         fontFamily: "var(--font-body)",
                         fontSize: "13px",
                         fontWeight: 300,
-                        color: "#777",
+                        color: colors.textMuted,
                         lineHeight: 1.5,
                         marginBottom: "12px",
                       }}
@@ -347,7 +348,7 @@ export default async function Pricing() {
                       fontFamily: "var(--font-display)",
                       fontSize: "16px",
                       fontWeight: 700,
-                      color: "#c41e3a",
+                      color: colors.accent,
                     }}
                   >
                     {formatPrice(addon)}
@@ -357,7 +358,7 @@ export default async function Pricing() {
                           fontFamily: "var(--font-body)",
                           fontSize: "11px",
                           fontWeight: 300,
-                          color: "#666",
+                          color: colors.textMuted,
                           marginLeft: "4px",
                         }}
                       >
@@ -380,7 +381,7 @@ export default async function Pricing() {
               fontSize: "14px",
               fontWeight: 600,
               letterSpacing: "0.08em",
-              color: "#c41e3a",
+              color: colors.accent,
               textDecoration: "none",
             }}
           >

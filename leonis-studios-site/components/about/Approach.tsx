@@ -1,3 +1,5 @@
+import { colors } from "@/lib/colors";
+
 interface Props {
   approachHeadline?: string;
 }
@@ -32,19 +34,19 @@ const steps = [
 
 export default function Approach({ approachHeadline }: Props) {
   return (
-    <section className="py-24 lg:py-32" style={{ background: "#0a0a0a" }}>
+    <section className="py-24 lg:py-32" style={{ background: colors.bgDark }}>
       <div className="max-w-7xl mx-auto px-6 lg:px-12">
         {/* Section label */}
         <div className="flex items-center gap-4 mb-6">
           <div
-            style={{ width: "32px", height: "1px", background: "#c41e3a" }}
+            style={{ width: "32px", height: "1px", background: colors.accent }}
           />
           <span
             className="text-xs tracking-[0.25em] uppercase"
             style={{
               fontFamily: "var(--font-display)",
               fontWeight: 500,
-              color: "#c41e3a",
+              color: colors.accent,
             }}
           >
             How We Work
@@ -59,7 +61,7 @@ export default function Approach({ approachHeadline }: Props) {
             fontWeight: 800,
             lineHeight: 1.0,
             letterSpacing: "-0.025em",
-            color: "#f2f2f0",
+            color: colors.bgLight,
             maxWidth: "600px",
           }}
         >
@@ -73,8 +75,8 @@ export default function Approach({ approachHeadline }: Props) {
               key={step.number}
               className="flex flex-col gap-4 py-8 lg:py-0 lg:px-6"
               style={{
-                borderTop: "1px solid #1c1c1c",
-                borderLeft: i > 0 ? "1px solid #1c1c1c" : undefined,
+                borderTop: `1px solid ${colors.surfaceDark}`,
+                borderLeft: i > 0 ? `1px solid ${colors.surfaceDark}` : undefined,
               }}
             >
               <span
@@ -82,7 +84,7 @@ export default function Approach({ approachHeadline }: Props) {
                   fontFamily: "var(--font-display)",
                   fontSize: "12px",
                   fontWeight: 600,
-                  color: "#c41e3a",
+                  color: colors.accent,
                   letterSpacing: "0.1em",
                 }}
               >
@@ -94,7 +96,7 @@ export default function Approach({ approachHeadline }: Props) {
                   fontSize: "clamp(16px, 1.4vw, 20px)",
                   fontWeight: 700,
                   letterSpacing: "-0.01em",
-                  color: "#f2f2f0",
+                  color: colors.bgLight,
                 }}
               >
                 {step.title}
@@ -104,7 +106,7 @@ export default function Approach({ approachHeadline }: Props) {
                   fontFamily: "var(--font-body)",
                   fontSize: "13px",
                   fontWeight: 300,
-                  color: "#888888",
+                  color: colors.textSecondary,
                   lineHeight: 1.75,
                 }}
               >

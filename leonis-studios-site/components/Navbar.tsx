@@ -12,11 +12,12 @@ import Link from "next/link";
 import Image from "next/image";
 import { usePathname } from "next/navigation";
 import siteConfig from "@/site.config";
+import { colors } from "@/lib/colors";
 
 export default function Navbar() {
-  const [scrolled, setScrolled]   = useState(false);
-  const [menuOpen, setMenuOpen]   = useState(false);
-  const pathname                  = usePathname();
+  const [scrolled, setScrolled] = useState(false);
+  const [menuOpen, setMenuOpen] = useState(false);
+  const pathname = usePathname();
 
   // Add a class when the user scrolls down so we can
   // transition the navbar from transparent to solid
@@ -36,15 +37,15 @@ export default function Navbar() {
       className={`
         fixed top-0 left-0 right-0 z-50
         transition-all duration-300
-        ${scrolled
-          ? "bg-black/95 backdrop-blur-sm border-b border-neutral-800"
-          : "bg-transparent"
+        ${
+          scrolled
+            ? "bg-black/95 backdrop-blur-sm border-b border-neutral-800"
+            : "bg-transparent"
         }
       `}
     >
       <div className="max-w-7xl mx-auto px-6 lg:px-12">
         <div className="flex items-center justify-between h-16">
-
           {/* ── Logo ───────────────────────────────────────── */}
           {(() => {
             const useDarkLogo = !scrolled && pathname !== "/";
@@ -56,7 +57,11 @@ export default function Navbar() {
                   width={140}
                   height={40}
                   priority
-                  style={{ height: "36px", width: "auto", objectFit: "contain" }}
+                  style={{
+                    height: "36px",
+                    width: "auto",
+                    objectFit: "contain",
+                  }}
                 />
               </Link>
             );
@@ -81,7 +86,10 @@ export default function Navbar() {
                   {link.label}
                   {/* Crimson underline on active link */}
                   {isActive && (
-                    <span className="absolute -bottom-1 left-0 right-0 h-px bg-crimson" />
+                    <span
+                      className="absolute -bottom-1 left-0 right-0 h-px"
+                      style={{ background: colors.accent }}
+                    />
                   )}
                 </Link>
               );
@@ -94,11 +102,11 @@ export default function Navbar() {
               href="/contact"
               className="
                 inline-flex items-center gap-2 px-5 py-2.5
-                bg-crimson text-white text-xs tracking-[0.12em] uppercase
-                hover:bg-crimson-dark transition-colors duration-200
+                text-xs tracking-[0.12em] uppercase
+                transition-colors duration-200
                 group
               "
-              style={{ fontFamily: "var(--font-display)", fontWeight: 600 }}
+              style={{ fontFamily: "var(--font-display)", fontWeight: 600, background: colors.bgBlack, color: colors.textNavAccent }}
             >
               <span>Start a Project</span>
               {/* Arrow shifts right on hover for a subtle motion cue */}
@@ -135,7 +143,6 @@ export default function Navbar() {
               `}
             />
           </button>
-
         </div>
       </div>
 
@@ -157,8 +164,8 @@ export default function Navbar() {
           ))}
           <Link
             href="/contact"
-            className="mt-2 inline-flex items-center justify-center gap-2 py-3 px-6 bg-crimson text-white text-xs tracking-[0.12em] uppercase"
-            style={{ fontFamily: "var(--font-display)", fontWeight: 600 }}
+            className="mt-2 inline-flex items-center justify-center gap-2 py-3 px-6 text-xs tracking-[0.12em] uppercase"
+            style={{ fontFamily: "var(--font-display)", fontWeight: 600, background: colors.bgBlack, color: colors.textNavAccent }}
           >
             Start a Project →
           </Link>

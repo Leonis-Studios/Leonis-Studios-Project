@@ -1,5 +1,6 @@
 import { ImageResponse } from "next/og";
 import { client }        from "@/sanity/lib/client";
+import { colors }        from "@/lib/colors";
 
 export const runtime = "edge";
 export const size = { width: 1200, height: 630 };
@@ -27,7 +28,7 @@ export default async function Image({ params }: { params: { slug: string } }) {
         style={{
           width:          "100%",
           height:         "100%",
-          background:     "#0a0a0a",
+          background:     colors.bgDark,
           display:        "flex",
           flexDirection:  "column",
           justifyContent: "center",
@@ -43,7 +44,7 @@ export default async function Image({ params }: { params: { slug: string } }) {
             top:        0,
             width:      "6px",
             height:     "100%",
-            background: "#c41e3a",
+            background: colors.accent,
             display:    "flex",
           }}
         />
@@ -59,7 +60,7 @@ export default async function Image({ params }: { params: { slug: string } }) {
             fontWeight:    800,
             letterSpacing: "0.2em",
             textTransform: "uppercase",
-            color:         "#888888",
+            color:         colors.textSecondary,
             display:       "flex",
           }}
         >
@@ -74,7 +75,7 @@ export default async function Image({ params }: { params: { slug: string } }) {
             right:      "80px",
             fontFamily: "system-ui, -apple-system, sans-serif",
             fontSize:   "14px",
-            color:      "#444444",
+            color:      colors.textMuted,
             display:    "flex",
           }}
         >
@@ -89,7 +90,7 @@ export default async function Image({ params }: { params: { slug: string } }) {
             left:       0,
             width:      "100%",
             height:     "4px",
-            background: "#c41e3a",
+            background: colors.accent,
             display:    "flex",
           }}
         />
@@ -104,7 +105,7 @@ export default async function Image({ params }: { params: { slug: string } }) {
               fontWeight:    800,
               letterSpacing: "0.25em",
               textTransform: "uppercase",
-              color:         "#c41e3a",
+              color:         colors.accent,
               marginBottom:  "20px",
               display:       "flex",
             }}
@@ -118,7 +119,7 @@ export default async function Image({ params }: { params: { slug: string } }) {
               fontFamily:    "system-ui, -apple-system, sans-serif",
               fontSize:      "72px",
               fontWeight:    800,
-              color:         "#f2f2f0",
+              color:         colors.bgLight,
               lineHeight:    0.92,
               letterSpacing: "-0.03em",
               display:       "flex",
@@ -134,7 +135,7 @@ export default async function Image({ params }: { params: { slug: string } }) {
                 fontFamily: "system-ui, -apple-system, sans-serif",
                 fontSize:   "24px",
                 fontWeight: 400,
-                color:      "#888888",
+                color:      colors.textSecondary,
                 marginTop:  "24px",
                 display:    "flex",
               }}

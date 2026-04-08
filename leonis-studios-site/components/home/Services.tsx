@@ -6,6 +6,7 @@ import { PACKAGE_SERVICES_QUERY } from "@/sanity/lib/queries";
 import type { Service }          from "@/lib/types";
 import ServicesGrid              from "@/components/home/ServicesGrid";
 import Link                      from "next/link";
+import { colors }                from "@/lib/colors";
 
 export default async function Services() {
   const services: Service[] = await client
@@ -20,10 +21,10 @@ export default async function Services() {
         <div className="flex flex-col lg:flex-row lg:items-end lg:justify-between mb-16 gap-6">
           <div>
             <div className="flex items-center gap-4 mb-5">
-              <div className="w-8 h-px" style={{ background: "#c41e3a" }} />
+              <div className="w-8 h-px" style={{ background: colors.accent }} />
               <span
                 className="text-xs tracking-[0.25em] uppercase"
-                style={{ fontFamily: "var(--font-display)", fontWeight: 500, color: "#c41e3a" }}
+                style={{ fontFamily: "var(--font-display)", fontWeight: 500, color: colors.accent }}
               >
                 What We Do
               </span>
@@ -35,7 +36,7 @@ export default async function Services() {
                 fontWeight:    800,
                 lineHeight:    0.95,
                 letterSpacing: "-0.025em",
-                color:         "#0a0a0a",
+                color:         colors.bgDark,
               }}
             >
               Our Services
@@ -43,7 +44,7 @@ export default async function Services() {
           </div>
           <p
             className="text-sm leading-relaxed max-w-xs"
-            style={{ fontFamily: "var(--font-body)", fontWeight: 300, color: "#555" }}
+            style={{ fontFamily: "var(--font-body)", fontWeight: 300, color: colors.textMuted }}
           >
             Three focused website packages, each executed with the same
             uncompromising standard of craft.
@@ -63,7 +64,7 @@ export default async function Services() {
               fontWeight:    600,
               letterSpacing: "0.12em",
               textTransform: "uppercase",
-              color:         "#c41e3a",
+              color:         colors.accent,
               textDecoration: "none",
             }}
           >

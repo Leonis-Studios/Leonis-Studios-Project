@@ -1,3 +1,5 @@
+import { colors } from "@/lib/colors";
+
 interface Value {
   title:       string;
   description: string;
@@ -32,19 +34,19 @@ export default function Values({ values }: Props) {
   return (
     <section
       className="py-24 lg:py-32"
-      style={{ background: "#f2f2f0", borderTop: "1px solid #cccccc" }}
+      style={{ background: colors.bgLight, borderTop: `1px solid ${colors.borderLight}` }}
     >
       <div className="max-w-7xl mx-auto px-6 lg:px-12">
 
         {/* Section label */}
         <div className="flex items-center gap-4 mb-16">
-          <div style={{ width: "32px", height: "1px", background: "#c41e3a" }} />
+          <div style={{ width: "32px", height: "1px", background: colors.textSubtle }} />
           <span
             className="text-xs tracking-[0.25em] uppercase"
             style={{
               fontFamily: "var(--font-display)",
               fontWeight: 500,
-              color:      "#c41e3a",
+              color:      colors.textSubtle,
             }}
           >
             What We Stand For
@@ -59,7 +61,7 @@ export default function Values({ values }: Props) {
               style={{
                 position:     "relative",
                 padding:      "32px 0 32px 0",
-                borderBottom: "1px solid #e8e8e8",
+                borderBottom: `1px solid ${colors.borderLight}`,
                 overflow:     "hidden",
               }}
             >
@@ -74,7 +76,7 @@ export default function Values({ values }: Props) {
                   fontSize:      "80px",
                   fontWeight:    800,
                   lineHeight:    1,
-                  color:         "#e3dfd9",
+                  color:         colors.bgMuted,
                   opacity:       0.6,
                   letterSpacing: "-0.03em",
                   userSelect:    "none",
@@ -102,7 +104,7 @@ export default function Values({ values }: Props) {
                     fontFamily:    "var(--font-display)",
                     fontSize:      "clamp(18px, 2vw, 24px)",
                     fontWeight:    700,
-                    color:         "#0a0a0a",
+                    color:         colors.bgDark,
                     letterSpacing: "-0.015em",
                     margin:        0,
                     paddingTop:    "4px",
@@ -115,7 +117,7 @@ export default function Values({ values }: Props) {
                     fontFamily: "var(--font-body)",
                     fontSize:   "15px",
                     fontWeight: 300,
-                    color:      "#3d3d3d",
+                    color:      colors.textSubtle,
                     lineHeight: 1.7,
                     margin:     0,
                   }}

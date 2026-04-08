@@ -1,6 +1,7 @@
 import Link from "next/link";
 import Image from "next/image";
 import siteConfig from "@/site.config";
+import { colors } from "@/lib/colors";
 
 // Footer is a Server Component (no "use client") because it
 // has no interactivity — it just renders static content.
@@ -70,7 +71,7 @@ export default function Footer() {
               <li>
                 <a
                   href={`mailto:${siteConfig.email}`}
-                  className="text-neutral-400 hover:text-crimson text-sm transition-colors duration-200"
+                  className="text-neutral-400 hover:text-white text-sm transition-colors duration-200"
                   style={{ fontFamily: "var(--font-body)", fontWeight: 300 }}
                 >
                   {siteConfig.email}
@@ -90,7 +91,7 @@ export default function Footer() {
                     href={siteConfig.social.github}
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="text-neutral-400 hover:text-crimson text-sm transition-colors duration-200"
+                    className="text-neutral-400 hover:text-white text-sm transition-colors duration-200"
                     style={{ fontFamily: "var(--font-body)", fontWeight: 300 }}
                   >
                     GitHub ↗
@@ -113,7 +114,7 @@ export default function Footer() {
           {/* The crimson dot is a subtle brand touch —
               it echoes the square logo mark */}
           <div className="flex items-center gap-2">
-            <div className="w-1.5 h-1.5 bg-crimson" />
+            <div className="w-1.5 h-1.5" style={{ background: colors.accent }} />
             <p
               className="text-neutral-400 text-xs tracking-widest"
               style={{ fontFamily: "var(--font-body)", fontWeight: 300 }}

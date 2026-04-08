@@ -1,3 +1,5 @@
+import { colors } from "@/lib/colors";
+
 export default function Marquee() {
   const items = [
     "Web Design",
@@ -13,7 +15,7 @@ export default function Marquee() {
   return (
     <div
       className="py-5 overflow-hidden"
-      style={{ background: "#c41e3a", minHeight: "48px" }}
+      style={{ background: colors.accent, minHeight: "48px" }}
       aria-hidden="true"
     >
       {/* ── Keyframe defined inline ───────────────────────────
@@ -40,7 +42,7 @@ export default function Marquee() {
             <span
               className="text-xs tracking-[0.2em] uppercase px-8"
               style={{
-                color: i % 2 === 0 ? "#ffffff" : "rgba(255,255,255,0.6)",
+                color: i % 2 === 0 ? colors.bgLight : "rgba(255,255,255,0.6)",
               }}
             >
               {item}

@@ -1,4 +1,5 @@
 import Link from "next/link";
+import { colors } from "@/lib/colors";
 
 interface Props {
   ctaHeadline?: string;
@@ -9,21 +10,21 @@ export default function AboutCTA({ ctaHeadline, ctaSubtext }: Props) {
   return (
     <section
       className="py-24 lg:py-32"
-      style={{ background: "#0a0a0a", borderTop: "1px solid #1c1c1c" }}
+      style={{ background: colors.bgDark, borderTop: `1px solid ${colors.surfaceDark}` }}
     >
       <div className="max-w-7xl mx-auto px-6 lg:px-12">
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
           <div>
             <div className="flex items-center gap-4 mb-6">
               <div
-                style={{ width: "32px", height: "1px", background: "#c41e3a" }}
+                style={{ width: "32px", height: "1px", background: colors.accent }}
               />
               <span
                 className="text-xs tracking-[0.25em] uppercase"
                 style={{
                   fontFamily: "var(--font-display)",
                   fontWeight: 500,
-                  color: "#c41e3a",
+                  color: colors.accent,
                 }}
               >
                 Ready to start?
@@ -36,14 +37,14 @@ export default function AboutCTA({ ctaHeadline, ctaSubtext }: Props) {
                 fontWeight: 800,
                 lineHeight: 0.95,
                 letterSpacing: "-0.025em",
-                color: "#f2f2f0",
+                color: colors.bgLight,
               }}
             >
               {ctaHeadline ?? (
                 <>
                   Ready to work
                   <br />
-                  <span style={{ color: "#c41e3a" }}>together?</span>
+                  <span style={{ color: colors.accent }}>together?</span>
                 </>
               )}
             </h2>
@@ -56,7 +57,7 @@ export default function AboutCTA({ ctaHeadline, ctaSubtext }: Props) {
                 fontFamily: "var(--font-body)",
                 fontSize: "15px",
                 fontWeight: 300,
-                color: "#888888",
+                color: colors.textSecondary,
                 lineHeight: 1.75,
               }}
             >
@@ -68,13 +69,13 @@ export default function AboutCTA({ ctaHeadline, ctaSubtext }: Props) {
                 href="/contact"
                 className="inline-flex items-center justify-center gap-3 px-8 py-4 group"
                 style={{
-                  background: "#c41e3a",
+                  background: colors.accent,
                   fontFamily: "var(--font-display)",
                   fontSize: "13px",
                   fontWeight: 600,
                   letterSpacing: "0.12em",
                   textTransform: "uppercase",
-                  color: "#f2f2f0",
+                  color: colors.bgLight,
                 }}
               >
                 <span>Start a Project</span>
@@ -86,13 +87,13 @@ export default function AboutCTA({ ctaHeadline, ctaSubtext }: Props) {
                 href="/work"
                 className="inline-flex items-center justify-center gap-3 px-8 py-4"
                 style={{
-                  border: "1px solid #2a2a2a",
+                  border: `1px solid ${colors.borderDark}`,
                   fontFamily: "var(--font-display)",
                   fontSize: "13px",
                   fontWeight: 600,
                   letterSpacing: "0.12em",
                   textTransform: "uppercase",
-                  color: "#f2f2f0",
+                  color: colors.bgLight,
                 }}
               >
                 See Our Work

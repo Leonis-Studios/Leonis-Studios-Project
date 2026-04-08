@@ -1,6 +1,7 @@
 "use client";
 
 import { useState } from "react";
+import { colors } from "@/lib/colors";
 
 type Status = "idle" | "loading" | "success" | "error";
 
@@ -16,12 +17,12 @@ const BUDGET_OPTIONS = ["Under $2k", "$2k – $5k", "$5k – $10k", "$10k+"];
 
 const inputStyle: React.CSSProperties = {
   width: "100%",
-  background: "#ffffff",
-  border: "1px solid #cccccc",
+  background: colors.white,
+  border: `1px solid ${colors.borderLight}`,
   padding: "14px 16px",
   fontFamily: "var(--font-body)",
   fontSize: "14px",
-  color: "#0a0a0a",
+  color: colors.bgDark,
   outline: "none",
   display: "block",
 };
@@ -32,7 +33,7 @@ const labelStyle: React.CSSProperties = {
   fontWeight: 600,
   letterSpacing: "0.15em",
   textTransform: "uppercase",
-  color: "#3d3d3d",
+  color: colors.textSubtle,
   display: "block",
   marginBottom: "8px",
 };
@@ -88,12 +89,12 @@ export default function ContactSection() {
   }
 
   return (
-    <section className="py-24 lg:py-32" style={{ background: "#f2f2f0" }}>
+    <section className="py-24 lg:py-32" style={{ background: colors.bgLight }}>
       <style>{`
         input::placeholder,
-        textarea::placeholder { color: #888; }
+        textarea::placeholder { color: ${colors.textSecondary}; }
         input:focus,
-        textarea:focus { border-color: #0a0a0a !important; }
+        textarea:focus { border-color: ${colors.bgDark} !important; }
       `}</style>
 
       <div className="max-w-7xl mx-auto px-6 lg:px-12">
@@ -102,14 +103,14 @@ export default function ContactSection() {
           <div className="lg:col-span-2">
             <div className="flex items-center gap-4 mb-10">
               <div
-                style={{ width: "32px", height: "1px", background: "#c41e3a" }}
+                style={{ width: "32px", height: "1px", background: colors.textSubtle }}
               />
               <span
                 className="text-xs tracking-[0.25em] uppercase"
                 style={{
                   fontFamily: "var(--font-display)",
                   fontWeight: 500,
-                  color: "#c41e3a",
+                  color: colors.textSubtle,
                 }}
               >
                 Get in Touch
@@ -126,7 +127,7 @@ export default function ContactSection() {
                     style={{
                       fontFamily: "var(--font-body)",
                       fontSize: "15px",
-                      color: "#0a0a0a",
+                      color: colors.bgDark,
                       textDecoration: "none",
                     }}
                   >
@@ -139,7 +140,7 @@ export default function ContactSection() {
                     style={{
                       fontFamily: "var(--font-body)",
                       fontSize: "15px",
-                      color: "#0a0a0a",
+                      color: colors.bgDark,
                     }}
                   >
                     New York, USA
@@ -153,7 +154,7 @@ export default function ContactSection() {
                     style={{
                       fontFamily: "var(--font-body)",
                       fontSize: "15px",
-                      color: "#0a0a0a",
+                      color: colors.bgDark,
                     }}
                   >
                     Within 24 hours
@@ -164,7 +165,7 @@ export default function ContactSection() {
               {/* What to expect */}
               <div
                 style={{
-                  borderTop: "1px solid #cccccc",
+                  borderTop: `1px solid ${colors.borderLight}`,
                   paddingTop: "32px",
                 }}
               >
@@ -189,13 +190,13 @@ export default function ContactSection() {
                       style={{
                         fontFamily: "var(--font-body)",
                         fontSize: "14px",
-                        color: "#3d3d3d",
+                        color: colors.textSubtle,
                         lineHeight: 1.6,
                       }}
                     >
                       <span
                         style={{
-                          color: "#c41e3a",
+                          color: colors.textSubtle,
                           marginTop: "2px",
                           flexShrink: 0,
                         }}
@@ -217,20 +218,20 @@ export default function ContactSection() {
               <div
                 className="flex flex-col gap-6 py-16"
                 style={{
-                  borderTop: "2px solid #c41e3a",
+                  borderTop: `2px solid ${colors.accent}`,
                 }}
               >
                 <div
                   style={{
                     width: "48px",
                     height: "48px",
-                    border: "2px solid #c41e3a",
+                    border: `2px solid ${colors.accent}`,
                     display: "flex",
                     alignItems: "center",
                     justifyContent: "center",
                   }}
                 >
-                  <span style={{ color: "#c41e3a", fontSize: "20px" }}>✓</span>
+                  <span style={{ color: colors.textSubtle, fontSize: "20px" }}>✓</span>
                 </div>
                 <h2
                   style={{
@@ -238,7 +239,7 @@ export default function ContactSection() {
                     fontSize: "clamp(24px, 3vw, 36px)",
                     fontWeight: 800,
                     letterSpacing: "-0.02em",
-                    color: "#0a0a0a",
+                    color: colors.bgDark,
                   }}
                 >
                   Message sent.
@@ -247,7 +248,7 @@ export default function ContactSection() {
                   style={{
                     fontFamily: "var(--font-body)",
                     fontSize: "15px",
-                    color: "#3d3d3d",
+                    color: colors.textSubtle,
                     lineHeight: 1.75,
                     maxWidth: "400px",
                   }}
@@ -267,7 +268,7 @@ export default function ContactSection() {
                 <div className="grid grid-cols-1 sm:grid-cols-2 gap-6">
                   <div>
                     <label htmlFor="name" style={labelStyle}>
-                      Name <span style={{ color: "#c41e3a" }}>*</span>
+                      Name <span style={{ color: colors.textSubtle }}>*</span>
                     </label>
                     <input
                       id="name"
@@ -282,7 +283,7 @@ export default function ContactSection() {
                   </div>
                   <div>
                     <label htmlFor="email" style={labelStyle}>
-                      Email <span style={{ color: "#c41e3a" }}>*</span>
+                      Email <span style={{ color: colors.textSubtle }}>*</span>
                     </label>
                     <input
                       id="email"
@@ -332,10 +333,10 @@ export default function ContactSection() {
                             textTransform: "uppercase",
                             padding: "10px 18px",
                             border: selected
-                              ? "1px solid #c41e3a"
-                              : "1px solid #cccccc",
-                            background: selected ? "#c41e3a" : "transparent",
-                            color: selected ? "#f2f2f0" : "#3d3d3d",
+                              ? `1px solid ${colors.accent}`
+                              : `1px solid ${colors.borderLight}`,
+                            background: selected ? colors.accent : "transparent",
+                            color: selected ? colors.bgLight : colors.textSubtle,
                             cursor: "pointer",
                             transition: "all 0.15s",
                           }}
@@ -366,10 +367,10 @@ export default function ContactSection() {
                             textTransform: "uppercase",
                             padding: "10px 18px",
                             border: selected
-                              ? "1px solid #0a0a0a"
-                              : "1px solid #cccccc",
-                            background: selected ? "#0a0a0a" : "transparent",
-                            color: selected ? "#f2f2f0" : "#3d3d3d",
+                              ? `1px solid ${colors.bgDark}`
+                              : `1px solid ${colors.borderLight}`,
+                            background: selected ? colors.bgDark : "transparent",
+                            color: selected ? colors.bgLight : colors.textSubtle,
                             cursor: "pointer",
                             transition: "all 0.15s",
                           }}
@@ -384,7 +385,7 @@ export default function ContactSection() {
                 {/* Project details */}
                 <div>
                   <label htmlFor="details" style={labelStyle}>
-                    Project Details <span style={{ color: "#c41e3a" }}>*</span>
+                    Project Details <span style={{ color: colors.textSubtle }}>*</span>
                   </label>
                   <textarea
                     id="details"
@@ -406,22 +407,22 @@ export default function ContactSection() {
                   <div
                     style={{
                       padding: "14px 16px",
-                      background: "#fff0f0",
-                      border: "1px solid #c41e3a",
+                      background: colors.errorBg,
+                      border: `1px solid ${colors.accent}`,
                     }}
                   >
                     <p
                       style={{
                         fontFamily: "var(--font-body)",
                         fontSize: "14px",
-                        color: "#c41e3a",
+                        color: colors.textSubtle,
                         margin: 0,
                       }}
                     >
                       {errorMsg} If the problem persists, email us directly at{" "}
                       <a
                         href="mailto:hello@leonistudios.com"
-                        style={{ color: "#c41e3a", fontWeight: 600 }}
+                        style={{ color: colors.textSubtle, fontWeight: 600 }}
                       >
                         hello@leonistudios.com
                       </a>
@@ -443,8 +444,8 @@ export default function ContactSection() {
                       letterSpacing: "0.12em",
                       textTransform: "uppercase",
                       padding: "16px 36px",
-                      background: status === "loading" ? "#888888" : "#c41e3a",
-                      color: "#f2f2f0",
+                      background: status === "loading" ? colors.textSecondary : colors.accent,
+                      color: colors.bgLight,
                       border: "none",
                       cursor: status === "loading" ? "not-allowed" : "pointer",
                       transition: "background 0.2s",
