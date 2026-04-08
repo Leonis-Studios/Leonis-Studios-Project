@@ -17,7 +17,7 @@ const BUDGET_OPTIONS = ["Under $2k", "$2k – $5k", "$5k – $10k", "$10k+"];
 
 const inputStyle: React.CSSProperties = {
   width: "100%",
-  background: colors.white,
+  background: colors.bgLight,
   border: `1px solid ${colors.borderLight}`,
   padding: "14px 16px",
   fontFamily: "var(--font-body)",
