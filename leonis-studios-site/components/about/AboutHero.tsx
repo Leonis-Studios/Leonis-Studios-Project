@@ -1,4 +1,5 @@
 import { colors } from "@/lib/colors";
+import { tokens } from "@/lib/tokens";
 
 interface Props {
   headline?: string;
@@ -52,7 +53,7 @@ export default function AboutHero({ headline, subheading }: Props) {
             className="text-xs tracking-[0.25em] uppercase"
             style={{
               fontFamily: "var(--font-display)",
-              fontWeight: 500,
+              fontWeight: tokens.weightUI,
               color: colors.accent,
             }}
           >
@@ -65,7 +66,7 @@ export default function AboutHero({ headline, subheading }: Props) {
           style={{
             fontFamily: "var(--font-display)",
             fontSize: "clamp(48px, 9vw, 112px)",
-            fontWeight: 800,
+            fontWeight: tokens.weightDisplay,
             lineHeight: 0.92,
             letterSpacing: "-0.03em",
             color: colors.bgLight,
@@ -90,7 +91,7 @@ export default function AboutHero({ headline, subheading }: Props) {
           style={{
             fontFamily: "var(--font-body)",
             fontSize: "clamp(15px, 1.4vw, 18px)",
-            fontWeight: 300,
+            fontWeight: tokens.weightBody,
             color: colors.textSecondary,
             maxWidth: "500px",
             lineHeight: 1.75,

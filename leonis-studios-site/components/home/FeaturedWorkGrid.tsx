@@ -5,6 +5,7 @@ import Link               from "next/link";
 import Image              from "next/image";
 import type { CaseStudyCard } from "@/lib/types";
 import { colors }             from "@/lib/colors";
+import { tokens }             from "@/lib/tokens";
 
 export default function FeaturedWorkGrid({ projects }: { projects: CaseStudyCard[] }) {
   const [hoveredId, setHoveredId] = useState<string | null>(null);
@@ -59,7 +60,7 @@ export default function FeaturedWorkGrid({ projects }: { projects: CaseStudyCard
                     className="text-xs tracking-[0.15em] uppercase mb-2"
                     style={{
                       fontFamily: "var(--font-display)",
-                      fontWeight: 500,
+                      fontWeight: tokens.weightUI,
                       color:      colors.textSecondary,
                     }}
                   >
@@ -69,7 +70,7 @@ export default function FeaturedWorkGrid({ projects }: { projects: CaseStudyCard
                     style={{
                       fontFamily:    "var(--font-display)",
                       fontSize:      "clamp(18px, 2vw, 24px)",
-                      fontWeight:    700,
+                      fontWeight:    tokens.weightHeading,
                       letterSpacing: "-0.015em",
                       color:         hovered ? colors.accent : colors.bgDark,
                       transition:    "color 0.3s",
@@ -95,7 +96,7 @@ export default function FeaturedWorkGrid({ projects }: { projects: CaseStudyCard
                 className="text-sm leading-relaxed mb-6"
                 style={{
                   fontFamily: "var(--font-body)",
-                  fontWeight: 300,
+                  fontWeight: tokens.weightBody,
                   color:      colors.textSecondary,
                 }}
               >
@@ -111,7 +112,7 @@ export default function FeaturedWorkGrid({ projects }: { projects: CaseStudyCard
                       className="px-2 py-1 text-xs"
                       style={{
                         fontFamily: "var(--font-display)",
-                        fontWeight: 500,
+                        fontWeight: tokens.weightUI,
                         background: colors.bgCard,
                         border:     `1px solid ${colors.bgMuted}`,
                         color:      colors.textSecondary,

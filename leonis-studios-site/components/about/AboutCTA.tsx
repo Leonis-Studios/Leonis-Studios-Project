@@ -1,5 +1,6 @@
 import Link from "next/link";
 import { colors } from "@/lib/colors";
+import { tokens } from "@/lib/tokens";
 
 interface Props {
   ctaHeadline?: string;
@@ -23,7 +24,7 @@ export default function AboutCTA({ ctaHeadline, ctaSubtext }: Props) {
                 className="text-xs tracking-[0.25em] uppercase"
                 style={{
                   fontFamily: "var(--font-display)",
-                  fontWeight: 500,
+                  fontWeight: tokens.weightUI,
                   color: colors.accent,
                 }}
               >
@@ -34,7 +35,7 @@ export default function AboutCTA({ ctaHeadline, ctaSubtext }: Props) {
               style={{
                 fontFamily: "var(--font-display)",
                 fontSize: "clamp(32px, 5vw, 64px)",
-                fontWeight: 800,
+                fontWeight: tokens.weightDisplay,
                 lineHeight: 0.95,
                 letterSpacing: "-0.025em",
                 color: colors.bgLight,
@@ -56,7 +57,7 @@ export default function AboutCTA({ ctaHeadline, ctaSubtext }: Props) {
               style={{
                 fontFamily: "var(--font-body)",
                 fontSize: "15px",
-                fontWeight: 300,
+                fontWeight: tokens.weightBody,
                 color: colors.textSecondary,
                 lineHeight: 1.75,
               }}
@@ -72,7 +73,7 @@ export default function AboutCTA({ ctaHeadline, ctaSubtext }: Props) {
                   background: colors.accent,
                   fontFamily: "var(--font-display)",
                   fontSize: "13px",
-                  fontWeight: 600,
+                  fontWeight: tokens.weightUI,
                   letterSpacing: "0.12em",
                   textTransform: "uppercase",
                   color: colors.bgLight,
@@ -90,7 +91,7 @@ export default function AboutCTA({ ctaHeadline, ctaSubtext }: Props) {
                   border: `1px solid ${colors.borderDark}`,
                   fontFamily: "var(--font-display)",
                   fontSize: "13px",
-                  fontWeight: 600,
+                  fontWeight: tokens.weightUI,
                   letterSpacing: "0.12em",
                   textTransform: "uppercase",
                   color: colors.bgLight,

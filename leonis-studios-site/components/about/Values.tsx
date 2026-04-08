@@ -1,4 +1,5 @@
 import { colors } from "@/lib/colors";
+import { tokens } from "@/lib/tokens";
 
 interface Value {
   title:       string;
@@ -45,7 +46,7 @@ export default function Values({ values }: Props) {
             className="text-xs tracking-[0.25em] uppercase"
             style={{
               fontFamily: "var(--font-display)",
-              fontWeight: 500,
+              fontWeight: tokens.weightUI,
               color:      colors.textSubtle,
             }}
           >
@@ -74,7 +75,7 @@ export default function Values({ values }: Props) {
                   top:           "8px",
                   fontFamily:    "var(--font-display)",
                   fontSize:      "80px",
-                  fontWeight:    800,
+                  fontWeight:    tokens.weightDisplay,
                   lineHeight:    1,
                   color:         colors.bgMuted,
                   opacity:       0.6,
@@ -103,7 +104,7 @@ export default function Values({ values }: Props) {
                   style={{
                     fontFamily:    "var(--font-display)",
                     fontSize:      "clamp(18px, 2vw, 24px)",
-                    fontWeight:    700,
+                    fontWeight:    tokens.weightHeading,
                     color:         colors.bgDark,
                     letterSpacing: "-0.015em",
                     margin:        0,
@@ -116,7 +117,7 @@ export default function Values({ values }: Props) {
                   style={{
                     fontFamily: "var(--font-body)",
                     fontSize:   "15px",
-                    fontWeight: 300,
+                    fontWeight: tokens.weightBody,
                     color:      colors.textSubtle,
                     lineHeight: 1.7,
                     margin:     0,

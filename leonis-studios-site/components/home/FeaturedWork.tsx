@@ -7,6 +7,7 @@ import { FEATURED_CASE_STUDIES_QUERY } from "@/sanity/lib/queries";
 import type { CaseStudyCard }          from "@/lib/types";
 import FeaturedWorkGrid                from "@/components/home/FeaturedWorkGrid";
 import { colors }                      from "@/lib/colors";
+import { tokens }                      from "@/lib/tokens";
 
 export default async function FeaturedWork() {
   const projects: CaseStudyCard[] = await client.fetch(
@@ -31,7 +32,7 @@ export default async function FeaturedWork() {
               <div className="w-8 h-px" style={{ background: colors.accent }} />
               <span
                 className="text-xs tracking-[0.25em] uppercase"
-                style={{ color: colors.accent, fontFamily: "var(--font-display)", fontWeight: 500 }}
+                style={{ color: colors.accent, fontFamily: "var(--font-display)", fontWeight: tokens.weightUI }}
               >
                 Selected Work
               </span>
@@ -40,7 +41,7 @@ export default async function FeaturedWork() {
               style={{
                 fontFamily:    "var(--font-display)",
                 fontSize:      "clamp(32px, 5vw, 64px)",
-                fontWeight:    800,
+                fontWeight:    tokens.weightDisplay,
                 lineHeight:    0.95,
                 letterSpacing: "-0.025em",
                 color:         "var(--color-black)",
@@ -52,7 +53,7 @@ export default async function FeaturedWork() {
           <Link
             href="/work"
             className="text-neutral-600 hover:text-black text-xs tracking-[0.15em] uppercase transition-colors duration-200 flex items-center gap-2 group self-end"
-            style={{ fontFamily: "var(--font-display)", fontWeight: 500 }}
+            style={{ fontFamily: "var(--font-display)", fontWeight: tokens.weightUI }}
           >
             <span>View All Work</span>
             <span className="group-hover:translate-x-1 transition-transform duration-200">→</span>

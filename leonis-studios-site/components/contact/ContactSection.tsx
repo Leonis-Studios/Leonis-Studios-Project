@@ -2,6 +2,7 @@
 
 import { useState } from "react";
 import { colors } from "@/lib/colors";
+import { tokens } from "@/lib/tokens";
 
 type Status = "idle" | "loading" | "success" | "error";
 
@@ -30,7 +31,7 @@ const inputStyle: React.CSSProperties = {
 const labelStyle: React.CSSProperties = {
   fontFamily: "var(--font-display)",
   fontSize: "11px",
-  fontWeight: 600,
+  fontWeight: tokens.weightUI,
   letterSpacing: "0.15em",
   textTransform: "uppercase",
   color: colors.textSubtle,
@@ -109,7 +110,7 @@ export default function ContactSection() {
                 className="text-xs tracking-[0.25em] uppercase"
                 style={{
                   fontFamily: "var(--font-display)",
-                  fontWeight: 500,
+                  fontWeight: tokens.weightUI,
                   color: colors.textSubtle,
                 }}
               >
@@ -127,6 +128,7 @@ export default function ContactSection() {
                     style={{
                       fontFamily: "var(--font-body)",
                       fontSize: "15px",
+                      fontWeight: tokens.weightBody,
                       color: colors.bgDark,
                       textDecoration: "none",
                     }}
@@ -140,6 +142,7 @@ export default function ContactSection() {
                     style={{
                       fontFamily: "var(--font-body)",
                       fontSize: "15px",
+                      fontWeight: tokens.weightBody,
                       color: colors.bgDark,
                     }}
                   >
@@ -154,6 +157,7 @@ export default function ContactSection() {
                     style={{
                       fontFamily: "var(--font-body)",
                       fontSize: "15px",
+                      fontWeight: tokens.weightBody,
                       color: colors.bgDark,
                     }}
                   >
@@ -190,6 +194,7 @@ export default function ContactSection() {
                       style={{
                         fontFamily: "var(--font-body)",
                         fontSize: "14px",
+                        fontWeight: tokens.weightSecondary,
                         color: colors.textSubtle,
                         lineHeight: 1.6,
                       }}
@@ -237,7 +242,7 @@ export default function ContactSection() {
                   style={{
                     fontFamily: "var(--font-display)",
                     fontSize: "clamp(24px, 3vw, 36px)",
-                    fontWeight: 800,
+                    fontWeight: tokens.weightDisplay,
                     letterSpacing: "-0.02em",
                     color: colors.bgDark,
                   }}
@@ -248,6 +253,7 @@ export default function ContactSection() {
                   style={{
                     fontFamily: "var(--font-body)",
                     fontSize: "15px",
+                    fontWeight: tokens.weightBody,
                     color: colors.textSubtle,
                     lineHeight: 1.75,
                     maxWidth: "400px",
@@ -328,7 +334,7 @@ export default function ContactSection() {
                           style={{
                             fontFamily: "var(--font-display)",
                             fontSize: "12px",
-                            fontWeight: 600,
+                            fontWeight: tokens.weightUI,
                             letterSpacing: "0.08em",
                             textTransform: "uppercase",
                             padding: "10px 18px",
@@ -362,7 +368,7 @@ export default function ContactSection() {
                           style={{
                             fontFamily: "var(--font-display)",
                             fontSize: "12px",
-                            fontWeight: 600,
+                            fontWeight: tokens.weightUI,
                             letterSpacing: "0.08em",
                             textTransform: "uppercase",
                             padding: "10px 18px",
@@ -422,7 +428,7 @@ export default function ContactSection() {
                       {errorMsg} If the problem persists, email us directly at{" "}
                       <a
                         href="mailto:hello@leonistudios.com"
-                        style={{ color: colors.textSubtle, fontWeight: 600 }}
+                        style={{ color: colors.textSubtle, fontWeight: tokens.weightUI }}
                       >
                         hello@leonistudios.com
                       </a>
@@ -440,7 +446,7 @@ export default function ContactSection() {
                     style={{
                       fontFamily: "var(--font-display)",
                       fontSize: "13px",
-                      fontWeight: 600,
+                      fontWeight: tokens.weightUI,
                       letterSpacing: "0.12em",
                       textTransform: "uppercase",
                       padding: "16px 36px",

@@ -13,6 +13,7 @@ import Image from "next/image";
 import { usePathname } from "next/navigation";
 import siteConfig from "@/site.config";
 import { colors } from "@/lib/colors";
+import { tokens } from "@/lib/tokens";
 
 export default function Navbar() {
   const [scrolled, setScrolled] = useState(false);
@@ -81,7 +82,7 @@ export default function Navbar() {
                     transition-colors duration-200
                     ${isActive ? "text-white" : "text-neutral-400 hover:text-white"}
                   `}
-                  style={{ fontFamily: "var(--font-display)", fontWeight: 500 }}
+                  style={{ fontFamily: "var(--font-display)", fontWeight: tokens.weightUI }}
                 >
                   {link.label}
                   {/* Crimson underline on active link */}
@@ -106,7 +107,7 @@ export default function Navbar() {
                 transition-colors duration-200
                 group
               "
-              style={{ fontFamily: "var(--font-display)", fontWeight: 600, background: colors.bgBlack, color: colors.textNavAccent }}
+              style={{ fontFamily: "var(--font-display)", fontWeight: tokens.weightUI, background: colors.bgBlack, color: colors.textNavAccent }}
             >
               <span>Start a Project</span>
               {/* Arrow shifts right on hover for a subtle motion cue */}
@@ -157,7 +158,7 @@ export default function Navbar() {
               key={link.href}
               href={link.href}
               className="text-neutral-400 hover:text-white text-sm tracking-[0.12em] uppercase transition-colors duration-200"
-              style={{ fontFamily: "var(--font-display)", fontWeight: 500 }}
+              style={{ fontFamily: "var(--font-display)", fontWeight: tokens.weightUI }}
             >
               {link.label}
             </Link>
@@ -165,7 +166,7 @@ export default function Navbar() {
           <Link
             href="/contact"
             className="mt-2 inline-flex items-center justify-center gap-2 py-3 px-6 text-xs tracking-[0.12em] uppercase"
-            style={{ fontFamily: "var(--font-display)", fontWeight: 600, background: colors.bgBlack, color: colors.textNavAccent }}
+            style={{ fontFamily: "var(--font-display)", fontWeight: tokens.weightUI, background: colors.bgBlack, color: colors.textNavAccent }}
           >
             Start a Project →
           </Link>

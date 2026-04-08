@@ -1,5 +1,6 @@
 import Link from "next/link";
 import { colors } from "@/lib/colors";
+import { tokens } from "@/lib/tokens";
 
 export default function CTA() {
   return (
@@ -12,7 +13,7 @@ export default function CTA() {
               <div className="w-8 h-px" style={{ background: colors.accent }} />
               <span
                 className="text-xs tracking-[0.25em] uppercase"
-                style={{ color: colors.accent, fontFamily: "var(--font-display)", fontWeight: 500 }}
+                style={{ color: colors.accent, fontFamily: "var(--font-display)", fontWeight: tokens.weightUI }}
               >
                 Ready to start?
               </span>
@@ -21,7 +22,7 @@ export default function CTA() {
               style={{
                 fontFamily:    "var(--font-display)",
                 fontSize:      "clamp(32px, 5vw, 64px)",
-                fontWeight:    800,
+                fontWeight:    tokens.weightDisplay,
                 lineHeight:    0.95,
                 letterSpacing: "-0.025em",
                 color:         "var(--color-white)",
@@ -34,7 +35,7 @@ export default function CTA() {
           <div className="flex flex-col gap-4 lg:items-end">
             <p
               className="text-neutral-400 text-sm leading-relaxed lg:text-right max-w-sm"
-              style={{ fontFamily: "var(--font-body)", fontWeight: 300 }}
+              style={{ fontFamily: "var(--font-body)", fontWeight: tokens.weightBody }}
             >
               Tell us about your project and we'll come back within
               24 hours with a plan and a quote.
@@ -51,7 +52,7 @@ export default function CTA() {
                 style={{
                   fontFamily:    "var(--font-display)",
                   fontSize:      "13px",
-                  fontWeight:    600,
+                  fontWeight:    tokens.weightUI,
                   letterSpacing: "0.12em",
                   textTransform: "uppercase",
                   background:    colors.accent,
@@ -70,7 +71,7 @@ export default function CTA() {
                 style={{
                   fontFamily:    "var(--font-display)",
                   fontSize:      "13px",
-                  fontWeight:    600,
+                  fontWeight:    tokens.weightUI,
                   letterSpacing: "0.12em",
                   textTransform: "uppercase",
                 }}

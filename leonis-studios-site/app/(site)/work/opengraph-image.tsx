@@ -1,5 +1,6 @@
 import { ImageResponse } from "next/og";
 import { colors } from "@/lib/colors";
+import { tokens } from "@/lib/tokens";
 
 export const runtime = "edge";
 export const size = { width: 1200, height: 630 };
@@ -41,7 +42,7 @@ export default async function Image() {
             left:          "80px",
             fontFamily:    "system-ui, -apple-system, sans-serif",
             fontSize:      "14px",
-            fontWeight:    800,
+            fontWeight:    tokens.weightDisplay,
             letterSpacing: "0.2em",
             textTransform: "uppercase",
             color:         colors.textSecondary,
@@ -72,7 +73,7 @@ export default async function Image() {
             style={{
               fontFamily:    "system-ui, -apple-system, sans-serif",
               fontSize:      "88px",
-              fontWeight:    800,
+              fontWeight:    tokens.weightDisplay,
               color:         colors.bgLight,
               lineHeight:    0.92,
               letterSpacing: "-0.03em",
@@ -85,7 +86,7 @@ export default async function Image() {
             style={{
               fontFamily: "system-ui, -apple-system, sans-serif",
               fontSize:   "24px",
-              fontWeight: 400,
+              fontWeight: tokens.weightBody,
               color:      colors.textSecondary,
               marginTop:  "24px",
               display:    "flex",

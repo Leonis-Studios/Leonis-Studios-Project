@@ -4,6 +4,7 @@ import { useState }     from "react";
 import Link             from "next/link";
 import type { Service } from "@/lib/types";
 import { colors }       from "@/lib/colors";
+import { tokens }       from "@/lib/tokens";
 
 function formatPrice(service: Service): string {
   if (service.priceLabel) return service.priceLabel;
@@ -41,7 +42,7 @@ export default function ServicesGrid({ services }: { services: Service[] }) {
                   style={{
                     fontFamily:    "var(--font-display)",
                     fontSize:      "10px",
-                    fontWeight:    700,
+                    fontWeight:    tokens.weightUI,
                     letterSpacing: "0.15em",
                     textTransform: "uppercase",
                     color:         colors.textSubtle,
@@ -58,7 +59,7 @@ export default function ServicesGrid({ services }: { services: Service[] }) {
               style={{
                 fontFamily:    "var(--font-display)",
                 fontSize:      "48px",
-                fontWeight:    800,
+                fontWeight:    tokens.weightDisplay,
                 lineHeight:    1,
                 letterSpacing: "-0.03em",
                 color:         hovered ? colors.accent : colors.borderLight,
@@ -74,7 +75,7 @@ export default function ServicesGrid({ services }: { services: Service[] }) {
               style={{
                 fontFamily:    "var(--font-display)",
                 fontSize:      "clamp(18px, 2vw, 24px)",
-                fontWeight:    700,
+                fontWeight:    tokens.weightHeading,
                 letterSpacing: "-0.015em",
                 color:         hovered ? colors.accent : colors.bgDark,
                 transition:    "color 0.3s",
@@ -89,7 +90,7 @@ export default function ServicesGrid({ services }: { services: Service[] }) {
                 className="text-xs tracking-[0.15em] uppercase mb-4"
                 style={{
                   fontFamily: "var(--font-display)",
-                  fontWeight: 500,
+                  fontWeight: tokens.weightUI,
                   color:      colors.textSubtle,
                 }}
               >
@@ -102,7 +103,7 @@ export default function ServicesGrid({ services }: { services: Service[] }) {
               className="text-sm leading-relaxed mb-8"
               style={{
                 fontFamily: "var(--font-body)",
-                fontWeight: 300,
+                fontWeight: tokens.weightBody,
                 color:      colors.textSubtle,
               }}
             >
@@ -118,7 +119,7 @@ export default function ServicesGrid({ services }: { services: Service[] }) {
                     className="flex items-center gap-3 text-sm"
                     style={{
                       fontFamily: "var(--font-body)",
-                      fontWeight: 300,
+                      fontWeight: tokens.weightBody,
                       color:      colors.textSubtle,
                     }}
                   >
@@ -138,7 +139,7 @@ export default function ServicesGrid({ services }: { services: Service[] }) {
                     className="flex items-center gap-3 text-sm"
                     style={{
                       fontFamily: "var(--font-body)",
-                      fontWeight: 300,
+                      fontWeight: tokens.weightSecondary,
                       color:      colors.textMuted,
                     }}
                   >
@@ -159,7 +160,7 @@ export default function ServicesGrid({ services }: { services: Service[] }) {
                   style={{
                     fontFamily: "var(--font-display)",
                     fontSize:   "20px",
-                    fontWeight: 700,
+                    fontWeight: tokens.weightHeading,
                     color:      colors.bgDark,
                   }}
                 >
@@ -170,7 +171,7 @@ export default function ServicesGrid({ services }: { services: Service[] }) {
                     style={{
                       fontFamily: "var(--font-body)",
                       fontSize:   "12px",
-                      fontWeight: 300,
+                      fontWeight: tokens.weightSecondary,
                       color:      colors.textSecondary,
                       marginTop:  "2px",
                     }}
@@ -184,7 +185,7 @@ export default function ServicesGrid({ services }: { services: Service[] }) {
                     style={{
                       fontFamily: "var(--font-body)",
                       fontSize:   "11px",
-                      fontWeight: 400,
+                      fontWeight: tokens.weightBody,
                       color:      colors.textSecondary,
                       marginTop:  "6px",
                     }}
@@ -203,7 +204,7 @@ export default function ServicesGrid({ services }: { services: Service[] }) {
                 style={{
                   fontFamily:     "var(--font-display)",
                   fontSize:       "12px",
-                  fontWeight:     600,
+                  fontWeight:     tokens.weightUI,
                   letterSpacing:  "0.12em",
                   textTransform:  "uppercase",
                   color:          colors.accent,

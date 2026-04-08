@@ -2,6 +2,7 @@ import Link from "next/link";
 import Image from "next/image";
 import siteConfig from "@/site.config";
 import { colors } from "@/lib/colors";
+import { tokens } from "@/lib/tokens";
 
 // Footer is a Server Component (no "use client") because it
 // has no interactivity — it just renders static content.
@@ -30,7 +31,7 @@ export default function Footer() {
             </Link>
             <p
               className="text-neutral-400 text-sm leading-relaxed max-w-xs"
-              style={{ fontFamily: "var(--font-body)", fontWeight: 300 }}
+              style={{ fontFamily: "var(--font-body)", fontWeight: tokens.weightBody }}
             >
               {siteConfig.description}
             </p>
@@ -40,7 +41,7 @@ export default function Footer() {
           <div>
             <p
               className="text-white text-xs tracking-[0.2em] uppercase mb-5"
-              style={{ fontFamily: "var(--font-display)", fontWeight: 600 }}
+              style={{ fontFamily: "var(--font-display)", fontWeight: tokens.weightUI }}
             >
               Navigate
             </p>
@@ -50,7 +51,7 @@ export default function Footer() {
                   <Link
                     href={link.href}
                     className="text-neutral-400 hover:text-white text-sm transition-colors duration-200"
-                    style={{ fontFamily: "var(--font-body)", fontWeight: 300 }}
+                    style={{ fontFamily: "var(--font-body)", fontWeight: tokens.weightBody }}
                   >
                     {link.label}
                   </Link>
@@ -63,7 +64,7 @@ export default function Footer() {
           <div>
             <p
               className="text-white text-xs tracking-[0.2em] uppercase mb-5"
-              style={{ fontFamily: "var(--font-display)", fontWeight: 600 }}
+              style={{ fontFamily: "var(--font-display)", fontWeight: tokens.weightUI }}
             >
               Contact
             </p>
@@ -72,7 +73,7 @@ export default function Footer() {
                 <a
                   href={`mailto:${siteConfig.email}`}
                   className="text-neutral-400 hover:text-white text-sm transition-colors duration-200"
-                  style={{ fontFamily: "var(--font-body)", fontWeight: 300 }}
+                  style={{ fontFamily: "var(--font-body)", fontWeight: tokens.weightBody }}
                 >
                   {siteConfig.email}
                 </a>
@@ -80,7 +81,7 @@ export default function Footer() {
               <li>
                 <span
                   className="text-neutral-400 text-sm"
-                  style={{ fontFamily: "var(--font-body)", fontWeight: 300 }}
+                  style={{ fontFamily: "var(--font-body)", fontWeight: tokens.weightBody }}
                 >
                   {siteConfig.location}
                 </span>
@@ -92,7 +93,7 @@ export default function Footer() {
                     target="_blank"
                     rel="noopener noreferrer"
                     className="text-neutral-400 hover:text-white text-sm transition-colors duration-200"
-                    style={{ fontFamily: "var(--font-body)", fontWeight: 300 }}
+                    style={{ fontFamily: "var(--font-body)", fontWeight: tokens.weightBody }}
                   >
                     GitHub ↗
                   </a>
@@ -107,7 +108,7 @@ export default function Footer() {
         <div className="pt-8 border-t border-neutral-700 flex flex-col sm:flex-row items-center justify-between gap-4">
           <p
             className="text-neutral-400 text-xs tracking-widest"
-            style={{ fontFamily: "var(--font-body)", fontWeight: 300 }}
+            style={{ fontFamily: "var(--font-body)", fontWeight: tokens.weightBody }}
           >
             © {year} {siteConfig.name}. All rights reserved.
           </p>
@@ -117,7 +118,7 @@ export default function Footer() {
             <div className="w-1.5 h-1.5" style={{ background: colors.accent }} />
             <p
               className="text-neutral-400 text-xs tracking-widest"
-              style={{ fontFamily: "var(--font-body)", fontWeight: 300 }}
+              style={{ fontFamily: "var(--font-body)", fontWeight: tokens.weightBody }}
             >
               Built by Leonis Studios
             </p>

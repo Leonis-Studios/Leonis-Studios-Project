@@ -1,4 +1,5 @@
 import { colors } from "@/lib/colors";
+import { tokens } from "@/lib/tokens";
 
 interface Props {
   techStack?: string[];
@@ -45,7 +46,7 @@ export default function Skills({ techStack }: Props) {
             className="text-xs tracking-[0.25em] uppercase"
             style={{
               fontFamily: "var(--font-display)",
-              fontWeight: 500,
+              fontWeight: tokens.weightUI,
               color:      colors.textSubtle,
             }}
           >
@@ -62,7 +63,7 @@ export default function Skills({ techStack }: Props) {
               style={{
                 fontFamily:    "var(--font-display)",
                 fontSize:      "clamp(18px, 2vw, 24px)",
-                fontWeight:    700,
+                fontWeight:    tokens.weightHeading,
                 letterSpacing: "-0.015em",
                 color:         colors.bgDark,
               }}
@@ -76,7 +77,7 @@ export default function Skills({ techStack }: Props) {
                   style={{
                     fontFamily:    "var(--font-display)",
                     fontSize:      "12px",
-                    fontWeight:    600,
+                    fontWeight:    tokens.weightUI,
                     letterSpacing: "0.08em",
                     textTransform: "uppercase" as const,
                     color:         colors.bgDark,
@@ -98,7 +99,7 @@ export default function Skills({ techStack }: Props) {
               style={{
                 fontFamily:    "var(--font-display)",
                 fontSize:      "clamp(18px, 2vw, 24px)",
-                fontWeight:    700,
+                fontWeight:    tokens.weightHeading,
                 letterSpacing: "-0.015em",
                 color:         colors.bgDark,
               }}
@@ -112,7 +113,7 @@ export default function Skills({ techStack }: Props) {
                   style={{
                     fontFamily:    "var(--font-display)",
                     fontSize:      "12px",
-                    fontWeight:    600,
+                    fontWeight:    tokens.weightUI,
                     letterSpacing: "0.08em",
                     textTransform: "uppercase" as const,
                     color:         colors.textSubtle,

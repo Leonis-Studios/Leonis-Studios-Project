@@ -9,6 +9,7 @@ import {
 import type { Service } from "@/lib/types";
 import Link from "next/link";
 import { colors } from "@/lib/colors";
+import { tokens } from "@/lib/tokens";
 
 function formatPrice(
   service: Service | { startingPrice?: number; priceLabel?: string },
@@ -39,7 +40,7 @@ export default async function Pricing() {
               className="text-xs tracking-[0.25em] uppercase"
               style={{
                 fontFamily: "var(--font-display)",
-                fontWeight: 500,
+                fontWeight: tokens.weightUI,
                 color: colors.accent,
               }}
             >
@@ -50,7 +51,7 @@ export default async function Pricing() {
             style={{
               fontFamily: "var(--font-display)",
               fontSize: "clamp(32px, 5vw, 64px)",
-              fontWeight: 800,
+              fontWeight: tokens.weightDisplay,
               lineHeight: 0.95,
               letterSpacing: "-0.025em",
               color: colors.textPrimary,
@@ -63,7 +64,7 @@ export default async function Pricing() {
             style={{
               fontFamily: "var(--font-body)",
               fontSize: "16px",
-              fontWeight: 300,
+              fontWeight: tokens.weightBody,
               color: colors.textSecondary,
               maxWidth: "480px",
             }}
@@ -90,7 +91,7 @@ export default async function Pricing() {
                         display: "inline-block",
                         fontFamily: "var(--font-display)",
                         fontSize: "10px",
-                        fontWeight: 700,
+                        fontWeight: tokens.weightUI,
                         letterSpacing: "0.15em",
                         textTransform: "uppercase",
                         color: colors.accent,
@@ -104,7 +105,7 @@ export default async function Pricing() {
                     style={{
                       fontFamily: "var(--font-display)",
                       fontSize: "clamp(20px, 2.5vw, 28px)",
-                      fontWeight: 700,
+                      fontWeight: tokens.weightHeading,
                       letterSpacing: "-0.02em",
                       color: colors.textPrimary,
                       marginBottom: "6px",
@@ -117,7 +118,7 @@ export default async function Pricing() {
                       style={{
                         fontFamily: "var(--font-display)",
                         fontSize: "11px",
-                        fontWeight: 500,
+                        fontWeight: tokens.weightUI,
                         letterSpacing: "0.12em",
                         textTransform: "uppercase",
                         color: colors.accent,
@@ -131,7 +132,7 @@ export default async function Pricing() {
                     style={{
                       fontFamily: "var(--font-body)",
                       fontSize: "14px",
-                      fontWeight: 300,
+                      fontWeight: tokens.weightBody,
                       color: colors.textSecondary,
                       lineHeight: 1.6,
                       marginBottom: "20px",
@@ -150,7 +151,7 @@ export default async function Pricing() {
                           style={{
                             fontFamily: "var(--font-body)",
                             fontSize: "13px",
-                            fontWeight: 300,
+                            fontWeight: tokens.weightBody,
                             color: colors.borderLight,
                           }}
                         >
@@ -174,7 +175,7 @@ export default async function Pricing() {
                           style={{
                             fontFamily: "var(--font-body)",
                             fontSize: "13px",
-                            fontWeight: 300,
+                            fontWeight: tokens.weightSecondary,
                             color: colors.textMuted,
                           }}
                         >
@@ -191,7 +192,7 @@ export default async function Pricing() {
                       style={{
                         fontFamily: "var(--font-display)",
                         fontSize: "28px",
-                        fontWeight: 800,
+                        fontWeight: tokens.weightDisplay,
                         color: colors.textPrimary,
                         letterSpacing: "-0.02em",
                       }}
@@ -203,7 +204,7 @@ export default async function Pricing() {
                         style={{
                           fontFamily: "var(--font-body)",
                           fontSize: "12px",
-                          fontWeight: 300,
+                          fontWeight: tokens.weightSecondary,
                           color: colors.textMuted,
                           marginTop: "2px",
                         }}
@@ -237,7 +238,7 @@ export default async function Pricing() {
                       style={{
                         fontFamily: "var(--font-display)",
                         fontSize: "10px",
-                        fontWeight: 600,
+                        fontWeight: tokens.weightUI,
                         letterSpacing: "0.2em",
                         textTransform: "uppercase",
                         color: colors.textMuted,
@@ -250,7 +251,7 @@ export default async function Pricing() {
                       style={{
                         fontFamily: "var(--font-display)",
                         fontSize: "clamp(16px, 2vw, 22px)",
-                        fontWeight: 700,
+                        fontWeight: tokens.weightHeading,
                         letterSpacing: "-0.015em",
                         color: colors.textPrimary,
                         marginBottom: "16px",
@@ -263,7 +264,7 @@ export default async function Pricing() {
                         style={{
                           fontFamily: "var(--font-display)",
                           fontSize: "24px",
-                          fontWeight: 800,
+                          fontWeight: tokens.weightDisplay,
                           color: colors.textPrimary,
                           letterSpacing: "-0.02em",
                         }}
@@ -275,7 +276,7 @@ export default async function Pricing() {
                           style={{
                             fontFamily: "var(--font-body)",
                             fontSize: "12px",
-                            fontWeight: 300,
+                            fontWeight: tokens.weightSecondary,
                             color: colors.textMuted,
                             marginTop: "2px",
                           }}
@@ -300,7 +301,7 @@ export default async function Pricing() {
               style={{
                 fontFamily: "var(--font-display)",
                 fontSize: "clamp(20px, 2.5vw, 28px)",
-                fontWeight: 700,
+                fontWeight: tokens.weightHeading,
                 letterSpacing: "-0.02em",
                 color: colors.textPrimary,
                 marginBottom: "24px",
@@ -321,7 +322,7 @@ export default async function Pricing() {
                     style={{
                       fontFamily: "var(--font-display)",
                       fontSize: "15px",
-                      fontWeight: 700,
+                      fontWeight: tokens.weightHeading,
                       color: colors.textPrimary,
                       marginBottom: "6px",
                       letterSpacing: "-0.01em",
@@ -334,7 +335,7 @@ export default async function Pricing() {
                       style={{
                         fontFamily: "var(--font-body)",
                         fontSize: "13px",
-                        fontWeight: 300,
+                        fontWeight: tokens.weightBody,
                         color: colors.textMuted,
                         lineHeight: 1.5,
                         marginBottom: "12px",
@@ -347,7 +348,7 @@ export default async function Pricing() {
                     style={{
                       fontFamily: "var(--font-display)",
                       fontSize: "16px",
-                      fontWeight: 700,
+                      fontWeight: tokens.weightDisplay,
                       color: colors.accent,
                     }}
                   >
@@ -357,7 +358,7 @@ export default async function Pricing() {
                         style={{
                           fontFamily: "var(--font-body)",
                           fontSize: "11px",
-                          fontWeight: 300,
+                          fontWeight: tokens.weightSecondary,
                           color: colors.textMuted,
                           marginLeft: "4px",
                         }}
@@ -379,7 +380,7 @@ export default async function Pricing() {
             style={{
               fontFamily: "var(--font-display)",
               fontSize: "14px",
-              fontWeight: 600,
+              fontWeight: tokens.weightUI,
               letterSpacing: "0.08em",
               color: colors.accent,
               textDecoration: "none",

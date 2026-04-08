@@ -1,5 +1,6 @@
 import { PortableText } from "@portabletext/react";
 import { colors } from "@/lib/colors";
+import { tokens } from "@/lib/tokens";
 
 interface Props {
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
@@ -9,7 +10,7 @@ interface Props {
 const paragraphStyle = {
   fontFamily: "var(--font-body)",
   fontSize:   "clamp(15px, 1.3vw, 17px)",
-  fontWeight: 400,
+  fontWeight: tokens.weightBody,
   color:      colors.textBody,
   lineHeight: 1.8,
 } as const;
@@ -37,7 +38,7 @@ export default function Story({ storyBody }: Props) {
             className="text-xs tracking-[0.25em] uppercase"
             style={{
               fontFamily: "var(--font-display)",
-              fontWeight: 500,
+              fontWeight: tokens.weightUI,
               color:      colors.textSubtle,
             }}
           >
@@ -53,7 +54,7 @@ export default function Story({ storyBody }: Props) {
               style={{
                 fontFamily:    "var(--font-display)",
                 fontSize:      "clamp(26px, 3.5vw, 44px)",
-                fontWeight:    800,
+                fontWeight:    tokens.weightDisplay,
                 lineHeight:    1.1,
                 letterSpacing: "-0.025em",
                 color:         colors.bgDark,

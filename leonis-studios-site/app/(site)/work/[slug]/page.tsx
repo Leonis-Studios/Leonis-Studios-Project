@@ -18,6 +18,7 @@ import {
 import type { CaseStudy }  from "@/lib/types";
 import siteConfig          from "@/site.config";
 import { colors }          from "@/lib/colors";
+import { tokens }          from "@/lib/tokens";
 
 // ── Static params ──────────────────────────────────────────────
 // Next.js calls this at build time to pre-render every slug.
@@ -103,7 +104,7 @@ export default async function CaseStudyPage(
             className="inline-flex items-center gap-2 text-xs tracking-[0.15em] uppercase transition-colors duration-200"
             style={{
               fontFamily: "var(--font-display)",
-              fontWeight: 500,
+              fontWeight: tokens.weightUI,
               color:      colors.textSecondary,
             }}
           >
@@ -118,7 +119,7 @@ export default async function CaseStudyPage(
             className="text-xs tracking-[0.2em] uppercase mb-4"
             style={{
               fontFamily: "var(--font-display)",
-              fontWeight: 500,
+              fontWeight: tokens.weightUI,
               color:      colors.accent,
             }}
           >
@@ -128,7 +129,7 @@ export default async function CaseStudyPage(
             style={{
               fontFamily:    "var(--font-display)",
               fontSize:      "clamp(32px, 6vw, 72px)",
-              fontWeight:    800,
+              fontWeight:    tokens.weightDisplay,
               lineHeight:    0.95,
               letterSpacing: "-0.025em",
               color:         colors.bgLight,
@@ -143,7 +144,7 @@ export default async function CaseStudyPage(
               style={{
                 fontFamily: "var(--font-body)",
                 fontSize:   "clamp(15px, 1.4vw, 18px)",
-                fontWeight: 300,
+                fontWeight: tokens.weightBody,
                 color:      colors.textSecondary,
                 maxWidth:   "560px",
                 lineHeight: 1.75,
@@ -189,7 +190,7 @@ export default async function CaseStudyPage(
                   style={{
                     fontFamily: "var(--font-body)",
                     fontSize:   "16px",
-                    fontWeight: 300,
+                    fontWeight: tokens.weightBody,
                     color:      colors.textSecondary,
                   }}
                 >
@@ -208,7 +209,7 @@ export default async function CaseStudyPage(
                     className="text-xs tracking-[0.2em] uppercase mb-6"
                     style={{
                       fontFamily: "var(--font-display)",
-                      fontWeight: 600,
+                      fontWeight: tokens.weightUI,
                       color:      colors.textSecondary,
                     }}
                   >
@@ -221,7 +222,7 @@ export default async function CaseStudyPage(
                           style={{
                             fontFamily:    "var(--font-display)",
                             fontSize:      "clamp(28px, 4vw, 44px)",
-                            fontWeight:    800,
+                            fontWeight:    tokens.weightDisplay,
                             lineHeight:    1,
                             letterSpacing: "-0.02em",
                             color:         colors.textSubtle,
@@ -233,7 +234,7 @@ export default async function CaseStudyPage(
                           className="mt-1 text-xs tracking-[0.12em] uppercase"
                           style={{
                             fontFamily: "var(--font-display)",
-                            fontWeight: 500,
+                            fontWeight: tokens.weightUI,
                             color:      colors.textSecondary,
                           }}
                         >
@@ -254,7 +255,7 @@ export default async function CaseStudyPage(
                     className="text-xs tracking-[0.2em] uppercase mb-1"
                     style={{
                       fontFamily: "var(--font-display)",
-                      fontWeight: 600,
+                      fontWeight: tokens.weightUI,
                       color:      colors.textSecondary,
                     }}
                   >
@@ -264,7 +265,7 @@ export default async function CaseStudyPage(
                     style={{
                       fontFamily: "var(--font-display)",
                       fontSize:   "15px",
-                      fontWeight: 600,
+                      fontWeight: tokens.weightHeading,
                       color:      colors.bgDark,
                     }}
                   >
@@ -278,7 +279,7 @@ export default async function CaseStudyPage(
                     className="text-xs tracking-[0.2em] uppercase mb-1"
                     style={{
                       fontFamily: "var(--font-display)",
-                      fontWeight: 600,
+                      fontWeight: tokens.weightUI,
                       color:      colors.textSecondary,
                     }}
                   >
@@ -288,7 +289,7 @@ export default async function CaseStudyPage(
                     style={{
                       fontFamily: "var(--font-display)",
                       fontSize:   "15px",
-                      fontWeight: 600,
+                      fontWeight: tokens.weightHeading,
                       color:      colors.bgDark,
                     }}
                   >
@@ -303,7 +304,7 @@ export default async function CaseStudyPage(
                       className="text-xs tracking-[0.2em] uppercase mb-2"
                       style={{
                         fontFamily: "var(--font-display)",
-                        fontWeight: 600,
+                        fontWeight: tokens.weightUI,
                         color:      colors.textSecondary,
                       }}
                     >
@@ -316,7 +317,7 @@ export default async function CaseStudyPage(
                           style={{
                             fontFamily: "var(--font-body)",
                             fontSize:   "14px",
-                            fontWeight: 300,
+                            fontWeight: tokens.weightSecondary,
                             color:      colors.textSubtle,
                           }}
                         >
@@ -334,7 +335,7 @@ export default async function CaseStudyPage(
                       className="text-xs tracking-[0.2em] uppercase mb-1"
                       style={{
                         fontFamily: "var(--font-display)",
-                        fontWeight: 600,
+                        fontWeight: tokens.weightUI,
                         color:      colors.textSecondary,
                       }}
                     >
@@ -347,7 +348,7 @@ export default async function CaseStudyPage(
                       className="inline-flex items-center gap-1 text-sm transition-colors duration-200"
                       style={{
                         fontFamily: "var(--font-display)",
-                        fontWeight: 600,
+                        fontWeight: tokens.weightUI,
                         color:      colors.accent,
                       }}
                     >
@@ -373,7 +374,7 @@ export default async function CaseStudyPage(
           className="inline-flex items-center gap-3 text-xs tracking-[0.15em] uppercase transition-colors duration-200"
           style={{
             fontFamily: "var(--font-display)",
-            fontWeight: 600,
+            fontWeight: tokens.weightUI,
             color:      colors.textSecondary,
           }}
         >

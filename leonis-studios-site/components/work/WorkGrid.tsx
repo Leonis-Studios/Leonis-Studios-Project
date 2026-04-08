@@ -11,6 +11,7 @@ import Image from "next/image";
 import { useState } from "react";
 import type { CaseStudyCard } from "@/lib/types";
 import { colors } from "@/lib/colors";
+import { tokens } from "@/lib/tokens";
 
 interface WorkGridProps {
   projects: CaseStudyCard[];
@@ -64,7 +65,7 @@ export default function WorkGrid({ projects }: WorkGridProps) {
               style={{
                 fontFamily:      "var(--font-display)",
                 fontSize:        "12px",
-                fontWeight:      600,
+                fontWeight:      tokens.weightUI,
                 letterSpacing:   "0.1em",
                 textTransform:   "uppercase",
                 background:      activeFilter === filter ? colors.accent : "transparent",
@@ -87,7 +88,7 @@ export default function WorkGrid({ projects }: WorkGridProps) {
               style={{
                 fontFamily: "var(--font-body)",
                 fontSize:   "16px",
-                fontWeight: 300,
+                fontWeight: tokens.weightBody,
                 color:      colors.textSecondary,
               }}
             >
@@ -131,7 +132,7 @@ export default function WorkGrid({ projects }: WorkGridProps) {
                         className="text-xs tracking-[0.15em] uppercase mb-2"
                         style={{
                           fontFamily: "var(--font-display)",
-                          fontWeight: 500,
+                          fontWeight: tokens.weightUI,
                           color:      colors.textSecondary,
                         }}
                       >
@@ -144,7 +145,7 @@ export default function WorkGrid({ projects }: WorkGridProps) {
                         style={{
                           fontFamily:    "var(--font-display)",
                           fontSize:      "clamp(18px, 2vw, 24px)",
-                          fontWeight:    700,
+                          fontWeight:    tokens.weightHeading,
                           letterSpacing: "-0.015em",
                           color:         colors.bgDark,
                         }}
@@ -167,7 +168,7 @@ export default function WorkGrid({ projects }: WorkGridProps) {
                     className="text-sm leading-relaxed mb-6"
                     style={{
                       fontFamily: "var(--font-body)",
-                      fontWeight: 300,
+                      fontWeight: tokens.weightBody,
                       color:      colors.textSecondary,
                     }}
                   >
@@ -183,7 +184,7 @@ export default function WorkGrid({ projects }: WorkGridProps) {
                           className="px-2 py-1 text-xs"
                           style={{
                             fontFamily: "var(--font-display)",
-                            fontWeight: 500,
+                            fontWeight: tokens.weightUI,
                             border:     `1px solid ${colors.borderDark}`,
                             color:      colors.textSecondary,
                           }}

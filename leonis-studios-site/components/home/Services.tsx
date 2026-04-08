@@ -7,6 +7,7 @@ import type { Service }          from "@/lib/types";
 import ServicesGrid              from "@/components/home/ServicesGrid";
 import Link                      from "next/link";
 import { colors }                from "@/lib/colors";
+import { tokens }                from "@/lib/tokens";
 
 export default async function Services() {
   const services: Service[] = await client
@@ -24,7 +25,7 @@ export default async function Services() {
               <div className="w-8 h-px" style={{ background: colors.accent }} />
               <span
                 className="text-xs tracking-[0.25em] uppercase"
-                style={{ fontFamily: "var(--font-display)", fontWeight: 500, color: colors.accent }}
+                style={{ fontFamily: "var(--font-display)", fontWeight: tokens.weightUI, color: colors.accent }}
               >
                 What We Do
               </span>
@@ -33,7 +34,7 @@ export default async function Services() {
               style={{
                 fontFamily:    "var(--font-display)",
                 fontSize:      "clamp(32px, 5vw, 64px)",
-                fontWeight:    800,
+                fontWeight:    tokens.weightDisplay,
                 lineHeight:    0.95,
                 letterSpacing: "-0.025em",
                 color:         colors.bgDark,
@@ -44,7 +45,7 @@ export default async function Services() {
           </div>
           <p
             className="text-sm leading-relaxed max-w-xs"
-            style={{ fontFamily: "var(--font-body)", fontWeight: 300, color: colors.textMuted }}
+            style={{ fontFamily: "var(--font-body)", fontWeight: tokens.weightBody, color: colors.textMuted }}
           >
             Three focused website packages, each executed with the same
             uncompromising standard of craft.
@@ -61,7 +62,7 @@ export default async function Services() {
             style={{
               fontFamily:    "var(--font-display)",
               fontSize:      "13px",
-              fontWeight:    600,
+              fontWeight:    tokens.weightUI,
               letterSpacing: "0.12em",
               textTransform: "uppercase",
               color:         colors.accent,

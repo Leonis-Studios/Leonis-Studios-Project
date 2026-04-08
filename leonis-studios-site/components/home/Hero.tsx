@@ -2,6 +2,7 @@
 import Link from "next/link";
 import { useState, useEffect } from "react";
 import { colors } from "@/lib/colors";
+import { tokens } from "@/lib/tokens";
 
 export default function Hero() {
   const [pastHero, setPastHero] = useState(false);
@@ -52,7 +53,7 @@ export default function Hero() {
           <div className="w-8 h-px" style={{ backgroundColor: colors.accent }} />
           <span
             className="text-xs tracking-[0.25em] uppercase"
-            style={{ color: colors.accent, fontFamily: "var(--font-display)", fontWeight: 500 }}
+            style={{ color: colors.accent, fontFamily: "var(--font-display)", fontWeight: tokens.weightUI }}
           >
             Web Studio · Est. 2026
           </span>
@@ -63,7 +64,7 @@ export default function Hero() {
           style={{
             fontFamily: "var(--font-display)",
             fontSize: "clamp(48px, 9vw, 120px)",
-            fontWeight: 800,
+            fontWeight: tokens.weightDisplay,
             lineHeight: 0.92,
             letterSpacing: "-0.03em",
             color: "var(--color-white)",
@@ -85,7 +86,7 @@ export default function Hero() {
           className="mt-10"
           style={{
             fontFamily: "var(--font-body)",
-            fontWeight: 300,
+            fontWeight: tokens.weightBody,
             fontSize: "clamp(16px, 1.5vw, 19px)",
             color: "var(--color-neutral-400)",
             maxWidth: "480px",
@@ -116,7 +117,7 @@ export default function Hero() {
               backgroundColor: colors.accent,
               fontFamily: "var(--font-display)",
               fontSize: "13px",
-              fontWeight: 600,
+              fontWeight: tokens.weightUI,
               letterSpacing: "0.12em",
               textTransform: "uppercase",
             }}
@@ -133,7 +134,7 @@ export default function Hero() {
             style={{
               fontFamily: "var(--font-display)",
               fontSize: "13px",
-              fontWeight: 600,
+              fontWeight: tokens.weightUI,
               letterSpacing: "0.12em",
               textTransform: "uppercase",
             }}
@@ -166,7 +167,7 @@ export default function Hero() {
                   style={{
                     fontFamily: "var(--font-display)",
                     fontSize: "clamp(28px, 4vw, 48px)",
-                    fontWeight: 800,
+                    fontWeight: tokens.weightDisplay,
                     lineHeight: 1,
                     letterSpacing: "-0.02em",
                     color: "var(--color-white)",
@@ -178,7 +179,7 @@ export default function Hero() {
                   className="mt-2 text-xs tracking-[0.15em] uppercase"
                   style={{
                     fontFamily: "var(--font-display)",
-                    fontWeight: 500,
+                    fontWeight: tokens.weightUI,
                     color: "var(--color-neutral-400)",
                   }}
                 >
@@ -220,7 +221,7 @@ export default function Hero() {
           style={{
             fontFamily: "var(--font-display)",
             fontSize: "10px",
-            fontWeight: 500,
+            fontWeight: tokens.weightUI,
             letterSpacing: "0.2em",
             textTransform: "uppercase",
             color: colors.textNav,

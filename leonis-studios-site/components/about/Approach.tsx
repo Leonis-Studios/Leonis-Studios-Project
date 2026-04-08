@@ -1,4 +1,5 @@
 import { colors } from "@/lib/colors";
+import { tokens } from "@/lib/tokens";
 
 interface Props {
   approachHeadline?: string;
@@ -45,7 +46,7 @@ export default function Approach({ approachHeadline }: Props) {
             className="text-xs tracking-[0.25em] uppercase"
             style={{
               fontFamily: "var(--font-display)",
-              fontWeight: 500,
+              fontWeight: tokens.weightUI,
               color: colors.accent,
             }}
           >
@@ -58,7 +59,7 @@ export default function Approach({ approachHeadline }: Props) {
           style={{
             fontFamily: "var(--font-display)",
             fontSize: "clamp(32px, 5vw, 64px)",
-            fontWeight: 800,
+            fontWeight: tokens.weightDisplay,
             lineHeight: 1.0,
             letterSpacing: "-0.025em",
             color: colors.bgLight,
@@ -83,7 +84,7 @@ export default function Approach({ approachHeadline }: Props) {
                 style={{
                   fontFamily: "var(--font-display)",
                   fontSize: "12px",
-                  fontWeight: 600,
+                  fontWeight: tokens.weightUI,
                   color: colors.accent,
                   letterSpacing: "0.1em",
                 }}
@@ -94,7 +95,7 @@ export default function Approach({ approachHeadline }: Props) {
                 style={{
                   fontFamily: "var(--font-display)",
                   fontSize: "clamp(16px, 1.4vw, 20px)",
-                  fontWeight: 700,
+                  fontWeight: tokens.weightHeading,
                   letterSpacing: "-0.01em",
                   color: colors.bgLight,
                 }}
@@ -105,7 +106,7 @@ export default function Approach({ approachHeadline }: Props) {
                 style={{
                   fontFamily: "var(--font-body)",
                   fontSize: "13px",
-                  fontWeight: 300,
+                  fontWeight: tokens.weightBody,
                   color: colors.textSecondary,
                   lineHeight: 1.75,
                 }}

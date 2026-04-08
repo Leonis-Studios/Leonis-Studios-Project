@@ -1,4 +1,5 @@
 import { colors } from "@/lib/colors";
+import { tokens } from "@/lib/tokens";
 
 export default function Marquee() {
   const items = [
@@ -37,7 +38,7 @@ export default function Marquee() {
           <span
             key={i}
             className="flex items-center"
-            style={{ fontFamily: "var(--font-display)", fontWeight: 600 }}
+            style={{ fontFamily: "var(--font-display)", fontWeight: tokens.weightUI }}
           >
             <span
               className="text-xs tracking-[0.2em] uppercase px-8"
