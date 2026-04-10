@@ -35,7 +35,7 @@ export default function Skills({ techStack }: Props) {
   return (
     <section
       className="py-24 lg:py-32"
-      style={{ background: colors.bgLight }}
+      style={{ background: colors.bgLight, borderTop: `1px solid ${colors.borderLight}` }}
     >
       <div className="max-w-7xl mx-auto px-6 lg:px-12">
 

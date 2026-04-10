@@ -10,7 +10,7 @@ import type { Metadata } from "next";
 import Hero         from "@/components/home/Hero";
 import Marquee      from "@/components/home/Marquee";
 import Services     from "@/components/home/Services";
-import Pricing      from "@/components/home/Pricing";
+import HowItWorks   from "@/components/home/HowItWorks";
 import FeaturedWork from "@/components/home/FeaturedWork";
 import CTA          from "@/components/home/CTA";
 import siteConfig   from "@/site.config";
@@ -95,7 +95,7 @@ export default function HomePage() {
       <Hero />
       <Marquee />
       <Services />
-      <Pricing />
+      <HowItWorks />
       <FeaturedWork />
       <CTA />
     </>

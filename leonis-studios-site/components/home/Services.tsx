@@ -58,7 +58,7 @@ export default async function Services() {
         {/* ── Bottom link ──────────────────────────────────── */}
         <div className="mt-12 flex justify-center">
           <Link
-            href="#pricing"
+            href="/contact"
             style={{
               fontFamily:    "var(--font-display)",
               fontSize:      "13px",
@@ -69,7 +69,7 @@ export default async function Services() {
               textDecoration: "none",
             }}
           >
-            View all services &amp; pricing →
+            Start a Project →
           </Link>
         </div>
 

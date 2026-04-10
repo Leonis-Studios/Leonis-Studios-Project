@@ -1,17 +1,17 @@
-import type { Metadata }  from "next";
-import siteConfig          from "@/site.config";
-import { client }          from "@/sanity/lib/client";
+import type { Metadata } from "next";
+import siteConfig from "@/site.config";
+import { client } from "@/sanity/lib/client";
 import { ABOUT_PAGE_QUERY } from "@/sanity/lib/queries";
 import type { AboutPageData } from "@/lib/types";
-import AboutHero           from "@/components/about/AboutHero";
-import Story               from "@/components/about/Story";
-import Values              from "@/components/about/Values";
-import Approach            from "@/components/about/Approach";
-import Skills              from "@/components/about/Skills";
-import AboutCTA            from "@/components/about/AboutCTA";
+import AboutHero from "@/components/about/AboutHero";
+import Story from "@/components/about/Story";
+import Values from "@/components/about/Values";
+import ClientPromise from "@/components/about/ClientPromise";
+import Skills from "@/components/about/Skills";
+import AboutCTA from "@/components/about/AboutCTA";
 
 export const metadata: Metadata = {
-  title:       "About",
+  title: "About",
   description:
     "Leonis Studios is a New Jersey web design studio built on craft and performance. Meet Hassan Shirazi, the developer behind every project.",
   keywords: [
@@ -24,15 +24,15 @@ export const metadata: Metadata = {
     "Leonis Studios",
   ],
   openGraph: {
-    title:       `About — ${siteConfig.name}`,
+    title: `About — ${siteConfig.name}`,
     description:
       "Leonis Studios is a New Jersey web design studio built on craft and performance. Meet Hassan Shirazi, the developer behind every project.",
-    url:         `${siteConfig.url}/about`,
-    type:        "website",
+    url: `${siteConfig.url}/about`,
+    type: "website",
   },
   twitter: {
-    card:        "summary_large_image",
-    title:       `About — ${siteConfig.name}`,
+    card: "summary_large_image",
+    title: `About — ${siteConfig.name}`,
     description:
       "Leonis Studios is a New Jersey web design studio built on craft and performance.",
   },
@@ -49,19 +49,19 @@ export default async function AboutPage() {
   // ── JSON-LD structured data ──────────────────────────────
   const personSchema = {
     "@context": "https://schema.org",
-    "@type":    "Person",
-    name:       "Hassan Shirazi",
-    jobTitle:   "Web Designer & Developer",
+    "@type": "Person",
+    name: "Hassan Shirazi",
+    jobTitle: "Web Designer & Developer",
     worksFor: {
       "@type": "Organization",
-      name:    "Leonis Studios",
+      name: "Leonis Studios",
     },
-    url:     siteConfig.url,
+    url: siteConfig.url,
     address: {
-      "@type":           "PostalAddress",
-      addressLocality:   "New Jersey",
-      addressRegion:     "NJ",
-      addressCountry:    "US",
+      "@type": "PostalAddress",
+      addressLocality: "New Jersey",
+      addressRegion: "NJ",
+      addressCountry: "US",
     },
     knowsAbout: [
       "Web Design",
@@ -75,24 +75,24 @@ export default async function AboutPage() {
   };
 
   const localBusinessSchema = {
-    "@context":   "https://schema.org",
-    "@type":      "ProfessionalService",
-    name:         "Leonis Studios",
-    description:  siteConfig.description,
-    url:          siteConfig.url,
-    email:        siteConfig.email,
+    "@context": "https://schema.org",
+    "@type": "ProfessionalService",
+    name: "Leonis Studios",
+    description: siteConfig.description,
+    url: siteConfig.url,
+    email: siteConfig.email,
     foundingDate: "2024",
     founder: {
       "@type": "Person",
-      name:    "Hassan Shirazi",
+      name: "Hassan Shirazi",
     },
     address: {
-      "@type":         "PostalAddress",
+      "@type": "PostalAddress",
       addressLocality: "New Jersey",
-      addressRegion:   "NJ",
-      addressCountry:  "US",
+      addressRegion: "NJ",
+      addressCountry: "US",
     },
-    areaServed:    "United States",
+    areaServed: "United States",
     serviceType: [
       "Web Design",
       "Web Development",
@@ -110,28 +110,19 @@ export default async function AboutPage() {
       />
       <script
         type="application/ld+json"
-        dangerouslySetInnerHTML={{ __html: JSON.stringify(localBusinessSchema) }}
+        dangerouslySetInnerHTML={{
+          __html: JSON.stringify(localBusinessSchema),
+        }}
       />
       <AboutHero
         headline={data?.heroHeadline}
         subheading={data?.heroSubheading}
       />
-      <Story
-        storyBody={data?.storyBody}
-      />
-      <Values
-        values={data?.values}
-      />
-      <Approach
-        approachHeadline={data?.approachHeadline}
-      />
-      <Skills
-        techStack={data?.techStack}
-      />
-      <AboutCTA
-        ctaHeadline={data?.ctaHeadline}
-        ctaSubtext={data?.ctaSubtext}
-      />
+      <Story storyBody={data?.storyBody} />
+      <Values values={data?.values} />
+      <ClientPromise />
+      <Skills techStack={data?.techStack} />
+      <AboutCTA ctaHeadline={data?.ctaHeadline} ctaSubtext={data?.ctaSubtext} />
     </>
   );
 }
