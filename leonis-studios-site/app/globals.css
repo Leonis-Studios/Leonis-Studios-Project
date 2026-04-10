@@ -1,4 +1,4 @@
-@import url('https://fonts.googleapis.com/css2?family=Syne:wght@400;500;600;700;800&family=Manrope:wght@300;400;500&display=swap');
+@import url("https://fonts.googleapis.com/css2?family=Syne:wght@400;500;600;700;800&family=Manrope:wght@300;400;500&display=swap");
 
 @import "tailwindcss";
 
@@ -10,34 +10,36 @@
 ──────────────────────────────────────────────────────── */
 @theme {
   /* Colours */
-  --color-black:          #000000;
-  --color-white:          #ffffff;
-  --color-crimson:        #fca311;
-  --color-crimson-dark:   #e08e00;
-  --color-neutral-800:    #0c1425;
-  --color-neutral-700:    #29447e;
-  --color-neutral-600:    #3d5a8a;
-  --color-neutral-400:    #7e99d5;
-  --color-neutral-200:    #e5e5e5;
-  --color-neutral-100:    #f5f5f5;
+  --color-black: #000000;
+  --color-white: #ffffff;
+  --color-crimson: #fca311;
+  --color-crimson-dark: #e08e00;
+  --color-neutral-800: #0c1425;
+  --color-neutral-700: #29447e;
+  --color-neutral-600: #3d5a8a;
+  --color-neutral-400: #7e99d5;
+  --color-neutral-200: #e5e5e5;
+  --color-neutral-100: #f5f5f5;
 
   /* Fonts */
   --font-display: "Syne", sans-serif;
-  --font-body:    "Manrope", sans-serif;
+  --font-body: "Manrope", sans-serif;
 
   /* Font sizes with fluid scaling using clamp()   */
   /* clamp(min, preferred, max)                    */
   /* Usage: className="text-display-2xl"           */
   --font-size-display-2xl: clamp(52px, 9vw, 120px);
-  --font-size-display-xl:  clamp(38px, 6vw, 80px);
-  --font-size-display-lg:  clamp(28px, 4vw, 52px);
-  --font-size-display-md:  clamp(20px, 2.5vw, 34px);
+  --font-size-display-xl: clamp(38px, 6vw, 80px);
+  --font-size-display-lg: clamp(28px, 4vw, 52px);
+  --font-size-display-md: clamp(20px, 2.5vw, 34px);
 }
 
 /* ── Base ───────────────────────────────────────────────
    Rules that apply globally to every page.
 ──────────────────────────────────────────────────────── */
-*, *::before, *::after {
+*,
+*::before,
+*::after {
   box-sizing: border-box;
 }
 
@@ -55,10 +57,18 @@ body {
 }
 
 /* ── Scrollbar ──────────────────────────────────────────*/
-::-webkit-scrollbar       { width: 4px; }
-::-webkit-scrollbar-track { background: var(--color-black); }
-::-webkit-scrollbar-thumb { background: var(--color-neutral-700); }
-::-webkit-scrollbar-thumb:hover { background: var(--color-crimson); }
+::-webkit-scrollbar {
+  width: 4px;
+}
+::-webkit-scrollbar-track {
+  background: var(--color-black);
+}
+::-webkit-scrollbar-thumb {
+  background: var(--color-neutral-700);
+}
+::-webkit-scrollbar-thumb:hover {
+  background: var(--color-crimson);
+}
 
 /* ── Selection ──────────────────────────────────────────*/
 ::selection {
@@ -72,23 +82,52 @@ body {
    until their animation fires.
 ──────────────────────────────────────────────────────── */
 @keyframes fadeUp {
-  from { opacity: 0; transform: translateY(28px); }
-  to   { opacity: 1; transform: translateY(0); }
+  from {
+    opacity: 0;
+    transform: translateY(28px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
 }
 
 @keyframes fadeIn {
-  from { opacity: 0; }
-  to   { opacity: 1; }
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
 }
 
-.animate-fade-up { animation: fadeUp 0.8s cubic-bezier(0.16, 1, 0.3, 1) forwards; }
-.animate-fade-in { animation: fadeIn 0.8s ease forwards; }
+.animate-fade-up {
+  animation: fadeUp 0.8s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+}
+.animate-fade-in {
+  animation: fadeIn 0.8s ease forwards;
+}
 
-.delay-100 { animation-delay: 0.10s; opacity: 0; }
-.delay-200 { animation-delay: 0.25s; opacity: 0; }
-.delay-300 { animation-delay: 0.40s; opacity: 0; }
-.delay-400 { animation-delay: 0.55s; opacity: 0; }
-.delay-500 { animation-delay: 0.70s; opacity: 0; }
+.delay-100 {
+  animation-delay: 0.1s;
+  opacity: 0;
+}
+.delay-200 {
+  animation-delay: 0.25s;
+  opacity: 0;
+}
+.delay-300 {
+  animation-delay: 0.4s;
+  opacity: 0;
+}
+.delay-400 {
+  animation-delay: 0.55s;
+  opacity: 0;
+}
+.delay-500 {
+  animation-delay: 0.7s;
+  opacity: 0;
+}
 
 /* ── Portable Text ──────────────────────────────────────
    Styles for Sanity rich text content rendered on
@@ -113,9 +152,9 @@ body {
 .prose-leonis p {
   font-size: 16px;
   line-height: 1.85;
-  color: #29447e;
+  color: #14213d;
   margin-bottom: 1.25rem;
-  font-weight: 300;
+  font-weight: 500;
 }
 .prose-leonis ul,
 .prose-leonis ol {
@@ -128,7 +167,10 @@ body {
   margin-bottom: 0.4rem;
   color: #29447e;
 }
-.prose-leonis strong { color: #14213d; font-weight: 600; }
+.prose-leonis strong {
+  color: #14213d;
+  font-weight: 600;
+}
 .prose-leonis blockquote {
   border-left: 3px solid var(--color-crimson);
   padding-left: 1.25rem;
@@ -143,6 +185,10 @@ body {
 }
 
 @keyframes marquee {
-  from { transform: translateX(0); }
-  to   { transform: translateX(-50%); }
+  from {
+    transform: translateX(0);
+  }
+  to {
+    transform: translateX(-50%);
+  }
 }

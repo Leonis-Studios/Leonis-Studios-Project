@@ -30,7 +30,11 @@ export default async function Pricing() {
     .catch(() => []);
 
   return (
-    <section id="pricing" style={{ background: colors.bgDark }} className="py-24">
+    <section
+      id="pricing"
+      style={{ background: colors.bgDark }}
+      className="py-24"
+    >
       <div className="max-w-7xl mx-auto px-6 lg:px-12">
         {/* ── Section header ───────────────────────────────── */}
         <div className="mb-16">
@@ -65,7 +69,7 @@ export default async function Pricing() {
               fontFamily: "var(--font-body)",
               fontSize: "16px",
               fontWeight: tokens.weightBody,
-              color: colors.textSecondary,
+              color: colors.textSecondaryLight,
               maxWidth: "480px",
             }}
           >
@@ -133,7 +137,7 @@ export default async function Pricing() {
                       fontFamily: "var(--font-body)",
                       fontSize: "14px",
                       fontWeight: tokens.weightBody,
-                      color: colors.textSecondary,
+                      color: colors.textSecondaryLight,
                       lineHeight: 1.6,
                       marginBottom: "20px",
                     }}
@@ -205,7 +209,7 @@ export default async function Pricing() {
                           fontFamily: "var(--font-body)",
                           fontSize: "12px",
                           fontWeight: tokens.weightSecondary,
-                          color: colors.textMuted,
+                          color: colors.textSecondaryLight,
                           marginTop: "2px",
                         }}
                       >
@@ -241,7 +245,7 @@ export default async function Pricing() {
                         fontWeight: tokens.weightUI,
                         letterSpacing: "0.2em",
                         textTransform: "uppercase",
-                        color: colors.textMuted,
+                        color: colors.accent,
                         marginBottom: "12px",
                       }}
                     >
@@ -277,7 +281,7 @@ export default async function Pricing() {
                             fontFamily: "var(--font-body)",
                             fontSize: "12px",
                             fontWeight: tokens.weightSecondary,
-                            color: colors.textMuted,
+                            color: colors.accent,
                             marginTop: "2px",
                           }}
                         >

@@ -19,6 +19,7 @@ export const colors = {
   textNavAccent: "#fca311",
   emailFooterBg: "#f5f5f5",
   errorBg: "#fff0f0",
+  textSecondaryLight: "#BFCEEE",
 } as const;
 
 export type ColorKey = keyof typeof colors;

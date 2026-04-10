@@ -5,50 +5,52 @@
 // generateStaticParams pre-renders every slug at build time.
 // generateMetadata provides dynamic title + OG data per project.
 
-import type { Metadata }   from "next";
-import Image               from "next/image";
-import Link                from "next/link";
-import { notFound }        from "next/navigation";
-import { PortableText }    from "@portabletext/react";
-import { client }          from "@/sanity/lib/client";
+import type { Metadata } from "next";
+import Image from "next/image";
+import Link from "next/link";
+import { notFound } from "next/navigation";
+import { PortableText } from "@portabletext/react";
+import { client } from "@/sanity/lib/client";
 import {
   CASE_STUDY_BY_SLUG_QUERY,
   ALL_CASE_STUDY_SLUGS_QUERY,
 } from "@/sanity/lib/queries";
-import type { CaseStudy }  from "@/lib/types";
-import siteConfig          from "@/site.config";
-import { colors }          from "@/lib/colors";
-import { tokens }          from "@/lib/tokens";
+import type { CaseStudy } from "@/lib/types";
+import siteConfig from "@/site.config";
+import { colors } from "@/lib/colors";
+import { tokens } from "@/lib/tokens";
 
 // ── Static params ──────────────────────────────────────────────
 // Next.js calls this at build time to pre-render every slug.
 export async function generateStaticParams() {
   const slugs: { slug: string }[] = await client.fetch(
-    ALL_CASE_STUDY_SLUGS_QUERY
+    ALL_CASE_STUDY_SLUGS_QUERY,
   );
   return slugs.map(({ slug }) => ({ slug }));
 }
 
 // ── Metadata ───────────────────────────────────────────────────
-export async function generateMetadata(
-  { params }: { params: Promise<{ slug: string }> }
-): Promise<Metadata> {
+export async function generateMetadata({
+  params,
+}: {
+  params: Promise<{ slug: string }>;
+}): Promise<Metadata> {
   const { slug } = await params;
   const project: CaseStudy | null = await client.fetch(
     CASE_STUDY_BY_SLUG_QUERY,
     { slug },
-    { next: { revalidate: 3600 } }
+    { next: { revalidate: 3600 } },
   );
 
   if (!project) return { title: "Project Not Found" };
 
   return {
-    title:       `${project.title} — ${siteConfig.name}`,
+    title: `${project.title} — ${siteConfig.name}`,
     description: project.summary,
     openGraph: {
-      title:       project.title,
+      title: project.title,
       description: project.summary,
-      images:      project.coverImage?.url
+      images: project.coverImage?.url
         ? [{ url: project.coverImage.url, width: 1200, height: 630 }]
         : [],
     },
@@ -56,32 +58,34 @@ export async function generateMetadata(
 }
 
 // ── Page ───────────────────────────────────────────────────────
-export default async function CaseStudyPage(
-  { params }: { params: Promise<{ slug: string }> }
-) {
+export default async function CaseStudyPage({
+  params,
+}: {
+  params: Promise<{ slug: string }>;
+}) {
   const { slug } = await params;
   const project: CaseStudy | null = await client.fetch(
     CASE_STUDY_BY_SLUG_QUERY,
     { slug },
-    { next: { revalidate: 3600 } }
+    { next: { revalidate: 3600 } },
   );
 
   if (!project) notFound();
 
   // ── JSON-LD structured data ──────────────────────────────
   const jsonLd = {
-    "@context":         "https://schema.org",
-    "@type":            "Article",
-    headline:           project.title,
-    description:        project.summary,
-    image:              project.coverImage?.url ?? undefined,
-    datePublished:      String(project.year),
+    "@context": "https://schema.org",
+    "@type": "Article",
+    headline: project.title,
+    description: project.summary,
+    image: project.coverImage?.url ?? undefined,
+    datePublished: String(project.year),
     publisher: {
       "@type": "Organization",
-      name:    siteConfig.name,
-      url:     siteConfig.url,
+      name: siteConfig.name,
+      url: siteConfig.url,
     },
-    mainEntityOfPage:   `${siteConfig.url}/work/${project.slug}`,
+    mainEntityOfPage: `${siteConfig.url}/work/${project.slug}`,
   };
 
   return (
@@ -96,7 +100,6 @@ export default async function CaseStudyPage(
           full-width cover image so it bleeds edge-to-edge.
       ──────────────────────────────────────────────────────── */}
       <div style={{ background: colors.bgDark }}>
-
         {/* Back navigation */}
         <div className="max-w-7xl mx-auto px-6 lg:px-12 pt-32 pb-8">
           <Link
@@ -105,7 +108,7 @@ export default async function CaseStudyPage(
             style={{
               fontFamily: "var(--font-display)",
               fontWeight: tokens.weightUI,
-              color:      colors.textSecondary,
+              color: colors.textSecondary,
             }}
           >
             <span>←</span>
@@ -120,20 +123,20 @@ export default async function CaseStudyPage(
             style={{
               fontFamily: "var(--font-display)",
               fontWeight: tokens.weightUI,
-              color:      colors.accent,
+              color: colors.accent,
             }}
           >
             {project.client} · {project.year}
           </p>
           <h1
             style={{
-              fontFamily:    "var(--font-display)",
-              fontSize:      "clamp(32px, 6vw, 72px)",
-              fontWeight:    tokens.weightDisplay,
-              lineHeight:    0.95,
+              fontFamily: "var(--font-display)",
+              fontSize: "clamp(32px, 6vw, 72px)",
+              fontWeight: tokens.weightDisplay,
+              lineHeight: 0.95,
               letterSpacing: "-0.025em",
-              color:         colors.bgLight,
-              maxWidth:      "820px",
+              color: colors.bgLight,
+              maxWidth: "820px",
             }}
           >
             {project.title}
@@ -143,10 +146,10 @@ export default async function CaseStudyPage(
               className="mt-6"
               style={{
                 fontFamily: "var(--font-body)",
-                fontSize:   "clamp(15px, 1.4vw, 18px)",
+                fontSize: "clamp(15px, 1.4vw, 18px)",
                 fontWeight: tokens.weightBody,
-                color:      colors.textSecondary,
-                maxWidth:   "560px",
+                color: colors.textSecondaryLight,
+                maxWidth: "560px",
                 lineHeight: 1.75,
               }}
             >
@@ -157,7 +160,10 @@ export default async function CaseStudyPage(
 
         {/* Full-width cover image */}
         {project.coverImage?.url && (
-          <div className="w-full aspect-video overflow-hidden" style={{ background: colors.surfaceDark }}>
+          <div
+            className="w-full aspect-video overflow-hidden"
+            style={{ background: colors.surfaceDark }}
+          >
             <Image
               src={project.coverImage.url}
               alt={project.coverImage.alt ?? project.title}
@@ -178,7 +184,6 @@ export default async function CaseStudyPage(
       <div style={{ background: colors.bgLight }}>
         <div className="max-w-7xl mx-auto px-6 lg:px-12 py-20">
           <div className="grid grid-cols-1 lg:grid-cols-3 gap-16">
-
             {/* ── Body copy ──────────────────────────────────── */}
             <div className="lg:col-span-2">
               {project.body && project.body.length > 0 ? (
@@ -189,9 +194,9 @@ export default async function CaseStudyPage(
                 <p
                   style={{
                     fontFamily: "var(--font-body)",
-                    fontSize:   "16px",
+                    fontSize: "16px",
                     fontWeight: tokens.weightBody,
-                    color:      colors.textSecondary,
+                    color: colors.textSecondary,
                   }}
                 >
                   Full case study coming soon.
@@ -201,16 +206,18 @@ export default async function CaseStudyPage(
 
             {/* ── Sidebar ────────────────────────────────────── */}
             <aside>
-
               {/* Results / metrics — shown first if they exist */}
               {project.results && project.results.length > 0 && (
-                <div className="mb-10 pb-10" style={{ borderBottom: `1px solid ${colors.borderLight}` }}>
+                <div
+                  className="mb-10 pb-10"
+                  style={{ borderBottom: `1px solid ${colors.borderLight}` }}
+                >
                   <p
                     className="text-xs tracking-[0.2em] uppercase mb-6"
                     style={{
                       fontFamily: "var(--font-display)",
                       fontWeight: tokens.weightUI,
-                      color:      colors.textSecondary,
+                      color: colors.textSecondary,
                     }}
                   >
                     Results
@@ -220,12 +227,12 @@ export default async function CaseStudyPage(
                       <div key={r.label}>
                         <p
                           style={{
-                            fontFamily:    "var(--font-display)",
-                            fontSize:      "clamp(28px, 4vw, 44px)",
-                            fontWeight:    tokens.weightDisplay,
-                            lineHeight:    1,
+                            fontFamily: "var(--font-display)",
+                            fontSize: "clamp(28px, 4vw, 44px)",
+                            fontWeight: tokens.weightDisplay,
+                            lineHeight: 1,
                             letterSpacing: "-0.02em",
-                            color:         colors.textSubtle,
+                            color: colors.textSubtle,
                           }}
                         >
                           {r.value}
@@ -235,7 +242,7 @@ export default async function CaseStudyPage(
                           style={{
                             fontFamily: "var(--font-display)",
                             fontWeight: tokens.weightUI,
-                            color:      colors.textSecondary,
+                            color: colors.textSecondary,
                           }}
                         >
                           {r.label}
@@ -248,7 +255,6 @@ export default async function CaseStudyPage(
 
               {/* Project meta */}
               <div className="flex flex-col gap-6">
-
                 {/* Client */}
                 <div>
                   <p
@@ -256,7 +262,7 @@ export default async function CaseStudyPage(
                     style={{
                       fontFamily: "var(--font-display)",
                       fontWeight: tokens.weightUI,
-                      color:      colors.textSecondary,
+                      color: colors.textSecondary,
                     }}
                   >
                     Client
@@ -264,9 +270,9 @@ export default async function CaseStudyPage(
                   <p
                     style={{
                       fontFamily: "var(--font-display)",
-                      fontSize:   "15px",
+                      fontSize: "15px",
                       fontWeight: tokens.weightHeading,
-                      color:      colors.bgDark,
+                      color: colors.bgDark,
                     }}
                   >
                     {project.client}
@@ -280,7 +286,7 @@ export default async function CaseStudyPage(
                     style={{
                       fontFamily: "var(--font-display)",
                       fontWeight: tokens.weightUI,
-                      color:      colors.textSecondary,
+                      color: colors.textSecondary,
                     }}
                   >
                     Year
@@ -288,9 +294,9 @@ export default async function CaseStudyPage(
                   <p
                     style={{
                       fontFamily: "var(--font-display)",
-                      fontSize:   "15px",
+                      fontSize: "15px",
                       fontWeight: tokens.weightHeading,
-                      color:      colors.bgDark,
+                      color: colors.bgDark,
                     }}
                   >
                     {project.year}
@@ -305,7 +311,7 @@ export default async function CaseStudyPage(
                       style={{
                         fontFamily: "var(--font-display)",
                         fontWeight: tokens.weightUI,
-                        color:      colors.textSecondary,
+                        color: colors.textSecondary,
                       }}
                     >
                       Services
@@ -316,9 +322,9 @@ export default async function CaseStudyPage(
                           key={s.slug}
                           style={{
                             fontFamily: "var(--font-body)",
-                            fontSize:   "14px",
+                            fontSize: "14px",
                             fontWeight: tokens.weightSecondary,
-                            color:      colors.textSubtle,
+                            color: colors.textSubtle,
                           }}
                         >
                           {s.name}
@@ -336,7 +342,7 @@ export default async function CaseStudyPage(
                       style={{
                         fontFamily: "var(--font-display)",
                         fontWeight: tokens.weightUI,
-                        color:      colors.textSecondary,
+                        color: colors.textSecondary,
                       }}
                     >
                       Live Site
@@ -349,7 +355,7 @@ export default async function CaseStudyPage(
                       style={{
                         fontFamily: "var(--font-display)",
                         fontWeight: tokens.weightUI,
-                        color:      colors.accent,
+                        color: colors.accent,
                       }}
                     >
                       <span>Visit site</span>
@@ -357,7 +363,6 @@ export default async function CaseStudyPage(
                     </a>
                   </div>
                 )}
-
               </div>
             </aside>
           </div>
@@ -367,7 +372,10 @@ export default async function CaseStudyPage(
       {/* ── Next project CTA ──────────────────────────────────── */}
       <div
         className="py-16 text-center"
-        style={{ background: colors.bgDark, borderTop: `1px solid ${colors.surfaceDark}` }}
+        style={{
+          background: colors.bgDark,
+          borderTop: `1px solid ${colors.surfaceDark}`,
+        }}
       >
         <Link
           href="/work"
@@ -375,7 +383,7 @@ export default async function CaseStudyPage(
           style={{
             fontFamily: "var(--font-display)",
             fontWeight: tokens.weightUI,
-            color:      colors.textSecondary,
+            color: colors.textSecondary,
           }}
         >
           <span>← Back to All Work</span>

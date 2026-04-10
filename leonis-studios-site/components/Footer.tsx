@@ -30,8 +30,8 @@ export default function Footer() {
               />
             </Link>
             <p
-              className="text-neutral-400 text-sm leading-relaxed max-w-xs"
-              style={{ fontFamily: "var(--font-body)", fontWeight: tokens.weightBody }}
+              className="text-sm leading-relaxed max-w-xs"
+              style={{ fontFamily: "var(--font-body)", fontWeight: tokens.weightBody, color: colors.textSecondaryLight }}
             >
               {siteConfig.description}
             </p>
@@ -50,8 +50,8 @@ export default function Footer() {
                 <li key={link.href}>
                   <Link
                     href={link.href}
-                    className="text-neutral-400 hover:text-white text-sm transition-colors duration-200"
-                    style={{ fontFamily: "var(--font-body)", fontWeight: tokens.weightBody }}
+                    className="text-sm transition-colors duration-200"
+                    style={{ fontFamily: "var(--font-body)", fontWeight: tokens.weightBody, color: colors.textSecondaryLight }}
                   >
                     {link.label}
                   </Link>
@@ -72,16 +72,16 @@ export default function Footer() {
               <li>
                 <a
                   href={`mailto:${siteConfig.email}`}
-                  className="text-neutral-400 hover:text-white text-sm transition-colors duration-200"
-                  style={{ fontFamily: "var(--font-body)", fontWeight: tokens.weightBody }}
+                  className="text-sm transition-colors duration-200"
+                  style={{ fontFamily: "var(--font-body)", fontWeight: tokens.weightBody, color: colors.textSecondaryLight }}
                 >
                   {siteConfig.email}
                 </a>
               </li>
               <li>
                 <span
-                  className="text-neutral-400 text-sm"
-                  style={{ fontFamily: "var(--font-body)", fontWeight: tokens.weightBody }}
+                  className="text-sm"
+                  style={{ fontFamily: "var(--font-body)", fontWeight: tokens.weightBody, color: colors.textSecondaryLight }}
                 >
                   {siteConfig.location}
                 </span>
@@ -92,8 +92,8 @@ export default function Footer() {
                     href={siteConfig.social.github}
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="text-neutral-400 hover:text-white text-sm transition-colors duration-200"
-                    style={{ fontFamily: "var(--font-body)", fontWeight: tokens.weightBody }}
+                    className="text-sm transition-colors duration-200"
+                    style={{ fontFamily: "var(--font-body)", fontWeight: tokens.weightBody, color: colors.textSecondaryLight }}
                   >
                     GitHub ↗
                   </a>
@@ -107,8 +107,8 @@ export default function Footer() {
         {/* ── Bottom bar ──────────────────────────────────────── */}
         <div className="pt-8 border-t border-neutral-700 flex flex-col sm:flex-row items-center justify-between gap-4">
           <p
-            className="text-neutral-400 text-xs tracking-widest"
-            style={{ fontFamily: "var(--font-body)", fontWeight: tokens.weightBody }}
+            className="text-xs tracking-widest"
+            style={{ fontFamily: "var(--font-body)", fontWeight: tokens.weightBody, color: colors.textSecondaryLight }}
           >
             © {year} {siteConfig.name}. All rights reserved.
           </p>
