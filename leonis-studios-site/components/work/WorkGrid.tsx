@@ -144,7 +144,7 @@ export default function WorkGrid({ projects }: WorkGridProps) {
                         className="work-card-title"
                         style={{
                           fontFamily:    "var(--font-display)",
-                          fontSize:      "clamp(18px, 2vw, 24px)",
+                          fontSize:      tokens.fontSizes.h3,
                           fontWeight:    tokens.weightHeading,
                           letterSpacing: "-0.015em",
                           color:         colors.bgDark,

@@ -105,7 +105,7 @@ export default function HowItWorks() {
           style={{
             fontFamily: "var(--font-body)",
             fontWeight: tokens.weightBody,
-            fontSize: "clamp(15px, 1.3vw, 17px)",
+            fontSize: tokens.fontSizes.body,
             color: colors.textSecondaryLight,
             maxWidth: "480px",
             lineHeight: 1.75,
@@ -182,7 +182,7 @@ export default function HowItWorks() {
                 <h3
                   style={{
                     fontFamily: "var(--font-display)",
-                    fontSize: "18px",
+                    fontSize: tokens.fontSizes.h3,
                     fontWeight: tokens.weightUI,
                     color: "var(--color-white)",
                     letterSpacing: "-0.01em",

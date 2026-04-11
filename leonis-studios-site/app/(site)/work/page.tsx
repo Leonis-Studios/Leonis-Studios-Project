@@ -126,7 +126,7 @@ export default async function WorkPage() {
             className="mt-8"
             style={{
               fontFamily: "var(--font-body)",
-              fontSize:   "clamp(15px, 1.4vw, 18px)",
+              fontSize:   tokens.fontSizes.bodyLarge,
               fontWeight: tokens.weightBody,
               color:      colors.textSecondary,
               maxWidth:   "460px",

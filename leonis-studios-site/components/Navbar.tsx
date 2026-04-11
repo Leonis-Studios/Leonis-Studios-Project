@@ -46,30 +46,33 @@ export default function Navbar() {
       `}
     >
       <div className="max-w-7xl mx-auto px-6 lg:px-12">
-        <div className="flex items-center justify-between h-16">
+        {/* 3-column grid: logo | nav (centered) | cta (right-aligned) */}
+        <div className="grid grid-cols-3 items-center h-16">
           {/* ── Logo ───────────────────────────────────────── */}
-          {(() => {
-            const useDarkLogo = !scrolled && pathname !== "/";
-            return (
-              <Link href="/">
-                <Image
-                  src={useDarkLogo ? "/logo-dark.png" : "/logo-white.png"}
-                  alt="Leonis Studios"
-                  width={140}
-                  height={40}
-                  priority
-                  style={{
-                    height: "36px",
-                    width: "auto",
-                    objectFit: "contain",
-                  }}
-                />
-              </Link>
-            );
-          })()}
+          <div className="flex items-center">
+            {(() => {
+              const useDarkLogo = !scrolled && pathname !== "/";
+              return (
+                <Link href="/">
+                  <Image
+                    src={useDarkLogo ? "/logo-dark.png" : "/logo-white.png"}
+                    alt="Leonis Studios"
+                    width={140}
+                    height={40}
+                    priority
+                    style={{
+                      height: "36px",
+                      width: "auto",
+                      objectFit: "contain",
+                    }}
+                  />
+                </Link>
+              );
+            })()}
+          </div>
 
-          {/* ── Desktop Nav ─────────────────────────────────── */}
-          <nav className="hidden md:flex items-center gap-8">
+          {/* ── Desktop Nav (always centered in the middle column) */}
+          <nav className="hidden md:flex items-center justify-center gap-8">
             {siteConfig.nav.map((link) => {
               // isActive highlights the current page link
               const isActive = pathname === link.href;
@@ -97,12 +100,13 @@ export default function Navbar() {
             })}
           </nav>
 
-          {/* ── CTA Button ──────────────────────────────────── */}
-          <div className="hidden md:block">
+          {/* ── Right column: CTA (desktop) + Hamburger (mobile) */}
+          <div className="flex items-center justify-end">
+            {/* CTA — desktop only */}
             <Link
               href="/contact"
               className="
-                inline-flex items-center gap-2 px-5 py-2.5
+                hidden md:inline-flex items-center gap-2 px-5 py-2.5
                 text-xs tracking-[0.12em] uppercase
                 transition-colors duration-200
                 group
@@ -115,35 +119,35 @@ export default function Navbar() {
                 →
               </span>
             </Link>
-          </div>
 
-          {/* ── Mobile Menu Toggle ──────────────────────────── */}
-          <button
-            className="md:hidden flex flex-col gap-1.5 p-1"
-            onClick={() => setMenuOpen(!menuOpen)}
-            aria-label="Toggle navigation menu"
-            aria-expanded={menuOpen}
-          >
-            {/* Three lines animate into an X when open */}
-            <span
-              className={`
-                block h-px w-6 bg-white transition-all duration-300 origin-center
-                ${menuOpen ? "rotate-45 translate-y-2" : ""}
-              `}
-            />
-            <span
-              className={`
-                block h-px bg-white transition-all duration-300
-                ${menuOpen ? "w-0 opacity-0" : "w-4"}
-              `}
-            />
-            <span
-              className={`
-                block h-px w-6 bg-white transition-all duration-300 origin-center
-                ${menuOpen ? "-rotate-45 -translate-y-2" : ""}
-              `}
-            />
-          </button>
+            {/* ── Mobile Menu Toggle ──────────────────────────── */}
+            <button
+              className="md:hidden flex flex-col gap-1.5 p-1"
+              onClick={() => setMenuOpen(!menuOpen)}
+              aria-label="Toggle navigation menu"
+              aria-expanded={menuOpen}
+            >
+              {/* Three lines animate into an X when open */}
+              <span
+                className={`
+                  block h-px w-6 bg-white transition-all duration-300 origin-center
+                  ${menuOpen ? "rotate-45 translate-y-2" : ""}
+                `}
+              />
+              <span
+                className={`
+                  block h-px bg-white transition-all duration-300
+                  ${menuOpen ? "w-0 opacity-0" : "w-4"}
+                `}
+              />
+              <span
+                className={`
+                  block h-px w-6 bg-white transition-all duration-300 origin-center
+                  ${menuOpen ? "-rotate-45 -translate-y-2" : ""}
+                `}
+              />
+            </button>
+          </div>
         </div>
       </div>
 

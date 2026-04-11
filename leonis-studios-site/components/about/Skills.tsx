@@ -62,7 +62,7 @@ export default function Skills({ techStack }: Props) {
               className="mb-8"
               style={{
                 fontFamily:    "var(--font-display)",
-                fontSize:      "clamp(18px, 2vw, 24px)",
+                fontSize:      tokens.fontSizes.h3,
                 fontWeight:    tokens.weightHeading,
                 letterSpacing: "-0.015em",
                 color:         colors.bgDark,
@@ -98,7 +98,7 @@ export default function Skills({ techStack }: Props) {
               className="mb-8"
               style={{
                 fontFamily:    "var(--font-display)",
-                fontSize:      "clamp(18px, 2vw, 24px)",
+                fontSize:      tokens.fontSizes.h3,
                 fontWeight:    tokens.weightHeading,
                 letterSpacing: "-0.015em",
                 color:         colors.bgDark,
