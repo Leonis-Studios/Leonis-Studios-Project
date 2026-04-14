@@ -52,17 +52,25 @@ export default function Navbar() {
             const useDarkLogo = !scrolled && pathname !== "/";
             return (
               <Link href="/">
+                {/* Mobile: always white logo */}
+                <Image
+                  src="/logo-white.png"
+                  alt="Leonis Studios"
+                  width={140}
+                  height={40}
+                  priority
+                  className="md:hidden"
+                  style={{ height: "36px", width: "auto", objectFit: "contain" }}
+                />
+                {/* Desktop: dark on non-home unscrolled, white otherwise */}
                 <Image
                   src={useDarkLogo ? "/logo-dark.png" : "/logo-white.png"}
                   alt="Leonis Studios"
                   width={140}
                   height={40}
                   priority
-                  style={{
-                    height: "36px",
-                    width: "auto",
-                    objectFit: "contain",
-                  }}
+                  className="hidden md:block"
+                  style={{ height: "36px", width: "auto", objectFit: "contain" }}
                 />
               </Link>
             );
@@ -119,7 +127,7 @@ export default function Navbar() {
 
           {/* ── Mobile Menu Toggle ──────────────────────────── */}
           <button
-            className="md:hidden flex flex-col gap-1.5 p-1"
+            className="md:hidden flex flex-col gap-1.5 p-1 ml-auto"
             onClick={() => setMenuOpen(!menuOpen)}
             aria-label="Toggle navigation menu"
             aria-expanded={menuOpen}
