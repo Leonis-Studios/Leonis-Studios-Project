@@ -146,7 +146,7 @@ export default async function CaseStudyPage({
               className="mt-6"
               style={{
                 fontFamily: "var(--font-body)",
-                fontSize: "clamp(15px, 1.4vw, 18px)",
+                fontSize: tokens.fontSizes.bodyLarge,
                 fontWeight: tokens.weightBody,
                 color: colors.textSecondaryLight,
                 maxWidth: "560px",

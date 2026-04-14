@@ -9,7 +9,7 @@ interface Props {
 
 const paragraphStyle = {
   fontFamily: "var(--font-body)",
-  fontSize:   "clamp(15px, 1.3vw, 17px)",
+  fontSize:   tokens.fontSizes.body,
   fontWeight: tokens.weightBody,
   color:      colors.textBody,
   lineHeight: 1.8,

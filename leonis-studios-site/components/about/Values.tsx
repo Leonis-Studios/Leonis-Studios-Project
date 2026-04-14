@@ -103,7 +103,7 @@ export default function Values({ values }: Props) {
                 <h3
                   style={{
                     fontFamily:    "var(--font-display)",
-                    fontSize:      "clamp(18px, 2vw, 24px)",
+                    fontSize:      tokens.fontSizes.h3,
                     fontWeight:    tokens.weightHeading,
                     color:         colors.bgDark,
                     letterSpacing: "-0.015em",
@@ -116,7 +116,7 @@ export default function Values({ values }: Props) {
                 <p
                   style={{
                     fontFamily: "var(--font-body)",
-                    fontSize:   "15px",
+                    fontSize:   tokens.fontSizes.body,
                     fontWeight: tokens.weightBody,
                     color:      colors.textSubtle,
                     lineHeight: 1.7,

@@ -69,7 +69,7 @@ export default function FeaturedWorkGrid({ projects }: { projects: CaseStudyCard
                   <h3
                     style={{
                       fontFamily:    "var(--font-display)",
-                      fontSize:      "clamp(18px, 2vw, 24px)",
+                      fontSize:      tokens.fontSizes.h3,
                       fontWeight:    tokens.weightHeading,
                       letterSpacing: "-0.015em",
                       color:         hovered ? colors.accent : colors.bgDark,

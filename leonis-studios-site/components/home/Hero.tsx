@@ -87,7 +87,7 @@ export default function Hero() {
           style={{
             fontFamily: "var(--font-body)",
             fontWeight: tokens.weightBody,
-            fontSize: "clamp(16px, 1.5vw, 19px)",
+            fontSize: tokens.fontSizes.bodyLarge,
             color: "var(--color-neutral-400)",
             maxWidth: "480px",
             lineHeight: 1.75,

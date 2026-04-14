@@ -94,7 +94,7 @@ export default function Approach({ approachHeadline }: Props) {
               <h3
                 style={{
                   fontFamily: "var(--font-display)",
-                  fontSize: "clamp(16px, 1.4vw, 20px)",
+                  fontSize: tokens.fontSizes.h3Compact,
                   fontWeight: tokens.weightHeading,
                   letterSpacing: "-0.01em",
                   color: colors.bgLight,
