@@ -47,7 +47,7 @@ export default function Navbar() {
     >
       <div className="max-w-7xl mx-auto px-6 lg:px-12">
         {/* 3-column grid: logo | nav (centered) | cta (right-aligned) */}
-        <div className="grid grid-cols-3 items-center h-16">
+        <div className="flex items-center justify-between h-16 md:grid md:grid-cols-3">
           {/* ── Logo ───────────────────────────────────────── */}
           {(() => {
             const useDarkLogo = !scrolled && pathname !== "/";
