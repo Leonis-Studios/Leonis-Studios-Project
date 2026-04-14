@@ -53,17 +53,25 @@ export default function Navbar() {
             const useDarkLogo = !scrolled && pathname !== "/";
             return (
               <Link href="/">
+                {/* Mobile: always white logo */}
+                <Image
+                  src="/logo-white.png"
+                  alt="Leonis Studios"
+                  width={140}
+                  height={40}
+                  priority
+                  className="md:hidden"
+                  style={{ height: "36px", width: "auto", objectFit: "contain" }}
+                />
+                {/* Desktop: dark on non-home unscrolled, white otherwise */}
                 <Image
                   src={useDarkLogo ? "/logo-dark.png" : "/logo-white.png"}
                   alt="Leonis Studios"
                   width={140}
                   height={40}
                   priority
-                  style={{
-                    height: "36px",
-                    width: "auto",
-                    objectFit: "contain",
-                  }}
+                  className="hidden md:block"
+                  style={{ height: "36px", width: "auto", objectFit: "contain" }}
                 />
               </Link>
             );
@@ -145,6 +153,7 @@ export default function Navbar() {
               `}
             />
           </button>
+          </div>
         </div>
       </div>
 
