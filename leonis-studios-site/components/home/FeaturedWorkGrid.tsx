@@ -1,13 +1,17 @@
 "use client";
 
-import { useState }       from "react";
-import Link               from "next/link";
-import Image              from "next/image";
+import { useState } from "react";
+import Link from "next/link";
+import Image from "next/image";
 import type { CaseStudyCard } from "@/lib/types";
-import { colors }             from "@/lib/colors";
-import { tokens }             from "@/lib/tokens";
+import { colors } from "@/lib/colors";
+import { tokens } from "@/lib/tokens";
 
-export default function FeaturedWorkGrid({ projects }: { projects: CaseStudyCard[] }) {
+export default function FeaturedWorkGrid({
+  projects,
+}: {
+  projects: CaseStudyCard[];
+}) {
   const [hoveredId, setHoveredId] = useState<string | null>(null);
 
   return (
@@ -20,9 +24,11 @@ export default function FeaturedWorkGrid({ projects }: { projects: CaseStudyCard
             href={`/work/${project.slug}`}
             className="block"
             style={{
-              background:  colors.bgCard,
-              border:      hovered ? `1px solid ${colors.accent}` : `1px solid ${colors.bgMuted}`,
-              transition:  "border-color 0.3s",
+              background: colors.bgCard,
+              border: hovered
+                ? `1px solid ${colors.accent}`
+                : `1px solid ${colors.bgMuted}`,
+              transition: "border-color 0.3s",
               textDecoration: "none",
             }}
             onMouseEnter={() => setHoveredId(project._id)}
@@ -41,13 +47,16 @@ export default function FeaturedWorkGrid({ projects }: { projects: CaseStudyCard
                   height={450}
                   className="w-full h-full object-cover"
                   style={{
-                    transform:  hovered ? "scale(1.05)" : "scale(1)",
+                    transform: hovered ? "scale(1.05)" : "scale(1)",
                     transition: "transform 0.5s",
                   }}
                 />
               ) : (
                 <div className="w-full h-full flex items-center justify-center">
-                  <div className="w-12 h-12" style={{ background: colors.borderLight }} />
+                  <div
+                    className="w-12 h-12"
+                    style={{ background: colors.borderLight }}
+                  />
                 </div>
               )}
             </div>
@@ -61,19 +70,19 @@ export default function FeaturedWorkGrid({ projects }: { projects: CaseStudyCard
                     style={{
                       fontFamily: "var(--font-display)",
                       fontWeight: tokens.weightUI,
-                      color:      colors.textSecondary,
+                      color: colors.textMuted,
                     }}
                   >
                     {project.client} · {project.year}
                   </p>
                   <h3
                     style={{
-                      fontFamily:    "var(--font-display)",
-                      fontSize:      tokens.fontSizes.h3,
-                      fontWeight:    tokens.weightHeading,
+                      fontFamily: "var(--font-display)",
+                      fontSize: tokens.fontSizes.h3,
+                      fontWeight: tokens.weightHeading,
                       letterSpacing: "-0.015em",
-                      color:         hovered ? colors.accent : colors.bgDark,
-                      transition:    "color 0.3s",
+                      color: hovered ? colors.accent : colors.bgDark,
+                      transition: "color 0.3s",
                     }}
                   >
                     {project.title}
@@ -82,10 +91,12 @@ export default function FeaturedWorkGrid({ projects }: { projects: CaseStudyCard
                 <span
                   className="text-xl shrink-0"
                   style={{
-                    color:      colors.accent,
-                    transform:  hovered ? "translate(2px, -2px)" : "translate(0, 0)",
+                    color: colors.accent,
+                    transform: hovered
+                      ? "translate(2px, -2px)"
+                      : "translate(0, 0)",
                     transition: "transform 0.2s",
-                    display:    "inline-block",
+                    display: "inline-block",
                   }}
                 >
                   ↗
@@ -97,7 +108,7 @@ export default function FeaturedWorkGrid({ projects }: { projects: CaseStudyCard
                 style={{
                   fontFamily: "var(--font-body)",
                   fontWeight: tokens.weightBody,
-                  color:      colors.textSecondary,
+                  color: colors.textMuted,
                 }}
               >
                 {project.summary}
@@ -114,8 +125,8 @@ export default function FeaturedWorkGrid({ projects }: { projects: CaseStudyCard
                         fontFamily: "var(--font-display)",
                         fontWeight: tokens.weightUI,
                         background: colors.bgCard,
-                        border:     `1px solid ${colors.bgMuted}`,
-                        color:      colors.textSecondary,
+                        border: `1px solid ${colors.bgMuted}`,
+                        color: colors.textMuted,
                       }}
                     >
                       {tag}
