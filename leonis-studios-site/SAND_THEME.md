@@ -126,7 +126,7 @@ Each `SandGutter` renders two `position: absolute` vignette `<div>`s (left + rig
 
 | Property | Value | Effect |
 |----------|-------|--------|
-| `width` | `180px` | How far the fade extends inward from each edge |
+| `width` | `clamp(40px, 10vw, 180px)` | Responsive: ~40px on mobile, up to 180px on wide screens |
 | `zIndex` | `0` | Same layer as canvas; painted above it by source order |
 
 **Gradient formula:**

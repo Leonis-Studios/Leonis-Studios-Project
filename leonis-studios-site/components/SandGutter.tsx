@@ -238,7 +238,7 @@ export default function SandGutter({ seed = 0 }: Props) {
     position:      "absolute",
     top:           0,
     bottom:        0,
-    width:         "180px",
+    width:         "clamp(40px, 10vw, 180px)",
     pointerEvents: "none",
     zIndex:        0, // same layer as canvas; paints over it via source order
   };
