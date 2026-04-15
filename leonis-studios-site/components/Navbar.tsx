@@ -47,7 +47,7 @@ export default function Navbar() {
     >
       <div className="max-w-7xl mx-auto px-6 lg:px-12">
         {/* 3-column grid: logo | nav (centered) | cta (right-aligned) */}
-        <div className="flex items-center justify-between h-16 md:grid md:grid-cols-3">
+        <div className="flex items-center justify-between h-20 md:grid md:grid-cols-3">
           {/* ── Logo ───────────────────────────────────────── */}
           {(() => {
             const useDarkLogo = !scrolled && pathname !== "/";
@@ -57,21 +57,21 @@ export default function Navbar() {
                 <Image
                   src="/logo-white.png"
                   alt="Leonis Studios"
-                  width={140}
-                  height={40}
+                  width={180}
+                  height={52}
                   priority
                   className="md:hidden"
-                  style={{ height: "36px", width: "auto", objectFit: "contain" }}
+                  style={{ height: "48px", width: "auto", objectFit: "contain" }}
                 />
                 {/* Desktop: dark on non-home unscrolled, white otherwise */}
                 <Image
                   src={useDarkLogo ? "/logo-dark.png" : "/logo-white.png"}
                   alt="Leonis Studios"
-                  width={140}
-                  height={40}
+                  width={180}
+                  height={52}
                   priority
                   className="hidden md:block"
-                  style={{ height: "36px", width: "auto", objectFit: "contain" }}
+                  style={{ height: "48px", width: "auto", objectFit: "contain" }}
                 />
               </Link>
             );
@@ -87,7 +87,7 @@ export default function Navbar() {
                   key={link.href}
                   href={link.href}
                   className={`
-                    relative text-xs tracking-[0.12em] uppercase
+                    relative text-sm tracking-widest uppercase
                     transition-colors duration-200
                     ${isActive ? "text-white" : "text-neutral-400 hover:text-white"}
                   `}
@@ -112,8 +112,8 @@ export default function Navbar() {
             <Link
               href="/contact"
               className="
-                hidden md:inline-flex items-center gap-2 px-5 py-2.5
-                text-xs tracking-[0.12em] uppercase
+                hidden md:inline-flex items-center gap-2 px-6 py-3
+                text-sm tracking-widest uppercase
                 transition-colors duration-200
                 group
               "
@@ -167,7 +167,7 @@ export default function Navbar() {
             <Link
               key={link.href}
               href={link.href}
-              className="text-neutral-400 hover:text-white text-sm tracking-[0.12em] uppercase transition-colors duration-200"
+              className="text-neutral-400 hover:text-white text-base tracking-widest uppercase transition-colors duration-200"
               style={{ fontFamily: "var(--font-display)", fontWeight: tokens.weightUI }}
             >
               {link.label}

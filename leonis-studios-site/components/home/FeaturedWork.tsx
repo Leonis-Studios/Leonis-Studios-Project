@@ -8,6 +8,7 @@ import type { CaseStudyCard }          from "@/lib/types";
 import FeaturedWorkGrid                from "@/components/home/FeaturedWorkGrid";
 import { colors }                      from "@/lib/colors";
 import { tokens }                      from "@/lib/tokens";
+import SandGutter                       from "@/components/SandGutter";
 
 export default async function FeaturedWork() {
   const projects: CaseStudyCard[] = await client.fetch(
@@ -22,7 +23,8 @@ export default async function FeaturedWork() {
   if (!projects.length) return null;
 
   return (
-    <section className="py-24" style={{background: colors.bgMuted}}>
+    <section className="py-24" style={{ background: colors.bgMuted, position: "relative", zIndex: 1, overflow: "hidden" }}>
+      <SandGutter seed={2} />
       <div className="max-w-7xl mx-auto px-6 lg:px-12">
 
         {/* ── Section header ───────────────────────────────── */}

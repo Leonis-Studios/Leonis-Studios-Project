@@ -1,10 +1,12 @@
 import Link from "next/link";
 import { colors } from "@/lib/colors";
 import { tokens } from "@/lib/tokens";
+import SandGutter from "@/components/SandGutter";
 
 export default function CTA() {
   return (
-    <section className="bg-black py-24 border-t border-neutral-800">
+    <section className="bg-black py-24 border-t border-neutral-800" style={{ position: "relative", zIndex: 1, overflow: "hidden" }}>
+      <SandGutter seed={3} />
       <div className="max-w-7xl mx-auto px-6 lg:px-12">
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
 

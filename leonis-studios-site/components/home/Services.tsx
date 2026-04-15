@@ -8,6 +8,7 @@ import ServicesGrid              from "@/components/home/ServicesGrid";
 import Link                      from "next/link";
 import { colors }                from "@/lib/colors";
 import { tokens }                from "@/lib/tokens";
+import SandGutter                 from "@/components/SandGutter";
 
 export default async function Services() {
   const services: Service[] = await client
@@ -15,7 +16,8 @@ export default async function Services() {
     .catch(() => []);
 
   return (
-    <section id="services" className="bg-white py-24">
+    <section id="services" className="bg-white py-24" style={{ position: "relative", zIndex: 1, overflow: "hidden" }}>
+      <SandGutter seed={0} />
       <div className="max-w-7xl mx-auto px-6 lg:px-12">
 
         {/* ── Section header ───────────────────────────────── */}

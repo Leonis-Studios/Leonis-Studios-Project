@@ -4,6 +4,7 @@ import Link from "next/link";
 import { useRef, useEffect, useState } from "react";
 import { colors } from "@/lib/colors";
 import { tokens } from "@/lib/tokens";
+import SandGutter from "@/components/SandGutter";
 
 const steps = [
   {
@@ -59,9 +60,10 @@ export default function HowItWorks() {
     <section
       ref={sectionRef}
       aria-label="Our web design and development process"
-      style={{ backgroundColor: colors.bgDark }}
+      style={{ backgroundColor: colors.bgDark, position: "relative", zIndex: 1, overflow: "hidden" }}
       className="py-28"
     >
+      <SandGutter seed={1} />
       <style>{`
         @keyframes processCardIn {
           from { opacity: 0; transform: translateY(24px); }
