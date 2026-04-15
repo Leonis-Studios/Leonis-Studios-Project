@@ -17,7 +17,7 @@ export default function Hero() {
   }, []);
 
   return (
-    <section className="relative min-h-screen flex flex-col overflow-hidden bg-black">
+    <section className="relative flex flex-col overflow-hidden bg-black" style={{ minHeight: "calc(100svh - 48px)" }}>
       <style>{`
         @keyframes fadeUp {
           from { opacity: 0; transform: translateY(28px); }
@@ -40,7 +40,7 @@ export default function Hero() {
         <div className="absolute top-1/2 -translate-y-1/2 left-24 w-32 h-32 border opacity-20" style={{ borderColor: colors.accent }} />
       </div>
 
-      <div className="max-w-7xl mx-auto px-6 lg:px-12 w-full flex flex-col justify-center flex-1 pt-32 pb-8">
+      <div className="max-w-7xl mx-auto px-6 lg:px-12 w-full flex flex-col justify-center flex-1 pt-28 pb-6">
         {/* ── Eyebrow label ──────────────────────────────────── */}
         <div
           className="flex items-center gap-4 mb-8"
@@ -146,7 +146,7 @@ export default function Hero() {
 
       {/* ── Stats ──────────────────────────────────────────── */}
       <div
-        className="max-w-7xl mx-auto px-6 lg:px-12 w-full pb-10"
+        className="max-w-7xl mx-auto px-6 lg:px-12 w-full pb-8"
         style={{
           opacity: 0,
           animation: "fadeUp 0.8s cubic-bezier(0.16, 1, 0.3, 1) 0.7s forwards",

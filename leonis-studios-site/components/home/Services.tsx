@@ -16,7 +16,7 @@ export default async function Services() {
     .catch(() => []);
 
   return (
-    <section id="services" className="bg-white py-24" style={{ position: "relative", zIndex: 1, overflow: "hidden" }}>
+    <section id="services" className="bg-white py-24 pb-32" style={{ position: "relative", zIndex: 1, overflow: "hidden" }}>
       <SandGutter seed={0} />
       <div className="max-w-7xl mx-auto px-6 lg:px-12">
 

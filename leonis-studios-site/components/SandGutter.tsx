@@ -34,10 +34,10 @@ interface Grain {
 // alphaMult boosts visibility on light backgrounds (seeds 0,2); color picks
 // dark gold on light bg so particles read clearly against white/gray.
 const SEED_CFG = [
-  { count: 110, vyMult: 1.00, swayAmp: 0.15, bimodal: false, alphaMult: 2.8, color: "180,110,0"  }, // 0 Services — white bg
-  { count:  85, vyMult: 0.55, swayAmp: 0.22, bimodal: false, alphaMult: 1.0, color: "252,163,17" }, // 1 HowItWorks — dark bg
-  { count: 140, vyMult: 1.35, swayAmp: 0.15, bimodal: false, alphaMult: 2.2, color: "180,110,0"  }, // 2 FeaturedWork — gray bg
-  { count:  95, vyMult: 1.00, swayAmp: 0.15, bimodal: true,  alphaMult: 1.0, color: "252,163,17" }, // 3 CTA — black bg
+  { count: 145, vyMult: 1.00, swayAmp: 0.15, bimodal: false, alphaMult: 3.5, color: "180,110,0"  }, // 0 Services — white bg
+  { count: 115, vyMult: 0.55, swayAmp: 0.22, bimodal: false, alphaMult: 1.5, color: "252,163,17" }, // 1 HowItWorks — dark bg
+  { count: 180, vyMult: 1.35, swayAmp: 0.15, bimodal: false, alphaMult: 2.8, color: "180,110,0"  }, // 2 FeaturedWork — gray bg
+  { count: 125, vyMult: 1.00, swayAmp: 0.15, bimodal: true,  alphaMult: 1.5, color: "252,163,17" }, // 3 CTA — black bg
 ] as const;
 
 const GUTTER = 100; // CSS px — how far inward grains can spawn from each edge
@@ -72,7 +72,7 @@ function makeGrains(seed: 0 | 1 | 2 | 3, w: number, h: number): { left: Grain[];
         : rnd(w - GUTTER, w - 2);
 
       const r         = rnd(0.5, 1.5);
-      const baseAlpha = rnd(0.12, 0.32);
+      const baseAlpha = rnd(0.16, 0.38);
       const alpha     = baseAlpha * (0.6 + 0.4 * (r / 1.5)) * cfg.alphaMult;
 
       let vy = rnd(0.08, 0.22) * cfg.vyMult;

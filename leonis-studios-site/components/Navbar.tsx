@@ -47,7 +47,7 @@ export default function Navbar() {
     >
       <div className="max-w-7xl mx-auto px-6 lg:px-12">
         {/* 3-column grid: logo | nav (centered) | cta (right-aligned) */}
-        <div className="flex items-center justify-between h-20 md:grid md:grid-cols-3">
+        <div className="flex items-center justify-between h-20 md:h-21.5 md:grid md:grid-cols-3">
           {/* ── Logo ───────────────────────────────────────── */}
           {(() => {
             const useDarkLogo = !scrolled && pathname !== "/";
@@ -67,11 +67,11 @@ export default function Navbar() {
                 <Image
                   src={useDarkLogo ? "/logo-dark.png" : "/logo-white.png"}
                   alt="Leonis Studios"
-                  width={180}
-                  height={52}
+                  width={190}
+                  height={54}
                   priority
                   className="hidden md:block"
-                  style={{ height: "48px", width: "auto", objectFit: "contain" }}
+                  style={{ height: "52px", width: "auto", objectFit: "contain" }}
                 />
               </Link>
             );
