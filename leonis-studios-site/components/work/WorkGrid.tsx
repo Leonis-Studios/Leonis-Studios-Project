@@ -22,9 +22,7 @@ export default function WorkGrid({ projects }: WorkGridProps) {
 
   // Build the filter list from every tag that appears across
   // all projects. "All" is always first.
-  const allTags = Array.from(
-    new Set(projects.flatMap((p) => p.tags ?? []))
-  );
+  const allTags = Array.from(new Set(projects.flatMap((p) => p.tags ?? [])));
   const filters = ["All", ...allTags];
 
   const filtered =
@@ -55,7 +53,6 @@ export default function WorkGrid({ projects }: WorkGridProps) {
       `}</style>
 
       <div className="max-w-7xl mx-auto px-6 lg:px-12">
-
         {/* ── Filter bar ──────────────────────────────────────── */}
         <div className="flex flex-wrap gap-3 mb-12">
           {filters.map((filter) => (
@@ -63,17 +60,19 @@ export default function WorkGrid({ projects }: WorkGridProps) {
               key={filter}
               onClick={() => setActiveFilter(filter)}
               style={{
-                fontFamily:      "var(--font-display)",
-                fontSize:        "12px",
-                fontWeight:      tokens.weightUI,
-                letterSpacing:   "0.1em",
-                textTransform:   "uppercase",
-                background:      activeFilter === filter ? colors.accent : "transparent",
-                color:           activeFilter === filter ? colors.bgLight : colors.textSecondary,
-                border:          `1px solid ${activeFilter === filter ? colors.accent : colors.borderDark}`,
-                padding:         "8px 20px",
-                cursor:          "pointer",
-                transition:      "all 0.2s ease",
+                fontFamily: "var(--font-display)",
+                fontSize: "12px",
+                fontWeight: tokens.weightUI,
+                letterSpacing: "0.1em",
+                textTransform: "uppercase",
+                background:
+                  activeFilter === filter ? colors.accent : "transparent",
+                color:
+                  activeFilter === filter ? colors.bgLight : colors.textMuted,
+                border: `1px solid ${activeFilter === filter ? colors.accent : colors.borderDark}`,
+                padding: "8px 20px",
+                cursor: "pointer",
+                transition: "all 0.2s ease",
               }}
             >
               {filter}
@@ -87,9 +86,9 @@ export default function WorkGrid({ projects }: WorkGridProps) {
             <p
               style={{
                 fontFamily: "var(--font-body)",
-                fontSize:   "16px",
+                fontSize: "16px",
                 fontWeight: tokens.weightBody,
-                color:      colors.textSecondary,
+                color: colors.textMuted,
               }}
             >
               No projects match that filter yet.
@@ -118,7 +117,10 @@ export default function WorkGrid({ projects }: WorkGridProps) {
                     />
                   ) : (
                     <div className="w-full h-full flex items-center justify-center">
-                      <div className="w-12 h-12" style={{ background: colors.borderDark }} />
+                      <div
+                        className="w-12 h-12"
+                        style={{ background: colors.borderDark }}
+                      />
                     </div>
                   )}
                 </div>
@@ -133,7 +135,7 @@ export default function WorkGrid({ projects }: WorkGridProps) {
                         style={{
                           fontFamily: "var(--font-display)",
                           fontWeight: tokens.weightUI,
-                          color:      colors.textSecondary,
+                          color: colors.textMuted,
                         }}
                       >
                         {project.client} · {project.year}
@@ -143,11 +145,11 @@ export default function WorkGrid({ projects }: WorkGridProps) {
                       <h3
                         className="work-card-title"
                         style={{
-                          fontFamily:    "var(--font-display)",
-                          fontSize:      tokens.fontSizes.h3,
-                          fontWeight:    tokens.weightHeading,
+                          fontFamily: "var(--font-display)",
+                          fontSize: tokens.fontSizes.h3,
+                          fontWeight: tokens.weightHeading,
                           letterSpacing: "-0.015em",
-                          color:         colors.bgDark,
+                          color: colors.bgDark,
                         }}
                       >
                         {project.title}
@@ -169,7 +171,7 @@ export default function WorkGrid({ projects }: WorkGridProps) {
                     style={{
                       fontFamily: "var(--font-body)",
                       fontWeight: tokens.weightBody,
-                      color:      colors.textSecondary,
+                      color: colors.textMuted,
                     }}
                   >
                     {project.summary}
@@ -185,8 +187,8 @@ export default function WorkGrid({ projects }: WorkGridProps) {
                           style={{
                             fontFamily: "var(--font-display)",
                             fontWeight: tokens.weightUI,
-                            border:     `1px solid ${colors.borderDark}`,
-                            color:      colors.textSecondary,
+                            border: `1px solid ${colors.borderDark}`,
+                            color: colors.textMuted,
                           }}
                         >
                           {tag}

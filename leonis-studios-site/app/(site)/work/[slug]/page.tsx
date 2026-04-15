@@ -196,7 +196,7 @@ export default async function CaseStudyPage({
                     fontFamily: "var(--font-body)",
                     fontSize: "16px",
                     fontWeight: tokens.weightBody,
-                    color: colors.textSecondary,
+                    color: colors.textMuted,
                   }}
                 >
                   Full case study coming soon.
@@ -217,7 +217,7 @@ export default async function CaseStudyPage({
                     style={{
                       fontFamily: "var(--font-display)",
                       fontWeight: tokens.weightUI,
-                      color: colors.textSecondary,
+                      color: colors.textMuted,
                     }}
                   >
                     Results
@@ -242,7 +242,7 @@ export default async function CaseStudyPage({
                           style={{
                             fontFamily: "var(--font-display)",
                             fontWeight: tokens.weightUI,
-                            color: colors.textSecondary,
+                            color: colors.textMuted,
                           }}
                         >
                           {r.label}
@@ -262,7 +262,7 @@ export default async function CaseStudyPage({
                     style={{
                       fontFamily: "var(--font-display)",
                       fontWeight: tokens.weightUI,
-                      color: colors.textSecondary,
+                      color: colors.textMuted,
                     }}
                   >
                     Client
@@ -286,7 +286,7 @@ export default async function CaseStudyPage({
                     style={{
                       fontFamily: "var(--font-display)",
                       fontWeight: tokens.weightUI,
-                      color: colors.textSecondary,
+                      color: colors.textMuted,
                     }}
                   >
                     Year
@@ -311,7 +311,7 @@ export default async function CaseStudyPage({
                       style={{
                         fontFamily: "var(--font-display)",
                         fontWeight: tokens.weightUI,
-                        color: colors.textSecondary,
+                        color: colors.textMuted,
                       }}
                     >
                       Services
@@ -342,7 +342,7 @@ export default async function CaseStudyPage({
                       style={{
                         fontFamily: "var(--font-display)",
                         fontWeight: tokens.weightUI,
-                        color: colors.textSecondary,
+                        color: colors.textMuted,
                       }}
                     >
                       Live Site
