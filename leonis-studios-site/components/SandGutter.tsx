@@ -30,13 +30,23 @@ interface Grain {
   swayAmp: number; // sway amplitude (CSS px)
 }
 
+// Edge vignette config: each seed gets a colour that matches its section bg
+// so the linear-gradient dissolve at the gutter edge feels native to the section.
+// The gradient goes: bg-colour (opaque at far edge) → transparent (at ~GUTTER px in).
+const VIGNETTE_COLOR = [
+  "235,220,195",   // 0 Services — warm cream tint (reads against white #fafafa)
+  "12,20,37",      // 1 HowItWorks — surfaceDark #0c1425
+  "215,200,175",   // 2 FeaturedWork — warm taupe (reads against gray #e5e5e5)
+  "0,0,0",         // 3 CTA — black
+] as const;
+
 // Seed config: each seed gives its section a distinct grain character
 // alphaMult boosts visibility on light backgrounds (seeds 0,2); color picks
 // dark gold on light bg so particles read clearly against white/gray.
 const SEED_CFG = [
-  { count: 145, vyMult: 1.00, swayAmp: 0.15, bimodal: false, alphaMult: 3.5, color: "180,110,0"  }, // 0 Services — white bg
+  { count: 145, vyMult: 1.00, swayAmp: 0.15, bimodal: false, alphaMult: 4.5, color: "180,110,0"  }, // 0 Services — white bg
   { count: 115, vyMult: 0.55, swayAmp: 0.22, bimodal: false, alphaMult: 1.5, color: "252,163,17" }, // 1 HowItWorks — dark bg
-  { count: 180, vyMult: 1.35, swayAmp: 0.15, bimodal: false, alphaMult: 2.8, color: "180,110,0"  }, // 2 FeaturedWork — gray bg
+  { count: 180, vyMult: 1.35, swayAmp: 0.15, bimodal: false, alphaMult: 4.0, color: "180,110,0"  }, // 2 FeaturedWork — gray bg
   { count: 125, vyMult: 1.00, swayAmp: 0.15, bimodal: true,  alphaMult: 1.5, color: "252,163,17" }, // 3 CTA — black bg
 ] as const;
 
@@ -221,17 +231,49 @@ export default function SandGutter({ seed = 0 }: Props) {
     };
   }, [seed]);
 
+  const vc = VIGNETTE_COLOR[seed];
+
+  // Shared style for both vignette strips
+  const vignetteBase: React.CSSProperties = {
+    position:      "absolute",
+    top:           0,
+    bottom:        0,
+    width:         "180px",
+    pointerEvents: "none",
+    zIndex:        0, // same layer as canvas; paints over it via source order
+  };
+
   return (
-    <canvas
-      ref={canvasRef}
-      aria-hidden="true"
-      style={{
-        position:      "absolute",
-        inset:         0,
-        pointerEvents: "none",
-        zIndex:        0,
-        display:       "block",
-      }}
-    />
+    <>
+      <canvas
+        ref={canvasRef}
+        aria-hidden="true"
+        style={{
+          position:      "absolute",
+          inset:         0,
+          pointerEvents: "none",
+          zIndex:        0,
+          display:       "block",
+        }}
+      />
+      {/* Left edge vignette — section bg bleeds inward, masking the hard canvas edge */}
+      <div
+        aria-hidden="true"
+        style={{
+          ...vignetteBase,
+          left:       0,
+          background: `linear-gradient(to right, rgba(${vc},0.95) 0%, rgba(${vc},0.55) 55%, transparent 100%)`,
+        }}
+      />
+      {/* Right edge vignette */}
+      <div
+        aria-hidden="true"
+        style={{
+          ...vignetteBase,
+          right:      0,
+          background: `linear-gradient(to left, rgba(${vc},0.95) 0%, rgba(${vc},0.55) 55%, transparent 100%)`,
+        }}
+      />
+    </>
   );
 }

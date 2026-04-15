@@ -75,10 +75,10 @@ Increase all by ~0.05 to make sand more prominent on light-background sections.
 
 | Seed | Section | Background | `alphaMult` | `color` |
 |------|---------|-----------|------------|---------|
-| 0 | Services | `bg-white` | `2.8` | `180,110,0` (dark gold) |
-| 1 | HowItWorks | `#14213d` (dark) | `1.0` | `252,163,17` (bright gold) |
-| 2 | FeaturedWork | `#e5e5e5` (gray) | `2.2` | `180,110,0` (dark gold) |
-| 3 | CTA | `bg-black` | `1.0` | `252,163,17` (bright gold) |
+| 0 | Services | `bg-white` | `4.5` | `180,110,0` (dark gold) |
+| 1 | HowItWorks | `#14213d` (dark) | `1.5` | `252,163,17` (bright gold) |
+| 2 | FeaturedWork | `#e5e5e5` (gray) | `4.0` | `180,110,0` (dark gold) |
+| 3 | CTA | `bg-black` | `1.5` | `252,163,17` (bright gold) |
 
 **Why two gold colors:** bright `#fca311` is near-invisible on white/gray. Dark gold `#b46e00` (RGB `180,110,0`) reads clearly on light backgrounds while still feeling warm and on-brand.
 
@@ -117,6 +117,43 @@ grain noise to the gold path shapes. Adjust `baseFrequency` for coarser/finer gr
 <feTurbulence baseFrequency="0.5 0.4" .../>   <!-- coarser, more visible -->
 <feTurbulence baseFrequency="1.2 1.0" .../>   <!-- very fine, subtle -->
 ```
+
+### Vignette Strips
+
+Each `SandGutter` renders two `position: absolute` vignette `<div>`s (left + right) that fade the section's own background colour into the gutter, softening the transition between the section background and the particle area. They sit above the canvas via source order (same `zIndex: 0`) and are `pointer-events: none`.
+
+**Properties (`vignetteBase`):**
+
+| Property | Value | Effect |
+|----------|-------|--------|
+| `width` | `180px` | How far the fade extends inward from each edge |
+| `zIndex` | `0` | Same layer as canvas; painted above it by source order |
+
+**Gradient formula:**
+
+```
+left vignette:  linear-gradient(to right, rgba(vc,0.95) 0%, rgba(vc,0.55) 55%, transparent 100%)
+right vignette: linear-gradient(to left,  rgba(vc,0.95) 0%, rgba(vc,0.55) 55%, transparent 100%)
+```
+
+| Stop | Opacity | Role |
+|------|---------|------|
+| `0%` | `0.95` | Near-opaque at the very edge — clearly visible gradient origin |
+| `55%` | `0.55` | Mid-fade — gradient stays visible across most of the gutter width |
+| `100%` | `0` | Fully transparent at the inner edge — doesn't touch content |
+
+**Vignette colours per seed (`VIGNETTE_COLOR` array):**
+
+| Seed | Section | RGB | Matches |
+|------|---------|-----|---------|
+| 0 | Services | `235,220,195` | Warm cream tint — reads against white `#fafafa` |
+| 1 | HowItWorks | `12,20,37` | `surfaceDark` #0c1425 |
+| 2 | FeaturedWork | `215,200,175` | Warm taupe — reads against gray `#e5e5e5` |
+| 3 | CTA | `0,0,0` | `bgBlack` #000000 |
+
+To tune: raise `0.95` / `0.55` for a stronger effect, lower for subtler. Increase `width` beyond `180px` to push the fade deeper into the content area (keep it below the content container padding — `px-6 lg:px-12`).
+
+---
 
 ### Top/Bottom Fade
 
