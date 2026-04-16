@@ -1,6 +1,7 @@
 import { PortableText } from "@portabletext/react";
 import { colors } from "@/lib/colors";
 import { tokens } from "@/lib/tokens";
+import SandGutter from "@/components/SandGutter";
 
 interface Props {
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
@@ -27,8 +28,9 @@ export default function Story({ storyBody }: Props) {
   return (
     <section
       className="py-24 lg:py-32"
-      style={{ background: colors.bgLight }}
+      style={{ background: colors.bgLight, position: "relative", zIndex: 1, overflow: "hidden" }}
     >
+      <SandGutter seed={0} />
       <div className="max-w-7xl mx-auto px-6 lg:px-12">
 
         {/* Section label */}

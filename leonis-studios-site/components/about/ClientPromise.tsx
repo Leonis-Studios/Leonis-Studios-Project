@@ -1,6 +1,7 @@
 import Link from "next/link";
 import { colors } from "@/lib/colors";
 import { tokens } from "@/lib/tokens";
+import SandGutter from "@/components/SandGutter";
 
 const promises = [
   {
@@ -34,8 +35,9 @@ export default function ClientPromise() {
     <section
       aria-label="Leonis Studios client commitments and guarantees"
       className="py-24 lg:py-32"
-      style={{ background: colors.bgLight, borderTop: `1px solid ${colors.borderLight}` }}
+      style={{ background: colors.bgLight, borderTop: `1px solid ${colors.borderLight}`, position: "relative", zIndex: 1, overflow: "hidden" }}
     >
+      <SandGutter seed={0} />
       <div className="max-w-7xl mx-auto px-6 lg:px-12">
 
         {/* Section label */}

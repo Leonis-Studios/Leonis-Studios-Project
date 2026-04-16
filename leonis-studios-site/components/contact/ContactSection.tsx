@@ -3,6 +3,7 @@
 import { useState } from "react";
 import { colors } from "@/lib/colors";
 import { tokens } from "@/lib/tokens";
+import SandGutter from "@/components/SandGutter";
 
 type Status = "idle" | "loading" | "success" | "error";
 
@@ -90,7 +91,8 @@ export default function ContactSection() {
   }
 
   return (
-    <section className="py-24 lg:py-32" style={{ background: colors.bgLight }}>
+    <section className="py-24 lg:py-32" style={{ background: colors.bgLight, position: "relative", zIndex: 1, overflow: "hidden" }}>
+      <SandGutter seed={0} />
       <style>{`
         input::placeholder,
         textarea::placeholder { color: ${colors.textSecondary}; }

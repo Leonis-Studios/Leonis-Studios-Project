@@ -12,6 +12,7 @@ import { useState } from "react";
 import type { CaseStudyCard } from "@/lib/types";
 import { colors } from "@/lib/colors";
 import { tokens } from "@/lib/tokens";
+import SandGutter from "@/components/SandGutter";
 
 interface WorkGridProps {
   projects: CaseStudyCard[];
@@ -31,7 +32,8 @@ export default function WorkGrid({ projects }: WorkGridProps) {
       : projects.filter((p) => p.tags?.includes(activeFilter));
 
   return (
-    <section style={{ background: colors.bgLight }} className="py-24">
+    <section style={{ background: colors.bgLight, position: "relative", zIndex: 1, overflow: "hidden" }} className="py-24">
+      <SandGutter seed={0} />
       {/* CSS hover rules for card border + title colour.
           Tailwind hover:border-crimson is unreliable in v4
           because the custom token isn't always available as a

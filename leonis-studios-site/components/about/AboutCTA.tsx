@@ -1,6 +1,7 @@
 import Link from "next/link";
 import { colors } from "@/lib/colors";
 import { tokens } from "@/lib/tokens";
+import SandGutter from "@/components/SandGutter";
 
 interface Props {
   ctaHeadline?: string;
@@ -11,8 +12,9 @@ export default function AboutCTA({ ctaHeadline, ctaSubtext }: Props) {
   return (
     <section
       className="py-24 lg:py-32"
-      style={{ background: colors.bgDark, borderTop: `1px solid ${colors.surfaceDark}` }}
+      style={{ background: colors.bgDark, borderTop: `1px solid ${colors.surfaceDark}`, position: "relative", zIndex: 1, overflow: "hidden" }}
     >
+      <SandGutter seed={1} />
       <div className="max-w-7xl mx-auto px-6 lg:px-12">
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
           <div>
