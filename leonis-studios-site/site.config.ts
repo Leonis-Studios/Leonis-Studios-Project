@@ -30,7 +30,7 @@ const siteConfig = {
   // and the Navbar updates automatically. No touching component code.
   nav: [
     { label: "Work", href: "/work" },
-    { label: "Services", href: "/#services" },
+    { label: "Services", href: "/services" },
     { label: "About", href: "/about" },
     { label: "Contact", href: "/contact" },
   ],
