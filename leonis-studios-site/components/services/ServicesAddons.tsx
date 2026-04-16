@@ -203,17 +203,17 @@ export default function ServicesAddons({ services }: { services: Service[] }) {
           </p>
         </div>
 
-        {/* Add-on cards — 5-col layout: card | connector | card | connector | card */}
-        <div style={{ display: "grid", gridTemplateColumns: "1fr 48px 1fr 48px 1fr", alignItems: "stretch" }}>
+        {/* Add-on cards — single col on mobile, 5-col (card|dot|card|dot|card) on desktop */}
+        <div className="grid grid-cols-1 gap-6 lg:gap-0 lg:grid-cols-[1fr_48px_1fr_48px_1fr] lg:items-stretch">
           {services.map((service, i) => (
             <Fragment key={service._id}>
               <AddonCard service={service} />
 
-              {/* Connector — only between cards */}
+              {/* Connector — only between cards, hidden on mobile */}
               {i < services.length - 1 && (
                 <div
+                  className="hidden lg:flex"
                   style={{
-                    display:        "flex",
                     flexDirection:  "column",
                     alignItems:     "center",
                     justifyContent: "center",

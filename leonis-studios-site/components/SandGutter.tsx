@@ -248,17 +248,18 @@ export default function SandGutter({ seed = 0 }: Props) {
       <canvas
         ref={canvasRef}
         aria-hidden="true"
+        className="hidden lg:block"
         style={{
           position:      "absolute",
           inset:         0,
           pointerEvents: "none",
           zIndex:        0,
-          display:       "block",
         }}
       />
       {/* Left edge vignette — section bg bleeds inward, masking the hard canvas edge */}
       <div
         aria-hidden="true"
+        className="hidden lg:block"
         style={{
           ...vignetteBase,
           left:       0,
@@ -268,6 +269,7 @@ export default function SandGutter({ seed = 0 }: Props) {
       {/* Right edge vignette */}
       <div
         aria-hidden="true"
+        className="hidden lg:block"
         style={{
           ...vignetteBase,
           right:      0,
