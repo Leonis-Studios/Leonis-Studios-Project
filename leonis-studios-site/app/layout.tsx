@@ -28,10 +28,6 @@ export async function generateMetadata(): Promise<Metadata> {
     },
     twitter: { card: "summary_large_image" },
     robots: { index: true, follow: true },
-    icons: {
-      icon: "/icon.png",
-      apple: "/apple-icon.png",
-    },
   };
 }
 
