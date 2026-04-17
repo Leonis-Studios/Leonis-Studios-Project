@@ -11,7 +11,7 @@
 
 const siteConfig = {
   name: "Leonis Studios",
-  tagline: "Bold digital craft.",
+  tagline: "Website Building Your Way.",
   description:
     "Leonis Studios builds high-performance websites, drives search growth, and maintains digital infrastructure for businesses that refuse to settle.",
 
