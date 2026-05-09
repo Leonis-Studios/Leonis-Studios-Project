@@ -1,0 +1,93 @@
+import { client }          from "@/sanity/lib/client";
+import { FAQ_ITEMS_QUERY } from "@/sanity/lib/queries";
+import type { FaqItem }    from "@/lib/types";
+import SandGutter          from "@/components/SandGutter";
+import { colors }          from "@/lib/colors";
+import { tokens }          from "@/lib/tokens";
+import FAQList             from "./FAQList";
+
+export default async function FAQ() {
+  const items: FaqItem[] = await client
+    .fetch(FAQ_ITEMS_QUERY, {}, { next: { revalidate: 3600 } })
+    .catch(() => []);
+
+  if (!items.length) return null;
+
+  // FAQPage schema — parsed by Google, Bing, and AI assistants for AEO
+  const faqSchema = {
+    "@context":  "https://schema.org",
+    "@type":     "FAQPage",
+    mainEntity:  items.map((item) => ({
+      "@type": "Question",
+      name:    item.question,
+      acceptedAnswer: {
+        "@type": "Answer",
+        text:    item.answer,
+      },
+    })),
+  };
+
+  return (
+    <section
+      className="py-24 bg-white"
+      style={{ position: "relative", zIndex: 1, overflow: "hidden" }}
+    >
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(faqSchema) }}
+      />
+
+      {/* White background → seed 0 gives dark gold particles (readable on white) */}
+      <SandGutter seed={0} />
+
+      <div className="max-w-7xl mx-auto px-6 lg:px-12">
+        {/* Section label */}
+        <div className="flex items-center gap-4 mb-5">
+          <div className="w-8 h-px" style={{ background: colors.accent }} />
+          <span
+            className="text-xs tracking-[0.25em] uppercase"
+            style={{
+              color:       colors.accent,
+              fontFamily:  "var(--font-display)",
+              fontWeight:  tokens.weightUI,
+            }}
+          >
+            FAQ
+          </span>
+        </div>
+
+        {/* Heading + intro — two-column on large screens */}
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 mb-16">
+          <h2
+            style={{
+              fontFamily:    "var(--font-display)",
+              fontSize:      "clamp(32px, 5vw, 64px)",
+              fontWeight:    tokens.weightDisplay,
+              lineHeight:    0.95,
+              letterSpacing: "-0.025em",
+              color:         colors.textBody,
+            }}
+          >
+            Frequently<br />asked questions
+          </h2>
+          <p
+            style={{
+              fontFamily: "var(--font-body)",
+              fontSize:   tokens.fontSizes.bodyLarge,
+              fontWeight: tokens.weightBody,
+              color:      colors.textSubtle,
+              lineHeight: 1.75,
+              alignSelf:  "end",
+            }}
+          >
+            Everything you need to know about working with Leonis Studios —
+            from pricing and timelines to process and ongoing support.
+          </p>
+        </div>
+
+        {/* Accordion — client component handles open/close state */}
+        <FAQList items={items} />
+      </div>
+    </section>
+  );
+}
