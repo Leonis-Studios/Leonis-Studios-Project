@@ -5,7 +5,8 @@
       "Bash(npm run:*)",
       "Bash(npx tsc *)",
       "Bash(ls -lh /Users/hassanshirazi/Documents/dev/business/Leonis-Studios-Project/leonis-studios-site/public/logo*)",
-      "Bash(file /Users/hassanshirazi/Documents/dev/business/Leonis-Studios-Project/leonis-studios-site/public/logo-*.png)"
+      "Bash(file /Users/hassanshirazi/Documents/dev/business/Leonis-Studios-Project/leonis-studios-site/public/logo-*.png)",
+      "Bash(grep -E \"\\\\.tsx$\")"
     ]
   }
 }

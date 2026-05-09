@@ -44,15 +44,34 @@ export async function generateMetadata({
 
   if (!project) return { title: "Project Not Found" };
 
+  const keywords = [
+    project.title,
+    project.client,
+    "case study",
+    "web design",
+    "web development",
+    ...(project.tags ?? []),
+  ].filter(Boolean) as string[];
+
   return {
-    title: `${project.title} — ${siteConfig.name}`,
+    title:       `${project.title} — ${siteConfig.name}`,
     description: project.summary,
+    keywords,
     openGraph: {
-      title: project.title,
+      title:       project.title,
       description: project.summary,
-      images: project.coverImage?.url
+      url:         `${siteConfig.url}/work/${slug}`,
+      images:      project.coverImage?.url
         ? [{ url: project.coverImage.url, width: 1200, height: 630 }]
         : [],
+    },
+    twitter: {
+      card:        "summary_large_image",
+      title:       project.title,
+      description: project.summary,
+    },
+    alternates: {
+      canonical: `${siteConfig.url}/work/${slug}`,
     },
   };
 }
@@ -73,7 +92,7 @@ export default async function CaseStudyPage({
   if (!project) notFound();
 
   // ── JSON-LD structured data ──────────────────────────────
-  const jsonLd = {
+  const articleSchema = {
     "@context": "https://schema.org",
     "@type": "Article",
     headline: project.title,
@@ -88,11 +107,25 @@ export default async function CaseStudyPage({
     mainEntityOfPage: `${siteConfig.url}/work/${project.slug}`,
   };
 
+  const breadcrumbSchema = {
+    "@context": "https://schema.org",
+    "@type": "BreadcrumbList",
+    itemListElement: [
+      { "@type": "ListItem", position: 1, name: "Home", item: siteConfig.url },
+      { "@type": "ListItem", position: 2, name: "Work", item: `${siteConfig.url}/work` },
+      { "@type": "ListItem", position: 3, name: project.title, item: `${siteConfig.url}/work/${project.slug}` },
+    ],
+  };
+
   return (
     <>
       <script
         type="application/ld+json"
-        dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(articleSchema) }}
+      />
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(breadcrumbSchema) }}
       />
 
       {/* ── Back link + cover ─────────────────────────────────

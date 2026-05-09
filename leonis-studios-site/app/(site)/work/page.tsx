@@ -17,6 +17,29 @@ import { tokens }                 from "@/lib/tokens";
 export const metadata: Metadata = {
   title:       `Work — ${siteConfig.name}`,
   description: "Browse case studies from Leonis Studios — web design, Next.js development, SEO, and more.",
+  keywords: [
+    "web design portfolio",
+    "Next.js case studies",
+    "web development projects NJ",
+    "small business website examples",
+    "web design agency work",
+    "SEO results",
+    "website redesign case study",
+  ],
+  openGraph: {
+    title:       `Our Work — ${siteConfig.name}`,
+    description: "Browse case studies from Leonis Studios — web design, Next.js development, SEO, and more.",
+    url:         `${siteConfig.url}/work`,
+    type:        "website",
+  },
+  twitter: {
+    card:        "summary_large_image",
+    title:       `Our Work — ${siteConfig.name}`,
+    description: "Browse case studies from Leonis Studios — web design, Next.js development, SEO, and more.",
+  },
+  alternates: {
+    canonical: `${siteConfig.url}/work`,
+  },
 };
 
 export default async function WorkPage() {

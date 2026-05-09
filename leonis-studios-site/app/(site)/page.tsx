@@ -12,6 +12,7 @@ import Marquee          from "@/components/home/Marquee";
 import Services         from "@/components/home/Services";
 import HowItWorks       from "@/components/home/HowItWorks";
 import FeaturedWork     from "@/components/home/FeaturedWork";
+import FAQ              from "@/components/home/FAQ";
 import CTA              from "@/components/home/CTA";
 import siteConfig       from "@/site.config";
 
@@ -97,6 +98,7 @@ export default function HomePage() {
       <Services />
       <HowItWorks />
       <FeaturedWork />
+      <FAQ />
       <CTA />
     </>
   );

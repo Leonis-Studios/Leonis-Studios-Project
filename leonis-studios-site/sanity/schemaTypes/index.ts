@@ -9,10 +9,12 @@ import { serviceSchema      } from "./service";
 import { caseStudySchema    } from "./caseStudy";
 import { siteSettingsSchema } from "./siteSettings";
 import { aboutPageSchema    } from "./aboutPage";
+import { faqItemSchema      } from "./faq";
 
 export const schemaTypes = [
   serviceSchema,
   caseStudySchema,
   siteSettingsSchema,
   aboutPageSchema,
+  faqItemSchema,
 ];

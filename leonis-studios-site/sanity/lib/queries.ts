@@ -193,6 +193,17 @@ export const SITE_SETTINGS_QUERY = `
   }
 `;
 
+// Active FAQ items ordered for home page accordion
+export const FAQ_ITEMS_QUERY = `
+  *[_type == "faqItem" && active == true]
+  | order(order asc) {
+    _id,
+    question,
+    answer,
+    category
+  }
+`;
+
 // Fetches the single about page document
 export const ABOUT_PAGE_QUERY = `
   *[_type == "aboutPage"][0] {

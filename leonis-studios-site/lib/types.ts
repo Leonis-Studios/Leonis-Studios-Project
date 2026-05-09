@@ -111,6 +111,14 @@ export interface SiteSettings {
   ogImage?: string;
 }
 
+// ── FAQ Item ──────────────────────────────────────────────
+export interface FaqItem {
+  _id:       string;
+  question:  string;
+  answer:    string;
+  category?: string;
+}
+
 // ── About Page ────────────────────────────────────────────
 export interface AboutPageData {
   heroHeadline?:   string;
