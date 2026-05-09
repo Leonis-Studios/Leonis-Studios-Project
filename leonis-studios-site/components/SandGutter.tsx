@@ -125,7 +125,11 @@ export default function SandGutter({ seed = 0 }: Props) {
     const cvs = canvas;
     const c   = ctx;
 
+    // Pre-compute color prefix — R,G,B never changes per seed, only alpha does
+    const colorPrefix = `rgba(${SEED_CFG[seed].color},`;
+
     let rafId = 0;
+    let isVisible = false;
     let t = 0;
     let grains: { left: Grain[]; right: Grain[] } | null = null;
     let dims = { w: 0, h: 0 };
@@ -168,29 +172,28 @@ export default function SandGutter({ seed = 0 }: Props) {
       const mob = mobileMult(dims.w);
       if (mob === 0) return;
 
-      const allGrains = [...grains.left, ...grains.right];
+      for (const side of [grains.left, grains.right] as const) {
+        for (const g of side) {
+          const fade  = edgeFade(g.y, dims.h);
+          const alpha = g.alpha * fade * mob;
+          if (alpha < 0.005) {
+            g.y += g.vy;
+            if (g.y > dims.h + 10) g.y = -5;
+            if (g.y < -10)         g.y = dims.h + 5;
+            continue;
+          }
 
-      for (const g of allGrains) {
-        const fade  = edgeFade(g.y, dims.h);
-        const alpha = g.alpha * fade * mob;
-        if (alpha < 0.005) {
-          // Still advance position even when invisible
+          const displayX = g.x + Math.sin(g.phase + t * g.freq) * g.swayAmp;
+
+          c.beginPath();
+          c.arc(displayX, g.y, g.r, 0, TWO_PI);
+          c.fillStyle = colorPrefix + alpha.toFixed(3) + ')';
+          c.fill();
+
           g.y += g.vy;
           if (g.y > dims.h + 10) g.y = -5;
           if (g.y < -10)         g.y = dims.h + 5;
-          continue;
         }
-
-        const displayX = g.x + Math.sin(g.phase + t * g.freq) * g.swayAmp;
-
-        c.beginPath();
-        c.arc(displayX, g.y, g.r, 0, TWO_PI);
-        c.fillStyle = `rgba(${SEED_CFG[seed].color},${alpha.toFixed(3)})`;
-        c.fill();
-
-        g.y += g.vy;
-        if (g.y > dims.h + 10) g.y = -5;
-        if (g.y < -10)         g.y = dims.h + 5;
       }
 
       t++;
@@ -199,6 +202,17 @@ export default function SandGutter({ seed = 0 }: Props) {
     function loop() {
       draw();
       rafId = requestAnimationFrame(loop);
+    }
+
+    function startLoop() {
+      if (rafId === 0 && isVisible && !prefersReduced) {
+        rafId = requestAnimationFrame(loop);
+      }
+    }
+
+    function stopLoop() {
+      cancelAnimationFrame(rafId);
+      rafId = 0;
     }
 
     const ro = new ResizeObserver((entries) => {
@@ -211,7 +225,17 @@ export default function SandGutter({ seed = 0 }: Props) {
       if (prefersReduced) draw();
     });
 
+    const io = new IntersectionObserver(([entry]) => {
+      isVisible = entry?.isIntersecting ?? false;
+      if (isVisible) {
+        startLoop();
+      } else {
+        stopLoop();
+      }
+    }, { threshold: 0 });
+
     ro.observe(parent);
+    io.observe(parent);
 
     // Initial setup using current parent dimensions
     const rect = parent.getBoundingClientRect();
@@ -221,13 +245,13 @@ export default function SandGutter({ seed = 0 }: Props) {
 
     if (prefersReduced) {
       draw(); // single static frame — dots visible but motionless
-    } else {
-      rafId = requestAnimationFrame(loop);
     }
+    // RAF starts via IntersectionObserver when section enters viewport
 
     return () => {
-      cancelAnimationFrame(rafId);
+      stopLoop();
       ro.disconnect();
+      io.disconnect();
     };
   }, [seed]);
 

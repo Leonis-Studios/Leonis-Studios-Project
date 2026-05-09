@@ -29,9 +29,9 @@ export default function ServicesGrid({ services }: { services: Service[] }) {
             <feComposite in="blended" in2="SourceGraphic" operator="in" />
           </filter>
 
-          {/* Crack-texture filter — turbulence → threshold → sharpen → warp → colorize */}
+          {/* Crack-texture filter — turbulence → threshold → colorize */}
           <filter id="crack-texture" x="0%" y="0%" width="100%" height="100%" colorInterpolationFilters="sRGB">
-            <feTurbulence type="fractalNoise" baseFrequency="0.045 0.065" numOctaves="5" seed="3" stitchTiles="stitch" result="crackNoise" />
+            <feTurbulence type="fractalNoise" baseFrequency="0.045 0.065" numOctaves="3" seed="3" stitchTiles="stitch" result="crackNoise" />
             <feColorMatrix type="saturate" values="0" in="crackNoise" result="grayNoise" />
             <feComponentTransfer in="grayNoise" result="crackMask">
               <feFuncR type="discrete" tableValues="0 0 0 0 1" />
@@ -39,11 +39,8 @@ export default function ServicesGrid({ services }: { services: Service[] }) {
               <feFuncB type="discrete" tableValues="0 0 0 0 1" />
               <feFuncA type="discrete" tableValues="0 0 0 0 1" />
             </feComponentTransfer>
-            <feConvolveMatrix in="crackMask" order="3" kernelMatrix="-1 -1 -1 -1 9 -1 -1 -1 -1" divisor="1" bias="0" result="crackSharp" />
-            <feTurbulence type="turbulence" baseFrequency="0.018 0.022" numOctaves="2" seed="7" result="warpNoise" />
-            <feDisplacementMap in="crackSharp" in2="warpNoise" scale="10" xChannelSelector="R" yChannelSelector="G" result="cracksWarped" />
             <feFlood floodColor="rgba(180,110,0,1)" result="goldColor" />
-            <feComposite in="goldColor" in2="cracksWarped" operator="in" result="goldCracks" />
+            <feComposite in="goldColor" in2="crackMask" operator="in" result="goldCracks" />
             <feComposite in="goldCracks" in2="SourceGraphic" operator="in" />
           </filter>
 
