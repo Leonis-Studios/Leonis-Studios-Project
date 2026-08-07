@@ -10,6 +10,8 @@ import { caseStudySchema    } from "./caseStudy";
 import { siteSettingsSchema } from "./siteSettings";
 import { aboutPageSchema    } from "./aboutPage";
 import { faqItemSchema      } from "./faq";
+import { postSchema         } from "./post";
+import { blogPageSchema     } from "./blogPage";
 
 export const schemaTypes = [
   serviceSchema,
@@ -17,4 +19,6 @@ export const schemaTypes = [
   siteSettingsSchema,
   aboutPageSchema,
   faqItemSchema,
+  postSchema,
+  blogPageSchema,
 ];

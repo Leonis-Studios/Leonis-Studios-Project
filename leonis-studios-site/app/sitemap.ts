@@ -7,6 +7,11 @@ const CASE_STUDY_DATES_QUERY = `
   *[_type == "caseStudy"] { "slug": slug.current, _updatedAt }
 `;
 
+// Fetches slug + last-modified date for each blog post
+const POST_DATES_QUERY = `
+  *[_type == "post"] { "slug": slug.current, _updatedAt }
+`;
+
 export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
   const now = new Date();
 
@@ -35,6 +40,12 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
       changeFrequency: "monthly",
       priority:        0.7,
     },
+    {
+      url:             `${siteConfig.url}/blog`,
+      lastModified:    now,
+      changeFrequency: "weekly",
+      priority:        0.7,
+    },
   ];
 
   let dynamicRoutes: MetadataRoute.Sitemap = [];
@@ -56,5 +67,24 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
     // Sanity unavailable at build time — static routes still work fine
   }
 
-  return [...staticRoutes, ...dynamicRoutes];
+  let postRoutes: MetadataRoute.Sitemap = [];
+
+  try {
+    const posts: { slug: string; _updatedAt: string }[] = await client.fetch(
+      POST_DATES_QUERY,
+      {},
+      { next: { revalidate: 3600 } }
+    );
+
+    postRoutes = posts.map((p) => ({
+      url:             `${siteConfig.url}/blog/${p.slug}`,
+      lastModified:    new Date(p._updatedAt),
+      changeFrequency: "monthly" as const,
+      priority:        0.6,
+    }));
+  } catch {
+    // Sanity unavailable at build time — static routes still work fine
+  }
+
+  return [...staticRoutes, ...dynamicRoutes, ...postRoutes];
 }

@@ -25,6 +25,7 @@ export async function generateMetadata(): Promise<Metadata> {
     openGraph: {
       type:     "website",
       siteName: name,
+      url,
     },
     twitter: { card: "summary_large_image" },
     robots: { index: true, follow: true },

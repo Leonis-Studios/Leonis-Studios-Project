@@ -47,7 +47,7 @@ export default function Navbar() {
     >
       <div className="max-w-7xl mx-auto px-6 lg:px-12">
         {/* 3-column grid: logo | nav (centered) | cta (right-aligned) */}
-        <div className="flex items-center justify-between h-20 md:h-21.5 md:grid md:grid-cols-3">
+        <div className="flex items-center justify-between h-24 md:h-28 md:grid md:grid-cols-3">
           {/* ── Logo ───────────────────────────────────────── */}
           {(() => {
             const useDarkLogo = !scrolled && pathname !== "/";
@@ -57,28 +57,28 @@ export default function Navbar() {
                 <Image
                   src="/logo-white.png"
                   alt="Leonis Studios"
-                  width={180}
-                  height={52}
+                  width={252}
+                  height={73}
                   priority
                   className="md:hidden"
-                  style={{ height: "48px", width: "auto", objectFit: "contain" }}
+                  style={{ height: "68px", width: "auto", objectFit: "contain" }}
                 />
                 {/* Desktop: dark on non-home unscrolled, white otherwise */}
                 <Image
                   src={useDarkLogo ? "/logo-dark.png" : "/logo-white.png"}
                   alt="Leonis Studios"
-                  width={190}
-                  height={54}
+                  width={266}
+                  height={76}
                   priority
                   className="hidden md:block"
-                  style={{ height: "52px", width: "auto", objectFit: "contain" }}
+                  style={{ height: "73px", width: "auto", objectFit: "contain" }}
                 />
               </Link>
             );
           })()}
 
           {/* ── Desktop Nav (always centered in the middle column) */}
-          <nav className="hidden md:flex items-center justify-center gap-8">
+          <nav className="hidden md:flex items-center justify-center gap-4 lg:gap-8">
             {siteConfig.nav.map((link) => {
               // isActive highlights the current page link
               const isActive = pathname === link.href;

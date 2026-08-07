@@ -14,28 +14,29 @@ import siteConfig                 from "@/site.config";
 import { colors }                 from "@/lib/colors";
 import { tokens }                 from "@/lib/tokens";
 
+const workDescription =
+  "Browse case studies from Leonis Studios — web design, Next.js development, SEO, and more.";
+
 export const metadata: Metadata = {
   title:       `Work — ${siteConfig.name}`,
-  description: "Browse case studies from Leonis Studios — web design, Next.js development, SEO, and more.",
+  description: workDescription,
   keywords: [
-    "web design portfolio",
-    "Next.js case studies",
-    "web development projects NJ",
-    "small business website examples",
-    "web design agency work",
-    "SEO results",
-    "website redesign case study",
+    "web design case studies",
+    "Leonis Studios portfolio",
+    "Next.js website examples",
+    "web development case studies New Jersey",
+    "website redesign portfolio",
   ],
   openGraph: {
-    title:       `Our Work — ${siteConfig.name}`,
-    description: "Browse case studies from Leonis Studios — web design, Next.js development, SEO, and more.",
-    url:         `${siteConfig.url}/work`,
-    type:        "website",
+    title:       `Work — ${siteConfig.name}`,
+    description: workDescription,
+    url:  `${siteConfig.url}/work`,
+    type: "website",
   },
   twitter: {
     card:        "summary_large_image",
-    title:       `Our Work — ${siteConfig.name}`,
-    description: "Browse case studies from Leonis Studios — web design, Next.js development, SEO, and more.",
+    title:       `Work — ${siteConfig.name}`,
+    description: workDescription,
   },
   alternates: {
     canonical: `${siteConfig.url}/work`,

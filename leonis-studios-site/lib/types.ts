@@ -95,6 +95,45 @@ export interface CaseStudy extends CaseStudyCard {
   }[];
 }
 
+// ── Blog Post (card) ───────────────────────────────────────
+// Used on the /blog index page — only the fields we need
+// to render a card. No body content yet.
+export interface PostCard {
+  _id:              string;
+  title:            string;
+  slug:             string;
+  excerpt:          string;
+  publishedAt:      string;
+  author?:          string;
+  tags?:            string[];
+  featured?:        boolean;
+  readTimeMinutes:  number;
+  coverImage?:      SanityImage;
+}
+
+// ── Blog Post (full) ──────────────────────────────────────
+// Used on the /blog/[slug] detail page — extends the card
+// with body content.
+export interface Post extends PostCard {
+  _updatedAt?: string;
+  // Portable Text is an array of block objects. The exact
+  // internal shape is handled by @portabletext/react so
+  // we type it as any[] here — it's the one place we allow it.
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  body?: any[];
+}
+
+// ── Blog Page Settings ────────────────────────────────────
+// Singleton document driving CaravanTrail's section header
+// and empty state — all optional, component falls back to
+// its own defaults when this doc doesn't exist yet.
+export interface BlogPageSettings {
+  eyebrow?:           string;
+  headline?:          string;
+  intro?:             string;
+  emptyStateMessage?: string;
+}
+
 // ── Site Settings ─────────────────────────────────────────
 export interface SiteSettings {
   siteName?:        string;

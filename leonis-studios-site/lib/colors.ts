@@ -20,6 +20,12 @@ export const colors = {
   emailFooterBg: "#f5f5f5",
   errorBg: "#fff0f0",
   textSecondaryLight: "#BFCEEE",
+
+  // ── Caravan Trail (blog listing) — warm sand/antique palette ──
+  antiqueGold: "#B46E00",
+  bgSand: "#F6EFE2",
+  bgPaper: "#F0E4CB",
+  borderWarm: "rgba(20,33,61,0.12)",
 } as const;
 
 export type ColorKey = keyof typeof colors;

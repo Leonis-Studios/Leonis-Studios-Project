@@ -204,6 +204,76 @@ export const FAQ_ITEMS_QUERY = `
   }
 `;
 
+// All blog posts, newest first — used on /blog
+// readTimeMinutes is computed here via pt::text() so the full
+// Portable Text body never has to be sent to the listing page —
+// ~1000 chars/min (~200wpm) estimate, clamped to 1 in the UI.
+export const ALL_POSTS_QUERY = `
+  *[_type == "post"] | order(publishedAt desc) {
+    _id,
+    title,
+    "slug": slug.current,
+    excerpt,
+    publishedAt,
+    author,
+    tags,
+    featured,
+    "readTimeMinutes": round(length(pt::text(body)) / 1000),
+    "coverImage": coverImage {
+  alt,
+  "url": asset->url,
+  "width": asset->metadata.dimensions.width,
+  "height": asset->metadata.dimensions.height,
+  hotspot,
+  crop
+}
+  }
+`;
+
+// Single blog post — used on /blog/[slug]
+export const POST_BY_SLUG_QUERY = `
+  *[_type == "post" && slug.current == $slug][0] {
+    _id,
+    title,
+    "slug": slug.current,
+    excerpt,
+    publishedAt,
+    _updatedAt,
+    author,
+    tags,
+    featured,
+    "coverImage": coverImage {
+  alt,
+  "url": asset->url,
+  "width": asset->metadata.dimensions.width,
+  "height": asset->metadata.dimensions.height,
+  hotspot,
+  crop
+},
+    body
+  }
+`;
+
+// Used by generateStaticParams to pre-render all blog post pages
+export const ALL_POST_SLUGS_QUERY = `
+  *[_type == "post"] { "slug": slug.current }
+`;
+
+// Used by sitemap.ts
+export const POST_DATES_QUERY = `
+  *[_type == "post"] { "slug": slug.current, _updatedAt }
+`;
+
+// Fetches the single blog page settings document (section header + empty state)
+export const BLOG_PAGE_QUERY = `
+  *[_type == "blogPage"][0] {
+    eyebrow,
+    headline,
+    intro,
+    emptyStateMessage
+  }
+`;
+
 // Fetches the single about page document
 export const ABOUT_PAGE_QUERY = `
   *[_type == "aboutPage"][0] {

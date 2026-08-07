@@ -60,7 +60,8 @@ export async function generateMetadata({
     openGraph: {
       title:       project.title,
       description: project.summary,
-      url:         `${siteConfig.url}/work/${slug}`,
+      url:         `${siteConfig.url}/work/${project.slug}`,
+      type:        "article",
       images:      project.coverImage?.url
         ? [{ url: project.coverImage.url, width: 1200, height: 630 }]
         : [],
@@ -71,7 +72,7 @@ export async function generateMetadata({
       description: project.summary,
     },
     alternates: {
-      canonical: `${siteConfig.url}/work/${slug}`,
+      canonical: `${siteConfig.url}/work/${project.slug}`,
     },
   };
 }

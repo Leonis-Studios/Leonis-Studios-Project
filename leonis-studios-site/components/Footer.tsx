@@ -24,9 +24,9 @@ export default function Footer() {
               <Image
                 src="/logo-white.png"
                 alt="Leonis Studios"
-                width={140}
-                height={40}
-                style={{ height: "40px", width: "auto" }}
+                width={196}
+                height={56}
+                style={{ height: "56px", width: "auto" }}
               />
             </Link>
             <p
