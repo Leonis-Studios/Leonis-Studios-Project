@@ -7,8 +7,6 @@ import ServicesHero          from "@/components/services/ServicesHero";
 import ServicesPackages      from "@/components/services/ServicesPackages";
 import ServicesRetainers     from "@/components/services/ServicesRetainers";
 import ServicesAddons        from "@/components/services/ServicesAddons";
-import ServicesFAQ           from "@/components/services/ServicesFAQ";
-import { faqs }              from "@/components/services/faqData";
 import ServicesCTA           from "@/components/services/ServicesCTA";
 
 export const metadata: Metadata = {
@@ -87,34 +85,16 @@ export default async function ServicesPage() {
     })),
   };
 
-  const faqSchema = {
-    "@context": "https://schema.org",
-    "@type":    "FAQPage",
-    mainEntity: faqs.map((faq) => ({
-      "@type":          "Question",
-      name:             faq.question,
-      acceptedAnswer: {
-        "@type": "Answer",
-        text:    faq.answer,
-      },
-    })),
-  };
-
   return (
     <>
       <script
         type="application/ld+json"
         dangerouslySetInnerHTML={{ __html: JSON.stringify(itemListSchema) }}
       />
-      <script
-        type="application/ld+json"
-        dangerouslySetInnerHTML={{ __html: JSON.stringify(faqSchema) }}
-      />
       <ServicesHero />
       <ServicesPackages  services={packages} />
       <ServicesRetainers services={retainers} />
       <ServicesAddons    services={addons} />
-      <ServicesFAQ />
       <ServicesCTA />
     </>
   );
