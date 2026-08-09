@@ -235,7 +235,7 @@ Single source of truth for site metadata, nav links, and social URLs. Always rea
 import siteConfig from "@/site.config";
 // siteConfig.name, siteConfig.tagline, siteConfig.url, siteConfig.email
 // siteConfig.nav: [{ label, href }]
-// siteConfig.social: { github }
+// siteConfig.social: { twitter, linkedin }
 ```
 
 ---

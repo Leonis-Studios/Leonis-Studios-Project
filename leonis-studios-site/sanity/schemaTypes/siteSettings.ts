@@ -37,7 +37,7 @@ export const siteSettingsSchema = defineType({
       name: "location",
       title: "Location",
       type: "string",
-      description: "e.g. New Jersey, USA",
+      description: "e.g. New York, USA",
     }),
     defineField({
       name: "social",

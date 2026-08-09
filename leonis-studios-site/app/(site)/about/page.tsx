@@ -13,20 +13,20 @@ import AboutCTA from "@/components/about/AboutCTA";
 export const metadata: Metadata = {
   title: "About",
   description:
-    "Leonis Studios is a New Jersey web design studio built on craft and performance. Meet Hassan Shirazi, the developer behind every project.",
+    "Leonis Studios is a New York web design studio built on craft and performance. Meet Hassan Shirazi, the developer behind every project.",
   keywords: [
-    "web designer New Jersey",
+    "web designer New York",
     "freelance web developer",
     "Next.js developer",
     "small business web design",
-    "web design NJ",
+    "web design NYC",
     "Hassan Shirazi",
     "Leonis Studios",
   ],
   openGraph: {
     title: `About — ${siteConfig.name}`,
     description:
-      "Leonis Studios is a New Jersey web design studio built on craft and performance. Meet Hassan Shirazi, the developer behind every project.",
+      "Leonis Studios is a New York web design studio built on craft and performance. Meet Hassan Shirazi, the developer behind every project.",
     url: `${siteConfig.url}/about`,
     type: "website",
   },
@@ -34,7 +34,7 @@ export const metadata: Metadata = {
     card: "summary_large_image",
     title: `About — ${siteConfig.name}`,
     description:
-      "Leonis Studios is a New Jersey web design studio built on craft and performance.",
+      "Leonis Studios is a New York web design studio built on craft and performance.",
   },
   alternates: {
     canonical: `${siteConfig.url}/about`,
@@ -59,8 +59,8 @@ export default async function AboutPage() {
     url: siteConfig.url,
     address: {
       "@type": "PostalAddress",
-      addressLocality: "New Jersey",
-      addressRegion: "NJ",
+      addressLocality: "New York",
+      addressRegion: "NY",
       addressCountry: "US",
     },
     knowsAbout: [
@@ -88,8 +88,8 @@ export default async function AboutPage() {
     },
     address: {
       "@type": "PostalAddress",
-      addressLocality: "New Jersey",
-      addressRegion: "NJ",
+      addressLocality: "New York",
+      addressRegion: "NY",
       addressCountry: "US",
     },
     areaServed: "United States",

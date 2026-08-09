@@ -22,7 +22,6 @@ const siteConfig = {
   // Social links — set to "" to hide a platform
   social: {
     twitter: "",
-    github: "https://github.com/leonis-studios",
     linkedin: "",
   },
 

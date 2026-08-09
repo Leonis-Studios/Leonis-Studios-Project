@@ -86,19 +86,6 @@ export default function Footer() {
                   {siteConfig.location}
                 </span>
               </li>
-              {siteConfig.social.github && (
-                <li>
-                  <a
-                    href={siteConfig.social.github}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="text-sm transition-colors duration-200"
-                    style={{ fontFamily: "var(--font-body)", fontWeight: tokens.weightBody, color: colors.textSecondaryLight }}
-                  >
-                    GitHub ↗
-                  </a>
-                </li>
-              )}
             </ul>
           </div>
 

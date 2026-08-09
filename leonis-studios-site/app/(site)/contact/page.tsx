@@ -6,13 +6,13 @@ import ContactSection      from "@/components/contact/ContactSection";
 export const metadata: Metadata = {
   title:       "Contact",
   description:
-    "Ready to hire a web designer? Tell Leonis Studios about your project and get a response within 24 hours. Web design quotes for NJ small businesses.",
+    "Ready to hire a web designer? Tell Leonis Studios about your project and get a response within 24 hours. Web design quotes for New York small businesses.",
   keywords: [
     "hire web designer",
     "web design quote",
     "website project inquiry",
     "web development consultation",
-    "New Jersey web design",
+    "New York web design",
     "Next.js developer for hire",
   ],
   openGraph: {
@@ -48,8 +48,8 @@ export default function ContactPage() {
       url:        siteConfig.url,
       address: {
         "@type":         "PostalAddress",
-        addressLocality: "New Jersey",
-        addressRegion:   "NJ",
+        addressLocality: "New York",
+        addressRegion:   "NY",
         addressCountry:  "US",
       },
     },

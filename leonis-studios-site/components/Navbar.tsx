@@ -49,33 +49,28 @@ export default function Navbar() {
         {/* 3-column grid: logo | nav (centered) | cta (right-aligned) */}
         <div className="flex items-center justify-between h-24 md:h-28 md:grid md:grid-cols-3">
           {/* ── Logo ───────────────────────────────────────── */}
-          {(() => {
-            const useDarkLogo = !scrolled && pathname !== "/";
-            return (
-              <Link href="/">
-                {/* Mobile: always white logo */}
-                <Image
-                  src="/logo-white.png"
-                  alt="Leonis Studios"
-                  width={252}
-                  height={73}
-                  priority
-                  className="md:hidden"
-                  style={{ height: "68px", width: "auto", objectFit: "contain" }}
-                />
-                {/* Desktop: dark on non-home unscrolled, white otherwise */}
-                <Image
-                  src={useDarkLogo ? "/logo-dark.png" : "/logo-white.png"}
-                  alt="Leonis Studios"
-                  width={266}
-                  height={76}
-                  priority
-                  className="hidden md:block"
-                  style={{ height: "73px", width: "auto", objectFit: "contain" }}
-                />
-              </Link>
-            );
-          })()}
+          <Link href="/">
+            {/* Mobile */}
+            <Image
+              src="/logo-white.png"
+              alt="Leonis Studios"
+              width={252}
+              height={73}
+              priority
+              className="md:hidden"
+              style={{ height: "76px", width: "auto", objectFit: "contain" }}
+            />
+            {/* Desktop */}
+            <Image
+              src="/logo-white.png"
+              alt="Leonis Studios"
+              width={266}
+              height={76}
+              priority
+              className="hidden md:block"
+              style={{ height: "82px", width: "auto", objectFit: "contain" }}
+            />
+          </Link>
 
           {/* ── Desktop Nav (always centered in the middle column) */}
           <nav className="hidden md:flex items-center justify-center gap-4 lg:gap-8">

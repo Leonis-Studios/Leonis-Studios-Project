@@ -24,7 +24,7 @@ export const metadata: Metadata = {
     "web design case studies",
     "Leonis Studios portfolio",
     "Next.js website examples",
-    "web development case studies New Jersey",
+    "web development case studies New York",
     "website redesign portfolio",
   ],
   openGraph: {
