@@ -12,6 +12,9 @@ import { aboutPageSchema    } from "./aboutPage";
 import { faqItemSchema      } from "./faq";
 import { postSchema         } from "./post";
 import { blogPageSchema     } from "./blogPage";
+import { homePageSchema     } from "./homePage";
+import { servicesPageSchema } from "./servicesPage";
+import { contactPageSchema  } from "./contactPage";
 
 export const schemaTypes = [
   serviceSchema,
@@ -21,4 +24,7 @@ export const schemaTypes = [
   faqItemSchema,
   postSchema,
   blogPageSchema,
+  homePageSchema,
+  servicesPageSchema,
+  contactPageSchema,
 ];

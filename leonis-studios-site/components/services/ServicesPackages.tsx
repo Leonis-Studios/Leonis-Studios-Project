@@ -1,14 +1,24 @@
 // Server Component — data passed as props from page.tsx.
 // ServicesGrid (client) handles hover interactivity.
 
-import type { Service } from "@/lib/types";
+import type { Service, ServicesPageData } from "@/lib/types";
 import { colors }       from "@/lib/colors";
 import { tokens }       from "@/lib/tokens";
 import ServicesGrid     from "@/components/home/ServicesGrid";
 import SandGutter       from "@/components/SandGutter";
 
-export default function ServicesPackages({ services }: { services: Service[] }) {
+export default function ServicesPackages({
+  services,
+  section,
+}: {
+  services: Service[];
+  section?: ServicesPageData["packagesSection"];
+}) {
   if (services.length === 0) return null;
+
+  const eyebrow  = section?.eyebrow  || "Website Packages";
+  const headline = section?.headline || "Choose Your Package";
+  const subtext  = section?.subtext  || "Three focused tiers — each executed with the same uncompromising standard of craft. No templates, no shortcuts.";
 
   return (
     <section
@@ -36,7 +46,7 @@ export default function ServicesPackages({ services }: { services: Service[] }) 
                   color:      "rgba(180,110,0,0.9)",
                 }}
               >
-                Website Packages
+                {eyebrow}
               </span>
             </div>
             <h2
@@ -49,7 +59,7 @@ export default function ServicesPackages({ services }: { services: Service[] }) 
                 color:         colors.bgDark,
               }}
             >
-              Choose Your Package
+              {headline}
             </h2>
           </div>
           <p
@@ -61,8 +71,7 @@ export default function ServicesPackages({ services }: { services: Service[] }) 
               color:      colors.textMuted,
             }}
           >
-            Three focused tiers — each executed with the same uncompromising
-            standard of craft. No templates, no shortcuts.
+            {subtext}
           </p>
         </div>
 

@@ -1,5 +1,8 @@
 import type { Metadata }  from "next";
 import siteConfig          from "@/site.config";
+import { client }          from "@/sanity/lib/client";
+import { SITE_SETTINGS_QUERY, CONTACT_PAGE_QUERY } from "@/sanity/lib/queries";
+import type { SiteSettings, ContactPageData } from "@/lib/types";
 import ContactHero         from "@/components/contact/ContactHero";
 import ContactSection      from "@/components/contact/ContactSection";
 
@@ -33,7 +36,18 @@ export const metadata: Metadata = {
   },
 };
 
-export default function ContactPage() {
+export default async function ContactPage() {
+  const settings: SiteSettings | null = await client
+    .fetch(SITE_SETTINGS_QUERY, {}, { next: { revalidate: 3600 } })
+    .catch(() => null);
+
+  const email    = settings?.email    ?? siteConfig.email;
+  const location = settings?.location ?? siteConfig.location;
+
+  const contactPage: ContactPageData | null = await client
+    .fetch(CONTACT_PAGE_QUERY, {}, { next: { revalidate: 3600 } })
+    .catch(() => null);
+
   // ── JSON-LD structured data ──────────────────────────────
   const jsonLd = {
     "@context": "https://schema.org",
@@ -44,7 +58,7 @@ export default function ContactPage() {
     mainEntity: {
       "@type":    "Organization",
       name:       siteConfig.name,
-      email:      siteConfig.email,
+      email,
       url:        siteConfig.url,
       address: {
         "@type":         "PostalAddress",
@@ -61,8 +75,8 @@ export default function ContactPage() {
         type="application/ld+json"
         dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
       />
-      <ContactHero />
-      <ContactSection />
+      <ContactHero hero={contactPage?.hero} />
+      <ContactSection siteEmail={email} location={location} />
     </>
   );
 }

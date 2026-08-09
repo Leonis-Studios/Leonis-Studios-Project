@@ -3,8 +3,8 @@
 
 import Link                            from "next/link"; // used for "View All Work" header link
 import { client }                      from "@/sanity/lib/client";
-import { FEATURED_CASE_STUDIES_QUERY } from "@/sanity/lib/queries";
-import type { CaseStudyCard }          from "@/lib/types";
+import { FEATURED_CASE_STUDIES_QUERY, HOME_PAGE_QUERY } from "@/sanity/lib/queries";
+import type { CaseStudyCard, HomePageData } from "@/lib/types";
 import FeaturedWorkGrid                from "@/components/home/FeaturedWorkGrid";
 import { colors }                      from "@/lib/colors";
 import { tokens }                      from "@/lib/tokens";
@@ -22,6 +22,13 @@ export default async function FeaturedWork() {
   // is still being populated.
   if (!projects.length) return null;
 
+  const homePage: HomePageData | null = await client
+    .fetch(HOME_PAGE_QUERY, {}, { next: { revalidate: 3600 } })
+    .catch(() => null);
+
+  const eyebrow  = homePage?.featuredWorkSection?.eyebrow  || "Selected Work";
+  const headline = homePage?.featuredWorkSection?.headline || "Recent Projects";
+
   return (
     <section className="py-24" style={{ background: colors.bgMuted, position: "relative", zIndex: 1, overflow: "hidden" }}>
       <SandGutter seed={2} />
@@ -36,7 +43,7 @@ export default async function FeaturedWork() {
                 className="text-xs tracking-[0.25em] uppercase"
                 style={{ color: colors.accent, fontFamily: "var(--font-display)", fontWeight: tokens.weightUI }}
               >
-                Selected Work
+                {eyebrow}
               </span>
             </div>
             <h2
@@ -49,7 +56,7 @@ export default async function FeaturedWork() {
                 color:         "var(--color-black)",
               }}
             >
-              Recent Projects
+              {headline}
             </h2>
           </div>
           <Link

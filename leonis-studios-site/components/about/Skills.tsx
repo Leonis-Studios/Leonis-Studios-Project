@@ -3,7 +3,9 @@ import { tokens } from "@/lib/tokens";
 import SandGutter from "@/components/SandGutter";
 
 interface Props {
+  eyebrow?: string;
   techStack?: string[];
+  servicesList?: string[];
 }
 
 const DEFAULT_TECHNOLOGIES = [
@@ -19,7 +21,7 @@ const DEFAULT_TECHNOLOGIES = [
   "Git",
 ];
 
-const services = [
+const DEFAULT_SERVICES = [
   "Web Design",
   "Frontend Development",
   "CMS Integration",
@@ -30,8 +32,10 @@ const services = [
   "Email Infrastructure",
 ];
 
-export default function Skills({ techStack }: Props) {
+export default function Skills({ eyebrow: eyebrowProp, techStack, servicesList }: Props) {
+  const eyebrow = eyebrowProp || "Stack & Services";
   const technologies = (techStack && techStack.length > 0) ? techStack : DEFAULT_TECHNOLOGIES;
+  const services = (servicesList && servicesList.length > 0) ? servicesList : DEFAULT_SERVICES;
 
   return (
     <section
@@ -52,7 +56,7 @@ export default function Skills({ techStack }: Props) {
               color:      colors.textSubtle,
             }}
           >
-            Stack &amp; Services
+            {eyebrow}
           </span>
         </div>
 

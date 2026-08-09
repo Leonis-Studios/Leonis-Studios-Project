@@ -5,8 +5,15 @@ import Link        from "next/link";
 import { colors }  from "@/lib/colors";
 import { tokens }  from "@/lib/tokens";
 import SandGutter  from "@/components/SandGutter";
+import type { ServicesPageData } from "@/lib/types";
 
-export default function ServicesCTA() {
+export default function ServicesCTA({ section }: { section?: ServicesPageData["ctaSection"] }) {
+  const eyebrow             = section?.eyebrow             || "Ready to Start?";
+  const headline            = section?.headline            || "Let's build something worth talking about.";
+  const subtext             = section?.subtext             || "Tell us about your project and we'll respond within 24 hours with a plan and a quote — no commitment required.";
+  const primaryCtaLabel     = section?.primaryCtaLabel     || "Get In Touch";
+  const secondaryCtaLabel   = section?.secondaryCtaLabel   || "See Our Work";
+
   return (
     <section
       className="py-24 border-t border-neutral-800"
@@ -32,7 +39,7 @@ export default function ServicesCTA() {
                   fontWeight: tokens.weightUI,
                 }}
               >
-                Ready to Start?
+                {eyebrow}
               </span>
             </div>
             <h2
@@ -45,7 +52,7 @@ export default function ServicesCTA() {
                 color:         colors.textPrimary,
               }}
             >
-              Let's build something worth talking about.
+              {headline}
             </h2>
           </div>
 
@@ -58,8 +65,7 @@ export default function ServicesCTA() {
                 color:      colors.textSecondaryLight,
               }}
             >
-              Tell us about your project and we'll respond within 24 hours
-              with a plan and a quote — no commitment required.
+              {subtext}
             </p>
             <div className="flex flex-col sm:flex-row gap-4">
               <Link
@@ -74,7 +80,7 @@ export default function ServicesCTA() {
                   background:    colors.accent,
                 }}
               >
-                <span>Get In Touch</span>
+                <span>{primaryCtaLabel}</span>
                 <span className="group-hover:translate-x-1 transition-transform duration-200">→</span>
               </Link>
               <Link
@@ -88,7 +94,7 @@ export default function ServicesCTA() {
                   textTransform: "uppercase",
                 }}
               >
-                See Our Work
+                {secondaryCtaLabel}
               </Link>
             </div>
           </div>

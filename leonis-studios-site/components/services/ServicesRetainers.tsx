@@ -2,7 +2,7 @@
 // Dark background section (surfaceDark) with seed 1 SandGutter.
 
 import Link        from "next/link";
-import type { Service } from "@/lib/types";
+import type { Service, ServicesPageData } from "@/lib/types";
 import { colors }       from "@/lib/colors";
 import { tokens }       from "@/lib/tokens";
 import SandGutter       from "@/components/SandGutter";
@@ -16,8 +16,18 @@ function formatPrice(service: Service): string {
   return "Custom quote";
 }
 
-export default function ServicesRetainers({ services }: { services: Service[] }) {
+export default function ServicesRetainers({
+  services,
+  section,
+}: {
+  services: Service[];
+  section?: ServicesPageData["retainersSection"];
+}) {
   if (services.length === 0) return null;
+
+  const eyebrow  = section?.eyebrow  || "Ongoing Growth";
+  const headline = section?.headline || "Monthly Retainers";
+  const subtext  = section?.subtext  || "Your site launches on day one. A retainer keeps it growing, secure, and ahead of the competition every month after.";
 
   return (
     <>
@@ -58,7 +68,7 @@ export default function ServicesRetainers({ services }: { services: Service[] })
                     color:      colors.accent,
                   }}
                 >
-                  Ongoing Growth
+                  {eyebrow}
                 </span>
               </div>
               <h2
@@ -71,7 +81,7 @@ export default function ServicesRetainers({ services }: { services: Service[] })
                   color:         colors.textPrimary,
                 }}
               >
-                Monthly Retainers
+                {headline}
               </h2>
             </div>
             <p
@@ -83,8 +93,7 @@ export default function ServicesRetainers({ services }: { services: Service[] })
                 color:      colors.textSecondaryLight,
               }}
             >
-              Your site launches on day one. A retainer keeps it growing,
-              secure, and ahead of the competition every month after.
+              {subtext}
             </p>
           </div>
 

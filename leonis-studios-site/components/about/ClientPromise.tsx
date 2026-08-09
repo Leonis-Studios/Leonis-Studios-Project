@@ -2,8 +2,9 @@ import Link from "next/link";
 import { colors } from "@/lib/colors";
 import { tokens } from "@/lib/tokens";
 import SandGutter from "@/components/SandGutter";
+import type { AboutPageData } from "@/lib/types";
 
-const promises = [
+const DEFAULT_PROMISES = [
   {
     title: "24-Hour Response",
     body: "Every message gets a reply within one business day. No chasing, no silence.",
@@ -30,7 +31,24 @@ const promises = [
   },
 ];
 
-export default function ClientPromise() {
+interface Props {
+  eyebrow?:    AboutPageData["promisesEyebrow"];
+  headline?:   AboutPageData["promisesHeadline"];
+  subheading?: AboutPageData["promisesSubheading"];
+  promises?:   AboutPageData["promises"];
+}
+
+export default function ClientPromise({
+  eyebrow:    eyebrowProp,
+  headline:   headlineProp,
+  subheading: subheadingProp,
+  promises:   promisesProp,
+}: Props) {
+  const eyebrow    = eyebrowProp    || "Our Promise";
+  const headline   = headlineProp   || "What you can always expect.";
+  const subheading = subheadingProp || "These aren't aspirations — they're the baseline for every project we take on.";
+  const promises   = promisesProp?.length ? promisesProp : DEFAULT_PROMISES;
+
   return (
     <section
       aria-label="Leonis Studios client commitments and guarantees"
@@ -53,7 +71,7 @@ export default function ClientPromise() {
               textTransform: "uppercase",
             }}
           >
-            Our Promise
+            {eyebrow}
           </span>
         </div>
 
@@ -70,7 +88,7 @@ export default function ClientPromise() {
             maxWidth: "600px",
           }}
         >
-          What you can always expect.
+          {headline}
         </h2>
 
         {/* Subheading */}
@@ -85,7 +103,7 @@ export default function ClientPromise() {
             maxWidth: "480px",
           }}
         >
-          These aren&apos;t aspirations — they&apos;re the baseline for every project we take on.
+          {subheading}
         </p>
 
         {/* Promise grid */}

@@ -23,6 +23,12 @@ export const aboutPageSchema = defineType({
 
     // ── Story section ─────────────────────────────────
     defineField({
+      name:        "storyEyebrow",
+      title:       "Story Eyebrow Label",
+      type:        "string",
+      description: 'e.g. "Our Story"',
+    }),
+    defineField({
       name:        "storyHeadline",
       title:       "Story Section Headline",
       type:        "string",
@@ -68,6 +74,12 @@ export const aboutPageSchema = defineType({
 
     // ── Values ────────────────────────────────────────
     defineField({
+      name:        "valuesEyebrow",
+      title:       "Values Eyebrow Label",
+      type:        "string",
+      description: 'e.g. "What We Stand For"',
+    }),
+    defineField({
       name:        "values",
       title:       "Values / Principles",
       type:        "array",
@@ -102,11 +114,60 @@ export const aboutPageSchema = defineType({
 
     // ── Tech stack ────────────────────────────────────
     defineField({
+      name:        "skillsEyebrow",
+      title:       "Skills Eyebrow Label",
+      type:        "string",
+      description: 'e.g. "Stack & Services"',
+    }),
+    defineField({
       name:        "techStack",
       title:       "Tech Stack",
       type:        "array",
       description: "Technologies listed in the stack section",
       of:          [{ type: "string" }],
+    }),
+    defineField({
+      name:        "servicesList",
+      title:       "Services List",
+      type:        "array",
+      description: "Services listed next to the tech stack",
+      of:          [{ type: "string" }],
+    }),
+
+    // ── Client Promise ──────────────────────────────────
+    defineField({
+      name:  "promisesEyebrow",
+      title: "Promises Eyebrow Label",
+      type:  "string",
+      description: 'e.g. "Our Promise"',
+    }),
+    defineField({
+      name:  "promisesHeadline",
+      title: "Promises Headline",
+      type:  "string",
+      description: 'e.g. "What you can always expect."',
+    }),
+    defineField({
+      name:  "promisesSubheading",
+      title: "Promises Subheading",
+      type:  "text",
+      rows:  2,
+    }),
+    defineField({
+      name:        "promises",
+      title:       "Promises",
+      type:        "array",
+      description: "The client commitment cards",
+      of: [
+        defineArrayMember({
+          type: "object",
+          fields: [
+            defineField({ name: "title", title: "Title", type: "string" }),
+            defineField({ name: "body",  title: "Body",  type: "text", rows: 2 }),
+          ],
+          preview: { select: { title: "title", subtitle: "body" } },
+        }),
+      ],
     }),
 
     // ── CTA ───────────────────────────────────────────

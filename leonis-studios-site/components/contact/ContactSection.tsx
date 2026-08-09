@@ -40,7 +40,13 @@ const labelStyle: React.CSSProperties = {
   marginBottom: "8px",
 };
 
-export default function ContactSection() {
+export default function ContactSection({
+  siteEmail,
+  location,
+}: {
+  siteEmail: string;
+  location: string;
+}) {
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
   const [company, setCompany] = useState("");
@@ -126,7 +132,7 @@ export default function ContactSection() {
                 <div>
                   <p style={{ ...labelStyle, marginBottom: "4px" }}>Email</p>
                   <a
-                    href={`mailto:hassan.shirazi@leonisstudios.com`}
+                    href={`mailto:${siteEmail}`}
                     style={{
                       fontFamily: "var(--font-body)",
                       fontSize: "15px",
@@ -135,7 +141,7 @@ export default function ContactSection() {
                       textDecoration: "none",
                     }}
                   >
-                    hassan.shirazi@leonisstudios.com
+                    {siteEmail}
                   </a>
                 </div>
                 <div>
@@ -148,7 +154,7 @@ export default function ContactSection() {
                       color: colors.bgDark,
                     }}
                   >
-                    New York, USA
+                    {location}
                   </p>
                 </div>
                 <div>
@@ -429,10 +435,10 @@ export default function ContactSection() {
                     >
                       {errorMsg} If the problem persists, email us directly at{" "}
                       <a
-                        href="mailto:hello@leonistudios.com"
+                        href={`mailto:${siteEmail}`}
                         style={{ color: colors.textSubtle, fontWeight: tokens.weightUI }}
                       >
-                        hello@leonistudios.com
+                        {siteEmail}
                       </a>
                       .
                     </p>

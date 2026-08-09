@@ -158,10 +158,108 @@ export interface FaqItem {
   category?: string;
 }
 
+// ── Home Page ─────────────────────────────────────────────
+// Singleton document driving the home page sections — all
+// optional, every section falls back to its own hardcoded
+// default when this doc (or a given field) hasn't been set yet.
+export interface HomePageData {
+  hero?: {
+    eyebrow?:            string;
+    headlineLine1?:      string;
+    headlineLine2?:      string;
+    headlineAccent?:     string;
+    subcopy?:            string;
+    primaryCtaLabel?:    string;
+    secondaryCtaLabel?:  string;
+    stats?: {
+      value: string;
+      label: string;
+    }[];
+  };
+  marquee?: {
+    items?: string[];
+  };
+  servicesSection?: {
+    eyebrow?:  string;
+    headline?: string;
+    subtext?:  string;
+  };
+  howItWorks?: {
+    eyebrow?:  string;
+    headline?: string;
+    subtext?:  string;
+    steps?: {
+      title:       string;
+      description: string;
+    }[];
+    bottomCtaLabel?: string;
+  };
+  featuredWorkSection?: {
+    eyebrow?:  string;
+    headline?: string;
+  };
+  faqSection?: {
+    eyebrow?:  string;
+    headline?: string;
+    intro?:    string;
+  };
+  ctaSection?: {
+    eyebrow?:           string;
+    headline?:          string;
+    subtext?:           string;
+    primaryCtaLabel?:   string;
+    secondaryCtaLabel?: string;
+  };
+}
+
+// ── Services Page ─────────────────────────────────────────
+export interface ServicesPageData {
+  hero?: {
+    eyebrow?:        string;
+    headlineLine1?:  string;
+    headlineAccent?: string;
+    subheading?:     string;
+    categories?:     string[];
+  };
+  packagesSection?: {
+    eyebrow?:  string;
+    headline?: string;
+    subtext?:  string;
+  };
+  retainersSection?: {
+    eyebrow?:  string;
+    headline?: string;
+    subtext?:  string;
+  };
+  addonsSection?: {
+    eyebrow?:  string;
+    headline?: string;
+    subtext?:  string;
+  };
+  ctaSection?: {
+    eyebrow?:           string;
+    headline?:          string;
+    subtext?:           string;
+    primaryCtaLabel?:   string;
+    secondaryCtaLabel?: string;
+  };
+}
+
+// ── Contact Page ──────────────────────────────────────────
+export interface ContactPageData {
+  hero?: {
+    eyebrow?:        string;
+    headlineLine1?:  string;
+    headlineAccent?: string;
+    subheading?:     string;
+  };
+}
+
 // ── About Page ────────────────────────────────────────────
 export interface AboutPageData {
   heroHeadline?:   string;
   heroSubheading?: string;
+  storyEyebrow?:   string;
   storyHeadline?:  string;
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
   storyBody?:      any[];
@@ -169,13 +267,23 @@ export interface AboutPageData {
     url: string;
     alt: string;
   };
+  valuesEyebrow?: string;
   values?: {
     title:       string;
     description: string;
   }[];
   approachHeadline?: string;
   approachBody?:     string;
+  skillsEyebrow?:    string;
   techStack?:        string[];
+  servicesList?:     string[];
+  promisesEyebrow?:    string;
+  promisesHeadline?:   string;
+  promisesSubheading?: string;
+  promises?: {
+    title: string;
+    body:  string;
+  }[];
   ctaHeadline?:      string;
   ctaSubtext?:       string;
 }

@@ -4,6 +4,7 @@ import { tokens } from "@/lib/tokens";
 import SandGutter from "@/components/SandGutter";
 
 interface Props {
+  eyebrow?: string;
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
   storyBody?: any[];
 }
@@ -24,7 +25,9 @@ const portableTextComponents = {
   },
 };
 
-export default function Story({ storyBody }: Props) {
+export default function Story({ eyebrow: eyebrowProp, storyBody }: Props) {
+  const eyebrow = eyebrowProp || "Our Story";
+
   return (
     <section
       className="py-24 lg:py-32"
@@ -44,7 +47,7 @@ export default function Story({ storyBody }: Props) {
               color:      colors.textSubtle,
             }}
           >
-            Our Story
+            {eyebrow}
           </span>
         </div>
 

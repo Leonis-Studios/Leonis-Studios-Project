@@ -8,6 +8,7 @@ interface Value {
 }
 
 interface Props {
+  eyebrow?: string;
   values?: Value[];
 }
 
@@ -30,7 +31,8 @@ const DEFAULT_VALUES: Value[] = [
   },
 ];
 
-export default function Values({ values }: Props) {
+export default function Values({ eyebrow: eyebrowProp, values }: Props) {
+  const eyebrow = eyebrowProp || "What We Stand For";
   const items = (values && values.length > 0) ? values : DEFAULT_VALUES;
 
   return (
@@ -52,7 +54,7 @@ export default function Values({ values }: Props) {
               color:      colors.textSubtle,
             }}
           >
-            What We Stand For
+            {eyebrow}
           </span>
         </div>
 

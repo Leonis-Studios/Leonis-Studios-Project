@@ -2,8 +2,8 @@
 // Hover interactivity is handled by the child ServicesGrid client component.
 
 import { client }                from "@/sanity/lib/client";
-import { PACKAGE_SERVICES_QUERY } from "@/sanity/lib/queries";
-import type { Service }          from "@/lib/types";
+import { PACKAGE_SERVICES_QUERY, HOME_PAGE_QUERY } from "@/sanity/lib/queries";
+import type { Service, HomePageData } from "@/lib/types";
 import ServicesGrid              from "@/components/home/ServicesGrid";
 import Link                      from "next/link";
 import { colors }                from "@/lib/colors";
@@ -14,6 +14,14 @@ export default async function Services() {
   const services: Service[] = await client
     .fetch(PACKAGE_SERVICES_QUERY, {}, { next: { revalidate: 3600 } })
     .catch(() => []);
+
+  const homePage: HomePageData | null = await client
+    .fetch(HOME_PAGE_QUERY, {}, { next: { revalidate: 3600 } })
+    .catch(() => null);
+
+  const eyebrow  = homePage?.servicesSection?.eyebrow  || "What We Do";
+  const headline = homePage?.servicesSection?.headline || "Our Services";
+  const subtext  = homePage?.servicesSection?.subtext  || "Three focused website packages, each executed with the same uncompromising standard of craft.";
 
   return (
     <section id="services" className="bg-white py-24 pb-32" style={{ position: "relative", zIndex: 1, overflow: "hidden" }}>
@@ -29,7 +37,7 @@ export default async function Services() {
                 className="text-xs tracking-[0.25em] uppercase"
                 style={{ fontFamily: "var(--font-display)", fontWeight: tokens.weightUI, color: colors.accent }}
               >
-                What We Do
+                {eyebrow}
               </span>
             </div>
             <h2
@@ -42,15 +50,14 @@ export default async function Services() {
                 color:         colors.bgDark,
               }}
             >
-              Our Services
+              {headline}
             </h2>
           </div>
           <p
             className="text-sm leading-relaxed max-w-xs"
             style={{ fontFamily: "var(--font-body)", fontWeight: tokens.weightBody, color: colors.textMuted }}
           >
-            Three focused website packages, each executed with the same
-            uncompromising standard of craft.
+            {subtext}
           </p>
         </div>
 

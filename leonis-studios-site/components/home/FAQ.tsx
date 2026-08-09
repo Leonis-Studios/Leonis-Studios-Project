@@ -1,6 +1,6 @@
 import { client }          from "@/sanity/lib/client";
-import { FAQ_ITEMS_QUERY } from "@/sanity/lib/queries";
-import type { FaqItem }    from "@/lib/types";
+import { FAQ_ITEMS_QUERY, HOME_PAGE_QUERY } from "@/sanity/lib/queries";
+import type { FaqItem, HomePageData } from "@/lib/types";
 import SandGutter          from "@/components/SandGutter";
 import { colors }          from "@/lib/colors";
 import { tokens }          from "@/lib/tokens";
@@ -12,6 +12,14 @@ export default async function FAQ() {
     .catch(() => []);
 
   if (!items.length) return null;
+
+  const homePage: HomePageData | null = await client
+    .fetch(HOME_PAGE_QUERY, {}, { next: { revalidate: 3600 } })
+    .catch(() => null);
+
+  const eyebrow  = homePage?.faqSection?.eyebrow  || "FAQ";
+  const headline = homePage?.faqSection?.headline || "Frequently asked questions";
+  const intro    = homePage?.faqSection?.intro    || "Everything you need to know about working with Leonis Studios — from pricing and timelines to process and ongoing support.";
 
   // FAQPage schema — parsed by Google, Bing, and AI assistants for AEO
   const faqSchema = {
@@ -52,7 +60,7 @@ export default async function FAQ() {
               fontWeight:  tokens.weightUI,
             }}
           >
-            FAQ
+            {eyebrow}
           </span>
         </div>
 
@@ -68,7 +76,7 @@ export default async function FAQ() {
               color:         colors.textBody,
             }}
           >
-            Frequently<br />asked questions
+            {headline}
           </h2>
           <p
             style={{
@@ -80,8 +88,7 @@ export default async function FAQ() {
               alignSelf:  "end",
             }}
           >
-            Everything you need to know about working with Leonis Studios —
-            from pricing and timelines to process and ongoing support.
+            {intro}
           </p>
         </div>
 

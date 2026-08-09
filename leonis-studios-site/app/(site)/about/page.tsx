@@ -118,10 +118,15 @@ export default async function AboutPage() {
         headline={data?.heroHeadline}
         subheading={data?.heroSubheading}
       />
-      <Story storyBody={data?.storyBody} />
-      <Values values={data?.values} />
-      <ClientPromise />
-      <Skills techStack={data?.techStack} />
+      <Story eyebrow={data?.storyEyebrow} storyBody={data?.storyBody} />
+      <Values eyebrow={data?.valuesEyebrow} values={data?.values} />
+      <ClientPromise
+        eyebrow={data?.promisesEyebrow}
+        headline={data?.promisesHeadline}
+        subheading={data?.promisesSubheading}
+        promises={data?.promises}
+      />
+      <Skills eyebrow={data?.skillsEyebrow} techStack={data?.techStack} servicesList={data?.servicesList} />
       <AboutCTA ctaHeadline={data?.ctaHeadline} ctaSubtext={data?.ctaSubtext} />
     </>
   );

@@ -3,15 +3,22 @@
 
 import { colors } from "@/lib/colors";
 import { tokens } from "@/lib/tokens";
+import type { ServicesPageData } from "@/lib/types";
 
-const CATEGORIES = [
+const DEFAULT_CATEGORIES = [
   "Website Packages",
   "Monthly Retainers",
   "SEO & Growth",
   "Add-On Services",
 ];
 
-export default function ServicesHero() {
+export default function ServicesHero({ hero }: { hero?: ServicesPageData["hero"] }) {
+  const eyebrow        = hero?.eyebrow        || "What We Offer";
+  const headlineLine1  = hero?.headlineLine1  || "Services Built";
+  const headlineAccent = hero?.headlineAccent || "to Perform.";
+  const subheading      = hero?.subheading      || "From a first website to a fully maintained digital presence — every engagement is built with the same obsessive attention to craft, performance, and growth.";
+  const categories       = hero?.categories?.length ? hero.categories : DEFAULT_CATEGORIES;
+
   return (
     <section
       className="relative overflow-hidden py-32 pt-40"
@@ -62,7 +69,7 @@ export default function ServicesHero() {
               color:      colors.accent,
             }}
           >
-            What We Offer
+            {eyebrow}
           </span>
         </div>
 
@@ -80,8 +87,8 @@ export default function ServicesHero() {
             animation:     "fadeUp 0.8s cubic-bezier(0.16, 1, 0.3, 1) 0.25s forwards",
           }}
         >
-          Services Built<br />
-          <span style={{ color: colors.accent }}>to Perform.</span>
+          {headlineLine1}<br />
+          <span style={{ color: colors.accent }}>{headlineAccent}</span>
         </h1>
 
         {/* Subheading */}
@@ -98,9 +105,7 @@ export default function ServicesHero() {
             animation:  "fadeUp 0.8s cubic-bezier(0.16, 1, 0.3, 1) 0.4s forwards",
           }}
         >
-          From a first website to a fully maintained digital presence — every
-          engagement is built with the same obsessive attention to craft,
-          performance, and growth.
+          {subheading}
         </p>
 
         {/* Category tags */}
@@ -111,7 +116,7 @@ export default function ServicesHero() {
             animation: "fadeUp 0.8s cubic-bezier(0.16, 1, 0.3, 1) 0.55s forwards",
           }}
         >
-          {CATEGORIES.map((cat) => (
+          {categories.map((cat) => (
             <span
               key={cat}
               style={{

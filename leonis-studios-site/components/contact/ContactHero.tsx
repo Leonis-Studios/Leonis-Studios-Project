@@ -1,7 +1,13 @@
 import { colors } from "@/lib/colors";
 import { tokens } from "@/lib/tokens";
+import type { ContactPageData } from "@/lib/types";
 
-export default function ContactHero() {
+export default function ContactHero({ hero }: { hero?: ContactPageData["hero"] }) {
+  const eyebrow        = hero?.eyebrow        || "Contact";
+  const headlineLine1  = hero?.headlineLine1  || "Start a";
+  const headlineAccent = hero?.headlineAccent || "Project.";
+  const subheading      = hero?.subheading      || "Tell me about what you're building. I'll respond within 24 hours with thoughts, questions, and next steps.";
+
   return (
     <section
       className="relative overflow-hidden py-32 pt-40"
@@ -48,7 +54,7 @@ export default function ContactHero() {
               color:      colors.accent,
             }}
           >
-            Contact
+            {eyebrow}
           </span>
         </div>
 
@@ -66,8 +72,8 @@ export default function ContactHero() {
             animation:     "fadeUp 0.8s cubic-bezier(0.16, 1, 0.3, 1) 0.25s forwards",
           }}
         >
-          Start a<br />
-          <span style={{ color: colors.accent }}>Project.</span>
+          {headlineLine1}<br />
+          <span style={{ color: colors.accent }}>{headlineAccent}</span>
         </h1>
 
         {/* Subheading */}
@@ -84,8 +90,7 @@ export default function ContactHero() {
             animation:  "fadeUp 0.8s cubic-bezier(0.16, 1, 0.3, 1) 0.4s forwards",
           }}
         >
-          Tell me about what you&apos;re building. I&apos;ll respond within
-          24 hours with thoughts, questions, and next steps.
+          {subheading}
         </p>
 
       </div>

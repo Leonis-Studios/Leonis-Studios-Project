@@ -4,7 +4,7 @@
 
 import { useState, Fragment } from "react";
 import Link         from "next/link";
-import type { Service } from "@/lib/types";
+import type { Service, ServicesPageData } from "@/lib/types";
 import { colors }       from "@/lib/colors";
 import { tokens }       from "@/lib/tokens";
 import SandGutter       from "@/components/SandGutter";
@@ -144,8 +144,18 @@ function AddonCard({ service }: { service: Service }) {
   );
 }
 
-export default function ServicesAddons({ services }: { services: Service[] }) {
+export default function ServicesAddons({
+  services,
+  section,
+}: {
+  services: Service[];
+  section?: ServicesPageData["addonsSection"];
+}) {
   if (services.length === 0) return null;
+
+  const eyebrow  = section?.eyebrow  || "Add-On Services";
+  const headline = section?.headline || "Extend Your Project";
+  const subtext  = section?.subtext  || "Bolt on exactly what you need. Each add-on pairs with any package or retainer to enhance your digital presence.";
 
   return (
     <section
@@ -173,7 +183,7 @@ export default function ServicesAddons({ services }: { services: Service[] }) {
                   color:      "rgba(180,110,0,0.9)",
                 }}
               >
-                Add-On Services
+                {eyebrow}
               </span>
             </div>
             <h2
@@ -186,7 +196,7 @@ export default function ServicesAddons({ services }: { services: Service[] }) {
                 color:         colors.bgDark,
               }}
             >
-              Extend Your Project
+              {headline}
             </h2>
           </div>
           <p
@@ -198,8 +208,7 @@ export default function ServicesAddons({ services }: { services: Service[] }) {
               color:      colors.textMuted,
             }}
           >
-            Bolt on exactly what you need. Each add-on pairs with any
-            package or retainer to enhance your digital presence.
+            {subtext}
           </p>
         </div>
 

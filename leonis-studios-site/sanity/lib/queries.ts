@@ -274,21 +274,60 @@ export const BLOG_PAGE_QUERY = `
   }
 `;
 
+// Fetches the single home page document
+export const HOME_PAGE_QUERY = `
+  *[_type == "homePage"][0] {
+    hero,
+    marquee,
+    servicesSection,
+    howItWorks,
+    featuredWorkSection,
+    faqSection,
+    ctaSection
+  }
+`;
+
+// Fetches the single services page document
+export const SERVICES_PAGE_QUERY = `
+  *[_type == "servicesPage"][0] {
+    hero,
+    packagesSection,
+    retainersSection,
+    addonsSection,
+    ctaSection
+  }
+`;
+
+// Fetches the single contact page document
+export const CONTACT_PAGE_QUERY = `
+  *[_type == "contactPage"][0] {
+    hero
+  }
+`;
+
 // Fetches the single about page document
 export const ABOUT_PAGE_QUERY = `
   *[_type == "aboutPage"][0] {
     heroHeadline,
     heroSubheading,
+    storyEyebrow,
     storyHeadline,
     storyBody,
     "profilePhoto": profilePhoto {
       "url": asset->url,
       alt
     },
+    valuesEyebrow,
     values,
     approachHeadline,
     approachBody,
+    skillsEyebrow,
     techStack,
+    servicesList,
+    promisesEyebrow,
+    promisesHeadline,
+    promisesSubheading,
+    promises,
     ctaHeadline,
     ctaSubtext
   }

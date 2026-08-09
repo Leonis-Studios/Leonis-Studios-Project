@@ -1,8 +1,8 @@
 import type { Metadata }    from "next";
 import siteConfig            from "@/site.config";
 import { client }            from "@/sanity/lib/client";
-import { ALL_SERVICES_QUERY } from "@/sanity/lib/queries";
-import type { Service }      from "@/lib/types";
+import { ALL_SERVICES_QUERY, SERVICES_PAGE_QUERY } from "@/sanity/lib/queries";
+import type { Service, ServicesPageData } from "@/lib/types";
 import ServicesHero          from "@/components/services/ServicesHero";
 import ServicesPackages      from "@/components/services/ServicesPackages";
 import ServicesRetainers     from "@/components/services/ServicesRetainers";
@@ -46,6 +46,10 @@ export default async function ServicesPage() {
   const allServices: Service[] = await client
     .fetch(ALL_SERVICES_QUERY, {}, { next: { revalidate: 3600 } })
     .catch(() => []);
+
+  const servicesPage: ServicesPageData | null = await client
+    .fetch(SERVICES_PAGE_QUERY, {}, { next: { revalidate: 3600 } })
+    .catch(() => null);
 
   const packages  = allServices.filter((s) => s.category === "package");
   const retainers = allServices.filter((s) => s.category === "retainer");
@@ -91,11 +95,11 @@ export default async function ServicesPage() {
         type="application/ld+json"
         dangerouslySetInnerHTML={{ __html: JSON.stringify(itemListSchema) }}
       />
-      <ServicesHero />
-      <ServicesPackages  services={packages} />
-      <ServicesRetainers services={retainers} />
-      <ServicesAddons    services={addons} />
-      <ServicesCTA />
+      <ServicesHero hero={servicesPage?.hero} />
+      <ServicesPackages  services={packages}  section={servicesPage?.packagesSection} />
+      <ServicesRetainers services={retainers} section={servicesPage?.retainersSection} />
+      <ServicesAddons    services={addons}    section={servicesPage?.addonsSection} />
+      <ServicesCTA section={servicesPage?.ctaSection} />
     </>
   );
 }

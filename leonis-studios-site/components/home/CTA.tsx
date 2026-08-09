@@ -1,9 +1,23 @@
 import Link from "next/link";
+import { client } from "@/sanity/lib/client";
+import { HOME_PAGE_QUERY } from "@/sanity/lib/queries";
+import type { HomePageData } from "@/lib/types";
 import { colors } from "@/lib/colors";
 import { tokens } from "@/lib/tokens";
 import SandGutter from "@/components/SandGutter";
 
-export default function CTA() {
+export default async function CTA() {
+  const homePage: HomePageData | null = await client
+    .fetch(HOME_PAGE_QUERY, {}, { next: { revalidate: 3600 } })
+    .catch(() => null);
+
+  const cta                = homePage?.ctaSection;
+  const eyebrow             = cta?.eyebrow             || "Ready to start?";
+  const headline            = cta?.headline            || "Let's build something worth talking about.";
+  const subtext             = cta?.subtext             || "Tell us about your project and we'll come back within 24 hours with a plan and a quote.";
+  const primaryCtaLabel     = cta?.primaryCtaLabel     || "Get In Touch";
+  const secondaryCtaLabel   = cta?.secondaryCtaLabel   || "See Our Work";
+
   return (
     <section className="bg-black py-24 border-t border-neutral-800" style={{ position: "relative", zIndex: 1, overflow: "hidden" }}>
       <SandGutter seed={3} />
@@ -17,7 +31,7 @@ export default function CTA() {
                 className="text-xs tracking-[0.25em] uppercase"
                 style={{ color: colors.accent, fontFamily: "var(--font-display)", fontWeight: tokens.weightUI }}
               >
-                Ready to start?
+                {eyebrow}
               </span>
             </div>
             <h2
@@ -30,7 +44,7 @@ export default function CTA() {
                 color:         "var(--color-white)",
               }}
             >
-              Let's build something worth talking about.
+              {headline}
             </h2>
           </div>
 
@@ -39,8 +53,7 @@ export default function CTA() {
               className="text-neutral-400 text-sm leading-relaxed lg:text-right max-w-sm"
               style={{ fontFamily: "var(--font-body)", fontWeight: tokens.weightBody }}
             >
-              Tell us about your project and we'll come back within
-              24 hours with a plan and a quote.
+              {subtext}
             </p>
             <div className="flex flex-col sm:flex-row gap-4">
               <Link
@@ -60,7 +73,7 @@ export default function CTA() {
                   background:    colors.accent,
                 }}
               >
-                <span>Get In Touch</span>
+                <span>{primaryCtaLabel}</span>
                 <span className="group-hover:translate-x-1 transition-transform duration-200">→</span>
               </Link>
               <Link
@@ -78,7 +91,7 @@ export default function CTA() {
                   textTransform: "uppercase",
                 }}
               >
-                See Our Work
+                {secondaryCtaLabel}
               </Link>
             </div>
           </div>
