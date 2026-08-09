@@ -185,6 +185,41 @@ body {
   text-underline-offset: 3px;
 }
 
+/* ── Desert accent (blog post detail page only) ──────────
+   Additive on top of .prose-leonis — applied as a second
+   class (className="prose-leonis prose-desert") so the
+   shared case-study styling above is never touched.
+──────────────────────────────────────────────────────── */
+.prose-desert p,
+.prose-desert li,
+.prose-desert ul,
+.prose-desert ol {
+  color: #2c2c2a;
+}
+.prose-desert blockquote {
+  font-family: var(--font-serif);
+  background: rgba(180, 110, 0, 0.04);
+  border-left-color: #c7b382;
+  color: #8a7f68;
+  padding: 1rem 1.25rem;
+}
+.prose-desert a {
+  color: #14213d;
+}
+.prose-desert h2 {
+  position: relative;
+  padding-top: 1.5rem;
+}
+.prose-desert h2::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 48px;
+  height: 2px;
+  background: linear-gradient(90deg, rgba(180, 110, 0, 0.4), transparent);
+}
+
 @keyframes marquee {
   from {
     transform: translateX(0);

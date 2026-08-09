@@ -33,14 +33,21 @@ export default function Navbar() {
     setMenuOpen(false);
   }, [pathname]);
 
+  // Blog post detail pages open on a light "Dune" sand background, so the
+  // usual transparent-until-scroll navbar is unreadable at the top of the
+  // page. Force it solid black there regardless of scroll position.
+  const isBlogPost = pathname?.startsWith("/blog/") ?? false;
+  const solid = scrolled || isBlogPost;
+
   return (
     <header
       className={`
         fixed top-0 left-0 right-0 z-50
-        transition-all duration-300
+        border-b border-transparent
+        transition-[background-color,border-color,backdrop-filter] duration-500 ease-out
         ${
-          scrolled
-            ? "bg-black/95 backdrop-blur-sm border-b border-neutral-800"
+          solid
+            ? "bg-black/95 backdrop-blur-sm border-b-neutral-800"
             : "bg-transparent"
         }
       `}

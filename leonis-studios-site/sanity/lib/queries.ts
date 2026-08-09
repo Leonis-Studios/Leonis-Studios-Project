@@ -231,6 +231,7 @@ export const ALL_POSTS_QUERY = `
 `;
 
 // Single blog post — used on /blog/[slug]
+// readTimeMinutes computed the same way as ALL_POSTS_QUERY (~1000 chars/min).
 export const POST_BY_SLUG_QUERY = `
   *[_type == "post" && slug.current == $slug][0] {
     _id,
@@ -242,6 +243,7 @@ export const POST_BY_SLUG_QUERY = `
     author,
     tags,
     featured,
+    "readTimeMinutes": round(length(pt::text(body)) / 1000),
     "coverImage": coverImage {
   alt,
   "url": asset->url,

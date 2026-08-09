@@ -26,6 +26,18 @@ export const colors = {
   bgSand: "#F6EFE2",
   bgPaper: "#F0E4CB",
   borderWarm: "rgba(20,33,61,0.12)",
+
+  // ── Dune (blog post detail page only) — do not use on /blog index ──
+  duneBg: "#f4ecdd",
+  duneSurface: "#fffaf0",
+  duneHeadline: "#14213d",
+  duneBody: "#2c2c2a",
+  duneMuted: "#8a7f68",
+  duneDivider: "#c7b382",
+  duneKickerBg: "#14213d",
+  duneKickerText: "#fca311",
+  duneChipBg: "#e6dcc2",
+  duneChipText: "#4a4227",
 } as const;
 
 export type ColorKey = keyof typeof colors;

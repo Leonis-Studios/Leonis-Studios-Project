@@ -22,6 +22,20 @@ import siteConfig from "@/site.config";
 import { colors } from "@/lib/colors";
 import { tokens } from "@/lib/tokens";
 
+// Triple radial-gradient "speckle" texture — copied verbatim from
+// components/blog/CaravanTrail.tsx so the sidebar card matches the
+// grain of the /blog index page's thumbnails.
+const speckleBackground = {
+  backgroundColor: colors.duneSurface,
+  backgroundImage: `
+    radial-gradient(circle, rgba(180,110,0,0.35) 0.5px, transparent 0.5px),
+    radial-gradient(circle, rgba(20,33,61,0.22) 0.5px, transparent 0.5px),
+    radial-gradient(circle, rgba(180,110,0,0.22) 0.5px, transparent 0.5px)
+  `,
+  backgroundSize: "6px 6px, 9px 9px, 13px 13px",
+  backgroundPosition: "0 0, 3px 5px, 6px 2px",
+};
+
 // ── Static params ──────────────────────────────────────────────
 export async function generateStaticParams() {
   const slugs: { slug: string }[] = await client.fetch(
@@ -126,7 +140,7 @@ export default async function BlogPostPage({
       />
 
       {/* ── Back link + cover ─────────────────────────────────── */}
-      <div style={{ background: colors.bgDark }}>
+      <div style={{ background: colors.duneBg }}>
         <div className="max-w-7xl mx-auto px-6 lg:px-12 pt-32 pb-8">
           <Link
             href="/blog"
@@ -134,7 +148,7 @@ export default async function BlogPostPage({
             style={{
               fontFamily: "var(--font-display)",
               fontWeight: tokens.weightUI,
-              color: colors.textSecondary,
+              color: colors.duneHeadline,
             }}
           >
             <span>←</span>
@@ -143,12 +157,16 @@ export default async function BlogPostPage({
         </div>
 
         <div className="max-w-7xl mx-auto px-6 lg:px-12 pb-12">
+          {/* Kicker — navy chip / amber text, per Dune palette rule that
+              amber only ever appears as text on a dark chip background */}
           <p
-            className="text-xs tracking-[0.2em] uppercase mb-4"
+            className="inline-block text-xs tracking-[0.2em] uppercase mb-4"
             style={{
               fontFamily: "var(--font-display)",
               fontWeight: tokens.weightUI,
-              color: colors.accent,
+              background: colors.duneKickerBg,
+              color: colors.duneKickerText,
+              padding: "6px 14px",
             }}
           >
             {new Date(post.publishedAt).toLocaleDateString("en-US", {
@@ -157,6 +175,7 @@ export default async function BlogPostPage({
               day: "numeric",
             })}
             {post.author ? ` · ${post.author}` : ""}
+            {post.readTimeMinutes ? ` · ${Math.max(1, post.readTimeMinutes)} min read` : ""}
           </p>
           <h1
             style={{
@@ -165,7 +184,7 @@ export default async function BlogPostPage({
               fontWeight: tokens.weightDisplay,
               lineHeight: 0.95,
               letterSpacing: "-0.025em",
-              color: colors.bgLight,
+              color: colors.duneHeadline,
               maxWidth: "820px",
             }}
           >
@@ -178,7 +197,7 @@ export default async function BlogPostPage({
                 fontFamily: "var(--font-body)",
                 fontSize: tokens.fontSizes.bodyLarge,
                 fontWeight: tokens.weightBody,
-                color: colors.textSecondaryLight,
+                color: colors.duneBody,
                 maxWidth: "560px",
                 lineHeight: 1.75,
               }}
@@ -190,8 +209,8 @@ export default async function BlogPostPage({
 
         {post.coverImage?.url && (
           <div
-            className="w-full aspect-video overflow-hidden"
-            style={{ background: colors.surfaceDark }}
+            className="relative w-full aspect-video overflow-hidden"
+            style={{ background: colors.duneSurface }}
           >
             <Image
               src={post.coverImage.url}
@@ -201,17 +220,42 @@ export default async function BlogPostPage({
               className="w-full h-full object-cover"
               priority
             />
+            {/* Reading-time badge — the one deliberate glass moment on this
+                page. Dark navy-tinted frost (not white) so it reads
+                consistently over any cover photo. */}
+            {post.readTimeMinutes && (
+              <div
+                className="absolute"
+                style={{
+                  bottom: "16px",
+                  right: "16px",
+                  padding: "6px 12px",
+                  background: "rgba(20,33,61,0.35)",
+                  backdropFilter: "blur(6px)",
+                  WebkitBackdropFilter: "blur(6px)",
+                  border: "1px solid rgba(252,163,17,0.25)",
+                  fontFamily: "var(--font-display)",
+                  fontSize: "11px",
+                  fontWeight: tokens.weightUI,
+                  letterSpacing: "0.1em",
+                  textTransform: "uppercase",
+                  color: colors.accent,
+                }}
+              >
+                {Math.max(1, post.readTimeMinutes)} min read
+              </div>
+            )}
           </div>
         )}
       </div>
 
       {/* ── Content area ──────────────────────────────────────── */}
-      <div style={{ background: colors.bgLight }}>
+      <div style={{ background: colors.duneBg, position: "relative", zIndex: 1, overflow: "hidden" }}>
         <div className="max-w-7xl mx-auto px-6 lg:px-12 py-20">
           <div className="grid grid-cols-1 lg:grid-cols-3 gap-16">
             <div className="lg:col-span-2">
               {post.body && post.body.length > 0 ? (
-                <div className="prose-leonis">
+                <div className="prose-leonis prose-desert">
                   <PortableText value={post.body} />
                 </div>
               ) : (
@@ -220,7 +264,7 @@ export default async function BlogPostPage({
                     fontFamily: "var(--font-body)",
                     fontSize: "16px",
                     fontWeight: tokens.weightBody,
-                    color: colors.textMuted,
+                    color: colors.duneMuted,
                   }}
                 >
                   Full post coming soon.
@@ -229,15 +273,73 @@ export default async function BlogPostPage({
             </div>
 
             <aside>
-              {post.tags && post.tags.length > 0 && (
-                <div className="flex flex-col gap-6">
+              <div
+                className="flex flex-col gap-6 p-8"
+                style={{ ...speckleBackground, border: `1px solid ${colors.duneDivider}` }}
+              >
+                {/* Published */}
+                <div>
+                  <p
+                    className="text-xs tracking-[0.2em] uppercase mb-1"
+                    style={{
+                      fontFamily: "var(--font-display)",
+                      fontWeight: tokens.weightUI,
+                      color: colors.duneMuted,
+                    }}
+                  >
+                    Published
+                  </p>
+                  <p
+                    style={{
+                      fontFamily: "var(--font-serif)",
+                      fontStyle: "italic",
+                      fontSize: "16px",
+                      color: colors.duneBody,
+                    }}
+                  >
+                    {new Date(post.publishedAt).toLocaleDateString("en-US", {
+                      year: "numeric",
+                      month: "long",
+                      day: "numeric",
+                    })}
+                  </p>
+                </div>
+
+                {/* Reading Time */}
+                {post.readTimeMinutes && (
+                  <div>
+                    <p
+                      className="text-xs tracking-[0.2em] uppercase mb-1"
+                      style={{
+                        fontFamily: "var(--font-display)",
+                        fontWeight: tokens.weightUI,
+                        color: colors.duneMuted,
+                      }}
+                    >
+                      Reading Time
+                    </p>
+                    <p
+                      style={{
+                        fontFamily: "var(--font-serif)",
+                        fontStyle: "italic",
+                        fontSize: "16px",
+                        color: colors.duneBody,
+                      }}
+                    >
+                      {Math.max(1, post.readTimeMinutes)} min read
+                    </p>
+                  </div>
+                )}
+
+                {/* Tags */}
+                {post.tags && post.tags.length > 0 && (
                   <div>
                     <p
                       className="text-xs tracking-[0.2em] uppercase mb-2"
                       style={{
                         fontFamily: "var(--font-display)",
                         fontWeight: tokens.weightUI,
-                        color: colors.textMuted,
+                        color: colors.duneMuted,
                       }}
                     >
                       Tags
@@ -250,8 +352,8 @@ export default async function BlogPostPage({
                           style={{
                             fontFamily: "var(--font-display)",
                             fontWeight: tokens.weightUI,
-                            border: `1px solid ${colors.borderLight}`,
-                            color: colors.textSubtle,
+                            background: colors.duneChipBg,
+                            color: colors.duneChipText,
                           }}
                         >
                           {tag}
@@ -259,8 +361,8 @@ export default async function BlogPostPage({
                       ))}
                     </div>
                   </div>
-                </div>
-              )}
+                )}
+              </div>
             </aside>
           </div>
         </div>
@@ -270,8 +372,8 @@ export default async function BlogPostPage({
       <div
         className="py-16 text-center"
         style={{
-          background: colors.bgDark,
-          borderTop: `1px solid ${colors.surfaceDark}`,
+          background: colors.duneBg,
+          borderTop: `1px solid ${colors.duneDivider}`,
         }}
       >
         <Link
@@ -280,7 +382,7 @@ export default async function BlogPostPage({
           style={{
             fontFamily: "var(--font-display)",
             fontWeight: tokens.weightUI,
-            color: colors.textSecondary,
+            color: colors.duneHeadline,
           }}
         >
           <span>← Back to All Posts</span>
