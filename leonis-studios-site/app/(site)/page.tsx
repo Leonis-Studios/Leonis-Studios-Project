@@ -52,7 +52,7 @@ export default function HomePage() {
     "@type":      "Organization",
     name:         siteConfig.name,
     url:          siteConfig.url,
-    logo:         `${siteConfig.url}/logo-white.png`,
+    logo:         `${siteConfig.url}/logo-square.png`,
     description:  siteConfig.description,
     email:        siteConfig.email,
     address: {
