@@ -14,6 +14,7 @@ export async function generateMetadata(): Promise<Metadata> {
   const tagline = settings?.tagline ?? siteConfig.tagline;
   const description = settings?.metaDescription ?? siteConfig.description;
   const url = siteConfig.url;
+  const ogImage = settings?.ogImage;
 
   return {
     metadataBase: new URL(url),
@@ -23,11 +24,17 @@ export async function generateMetadata(): Promise<Metadata> {
     },
     description,
     openGraph: {
-      type:     "website",
-      siteName: name,
+      type:      "website",
+      siteName:  name,
       url,
+      images:    ogImage ? [{ url: ogImage, width: 1200, height: 630 }] : [],
     },
-    twitter: { card: "summary_large_image" },
+    twitter: {
+      card:        "summary_large_image",
+      title:       `${name} — ${tagline}`,
+      description,
+      images:      ogImage ? [ogImage] : [],
+    },
     robots: { index: true, follow: true },
     icons: {
       icon: [

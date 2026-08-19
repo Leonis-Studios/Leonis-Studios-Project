@@ -40,6 +40,13 @@ export const siteSettingsSchema = defineType({
       description: "e.g. New York, USA",
     }),
     defineField({
+      name:  "ogImage",
+      title: "Default Social Share Image",
+      type:  "image",
+      options: { hotspot: true },
+      description: "1200×630 recommended. Used as the fallback social share image for any page without its own.",
+    }),
+    defineField({
       name: "social",
       title: "Social Links",
       type: "object",

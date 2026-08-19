@@ -6,6 +6,7 @@
 // identical to case study editing.
 
 import { defineField, defineType, defineArrayMember } from "sanity";
+import { faqBlockArrayMember } from "./objects/faqBlock";
 
 export const postSchema = defineType({
   name:  "post",
@@ -66,7 +67,8 @@ export const postSchema = defineType({
     defineField({
       name:  "author",
       title: "Author",
-      type:  "string",
+      type:  "reference",
+      to:    [{ type: "author" }],
     }),
 
     defineField({
@@ -75,6 +77,12 @@ export const postSchema = defineType({
       type:  "array",
       of:    [{ type: "string" }],
       options: { layout: "tags" },
+    }),
+
+    defineField({
+      name:  "seo",
+      title: "SEO",
+      type:  "seo",
     }),
 
     defineField({
@@ -117,6 +125,14 @@ export const postSchema = defineType({
           ],
         }),
       ],
+    }),
+
+    defineField({
+      name:  "faq",
+      title: "FAQ",
+      type:  "array",
+      description: "Optional Q&A pairs shown at the end of the post and marked up as FAQPage structured data.",
+      of:    [faqBlockArrayMember],
     }),
 
     defineField({

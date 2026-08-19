@@ -20,6 +20,13 @@ export const contactPageSchema = defineType({
         defineField({ name: "subheading", title: "Subheading", type: "text", rows: 3 }),
       ],
     }),
+
+    // ── SEO ─────────────────────────────────────────────
+    defineField({
+      name:  "seo",
+      title: "SEO",
+      type:  "seo",
+    }),
   ],
   preview: {
     prepare: () => ({ title: "Contact Page" }),

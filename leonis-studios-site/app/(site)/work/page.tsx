@@ -6,9 +6,11 @@
 // means the initial HTML is fully populated for SEO.
 
 import type { Metadata } from "next";
+import type { CollectionPage, WithContext } from "schema-dts";
 import { client }        from "@/sanity/lib/client";
 import { ALL_CASE_STUDIES_QUERY } from "@/sanity/lib/queries";
 import type { CaseStudyCard }     from "@/lib/types";
+import JsonLd                     from "@/components/JsonLd";
 import WorkGrid                   from "@/components/work/WorkGrid";
 import siteConfig                 from "@/site.config";
 import { colors }                 from "@/lib/colors";
@@ -18,7 +20,9 @@ const workDescription =
   "Browse case studies from Leonis Studios — web design, Next.js development, SEO, and more.";
 
 export const metadata: Metadata = {
-  title:       `Work — ${siteConfig.name}`,
+  // Absolute — bypasses the root layout's "%s — {name}" template,
+  // since this string already includes the site name.
+  title:       { absolute: `Work — ${siteConfig.name}` },
   description: workDescription,
   keywords: [
     "web design case studies",
@@ -51,11 +55,11 @@ export default async function WorkPage() {
   );
 
   // ── JSON-LD structured data ──────────────────────────────
-  const jsonLd = {
+  const jsonLdData = {
     "@context": "https://schema.org",
     "@type":    "CollectionPage",
     name:       "Our Work — Leonis Studios",
-    description: metadata.description,
+    description: workDescription,
     url:        `${siteConfig.url}/work`,
     hasPart:    projects.map((p) => ({
       "@type":     "CreativeWork",
@@ -63,14 +67,12 @@ export default async function WorkPage() {
       description: p.summary,
       url:         `${siteConfig.url}/work/${p.slug}`,
     })),
-  };
+  } as const;
+  const jsonLd = jsonLdData as unknown as WithContext<CollectionPage>;
 
   return (
     <>
-      <script
-        type="application/ld+json"
-        dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
-      />
+      <JsonLd data={jsonLd} />
 
       {/* ── Hero ──────────────────────────────────────────────
           Dark header to match the home Hero section's palette.

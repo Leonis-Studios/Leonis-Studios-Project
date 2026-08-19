@@ -1,16 +1,9 @@
-import type { MetadataRoute } from "next";
-import { client }             from "@/sanity/lib/client";
-import siteConfig             from "@/site.config";
+import type { MetadataRoute }                            from "next";
+import { client }                                         from "@/sanity/lib/client";
+import { CASE_STUDY_DATES_QUERY, POST_DATES_QUERY }       from "@/sanity/lib/queries";
+import siteConfig                                         from "@/site.config";
 
-// Fetches slug + last-modified date for each case study
-const CASE_STUDY_DATES_QUERY = `
-  *[_type == "caseStudy"] { "slug": slug.current, _updatedAt }
-`;
-
-// Fetches slug + last-modified date for each blog post
-const POST_DATES_QUERY = `
-  *[_type == "post"] { "slug": slug.current, _updatedAt }
-`;
+export const revalidate = 3600;
 
 export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
   const now = new Date();
@@ -57,18 +50,20 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
   let dynamicRoutes: MetadataRoute.Sitemap = [];
 
   try {
-    const studies: { slug: string; _updatedAt: string }[] = await client.fetch(
+    const studies: { slug: string; _updatedAt: string; noindex: boolean }[] = await client.fetch(
       CASE_STUDY_DATES_QUERY,
       {},
       { next: { revalidate: 3600 } }
     );
 
-    dynamicRoutes = studies.map((s) => ({
-      url:             `${siteConfig.url}/work/${s.slug}`,
-      lastModified:    new Date(s._updatedAt),
-      changeFrequency: "monthly" as const,
-      priority:        0.6,
-    }));
+    dynamicRoutes = studies
+      .filter((s) => !s.noindex)
+      .map((s) => ({
+        url:             `${siteConfig.url}/work/${s.slug}`,
+        lastModified:    new Date(s._updatedAt),
+        changeFrequency: "monthly" as const,
+        priority:        0.6,
+      }));
   } catch {
     // Sanity unavailable at build time — static routes still work fine
   }
@@ -76,18 +71,20 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
   let postRoutes: MetadataRoute.Sitemap = [];
 
   try {
-    const posts: { slug: string; _updatedAt: string }[] = await client.fetch(
+    const posts: { slug: string; _updatedAt: string; noindex: boolean }[] = await client.fetch(
       POST_DATES_QUERY,
       {},
       { next: { revalidate: 3600 } }
     );
 
-    postRoutes = posts.map((p) => ({
-      url:             `${siteConfig.url}/blog/${p.slug}`,
-      lastModified:    new Date(p._updatedAt),
-      changeFrequency: "monthly" as const,
-      priority:        0.6,
-    }));
+    postRoutes = posts
+      .filter((p) => !p.noindex)
+      .map((p) => ({
+        url:             `${siteConfig.url}/blog/${p.slug}`,
+        lastModified:    new Date(p._updatedAt),
+        changeFrequency: "monthly" as const,
+        priority:        0.6,
+      }));
   } catch {
     // Sanity unavailable at build time — static routes still work fine
   }

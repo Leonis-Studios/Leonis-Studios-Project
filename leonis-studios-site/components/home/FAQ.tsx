@@ -1,7 +1,9 @@
+import type { FAQPage, WithContext } from "schema-dts";
 import { client }          from "@/sanity/lib/client";
 import { FAQ_ITEMS_QUERY, HOME_PAGE_QUERY } from "@/sanity/lib/queries";
 import type { FaqItem, HomePageData } from "@/lib/types";
 import SandGutter          from "@/components/SandGutter";
+import JsonLd               from "@/components/JsonLd";
 import { colors }          from "@/lib/colors";
 import { tokens }          from "@/lib/tokens";
 import FAQList             from "./FAQList";
@@ -22,7 +24,7 @@ export default async function FAQ() {
   const intro    = homePage?.faqSection?.intro    || "Everything you need to know about working with Leonis Studios — from pricing and timelines to process and ongoing support.";
 
   // FAQPage schema — parsed by Google, Bing, and AI assistants for AEO
-  const faqSchema = {
+  const faqSchema: WithContext<FAQPage> = {
     "@context":  "https://schema.org",
     "@type":     "FAQPage",
     mainEntity:  items.map((item) => ({
@@ -40,10 +42,7 @@ export default async function FAQ() {
       className="py-24 bg-white"
       style={{ position: "relative", zIndex: 1, overflow: "hidden" }}
     >
-      <script
-        type="application/ld+json"
-        dangerouslySetInnerHTML={{ __html: JSON.stringify(faqSchema) }}
-      />
+      <JsonLd data={faqSchema} />
 
       {/* White background → seed 0 gives dark gold particles (readable on white) */}
       <SandGutter seed={0} />

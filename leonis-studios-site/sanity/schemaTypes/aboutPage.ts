@@ -182,6 +182,13 @@ export const aboutPageSchema = defineType({
       title:   "CTA Subtext",
       type:    "string",
     }),
+
+    // ── SEO ─────────────────────────────────────────────
+    defineField({
+      name:  "seo",
+      title: "SEO",
+      type:  "seo",
+    }),
   ],
   preview: {
     prepare: () => ({ title: "About Page" }),

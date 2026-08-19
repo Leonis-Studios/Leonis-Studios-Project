@@ -77,6 +77,13 @@ export const servicesPageSchema = defineType({
         defineField({ name: "secondaryCtaLabel", title: "Secondary CTA Label", type: "string", description: 'e.g. "See Our Work"' }),
       ],
     }),
+
+    // ── SEO ─────────────────────────────────────────────
+    defineField({
+      name:  "seo",
+      title: "SEO",
+      type:  "seo",
+    }),
   ],
   preview: {
     prepare: () => ({ title: "Services Page" }),

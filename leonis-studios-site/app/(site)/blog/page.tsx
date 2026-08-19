@@ -7,9 +7,11 @@
 // Linked from the Navbar via site.config.ts.
 
 import type { Metadata } from "next";
+import type { CollectionPage, WithContext } from "schema-dts";
 import { client }        from "@/sanity/lib/client";
 import { ALL_POSTS_QUERY, BLOG_PAGE_QUERY } from "@/sanity/lib/queries";
 import type { PostCard, BlogPageSettings }  from "@/lib/types";
+import JsonLd                from "@/components/JsonLd";
 import CaravanTrail         from "@/components/blog/CaravanTrail";
 import siteConfig           from "@/site.config";
 import { colors }           from "@/lib/colors";
@@ -17,31 +19,47 @@ import { colors }           from "@/lib/colors";
 const blogDescription =
   "Insights on web design, Next.js development, and SEO from the Leonis Studios team.";
 
-export const metadata: Metadata = {
-  title:       `Blog — ${siteConfig.name}`,
-  description: blogDescription,
-  keywords: [
-    "Leonis Studios blog",
-    "web design insights",
-    "Next.js development blog",
-    "SEO tips",
-    "website growth strategy",
-  ],
-  openGraph: {
-    title:       `Blog — ${siteConfig.name}`,
-    description: blogDescription,
-    url:  `${siteConfig.url}/blog`,
-    type: "website",
-  },
-  twitter: {
-    card:        "summary_large_image",
-    title:       `Blog — ${siteConfig.name}`,
-    description: blogDescription,
-  },
-  alternates: {
-    canonical: `${siteConfig.url}/blog`,
-  },
-};
+export async function generateMetadata(): Promise<Metadata> {
+  const pageSettings: BlogPageSettings | null = await client
+    .fetch(BLOG_PAGE_QUERY, {}, { next: { revalidate: 3600 } })
+    .catch(() => null);
+
+  const title       = pageSettings?.seo?.metaTitle       ?? `Blog — ${siteConfig.name}`;
+  const description = pageSettings?.seo?.metaDescription ?? blogDescription;
+  const ogImage      = pageSettings?.seo?.ogImage;
+
+  return {
+    // Absolute — bypasses the root layout's "%s — {name}" template,
+    // since `title` already includes the site name. openGraph/twitter
+    // below reuse the same full-form string (they don't go through
+    // the template).
+    title: { absolute: title },
+    description,
+    keywords: [
+      "Leonis Studios blog",
+      "web design insights",
+      "Next.js development blog",
+      "SEO tips",
+      "website growth strategy",
+    ],
+    openGraph: {
+      title,
+      description,
+      url:  `${siteConfig.url}/blog`,
+      type: "website",
+      images: ogImage ? [{ url: ogImage, width: 1200, height: 630 }] : [],
+    },
+    twitter: {
+      card:        "summary_large_image",
+      title,
+      description,
+    },
+    alternates: {
+      canonical: `${siteConfig.url}/blog`,
+    },
+    robots: pageSettings?.seo?.noindex ? { index: false, follow: true } : undefined,
+  };
+}
 
 export default async function BlogPage() {
   const posts: PostCard[] = await client
@@ -53,7 +71,7 @@ export default async function BlogPage() {
     .catch(() => null);
 
   // ── JSON-LD structured data ──────────────────────────────
-  const jsonLd = {
+  const jsonLdData = {
     "@context": "https://schema.org",
     "@type":    "CollectionPage",
     name:       "Blog — Leonis Studios",
@@ -66,14 +84,12 @@ export default async function BlogPage() {
       datePublished: p.publishedAt,
       url:           `${siteConfig.url}/blog/${p.slug}`,
     })),
-  };
+  } as const;
+  const jsonLd = jsonLdData as unknown as WithContext<CollectionPage>;
 
   return (
     <>
-      <script
-        type="application/ld+json"
-        dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
-      />
+      <JsonLd data={jsonLd} />
       {/* The Navbar is fixed + transparent-until-scrolled, with nav text
           styled for a dark background — every other page opens on a dark
           hero to stay legible under it. CaravanTrail is light, so this

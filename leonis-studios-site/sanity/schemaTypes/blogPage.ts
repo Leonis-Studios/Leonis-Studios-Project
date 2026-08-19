@@ -38,6 +38,13 @@ export const blogPageSchema = defineType({
       type:        "string",
       description: "Shown on the blog index when there are zero published posts",
     }),
+
+    // ── SEO ─────────────────────────────────────────────
+    defineField({
+      name:  "seo",
+      title: "SEO",
+      type:  "seo",
+    }),
   ],
   preview: {
     prepare: () => ({ title: "Blog Page Settings" }),

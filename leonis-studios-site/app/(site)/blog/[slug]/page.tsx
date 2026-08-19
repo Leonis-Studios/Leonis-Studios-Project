@@ -8,6 +8,7 @@
 // visual + SEO consistency with the case study detail page.
 
 import type { Metadata } from "next";
+import type { Article, BreadcrumbList, FAQPage, WithContext } from "schema-dts";
 import Image from "next/image";
 import Link from "next/link";
 import { notFound } from "next/navigation";
@@ -21,6 +22,8 @@ import type { Post } from "@/lib/types";
 import siteConfig from "@/site.config";
 import { colors } from "@/lib/colors";
 import { tokens } from "@/lib/tokens";
+import JsonLd from "@/components/JsonLd";
+import ContentFAQ from "@/components/shared/ContentFAQ";
 
 // Triple radial-gradient "speckle" texture — copied verbatim from
 // components/blog/CaravanTrail.tsx so the sidebar card matches the
@@ -59,28 +62,32 @@ export async function generateMetadata({
 
   if (!post) return { title: "Post Not Found" };
 
+  const title = post.seoTitle ?? post.title;
+  const description = post.seoDescription ?? post.excerpt;
+  const ogImage = post.seoImage ?? post.coverImage?.url;
+
   return {
-    title: `${post.title} — ${siteConfig.name}`,
-    description: post.excerpt,
+    // Root layout's title template already appends " — {name}".
+    title,
+    description,
     keywords: post.tags,
     openGraph: {
-      title: post.title,
-      description: post.excerpt,
+      title,
+      description,
       url: `${siteConfig.url}/blog/${post.slug}`,
       type: "article",
       publishedTime: post.publishedAt,
-      images: post.coverImage?.url
-        ? [{ url: post.coverImage.url, width: 1200, height: 630 }]
-        : [],
+      images: ogImage ? [{ url: ogImage, width: 1200, height: 630 }] : [],
     },
     twitter: {
       card: "summary_large_image",
-      title: post.title,
-      description: post.excerpt,
+      title,
+      description,
     },
     alternates: {
       canonical: `${siteConfig.url}/blog/${post.slug}`,
     },
+    robots: post.noindex ? { index: false, follow: true } : undefined,
   };
 }
 
@@ -100,7 +107,7 @@ export default async function BlogPostPage({
   if (!post) notFound();
 
   // ── JSON-LD structured data ──────────────────────────────
-  const jsonLd = {
+  const jsonLdData = {
     "@context": "https://schema.org",
     "@type": "Article",
     headline: post.title,
@@ -109,7 +116,11 @@ export default async function BlogPostPage({
     datePublished: post.publishedAt,
     dateModified: post._updatedAt ?? post.publishedAt,
     author: post.author
-      ? { "@type": "Person", name: post.author }
+      ? {
+          "@type": "Person",
+          name: post.author.name,
+          ...(post.author.sameAs?.length ? { sameAs: post.author.sameAs } : {}),
+        }
       : { "@type": "Organization", name: siteConfig.name },
     publisher: {
       "@type": "Organization",
@@ -117,9 +128,10 @@ export default async function BlogPostPage({
       url: siteConfig.url,
     },
     mainEntityOfPage: `${siteConfig.url}/blog/${post.slug}`,
-  };
+  } as const;
+  const jsonLd = jsonLdData as unknown as WithContext<Article>;
 
-  const breadcrumbLd = {
+  const breadcrumbLd: WithContext<BreadcrumbList> = {
     "@context": "https://schema.org",
     "@type": "BreadcrumbList",
     itemListElement: [
@@ -128,16 +140,23 @@ export default async function BlogPostPage({
     ],
   };
 
+  const faqLd: WithContext<FAQPage> | null = post.faq && post.faq.length > 0
+    ? {
+        "@context": "https://schema.org",
+        "@type": "FAQPage",
+        mainEntity: post.faq.map((item) => ({
+          "@type": "Question",
+          name: item.question,
+          acceptedAnswer: { "@type": "Answer", text: item.answer },
+        })),
+      }
+    : null;
+
   return (
     <>
-      <script
-        type="application/ld+json"
-        dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
-      />
-      <script
-        type="application/ld+json"
-        dangerouslySetInnerHTML={{ __html: JSON.stringify(breadcrumbLd) }}
-      />
+      <JsonLd data={jsonLd} />
+      <JsonLd data={breadcrumbLd} />
+      {faqLd && <JsonLd data={faqLd} />}
 
       {/* ── Back link + cover ─────────────────────────────────── */}
       <div style={{ background: colors.duneBg }}>
@@ -174,7 +193,7 @@ export default async function BlogPostPage({
               month: "long",
               day: "numeric",
             })}
-            {post.author ? ` · ${post.author}` : ""}
+            {post.author?.name ? ` · ${post.author.name}` : ""}
             {post.readTimeMinutes ? ` · ${Math.max(1, post.readTimeMinutes)} min read` : ""}
           </p>
           <h1
@@ -367,6 +386,10 @@ export default async function BlogPostPage({
           </div>
         </div>
       </div>
+
+      {post.faq && post.faq.length > 0 && (
+        <ContentFAQ items={post.faq} />
+      )}
 
       {/* ── Next post CTA ──────────────────────────────────────── */}
       <div

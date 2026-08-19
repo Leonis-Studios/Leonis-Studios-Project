@@ -123,7 +123,10 @@ export const ALL_CASE_STUDIES_QUERY = `
   hotspot,
   crop
 },
-    "services": services[]->{ name, "slug": slug.current }
+    "services": services[]->{ name, "slug": slug.current },
+    "seoTitle": coalesce(seo.metaTitle, title),
+    "seoDescription": coalesce(seo.metaDescription, summary),
+    "noindex": coalesce(seo.noindex, false)
   }
 `;
 
@@ -144,7 +147,10 @@ export const FEATURED_CASE_STUDIES_QUERY = `
   hotspot,
   crop
 },
-    "services": services[]->{ name, "slug": slug.current }
+    "services": services[]->{ name, "slug": slug.current },
+    "seoTitle": coalesce(seo.metaTitle, title),
+    "seoDescription": coalesce(seo.metaDescription, summary),
+    "noindex": coalesce(seo.noindex, false)
   }
 `;
 
@@ -170,14 +176,24 @@ export const CASE_STUDY_BY_SLUG_QUERY = `
   crop
 },
     body,
+    "faq": faq[]{ _key, question, answer },
     results,
-    "services": services[]->{ name, "slug": slug.current }
+    "services": services[]->{ name, "slug": slug.current },
+    "seoTitle": coalesce(seo.metaTitle, title),
+    "seoDescription": coalesce(seo.metaDescription, summary),
+    "seoImage": seo.ogImage.asset->url,
+    "noindex": coalesce(seo.noindex, false)
   }
 `;
 
 // Used by generateStaticParams to pre-render all case study pages
 export const ALL_CASE_STUDY_SLUGS_QUERY = `
   *[_type == "caseStudy"] { "slug": slug.current }
+`;
+
+// Used by sitemap.ts
+export const CASE_STUDY_DATES_QUERY = `
+  *[_type == "caseStudy"] { "slug": slug.current, _updatedAt, "noindex": coalesce(seo.noindex, false) }
 `;
 
 // Fetches the single site settings document
@@ -215,7 +231,7 @@ export const ALL_POSTS_QUERY = `
     "slug": slug.current,
     excerpt,
     publishedAt,
-    author,
+    "author": author->{ name, "slug": slug.current, bio, "image": image{ "url": asset->url, alt }, sameAs },
     tags,
     featured,
     "readTimeMinutes": round(length(pt::text(body)) / 1000),
@@ -226,7 +242,10 @@ export const ALL_POSTS_QUERY = `
   "height": asset->metadata.dimensions.height,
   hotspot,
   crop
-}
+},
+    "seoTitle": coalesce(seo.metaTitle, title),
+    "seoDescription": coalesce(seo.metaDescription, excerpt),
+    "noindex": coalesce(seo.noindex, false)
   }
 `;
 
@@ -240,7 +259,7 @@ export const POST_BY_SLUG_QUERY = `
     excerpt,
     publishedAt,
     _updatedAt,
-    author,
+    "author": author->{ name, "slug": slug.current, bio, "image": image{ "url": asset->url, alt }, sameAs },
     tags,
     featured,
     "readTimeMinutes": round(length(pt::text(body)) / 1000),
@@ -252,7 +271,12 @@ export const POST_BY_SLUG_QUERY = `
   hotspot,
   crop
 },
-    body
+    body,
+    "faq": faq[]{ _key, question, answer },
+    "seoTitle": coalesce(seo.metaTitle, title),
+    "seoDescription": coalesce(seo.metaDescription, excerpt),
+    "seoImage": seo.ogImage.asset->url,
+    "noindex": coalesce(seo.noindex, false)
   }
 `;
 
@@ -263,7 +287,19 @@ export const ALL_POST_SLUGS_QUERY = `
 
 // Used by sitemap.ts
 export const POST_DATES_QUERY = `
-  *[_type == "post"] { "slug": slug.current, _updatedAt }
+  *[_type == "post"] { "slug": slug.current, _updatedAt, "noindex": coalesce(seo.noindex, false) }
+`;
+
+// Reused on every singleton page query below — reads the seo
+// override object and resolves the image asset URL inline.
+const SEO_PROJECTION = `
+  seo {
+    metaTitle,
+    metaDescription,
+    "ogImage": ogImage.asset->url,
+    canonicalUrl,
+    noindex
+  }
 `;
 
 // Fetches the single blog page settings document (section header + empty state)
@@ -272,7 +308,8 @@ export const BLOG_PAGE_QUERY = `
     eyebrow,
     headline,
     intro,
-    emptyStateMessage
+    emptyStateMessage,
+    ${SEO_PROJECTION}
   }
 `;
 
@@ -285,7 +322,8 @@ export const HOME_PAGE_QUERY = `
     howItWorks,
     featuredWorkSection,
     faqSection,
-    ctaSection
+    ctaSection,
+    ${SEO_PROJECTION}
   }
 `;
 
@@ -296,14 +334,16 @@ export const SERVICES_PAGE_QUERY = `
     packagesSection,
     retainersSection,
     addonsSection,
-    ctaSection
+    ctaSection,
+    ${SEO_PROJECTION}
   }
 `;
 
 // Fetches the single contact page document
 export const CONTACT_PAGE_QUERY = `
   *[_type == "contactPage"][0] {
-    hero
+    hero,
+    ${SEO_PROJECTION}
   }
 `;
 
@@ -331,6 +371,7 @@ export const ABOUT_PAGE_QUERY = `
     promisesSubheading,
     promises,
     ctaHeadline,
-    ctaSubtext
+    ctaSubtext,
+    ${SEO_PROJECTION}
   }
 `;

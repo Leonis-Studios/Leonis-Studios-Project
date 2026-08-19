@@ -17,6 +17,7 @@
 //               the @portabletext/react package.
 
 import { defineField, defineType, defineArrayMember } from "sanity";
+import { faqBlockArrayMember } from "./objects/faqBlock";
 
 export const caseStudySchema = defineType({
   name:  "caseStudy",
@@ -87,6 +88,12 @@ export const caseStudySchema = defineType({
     }),
 
     defineField({
+      name:  "seo",
+      title: "SEO",
+      type:  "seo",
+    }),
+
+    defineField({
       name:  "coverImage",
       title: "Cover Image",
       type:  "image",
@@ -153,6 +160,14 @@ export const caseStudySchema = defineType({
           ],
         }),
       ],
+    }),
+
+    defineField({
+      name:  "faq",
+      title: "FAQ",
+      type:  "array",
+      description: "Optional Q&A pairs shown at the end of the case study and marked up as FAQPage structured data.",
+      of:    [faqBlockArrayMember],
     }),
 
     defineField({

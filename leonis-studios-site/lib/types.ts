@@ -36,6 +36,20 @@ export interface SanityImage {
   };
 }
 
+// ── SEO ───────────────────────────────────────────────────
+// Resolved shape of the reusable `seo` object (see
+// sanity/schemaTypes/objects/seo.ts). Used on singleton page
+// queries, which project the raw object. Post/CaseStudy queries
+// project flattened, already-coalesced aliases instead (seoTitle,
+// seoDescription, seoImage, noindex) — see below.
+export interface Seo {
+  metaTitle?:       string;
+  metaDescription?: string;
+  ogImage?:         string;
+  canonicalUrl?:    string;
+  noindex?:         boolean;
+}
+
 // ── Service ───────────────────────────────────────────────
 export interface RetainerSummary {
   _id:            string;
@@ -67,16 +81,19 @@ export interface Service {
 // Used on the /work grid page — only the fields we need
 // to render a card. No body content yet.
 export interface CaseStudyCard {
-  _id:         string;
-  title:       string;
-  slug:        string;
-  client:      string;
-  year:        number;
-  summary:     string;
-  tags?:       string[];
-  featured?:   boolean;
-  coverImage?: SanityImage;
-  services?:   Pick<Service, "name" | "slug">[];
+  _id:             string;
+  title:           string;
+  slug:            string;
+  client:          string;
+  year:            number;
+  summary:         string;
+  tags?:           string[];
+  featured?:       boolean;
+  coverImage?:     SanityImage;
+  services?:       Pick<Service, "name" | "slug">[];
+  seoTitle?:       string;
+  seoDescription?: string;
+  noindex?:        boolean;
 }
 
 // ── Case Study (full) ─────────────────────────────────────
@@ -89,10 +106,24 @@ export interface CaseStudy extends CaseStudyCard {
   // we type it as any[] here — it's the one place we allow it.
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
   body?:    any[];
+  faq?:     FaqBlockItem[];
   results?: {
     label: string;
     value: string;
   }[];
+  seoImage?: string;
+}
+
+// ── Author ────────────────────────────────────────────────
+export interface Author {
+  name:    string;
+  slug?:   string;
+  bio?:    string;
+  image?: {
+    url: string;
+    alt?: string;
+  };
+  sameAs?: string[];
 }
 
 // ── Blog Post (card) ───────────────────────────────────────
@@ -104,11 +135,14 @@ export interface PostCard {
   slug:             string;
   excerpt:          string;
   publishedAt:      string;
-  author?:          string;
+  author?:          Author;
   tags?:            string[];
   featured?:        boolean;
   readTimeMinutes:  number;
   coverImage?:      SanityImage;
+  seoTitle?:        string;
+  seoDescription?:  string;
+  noindex?:         boolean;
 }
 
 // ── Blog Post (full) ──────────────────────────────────────
@@ -120,7 +154,9 @@ export interface Post extends PostCard {
   // internal shape is handled by @portabletext/react so
   // we type it as any[] here — it's the one place we allow it.
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
-  body?: any[];
+  body?:     any[];
+  faq?:      FaqBlockItem[];
+  seoImage?: string;
 }
 
 // ── Blog Page Settings ────────────────────────────────────
@@ -132,6 +168,7 @@ export interface BlogPageSettings {
   headline?:          string;
   intro?:             string;
   emptyStateMessage?: string;
+  seo?:               Seo;
 }
 
 // ── Site Settings ─────────────────────────────────────────
@@ -151,11 +188,21 @@ export interface SiteSettings {
 }
 
 // ── FAQ Item ──────────────────────────────────────────────
+// Global home-page FAQ, sourced from standalone faqItem documents.
 export interface FaqItem {
   _id:       string;
   question:  string;
   answer:    string;
   category?: string;
+}
+
+// ── FAQ Block (content-local) ──────────────────────────────
+// Inline array field on post/caseStudy — distinct from FaqItem
+// above (no _id, only _key, since it's not its own document).
+export interface FaqBlockItem {
+  _key:     string;
+  question: string;
+  answer:   string;
 }
 
 // ── Home Page ─────────────────────────────────────────────
@@ -210,6 +257,7 @@ export interface HomePageData {
     primaryCtaLabel?:   string;
     secondaryCtaLabel?: string;
   };
+  seo?: Seo;
 }
 
 // ── Services Page ─────────────────────────────────────────
@@ -243,6 +291,7 @@ export interface ServicesPageData {
     primaryCtaLabel?:   string;
     secondaryCtaLabel?: string;
   };
+  seo?: Seo;
 }
 
 // ── Contact Page ──────────────────────────────────────────
@@ -253,6 +302,7 @@ export interface ContactPageData {
     headlineAccent?: string;
     subheading?:     string;
   };
+  seo?: Seo;
 }
 
 // ── About Page ────────────────────────────────────────────
@@ -286,4 +336,5 @@ export interface AboutPageData {
   }[];
   ctaHeadline?:      string;
   ctaSubtext?:       string;
+  seo?:              Seo;
 }

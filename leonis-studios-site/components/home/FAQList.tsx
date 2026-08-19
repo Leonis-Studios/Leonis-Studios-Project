@@ -1,11 +1,19 @@
 "use client";
 
 import { useState } from "react";
-import type { FaqItem } from "@/lib/types";
 import { colors } from "@/lib/colors";
 import { tokens } from "@/lib/tokens";
 
-export default function FAQList({ items }: { items: FaqItem[] }) {
+// Accepts both global faqItem documents (_id) and content-local
+// faq[] block items (_key) — either identifier works as a React key.
+interface FAQListItem {
+  _id?:      string;
+  _key?:     string;
+  question:  string;
+  answer:    string;
+}
+
+export default function FAQList({ items }: { items: FAQListItem[] }) {
   const [openIndex, setOpenIndex] = useState<number | null>(null);
 
   return (
@@ -14,7 +22,7 @@ export default function FAQList({ items }: { items: FaqItem[] }) {
         const isOpen = openIndex === i;
         return (
           <div
-            key={item._id}
+            key={item._key ?? item._id ?? i}
             style={{ borderBottom: `1px solid rgba(252,163,17,0.15)` }}
           >
             <button

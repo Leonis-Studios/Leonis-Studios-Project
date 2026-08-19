@@ -6,6 +6,7 @@
 // generateMetadata provides dynamic title + OG data per project.
 
 import type { Metadata } from "next";
+import type { Article, BreadcrumbList, FAQPage, WithContext } from "schema-dts";
 import Image from "next/image";
 import Link from "next/link";
 import { notFound } from "next/navigation";
@@ -19,6 +20,8 @@ import type { CaseStudy } from "@/lib/types";
 import siteConfig from "@/site.config";
 import { colors } from "@/lib/colors";
 import { tokens } from "@/lib/tokens";
+import JsonLd from "@/components/JsonLd";
+import ContentFAQ from "@/components/shared/ContentFAQ";
 
 // ── Static params ──────────────────────────────────────────────
 // Next.js calls this at build time to pre-render every slug.
@@ -44,6 +47,10 @@ export async function generateMetadata({
 
   if (!project) return { title: "Project Not Found" };
 
+  const title = project.seoTitle ?? project.title;
+  const description = project.seoDescription ?? project.summary;
+  const ogImage = project.seoImage ?? project.coverImage?.url;
+
   const keywords = [
     project.title,
     project.client,
@@ -54,26 +61,26 @@ export async function generateMetadata({
   ].filter(Boolean) as string[];
 
   return {
-    title:       `${project.title} — ${siteConfig.name}`,
-    description: project.summary,
+    // Root layout's title template already appends " — {name}".
+    title,
+    description,
     keywords,
     openGraph: {
-      title:       project.title,
-      description: project.summary,
+      title,
+      description,
       url:         `${siteConfig.url}/work/${project.slug}`,
       type:        "article",
-      images:      project.coverImage?.url
-        ? [{ url: project.coverImage.url, width: 1200, height: 630 }]
-        : [],
+      images:      ogImage ? [{ url: ogImage, width: 1200, height: 630 }] : [],
     },
     twitter: {
       card:        "summary_large_image",
-      title:       project.title,
-      description: project.summary,
+      title,
+      description,
     },
     alternates: {
       canonical: `${siteConfig.url}/work/${project.slug}`,
     },
+    robots: project.noindex ? { index: false, follow: true } : undefined,
   };
 }
 
@@ -93,7 +100,7 @@ export default async function CaseStudyPage({
   if (!project) notFound();
 
   // ── JSON-LD structured data ──────────────────────────────
-  const articleSchema = {
+  const articleData = {
     "@context": "https://schema.org",
     "@type": "Article",
     headline: project.title,
@@ -106,9 +113,10 @@ export default async function CaseStudyPage({
       url: siteConfig.url,
     },
     mainEntityOfPage: `${siteConfig.url}/work/${project.slug}`,
-  };
+  } as const;
+  const articleSchema = articleData as unknown as WithContext<Article>;
 
-  const breadcrumbSchema = {
+  const breadcrumbSchema: WithContext<BreadcrumbList> = {
     "@context": "https://schema.org",
     "@type": "BreadcrumbList",
     itemListElement: [
@@ -118,16 +126,23 @@ export default async function CaseStudyPage({
     ],
   };
 
+  const faqSchema: WithContext<FAQPage> | null = project.faq && project.faq.length > 0
+    ? {
+        "@context": "https://schema.org",
+        "@type": "FAQPage",
+        mainEntity: project.faq.map((item) => ({
+          "@type": "Question",
+          name: item.question,
+          acceptedAnswer: { "@type": "Answer", text: item.answer },
+        })),
+      }
+    : null;
+
   return (
     <>
-      <script
-        type="application/ld+json"
-        dangerouslySetInnerHTML={{ __html: JSON.stringify(articleSchema) }}
-      />
-      <script
-        type="application/ld+json"
-        dangerouslySetInnerHTML={{ __html: JSON.stringify(breadcrumbSchema) }}
-      />
+      <JsonLd data={articleSchema} />
+      <JsonLd data={breadcrumbSchema} />
+      {faqSchema && <JsonLd data={faqSchema} />}
 
       {/* ── Back link + cover ─────────────────────────────────
           Dark strip at the top holds the navigation and the
@@ -402,6 +417,10 @@ export default async function CaseStudyPage({
           </div>
         </div>
       </div>
+
+      {project.faq && project.faq.length > 0 && (
+        <ContentFAQ items={project.faq} />
+      )}
 
       {/* ── Next project CTA ──────────────────────────────────── */}
       <div

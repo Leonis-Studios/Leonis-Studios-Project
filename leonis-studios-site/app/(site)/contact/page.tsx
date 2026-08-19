@@ -1,40 +1,54 @@
 import type { Metadata }  from "next";
+import type { ContactPage as ContactPageSchema, BreadcrumbList, WithContext } from "schema-dts";
 import siteConfig          from "@/site.config";
 import { client }          from "@/sanity/lib/client";
 import { SITE_SETTINGS_QUERY, CONTACT_PAGE_QUERY } from "@/sanity/lib/queries";
 import type { SiteSettings, ContactPageData } from "@/lib/types";
+import JsonLd               from "@/components/JsonLd";
 import ContactHero         from "@/components/contact/ContactHero";
 import ContactSection      from "@/components/contact/ContactSection";
 
-export const metadata: Metadata = {
-  title:       "Contact",
-  description:
-    "Ready to hire a web designer? Tell Leonis Studios about your project and get a response within 24 hours. Web design quotes for New York small businesses.",
-  keywords: [
-    "hire web designer",
-    "web design quote",
-    "website project inquiry",
-    "web development consultation",
-    "New York web design",
-    "Next.js developer for hire",
-  ],
-  openGraph: {
-    title:       `Start a Project — ${siteConfig.name}`,
-    description:
-      "Ready to hire a web designer? Tell Leonis Studios about your project and get a response within 24 hours.",
-    url:         `${siteConfig.url}/contact`,
-    type:        "website",
-  },
-  twitter: {
-    card:        "summary_large_image",
-    title:       `Start a Project — ${siteConfig.name}`,
-    description:
-      "Ready to hire a web designer? Get a response from Leonis Studios within 24 hours.",
-  },
-  alternates: {
-    canonical: `${siteConfig.url}/contact`,
-  },
-};
+const defaultDescription =
+  "Ready to hire a web designer? Tell Leonis Studios about your project and get a response within 24 hours. Web design quotes for New York small businesses.";
+
+export async function generateMetadata(): Promise<Metadata> {
+  const contactPage: ContactPageData | null = await client
+    .fetch(CONTACT_PAGE_QUERY, {}, { next: { revalidate: 3600 } })
+    .catch(() => null);
+
+  const title       = contactPage?.seo?.metaTitle       ?? "Contact";
+  const description = contactPage?.seo?.metaDescription ?? defaultDescription;
+  const ogImage      = contactPage?.seo?.ogImage;
+
+  return {
+    title,
+    description,
+    keywords: [
+      "hire web designer",
+      "web design quote",
+      "website project inquiry",
+      "web development consultation",
+      "New York web design",
+      "Next.js developer for hire",
+    ],
+    openGraph: {
+      title:       `Start a Project — ${siteConfig.name}`,
+      description,
+      url:         `${siteConfig.url}/contact`,
+      type:        "website",
+      images:      ogImage ? [{ url: ogImage, width: 1200, height: 630 }] : [],
+    },
+    twitter: {
+      card:        "summary_large_image",
+      title:       `Start a Project — ${siteConfig.name}`,
+      description,
+    },
+    alternates: {
+      canonical: `${siteConfig.url}/contact`,
+    },
+    robots: contactPage?.seo?.noindex ? { index: false, follow: true } : undefined,
+  };
+}
 
 export default async function ContactPage() {
   const settings: SiteSettings | null = await client
@@ -49,11 +63,11 @@ export default async function ContactPage() {
     .catch(() => null);
 
   // ── JSON-LD structured data ──────────────────────────────
-  const jsonLd = {
+  const jsonLdData = {
     "@context": "https://schema.org",
     "@type":    "ContactPage",
     name:       "Contact Leonis Studios",
-    description: metadata.description,
+    description: contactPage?.seo?.metaDescription ?? defaultDescription,
     url:         `${siteConfig.url}/contact`,
     mainEntity: {
       "@type":    "Organization",
@@ -67,14 +81,22 @@ export default async function ContactPage() {
         addressCountry:  "US",
       },
     },
+  } as const;
+  const jsonLd = jsonLdData as WithContext<ContactPageSchema>;
+
+  const breadcrumbSchema: WithContext<BreadcrumbList> = {
+    "@context": "https://schema.org",
+    "@type": "BreadcrumbList",
+    itemListElement: [
+      { "@type": "ListItem", position: 1, name: "Home", item: siteConfig.url },
+      { "@type": "ListItem", position: 2, name: "Contact", item: `${siteConfig.url}/contact` },
+    ],
   };
 
   return (
     <>
-      <script
-        type="application/ld+json"
-        dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
-      />
+      <JsonLd data={jsonLd} />
+      <JsonLd data={breadcrumbSchema} />
       <ContactHero hero={contactPage?.hero} />
       <ContactSection siteEmail={email} location={location} />
     </>
