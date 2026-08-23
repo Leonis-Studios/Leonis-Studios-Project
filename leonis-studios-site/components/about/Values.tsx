@@ -1,8 +1,15 @@
 "use client";
-// "use client" is required here because each row uses useInViewOnce +
-// useSandReveal (IntersectionObserver + canvas) for its per-row erosion reveal.
-// Props-only component — no data fetching of its own — matches the precedent
-// set by BenefitsClient.tsx / Skills.tsx.
+// "use client" is required here because each card uses useInViewOnce +
+// useSandReveal (IntersectionObserver + canvas) for its own crystallizing
+// reveal, and the section shell uses useInViewOnce to fade in the header
+// and fault-line vein. Props-only component — no data fetching of its own —
+// matches the precedent set by BenefitsClient.tsx / Skills.tsx.
+//
+// Redesign concept: values are cut gems embedded in a bedrock stratum —
+// dark surfaceDark section (SandGutter seed 1, matching HowItWorks/AboutCTA),
+// a faint fault-line vein running behind the grid, and each card carved with
+// two clipped gem corners + a faceted diamond number-badge that catches a
+// one-shot light glint as it crystallizes into view.
 
 import { colors } from "@/lib/colors";
 import { tokens } from "@/lib/tokens";
@@ -39,37 +46,120 @@ const DEFAULT_VALUES: Value[] = [
   },
 ];
 
+// Cuts the top-right and bottom-left corners — a heavier, two-facet version
+// of ClientPromise's single-corner "leo-promise-card" cut.
+const GEM_CLIP = "polygon(0 0, calc(100% - 26px) 0, 100% 26px, 100% 100%, 26px 100%, 0 calc(100% - 26px))";
+const BADGE_CLIP = "polygon(50% 0%, 100% 38%, 82% 100%, 18% 100%, 0% 38%)";
+
 export default function Values({ eyebrow: eyebrowProp, values }: Props) {
   const eyebrow = eyebrowProp || "What We Stand For";
   const items = (values && values.length > 0) ? values : DEFAULT_VALUES;
+  const { ref: headRef, inView: headIn } = useInViewOnce<HTMLDivElement>(0.3);
 
   return (
     <section
       className="py-24 lg:py-32"
-      style={{ background: colors.bgLight, borderTop: `1px solid ${colors.borderLight}`, position: "relative", zIndex: 1, overflow: "hidden" }}
+      style={{ background: colors.surfaceDark, borderTop: `1px solid ${colors.borderDark}`, position: "relative", zIndex: 1, overflow: "hidden" }}
     >
-      <SandGutter seed={0} />
+      <SandGutter seed={1} />
+      <style>{`
+        @keyframes gemCardIn {
+          from { opacity: 0; transform: translateY(22px) scale(0.97); }
+          to   { opacity: 1; transform: translateY(0) scale(1); }
+        }
+        @keyframes gemBadgeGlint {
+          from { transform: translateX(-160%) rotate(20deg); opacity: 0; }
+          20%  { opacity: 1; }
+          to   { transform: translateX(220%) rotate(20deg); opacity: 0; }
+        }
+        @keyframes veinFadeIn {
+          from { opacity: 0; }
+          to   { opacity: 1; }
+        }
+        .leo-gem-card {
+          position: relative;
+          overflow: hidden;
+        }
+        .leo-gem-card::before {
+          content: "";
+          position: absolute;
+          inset: 0;
+          pointer-events: none;
+          opacity: 0;
+          transition: opacity 0.45s ease;
+          background: linear-gradient(120deg, transparent 25%, rgba(252,163,17,0.14) 48%, transparent 70%);
+        }
+        @media (prefers-reduced-motion: no-preference) {
+          .leo-gem-card:hover::before { opacity: 1; }
+          .leo-gem-card:hover { transform: translateY(-5px); }
+          .leo-gem-card:hover .leo-gem-badge-glint { animation: gemBadgeGlint 0.9s cubic-bezier(0.16,1,0.3,1) 1; }
+        }
+        .leo-gem-card {
+          transition: transform 0.35s cubic-bezier(0.16,1,0.3,1), border-color 0.35s ease;
+        }
+      `}</style>
+
       <div className="max-w-7xl mx-auto px-6 lg:px-12">
 
         {/* Section label */}
-        <div className="flex items-center gap-4 mb-16">
-          <div style={{ width: "32px", height: "1px", background: colors.textSubtle }} />
+        <div
+          ref={headRef}
+          className="flex items-center gap-4 mb-16"
+          style={{
+            opacity:    headIn ? 1 : 0,
+            transform:  headIn ? "translateY(0)" : "translateY(10px)",
+            transition: "opacity 0.7s cubic-bezier(0.16,1,0.3,1), transform 0.7s cubic-bezier(0.16,1,0.3,1)",
+          }}
+        >
+          <div style={{ width: "32px", height: "1px", background: colors.accent }} />
           <span
             className="text-xs tracking-[0.25em] uppercase"
             style={{
               fontFamily: "var(--font-display)",
               fontWeight: tokens.weightUI,
-              color:      colors.textSubtle,
+              color:      colors.accent,
             }}
           >
             {eyebrow}
           </span>
         </div>
 
-        {/* Values list */}
-        <div>
+        {/* Fault-line vein — decorative geological cross-section behind the gem grid */}
+        <div
+          aria-hidden="true"
+          style={{
+            position:   "absolute",
+            inset:      0,
+            top:        "180px",
+            zIndex:     0,
+            pointerEvents: "none",
+            opacity:    headIn ? 1 : 0,
+            animation:  headIn ? "veinFadeIn 1.6s ease 0.2s both" : undefined,
+          }}
+        >
+          <svg
+            className="w-full h-full"
+            preserveAspectRatio="none"
+            viewBox="0 0 400 300"
+            style={{ width: "100%", height: "100%" }}
+          >
+            <path d="M0,60 L90,110 L170,70 L260,140 L340,95 L400,150" stroke="rgba(252,163,17,0.16)" strokeWidth="0.6" fill="none" />
+            <path d="M0,190 L100,230 L190,195 L280,245 L400,210" stroke="rgba(252,163,17,0.10)" strokeWidth="0.6" fill="none" />
+          </svg>
+        </div>
+
+        {/* Gem grid — values crystallize in as clipped, faceted cards */}
+        <div
+          className="grid grid-cols-1 md:grid-cols-2 gap-8 lg:gap-10"
+          style={{ position: "relative", zIndex: 1 }}
+        >
           {items.map((value, index) => (
-            <ValueRow key={index} value={value} index={index} />
+            <GemCard
+              key={index}
+              value={value}
+              index={index}
+              offset={index % 2 === 1}
+            />
           ))}
         </div>
 
@@ -78,108 +168,101 @@ export default function Values({ eyebrow: eyebrowProp, values }: Props) {
   );
 }
 
-// Each row erodes its own ghost numeral into view — drifting sand grains
-// scour it clear as the row scrolls in, rather than all four numerals
-// appearing at once.
-function ValueRow({ value, index }: { value: Value; index: number }) {
-  const { ref, inView } = useInViewOnce<HTMLDivElement>(0.5);
+function GemCard({ value, index, offset }: { value: Value; index: number; offset: boolean }) {
+  const { ref, inView } = useInViewOnce<HTMLDivElement>(0.3);
   const { canvasRef, showCanvas } = useSandReveal({
     trigger:       inView,
     containerRef:  ref,
-    color:         "180,110,0",
+    color:         "252,163,17",
     mode:          "drift",
-    density:       700,
+    density:       900,
     delayRange:    [0, 150],
     durationRange: [450, 750],
   });
 
   return (
     <div
+      ref={ref}
+      className={`leo-gem-card ${offset ? "lg:mt-14" : ""}`}
       style={{
-        position:     "relative",
-        padding:      "32px 0 32px 0",
-        borderBottom: `1px solid ${colors.borderLight}`,
-        overflow:     "hidden",
+        clipPath:   GEM_CLIP,
+        padding:    "40px 36px 36px 36px",
+        background: "linear-gradient(155deg, rgba(255,255,255,0.05), rgba(255,255,255,0.015))",
+        border:     `1px solid rgba(252,163,17,0.2)`,
+        opacity:    inView ? undefined : 0,
+        animation:  inView ? `gemCardIn 0.6s cubic-bezier(0.16,1,0.3,1) ${index * 90}ms both` : undefined,
       }}
     >
-      {/* Large decorative number — eroded into view, sand-sweep canvas overlays it */}
+      {showCanvas && (
+        <canvas ref={canvasRef} aria-hidden="true" style={{ position: "absolute", inset: 0, zIndex: 2, pointerEvents: "none" }} />
+      )}
+
+      {/* Faceted number badge */}
       <div
-        ref={ref}
         aria-hidden="true"
         style={{
-          position:      "absolute",
-          left:          "-10px",
-          top:           "8px",
-          width:         "150px",
-          height:        "96px",
-          zIndex:        0,
-          pointerEvents: "none",
-          overflow:      "hidden",
+          position:  "relative",
+          width:     "48px",
+          height:    "48px",
+          marginBottom: "22px",
+          clipPath:  BADGE_CLIP,
+          background: "linear-gradient(150deg, #fca311 0%, rgba(252,163,17,0.55) 100%)",
+          display:   "flex",
+          alignItems: "center",
+          justifyContent: "center",
         }}
       >
         <span
           style={{
-            position:      "absolute",
-            inset:         0,
-            fontFamily:    "var(--font-display)",
-            fontSize:      "80px",
-            fontWeight:    tokens.weightDisplay,
-            lineHeight:    1,
-            color:         colors.bgMuted,
-            opacity:       inView ? 0.6 : 0,
-            letterSpacing: "-0.03em",
-            userSelect:    "none",
-            transition:    "opacity 0.7s ease 0.1s",
+            fontFamily: "var(--font-display)",
+            fontSize:   "14px",
+            fontWeight: tokens.weightUI,
+            color:      colors.surfaceDark,
+            letterSpacing: "-0.02em",
           }}
         >
           {String(index + 1).padStart(2, "0")}
         </span>
-        {showCanvas && (
-          <canvas ref={canvasRef} style={{ position: "absolute", inset: 0 }} />
-        )}
+        <span
+          className="leo-gem-badge-glint"
+          aria-hidden="true"
+          style={{
+            position:  "absolute",
+            inset:     0,
+            background: "linear-gradient(100deg, transparent, rgba(255,255,255,0.75) 45%, transparent)",
+            pointerEvents: "none",
+          }}
+        />
       </div>
 
-      {/* Content sits above the number via z-index */}
-      <div
+      <h3
         style={{
-          position:            "relative",
-          zIndex:              1,
-          display:             "grid",
-          gridTemplateColumns: "1fr 2fr",
-          gap:                 "0 48px",
-          alignItems:          "start",
-          paddingLeft:         "0px",
-          opacity:             inView ? 1 : 0,
-          transform:           inView ? "translateY(0)" : "translateY(10px)",
-          transition:          "opacity 0.6s cubic-bezier(0.16,1,0.3,1) 0.1s, transform 0.6s cubic-bezier(0.16,1,0.3,1) 0.1s",
+          fontFamily:    "var(--font-display)",
+          fontSize:      tokens.fontSizes.h3,
+          fontWeight:    tokens.weightHeading,
+          color:         colors.bgLight,
+          letterSpacing: "-0.015em",
+          margin:        "0 0 12px 0",
+          position:      "relative",
+          zIndex:        1,
         }}
       >
-        <h3
-          style={{
-            fontFamily:    "var(--font-display)",
-            fontSize:      tokens.fontSizes.h3,
-            fontWeight:    tokens.weightHeading,
-            color:         colors.bgDark,
-            letterSpacing: "-0.015em",
-            margin:        0,
-            paddingTop:    "4px",
-          }}
-        >
-          {value.title}
-        </h3>
-        <p
-          style={{
-            fontFamily: "var(--font-body)",
-            fontSize:   tokens.fontSizes.body,
-            fontWeight: tokens.weightBody,
-            color:      colors.textSubtle,
-            lineHeight: 1.7,
-            margin:     0,
-          }}
-        >
-          {value.description}
-        </p>
-      </div>
+        {value.title}
+      </h3>
+      <p
+        style={{
+          fontFamily: "var(--font-body)",
+          fontSize:   tokens.fontSizes.body,
+          fontWeight: tokens.weightBody,
+          color:      colors.textSecondaryLight,
+          lineHeight: 1.7,
+          margin:     0,
+          position:   "relative",
+          zIndex:     1,
+        }}
+      >
+        {value.description}
+      </p>
     </div>
   );
 }

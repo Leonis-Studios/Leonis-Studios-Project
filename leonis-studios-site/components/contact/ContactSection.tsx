@@ -4,8 +4,16 @@ import { useEffect, useState } from "react";
 import { colors } from "@/lib/colors";
 import { tokens } from "@/lib/tokens";
 import SandGutter from "@/components/SandGutter";
+import { useInViewOnce } from "@/lib/hooks/useInViewOnce";
 
 type Status = "idle" | "loading" | "success" | "error";
+
+// Cuts the top-right and bottom-left corners — same two-facet gem cut used
+// on the about page's Values cards, carried over here for a consistent
+// bedrock/gem language between the two rewritten sections.
+const GEM_CLIP = "polygon(0 0, calc(100% - 26px) 0, 100% 26px, 100% 100%, 26px 100%, 0 calc(100% - 26px))";
+// Small rotated-square "diamond" marker used for the info rail's vein nodes and bullets.
+const BADGE_CLIP_SMALL = "polygon(50% 0%, 100% 50%, 50% 100%, 0% 50%)";
 
 const SERVICE_OPTIONS = [
   "Web Design",
@@ -56,6 +64,8 @@ export default function ContactSection({
   const [status, setStatus] = useState<Status>("idle");
   const [errorMsg, setErrorMsg] = useState("");
   const [reducedMotion, setReducedMotion] = useState(false);
+  const { ref: infoRef, inView: infoIn } = useInViewOnce<HTMLDivElement>(0.2);
+  const { ref: panelRef, inView: panelIn } = useInViewOnce<HTMLDivElement>(0.15);
 
   useEffect(() => {
     setReducedMotion(window.matchMedia("(prefers-reduced-motion: reduce)").matches);
@@ -121,13 +131,31 @@ export default function ContactSection({
           40%  { opacity: 1; }
           100% { opacity: 0; transform: translateY(6px) scale(1); }
         }
+        @keyframes railItemIn {
+          from { opacity: 0; transform: translateX(-10px); }
+          to   { opacity: 1; transform: translateX(0); }
+        }
+        @keyframes panelGlint {
+          from { transform: translateX(-160%) skewX(-12deg); opacity: 0; }
+          20%  { opacity: 0.8; }
+          to   { transform: translateX(220%) skewX(-12deg); opacity: 0; }
+        }
       `}</style>
 
       <div className="max-w-7xl mx-auto px-6 lg:px-12">
         <div className="grid grid-cols-1 lg:grid-cols-5 gap-16 lg:gap-24">
           {/* ── Left: Info ─────────────────────────────────────── */}
-          <div className="lg:col-span-2">
-            <div className="flex items-center gap-4 mb-10">
+          <div ref={infoRef} className="lg:col-span-2" style={{ position: "relative" }}>
+            {/* Sedimentary strata — faint bedrock bands behind the info rail */}
+            <div
+              aria-hidden="true"
+              style={{ position: "absolute", inset: "-20px -16px auto -16px", height: "220px", zIndex: 0, pointerEvents: "none", overflow: "hidden" }}
+            >
+              <div style={{ position: "absolute", left: 0, right: "22%", top: "18%", height: "12px", background: colors.bgMuted, opacity: infoIn ? 0.5 : 0, transition: "opacity 1s ease 0.15s" }} />
+              <div style={{ position: "absolute", left: "10%", right: 0, top: "55%", height: "9px", background: "rgba(180,110,0,0.1)", opacity: infoIn ? 1 : 0, transition: "opacity 1s ease 0.35s" }} />
+            </div>
+
+            <div className="flex items-center gap-4 mb-10" style={{ position: "relative", zIndex: 1 }}>
               <div
                 style={{ width: "32px", height: "1px", background: colors.textSubtle }}
               />
@@ -143,52 +171,76 @@ export default function ContactSection({
               </span>
             </div>
 
-            <div className="flex flex-col gap-10">
-              {/* Contact details */}
-              <div className="flex flex-col gap-6">
-                <div>
-                  <p style={{ ...labelStyle, marginBottom: "4px" }}>Email</p>
-                  <a
-                    href={`mailto:${siteEmail}`}
+            <div className="flex flex-col gap-10" style={{ position: "relative", zIndex: 1 }}>
+              {/* Contact details — a gold vein connects each fact like a mineral seam */}
+              <div className="flex flex-col gap-6" style={{ position: "relative", paddingLeft: "22px" }}>
+                <div
+                  aria-hidden="true"
+                  style={{
+                    position: "absolute",
+                    left: "3px",
+                    top: "6px",
+                    bottom: "6px",
+                    width: "1px",
+                    background: "linear-gradient(to bottom, rgba(180,110,0,0.5), rgba(180,110,0,0.08))",
+                    transform: infoIn ? "scaleY(1)" : "scaleY(0)",
+                    transformOrigin: "top",
+                    transition: "transform 0.9s cubic-bezier(0.16,1,0.3,1) 0.1s",
+                  }}
+                />
+                {[
+                  { label: "Email", value: siteEmail, href: `mailto:${siteEmail}` },
+                  { label: "Location", value: location },
+                  { label: "Response Time", value: "Within 24 hours" },
+                ].map((row, i) => (
+                  <div
+                    key={row.label}
                     style={{
-                      fontFamily: "var(--font-body)",
-                      fontSize: "15px",
-                      fontWeight: tokens.weightBody,
-                      color: colors.bgDark,
-                      textDecoration: "none",
+                      position: "relative",
+                      opacity: infoIn ? undefined : 0,
+                      animation: infoIn ? `railItemIn 0.5s cubic-bezier(0.16,1,0.3,1) ${0.25 + i * 0.12}s both` : undefined,
                     }}
                   >
-                    {siteEmail}
-                  </a>
-                </div>
-                <div>
-                  <p style={{ ...labelStyle, marginBottom: "4px" }}>Location</p>
-                  <p
-                    style={{
-                      fontFamily: "var(--font-body)",
-                      fontSize: "15px",
-                      fontWeight: tokens.weightBody,
-                      color: colors.bgDark,
-                    }}
-                  >
-                    {location}
-                  </p>
-                </div>
-                <div>
-                  <p style={{ ...labelStyle, marginBottom: "4px" }}>
-                    Response Time
-                  </p>
-                  <p
-                    style={{
-                      fontFamily: "var(--font-body)",
-                      fontSize: "15px",
-                      fontWeight: tokens.weightBody,
-                      color: colors.bgDark,
-                    }}
-                  >
-                    Within 24 hours
-                  </p>
-                </div>
+                    <span
+                      aria-hidden="true"
+                      style={{
+                        position: "absolute",
+                        left: "-22px",
+                        top: "7px",
+                        width: "7px",
+                        height: "7px",
+                        background: colors.accent,
+                        clipPath: BADGE_CLIP_SMALL,
+                      }}
+                    />
+                    <p style={{ ...labelStyle, marginBottom: "4px" }}>{row.label}</p>
+                    {row.href ? (
+                      <a
+                        href={row.href}
+                        style={{
+                          fontFamily: "var(--font-body)",
+                          fontSize: "15px",
+                          fontWeight: tokens.weightBody,
+                          color: colors.bgDark,
+                          textDecoration: "none",
+                        }}
+                      >
+                        {row.value}
+                      </a>
+                    ) : (
+                      <p
+                        style={{
+                          fontFamily: "var(--font-body)",
+                          fontSize: "15px",
+                          fontWeight: tokens.weightBody,
+                          color: colors.bgDark,
+                        }}
+                      >
+                        {row.value}
+                      </p>
+                    )}
+                  </div>
+                ))}
               </div>
 
               {/* What to expect */}
@@ -212,7 +264,7 @@ export default function ContactSection({
                     "No pushy sales tactics, just an honest conversation",
                     "A clear outline of scope, timeline, and pricing",
                     "Direct communication, start to finish",
-                  ].map((item) => (
+                  ].map((item, i) => (
                     <li
                       key={item}
                       className="flex items-start gap-3"
@@ -222,17 +274,21 @@ export default function ContactSection({
                         fontWeight: tokens.weightSecondary,
                         color: colors.textSubtle,
                         lineHeight: 1.6,
+                        opacity: infoIn ? undefined : 0,
+                        animation: infoIn ? `railItemIn 0.5s cubic-bezier(0.16,1,0.3,1) ${0.6 + i * 0.08}s both` : undefined,
                       }}
                     >
                       <span
+                        aria-hidden="true"
                         style={{
-                          color: colors.textSubtle,
-                          marginTop: "2px",
+                          width: "6px",
+                          height: "6px",
+                          marginTop: "6px",
                           flexShrink: 0,
+                          background: "rgba(180,110,0,0.6)",
+                          clipPath: BADGE_CLIP_SMALL,
                         }}
-                      >
-                        —
-                      </span>
+                      />
                       {item}
                     </li>
                   ))}
@@ -241,27 +297,36 @@ export default function ContactSection({
             </div>
           </div>
 
-          {/* ── Right: Form ────────────────────────────────────── */}
-          <div className="lg:col-span-3" style={{ position: "relative" }}>
-            {/* Quartz facet corners — decorative, static */}
-            <span
-              aria-hidden="true"
-              style={{
-                position: "absolute", top: "-14px", right: "-6px", width: "18px", height: "18px",
-                borderTop: `1px solid rgba(180,110,0,0.4)`,
-                borderRight: `1px solid rgba(180,110,0,0.4)`,
-                pointerEvents: "none",
-              }}
-            />
-            <span
-              aria-hidden="true"
-              style={{
-                position: "absolute", bottom: "-14px", left: "-6px", width: "18px", height: "18px",
-                borderBottom: `1px solid rgba(180,110,0,0.4)`,
-                borderLeft: `1px solid rgba(180,110,0,0.4)`,
-                pointerEvents: "none",
-              }}
-            />
+          {/* ── Right: Form — cut into a single faceted gem panel ─ */}
+          <div
+            ref={panelRef}
+            className="lg:col-span-3"
+            style={{
+              position: "relative",
+              clipPath: GEM_CLIP,
+              background: `linear-gradient(155deg, rgba(180,110,0,0.05), ${colors.bgCard})`,
+              border: `1px solid rgba(180,110,0,0.22)`,
+              padding: "40px clamp(24px, 4vw, 44px)",
+              opacity: panelIn ? 1 : 0,
+              transform: panelIn ? "translateY(0) scale(1)" : "translateY(16px) scale(0.985)",
+              transition: "opacity 0.7s cubic-bezier(0.16,1,0.3,1), transform 0.7s cubic-bezier(0.16,1,0.3,1)",
+            }}
+          >
+            {panelIn && !reducedMotion && (
+              <span
+                aria-hidden="true"
+                style={{
+                  position: "absolute",
+                  top: 0,
+                  bottom: 0,
+                  left: 0,
+                  width: "60%",
+                  background: "linear-gradient(100deg, transparent, rgba(255,255,255,0.5) 45%, transparent)",
+                  animation: "panelGlint 1.1s cubic-bezier(0.16,1,0.3,1) 0.35s 1",
+                  pointerEvents: "none",
+                }}
+              />
+            )}
             {status === "success" ? (
               /* Success state */
               <div
