@@ -18,12 +18,43 @@ export default function ContactHero({ hero }: { hero?: ContactPageData["hero"] }
           from { opacity: 0; transform: translateY(24px); }
           to   { opacity: 1; transform: translateY(0); }
         }
+        @keyframes duskGlowIn {
+          from { opacity: 0; }
+          to   { opacity: 1; }
+        }
+        @keyframes heatShimmer {
+          0%, 100% { opacity: 0.6; }
+          50%      { opacity: 0.85; }
+        }
+        .dusk-glow {
+          animation: duskGlowIn 1.8s cubic-bezier(0.16, 1, 0.3, 1) 0.2s both;
+        }
+        @media (prefers-reduced-motion: no-preference) {
+          .dusk-glow { animation-name: duskGlowIn, heatShimmer; animation-duration: 1.8s, 7s; animation-delay: 0.2s, 2s; animation-timing-function: cubic-bezier(0.16, 1, 0.3, 1), ease-in-out; animation-iteration-count: 1, infinite; animation-fill-mode: both, none; }
+        }
       `}</style>
+
+      {/* Dusk glow — hazier antiqueGold sunset, distinct from AboutCTA's brighter centered gold */}
+      <div
+        aria-hidden="true"
+        className="dusk-glow absolute pointer-events-none"
+        style={{
+          right:  "-15vw",
+          top:    "-10vh",
+          width:  "55vw",
+          height: "55vw",
+          maxWidth:  "560px",
+          maxHeight: "560px",
+          background: `radial-gradient(circle, rgba(180,110,0,0.22) 0%, rgba(180,110,0,0.07) 50%, transparent 75%)`,
+          zIndex: 0,
+        }}
+      />
 
       {/* Background geometric detail */}
       <div
         className="absolute top-0 right-0 w-[40vw] h-full pointer-events-none"
         aria-hidden="true"
+        style={{ zIndex: 0 }}
       >
         <div
           className="absolute left-0 top-0 bottom-0 w-px"
@@ -35,7 +66,7 @@ export default function ContactHero({ hero }: { hero?: ContactPageData["hero"] }
         />
       </div>
 
-      <div className="max-w-7xl mx-auto px-6 lg:px-12">
+      <div className="max-w-7xl mx-auto px-6 lg:px-12" style={{ position: "relative", zIndex: 1 }}>
 
         {/* Eyebrow label */}
         <div

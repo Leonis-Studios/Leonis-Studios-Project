@@ -260,9 +260,14 @@ export default function Skills({ eyebrow: eyebrowProp, techStack, servicesList }
           from { opacity: 0; transform: translateY(-6px); }
           to   { opacity: 1; transform: translateY(0); }
         }
+        @keyframes dustDevilSpin {
+          from { transform: rotate(0deg); opacity: 0; }
+          15%  { opacity: 0.8; }
+          to   { transform: rotate(300deg); opacity: 0; }
+        }
         .leo-tag-btn {
           position: relative;
-          overflow: hidden;
+          overflow: visible;
         }
         .leo-tag-btn::before {
           content: "";
@@ -278,6 +283,7 @@ export default function Skills({ eyebrow: eyebrowProp, techStack, servicesList }
             radial-gradient(circle at 78% 65%, rgba(180,110,0,0.4) 0.5px, transparent 0.5px),
             radial-gradient(circle at 90% 35%, rgba(180,110,0,0.5) 0.6px, transparent 0.6px);
           background-size: 18px 18px;
+          overflow: hidden;
         }
         .leo-tag-btn:hover {
           border-color: rgba(180,110,0,0.6) !important;
@@ -289,6 +295,18 @@ export default function Skills({ eyebrow: eyebrowProp, techStack, servicesList }
           .leo-tag-btn:hover {
             transform: translateY(-2px);
             box-shadow: 0 4px 14px rgba(180,110,0,0.25);
+          }
+          .leo-tag-btn::after {
+            content: "";
+            position: absolute;
+            inset: -6px;
+            pointer-events: none;
+            border-radius: 999px;
+            border: 1px dashed rgba(180,110,0,0.5);
+            opacity: 0;
+          }
+          .leo-tag-btn:hover::after {
+            animation: dustDevilSpin 0.7s ease-out 1;
           }
         }
         .leo-tag-panel-wrap {

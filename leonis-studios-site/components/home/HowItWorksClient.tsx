@@ -10,6 +10,7 @@ import { useRef, useEffect, useState } from "react";
 import { colors } from "@/lib/colors";
 import { tokens } from "@/lib/tokens";
 import SandGutter from "@/components/SandGutter";
+import { useSandReveal } from "@/lib/hooks/useSandReveal";
 import type { HomePageData } from "@/lib/types";
 
 const DEFAULT_STEPS = [
@@ -64,6 +65,20 @@ export default function HowItWorksClient({ howItWorks }: { howItWorks?: HomePage
     return () => observer.disconnect();
   }, []);
 
+  // Sand-tornado curtain — swirls across the full step grid once on scroll-in,
+  // sharing the same `visible` trigger as the card stagger below so the sweep
+  // clears as the steps resolve underneath it.
+  const { canvasRef, showCanvas } = useSandReveal({
+    trigger:           visible,
+    containerRef:      sectionRef,
+    color:              "252,163,17",
+    mode:               "swirl",
+    density:            1100,
+    delayRange:         [0, 500],
+    durationRange:      [550, 950],
+    mobileDensityMult:  0.3,
+  });
+
   return (
     <section
       ref={sectionRef}
@@ -77,9 +92,22 @@ export default function HowItWorksClient({ howItWorks }: { howItWorks?: HomePage
           from { opacity: 0; transform: translateY(24px); }
           to   { opacity: 1; transform: translateY(0); }
         }
+        @keyframes gustLine {
+          from { background-position: -60px 0; }
+          to   { background-position: 60px 0; }
+        }
       `}</style>
 
-      <div className="max-w-7xl mx-auto px-6 lg:px-12">
+      {/* Blowing-sand curtain — one-shot, removed from the DOM after animating */}
+      {showCanvas && (
+        <canvas
+          ref={canvasRef}
+          aria-hidden="true"
+          style={{ position: "absolute", inset: 0, zIndex: 2, pointerEvents: "none" }}
+        />
+      )}
+
+      <div className="max-w-7xl mx-auto px-6 lg:px-12" style={{ position: "relative", zIndex: 1 }}>
         {/* ── Section header ───────────────────────────────── */}
         <div className="flex items-center gap-4 mb-5">
           <div className="w-8 h-px" style={{ background: colors.accent }} />
@@ -159,6 +187,23 @@ export default function HowItWorksClient({ howItWorks }: { howItWorks?: HomePage
                     backgroundColor: colors.accent,
                     opacity: hoveredIndex === i ? 1 : 0,
                     transition: "opacity 200ms ease",
+                  }}
+                />
+
+                {/* Hover gust line — a dashed streak drifts across the top edge */}
+                <div
+                  aria-hidden="true"
+                  style={{
+                    position: "absolute",
+                    top: 0,
+                    left: 0,
+                    right: 0,
+                    height: "2px",
+                    backgroundImage: `repeating-linear-gradient(90deg, ${colors.accent} 0 10px, transparent 10px 20px)`,
+                    backgroundSize: "20px 2px",
+                    opacity: hoveredIndex === i ? 0.8 : 0,
+                    transition: "opacity 200ms ease",
+                    animation: hoveredIndex === i ? "gustLine 1.1s linear infinite" : undefined,
                   }}
                 />
 

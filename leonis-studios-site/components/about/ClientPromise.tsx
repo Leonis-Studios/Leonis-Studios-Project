@@ -1,7 +1,14 @@
+"use client";
+// "use client" is required here because the promise grid uses useInViewOnce
+// (IntersectionObserver) to trigger its staggered "crystallizing" entrance.
+// Props-only component — no data fetching of its own — matches the precedent
+// set by BenefitsClient.tsx / Skills.tsx.
+
 import Link from "next/link";
 import { colors } from "@/lib/colors";
 import { tokens } from "@/lib/tokens";
 import SandGutter from "@/components/SandGutter";
+import { useInViewOnce } from "@/lib/hooks/useInViewOnce";
 import type { AboutPageData } from "@/lib/types";
 
 const DEFAULT_PROMISES = [
@@ -48,6 +55,7 @@ export default function ClientPromise({
   const headline   = headlineProp   || "What you can always expect.";
   const subheading = subheadingProp || "These aren't aspirations. They're the baseline for every project we take on.";
   const promises   = promisesProp?.length ? promisesProp : DEFAULT_PROMISES;
+  const { ref, inView } = useInViewOnce<HTMLUListElement>(0.15);
 
   return (
     <section
@@ -56,6 +64,29 @@ export default function ClientPromise({
       style={{ background: colors.bgLight, borderTop: `1px solid ${colors.borderLight}`, position: "relative", zIndex: 1, overflow: "hidden" }}
     >
       <SandGutter seed={0} />
+      <style>{`
+        @keyframes promiseCardIn {
+          from { opacity: 0; transform: translateY(16px) scale(0.98); }
+          to   { opacity: 1; transform: translateY(0) scale(1); }
+        }
+        .leo-promise-card {
+          position: relative;
+          overflow: hidden;
+          clip-path: polygon(0 0, calc(100% - 18px) 0, 100% 18px, 100% 100%, 0 100%);
+        }
+        .leo-promise-card::before {
+          content: "";
+          position: absolute;
+          inset: 0;
+          pointer-events: none;
+          opacity: 0;
+          transition: opacity 0.4s ease;
+          background: linear-gradient(115deg, transparent 30%, rgba(180,110,0,0.16) 48%, transparent 66%);
+        }
+        @media (prefers-reduced-motion: no-preference) {
+          .leo-promise-card:hover::before { opacity: 1; }
+        }
+      `}</style>
       <div className="max-w-7xl mx-auto px-6 lg:px-12">
 
         {/* Section label */}
@@ -106,18 +137,23 @@ export default function ClientPromise({
           {subheading}
         </p>
 
-        {/* Promise grid */}
+        {/* Promise grid — pale gypsum-surface cards, crystallize in on scroll */}
         <ul
+          ref={ref}
           className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-px"
-          style={{ background: colors.borderLight, listStyle: "none", padding: 0, margin: 0 }}
+          style={{ background: colors.duneDivider, listStyle: "none", padding: 0, margin: 0 }}
         >
-          {promises.map((p) => (
+          {promises.map((p, i) => (
             <li
               key={p.title}
+              className="leo-promise-card"
               style={{
-                background: colors.bgCard,
+                background: colors.duneSurface,
                 padding: "32px",
-                position: "relative",
+                opacity: inView ? undefined : 0,
+                animation: inView
+                  ? `promiseCardIn 0.55s cubic-bezier(0.16,1,0.3,1) ${i * 70}ms both`
+                  : undefined,
               }}
             >
               {/* Accent mark */}

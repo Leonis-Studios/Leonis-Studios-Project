@@ -2,6 +2,7 @@ import { PortableText } from "@portabletext/react";
 import { colors } from "@/lib/colors";
 import { tokens } from "@/lib/tokens";
 import SandGutter from "@/components/SandGutter";
+import StoryReveal from "./StoryReveal";
 
 interface Props {
   eyebrow?: string;
@@ -51,30 +52,28 @@ export default function Story({ eyebrow: eyebrowProp, storyBody }: Props) {
           </span>
         </div>
 
-        <div className="grid grid-cols-1 lg:grid-cols-2 gap-16 lg:gap-24 items-start">
-
-          {/* Pull quote */}
-          <div className="lg:sticky lg:top-32">
-            <blockquote
-              style={{
-                fontFamily:    "var(--font-display)",
-                fontSize:      "clamp(26px, 3.5vw, 44px)",
-                fontWeight:    tokens.weightDisplay,
-                lineHeight:    1.1,
-                letterSpacing: "-0.025em",
-                color:         colors.bgDark,
-              }}
-            >
-              Bold work. No fluff.
-              <br />
-              <span style={{ color: colors.textSubtle }}>No compromise.</span>
-            </blockquote>
-            <div className="mt-8 w-12 h-px" style={{ background: colors.textSubtle }} />
-          </div>
-
-          {/* Story paragraphs */}
-          <div className="flex flex-col gap-6">
-            {storyBody && storyBody.length > 0 ? (
+        <StoryReveal
+          quote={
+            <>
+              <blockquote
+                style={{
+                  fontFamily:    "var(--font-display)",
+                  fontSize:      "clamp(26px, 3.5vw, 44px)",
+                  fontWeight:    tokens.weightDisplay,
+                  lineHeight:    1.1,
+                  letterSpacing: "-0.025em",
+                  color:         colors.bgDark,
+                }}
+              >
+                Bold work. No fluff.
+                <br />
+                <span style={{ color: colors.textSubtle }}>No compromise.</span>
+              </blockquote>
+              <div className="mt-8 w-12 h-px" style={{ background: colors.textSubtle }} />
+            </>
+          }
+          body={
+            storyBody && storyBody.length > 0 ? (
               <PortableText value={storyBody} components={portableTextComponents} />
             ) : (
               <>
@@ -104,10 +103,9 @@ export default function Story({ eyebrow: eyebrowProp, storyBody }: Props) {
                   your business, we&apos;ll get along fine.
                 </p>
               </>
-            )}
-          </div>
-
-        </div>
+            )
+          }
+        />
       </div>
     </section>
   );

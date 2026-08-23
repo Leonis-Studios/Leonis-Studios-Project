@@ -82,9 +82,14 @@ Font weights:
 
 ### Server vs Client split
 
-- **Server Components**: data fetching (`Services`, `FeaturedWork`, `Footer`). Never add `"use client"` unless browser APIs / state / effects are needed.
-- **Client Components**: interactivity only (`ServicesGrid`, `FeaturedWorkGrid`, `HowItWorks`, `BenefitsClient`, `Navbar`, `SandGutter`). Add `"use client"` + explain why at the top.
-- Pattern: Server parent fetches data → passes as props to Client child (e.g., `Services` → `ServicesGrid`).
+- **Server Components**: data fetching (`Services`, `FeaturedWork`, `Footer`, `Story`, `AboutHero`, `ContactHero`). Never add `"use client"` unless browser APIs / state / effects are needed.
+- **Client Components**: interactivity only (`ServicesGrid`, `FeaturedWorkGrid`, `HowItWorks`, `BenefitsClient`, `Navbar`, `SandGutter`, `Values`, `ClientPromise`, `AboutCTA`, `StoryReveal`). Add `"use client"` + explain why at the top.
+- Pattern: Server parent fetches data → passes as props to Client child (e.g., `Services` → `ServicesGrid`, `Story` → `StoryReveal`).
+
+### Scroll/reveal hooks — `lib/hooks/`
+
+- `useInViewOnce.ts` — single-fire IntersectionObserver (`{ ref, inView }`). Use for any scroll-triggered CSS entrance (fade/stagger). Extracted from the duplicated observer setup in `BenefitsClient.tsx`/`HowItWorksClient.tsx`.
+- `useSandReveal.ts` — one-shot canvas grain sweep (`{ canvasRef, showCanvas }`), generalized from `BenefitsClient.tsx`'s sand-curtain and `Skills.tsx`'s `TagPanel` sweep. Modes: `"drift"` (Values' per-row erosion reveal), `"swirl"` (HowItWorksClient's sand-tornado curtain). Handles DPR sizing, RAF loop, `prefers-reduced-motion`, and auto-unmounts the canvas via `showCanvas` once done — consumer just renders `{showCanvas && <canvas ref={canvasRef} .../>}`. `BenefitsClient`/`Skills` keep their original hand-rolled canvases (not migrated onto this hook).
 
 ### Page layout — `app/(site)/layout.tsx`
 

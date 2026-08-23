@@ -1,6 +1,6 @@
 "use client";
 
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { colors } from "@/lib/colors";
 import { tokens } from "@/lib/tokens";
 import SandGutter from "@/components/SandGutter";
@@ -55,6 +55,11 @@ export default function ContactSection({
   const [details, setDetails] = useState("");
   const [status, setStatus] = useState<Status>("idle");
   const [errorMsg, setErrorMsg] = useState("");
+  const [reducedMotion, setReducedMotion] = useState(false);
+
+  useEffect(() => {
+    setReducedMotion(window.matchMedia("(prefers-reduced-motion: reduce)").matches);
+  }, []);
 
   function toggleService(s: string) {
     setServices((prev) =>
@@ -102,8 +107,20 @@ export default function ContactSection({
       <style>{`
         input::placeholder,
         textarea::placeholder { color: ${colors.textSecondary}; }
+        input, textarea {
+          transition: border-color 0.2s ease, box-shadow 0.2s ease;
+          box-shadow: 0 0 0 0 rgba(252,163,17,0);
+        }
         input:focus,
-        textarea:focus { border-color: ${colors.bgDark} !important; }
+        textarea:focus {
+          border-color: ${colors.bgDark} !important;
+          box-shadow: 0 0 0 3px rgba(252,163,17,0.18);
+        }
+        @keyframes settle {
+          0%   { opacity: 0; transform: translateY(-10px) scale(0.6); }
+          40%  { opacity: 1; }
+          100% { opacity: 0; transform: translateY(6px) scale(1); }
+        }
       `}</style>
 
       <div className="max-w-7xl mx-auto px-6 lg:px-12">
@@ -225,13 +242,33 @@ export default function ContactSection({
           </div>
 
           {/* ── Right: Form ────────────────────────────────────── */}
-          <div className="lg:col-span-3">
+          <div className="lg:col-span-3" style={{ position: "relative" }}>
+            {/* Quartz facet corners — decorative, static */}
+            <span
+              aria-hidden="true"
+              style={{
+                position: "absolute", top: "-14px", right: "-6px", width: "18px", height: "18px",
+                borderTop: `1px solid rgba(180,110,0,0.4)`,
+                borderRight: `1px solid rgba(180,110,0,0.4)`,
+                pointerEvents: "none",
+              }}
+            />
+            <span
+              aria-hidden="true"
+              style={{
+                position: "absolute", bottom: "-14px", left: "-6px", width: "18px", height: "18px",
+                borderBottom: `1px solid rgba(180,110,0,0.4)`,
+                borderLeft: `1px solid rgba(180,110,0,0.4)`,
+                pointerEvents: "none",
+              }}
+            />
             {status === "success" ? (
               /* Success state */
               <div
                 className="flex flex-col gap-6 py-16"
                 style={{
                   borderTop: `2px solid ${colors.accent}`,
+                  position: "relative",
                 }}
               >
                 <div
@@ -242,9 +279,28 @@ export default function ContactSection({
                     display: "flex",
                     alignItems: "center",
                     justifyContent: "center",
+                    position: "relative",
                   }}
                 >
                   <span style={{ color: colors.textSubtle, fontSize: "20px" }}>✓</span>
+                  {/* Sand-settle flourish — grains fall and fade once, around the checkmark */}
+                  {!reducedMotion && Array.from({ length: 12 }).map((_, i) => (
+                    <span
+                      key={i}
+                      aria-hidden="true"
+                      style={{
+                        position: "absolute",
+                        left: `${8 + (i * 37) % 100}%`,
+                        top: `${-10 - (i % 4) * 6}px`,
+                        width: "3px",
+                        height: "3px",
+                        borderRadius: "50%",
+                        background: "rgba(180,110,0,0.7)",
+                        animation: `settle ${0.6 + (i % 5) * 0.08}s ease ${(i % 6) * 0.05}s 1 both`,
+                        pointerEvents: "none",
+                      }}
+                    />
+                  ))}
                 </div>
                 <h2
                   style={{
