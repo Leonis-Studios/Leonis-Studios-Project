@@ -62,7 +62,7 @@ export default function ContactHero({ hero }: { hero?: ContactPageData["hero"] }
         <h1
           style={{
             fontFamily:    "var(--font-display)",
-            fontSize:      "clamp(48px, 9vw, 112px)",
+            fontSize:      "clamp(52px, 9.5vw, 118px)",
             fontWeight:    tokens.weightDisplay,
             lineHeight:    0.92,
             letterSpacing: "-0.03em",

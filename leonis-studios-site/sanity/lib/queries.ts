@@ -318,6 +318,7 @@ export const HOME_PAGE_QUERY = `
   *[_type == "homePage"][0] {
     hero,
     marquee,
+    benefitsSection,
     servicesSection,
     howItWorks,
     featuredWorkSection,

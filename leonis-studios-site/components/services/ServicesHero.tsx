@@ -16,7 +16,7 @@ export default function ServicesHero({ hero }: { hero?: ServicesPageData["hero"]
   const eyebrow        = hero?.eyebrow        || "What We Offer";
   const headlineLine1  = hero?.headlineLine1  || "Services Built";
   const headlineAccent = hero?.headlineAccent || "to Perform.";
-  const subheading      = hero?.subheading      || "From a first website to a fully maintained digital presence — every engagement is built with the same obsessive attention to craft, performance, and growth.";
+  const subheading      = hero?.subheading      || "From a first website to a fully maintained digital presence, every engagement is built with the same obsessive attention to craft, performance, and getting you found in search and AI answers.";
   const categories       = hero?.categories?.length ? hero.categories : DEFAULT_CATEGORIES;
 
   return (
@@ -77,7 +77,7 @@ export default function ServicesHero({ hero }: { hero?: ServicesPageData["hero"]
         <h1
           style={{
             fontFamily:    "var(--font-display)",
-            fontSize:      "clamp(48px, 9vw, 112px)",
+            fontSize:      "clamp(52px, 9.5vw, 118px)",
             fontWeight:    tokens.weightDisplay,
             lineHeight:    0.92,
             letterSpacing: "-0.03em",

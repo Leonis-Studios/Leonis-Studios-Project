@@ -23,7 +23,7 @@ const DEFAULT_PROMISES = [
   },
   {
     title: "Honest Timelines",
-    body: "We give you realistic schedules and flag delays early — not the day before launch.",
+    body: "We give you realistic schedules and flag delays early, not the day before launch.",
   },
   {
     title: "Post-Launch Support",
@@ -46,7 +46,7 @@ export default function ClientPromise({
 }: Props) {
   const eyebrow    = eyebrowProp    || "Our Promise";
   const headline   = headlineProp   || "What you can always expect.";
-  const subheading = subheadingProp || "These aren't aspirations — they're the baseline for every project we take on.";
+  const subheading = subheadingProp || "These aren't aspirations. They're the baseline for every project we take on.";
   const promises   = promisesProp?.length ? promisesProp : DEFAULT_PROMISES;
 
   return (
@@ -80,7 +80,7 @@ export default function ClientPromise({
           className="mb-4"
           style={{
             fontFamily: "var(--font-display)",
-            fontSize: "clamp(32px, 5vw, 64px)",
+            fontSize: "clamp(36px, 5.5vw, 70px)",
             fontWeight: tokens.weightDisplay,
             lineHeight: 0.95,
             letterSpacing: "-0.025em",
@@ -179,7 +179,7 @@ export default function ClientPromise({
           >
             Ask us directly
           </Link>
-          {" "}— we&apos;ll tell you straight.
+          {" "}and we&apos;ll tell you straight.
         </p>
 
       </div>

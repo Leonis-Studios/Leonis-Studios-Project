@@ -65,7 +65,7 @@ export default function AboutHero({ headline, subheading }: Props) {
         <h1
           style={{
             fontFamily: "var(--font-display)",
-            fontSize: "clamp(48px, 9vw, 112px)",
+            fontSize: "clamp(52px, 9.5vw, 118px)",
             fontWeight: tokens.weightDisplay,
             lineHeight: 0.92,
             letterSpacing: "-0.03em",
@@ -101,7 +101,7 @@ export default function AboutHero({ headline, subheading }: Props) {
           }}
         >
           {subheading ??
-            "Leonis Studios is a one-person web design studio based in New York. We build high-performance websites for businesses that care about doing things properly."}
+            "Leonis Studios is a one-person web design studio based in New York. We build fast, high-performance websites and make sure they get found, on Google, in AI search, and everywhere your customers are already looking."}
         </p>
       </div>
     </section>

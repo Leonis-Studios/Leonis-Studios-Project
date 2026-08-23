@@ -12,7 +12,7 @@ import ServicesAddons        from "@/components/services/ServicesAddons";
 import ServicesCTA           from "@/components/services/ServicesCTA";
 
 const defaultDescription =
-  "Leonis Studios offers website packages, monthly retainers, and add-on services for businesses ready to stand out. Explore our craft-first approach to web design and growth.";
+  "Leonis Studios offers website packages, retainers, and SEO, GEO, and AEO services for businesses ready to be found in search and AI answers.";
 
 export async function generateMetadata(): Promise<Metadata> {
   const servicesPage: ServicesPageData | null = await client

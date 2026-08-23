@@ -91,15 +91,16 @@ export default function Story({ eyebrow: eyebrowProp, storyBody }: Props) {
                 </p>
                 <p style={paragraphStyle}>
                   Leonis Studios is intentionally small. One person handles every
-                  project — design, development, SEO, and ongoing maintenance. That
+                  project: design, development, SEO, and ongoing maintenance. That
                   means no account managers, no hand-offs, no diluted output. You
                   work directly with the person building your site, from first call
                   to final deployment.
                 </p>
                 <p style={paragraphStyle}>
                   The clients I work with are small businesses, founders, and growing
-                  brands who understand that a great website is an investment — not
-                  a cost. If you value craft and want a site that actually works for
+                  brands who understand that a great website is an investment, not
+                  a cost, and that getting found in search matters as much as looking
+                  good. If you value craft and want a site that actually works for
                   your business, we&apos;ll get along fine.
                 </p>
               </>

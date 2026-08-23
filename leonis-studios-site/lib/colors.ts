@@ -27,7 +27,7 @@ export const colors = {
   bgPaper: "#F0E4CB",
   borderWarm: "rgba(20,33,61,0.12)",
 
-  // ── Dune (blog post detail page only) — do not use on /blog index ──
+  // ── Dune (blog post detail page, home page Benefits section, about page Skills tag panels) — do not use on /blog index ──
   duneBg: "#f4ecdd",
   duneSurface: "#fffaf0",
   duneHeadline: "#14213d",

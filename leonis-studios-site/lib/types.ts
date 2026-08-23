@@ -226,6 +226,15 @@ export interface HomePageData {
   marquee?: {
     items?: string[];
   };
+  benefitsSection?: {
+    eyebrow?:  string;
+    headline?: string;
+    subtext?:  string;
+    items?: {
+      title:       string;
+      description: string;
+    }[];
+  };
   servicesSection?: {
     eyebrow?:  string;
     headline?: string;
@@ -325,8 +334,14 @@ export interface AboutPageData {
   approachHeadline?: string;
   approachBody?:     string;
   skillsEyebrow?:    string;
-  techStack?:        string[];
-  servicesList?:     string[];
+  techStack?: {
+    label:       string;
+    description: string;
+  }[];
+  servicesList?: {
+    label:       string;
+    description: string;
+  }[];
   promisesEyebrow?:    string;
   promisesHeadline?:   string;
   promisesSubheading?: string;

@@ -51,8 +51,8 @@ export default function CaravanTrail({
   posts,
   eyebrow = "Journal",
   headline = "Latest dispatches.",
-  intro = "Notes on web design, development, and growth — filed from the road, one stop at a time.",
-  emptyStateMessage = "No dispatches yet — check back soon.",
+  intro = "Notes on web design, development, and growth, filed from the road, one stop at a time.",
+  emptyStateMessage = "No dispatches yet, check back soon.",
 }: CaravanTrailProps) {
   return (
     <section style={{ background: colors.bgSand }} className="py-24">

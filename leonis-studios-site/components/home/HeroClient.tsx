@@ -12,19 +12,19 @@ import { tokens } from "@/lib/tokens";
 import type { HomePageData } from "@/lib/types";
 
 const DEFAULT_STATS = [
-  { value: "01", label: "Client Served" },
   { value: "100%", label: "Project Success Rate" },
   { value: "4", label: "Services Offered" },
+  { value: "48hr", label: "Average Response Time" },
 ];
 
 export default function HeroClient({ hero }: { hero?: HomePageData["hero"] }) {
   const [pastHero, setPastHero] = useState(false);
 
-  const eyebrow           = hero?.eyebrow           || "Web Studio · Est. 2026";
+  const eyebrow           = hero?.eyebrow           || "Web Design & Search Growth Studio";
   const headlineLine1     = hero?.headlineLine1     || "Bold.";
   const headlineLine2     = hero?.headlineLine2     || "Digital.";
   const headlineAccent    = hero?.headlineAccent    || "Craft.";
-  const subcopy           = hero?.subcopy           || "Leonis Studios builds high-performance websites, drives search growth, and maintains digital infrastructure for businesses that refuse to settle.";
+  const subcopy           = hero?.subcopy           || "Leonis Studios builds fast, custom websites and makes sure people actually find them, through Google, AI answer engines, and everywhere search is heading next.";
   const primaryCtaLabel   = hero?.primaryCtaLabel   || "Start a Project";
   const secondaryCtaLabel = hero?.secondaryCtaLabel || "View Our Work";
   const stats             = hero?.stats?.length ? hero.stats : DEFAULT_STATS;
@@ -85,7 +85,7 @@ export default function HeroClient({ hero }: { hero?: HomePageData["hero"] }) {
         <h1
           style={{
             fontFamily: "var(--font-display)",
-            fontSize: "clamp(48px, 9vw, 120px)",
+            fontSize: "clamp(52px, 9.5vw, 128px)",
             fontWeight: tokens.weightDisplay,
             lineHeight: 0.92,
             letterSpacing: "-0.03em",
@@ -182,7 +182,7 @@ export default function HeroClient({ hero }: { hero?: HomePageData["hero"] }) {
                 <p
                   style={{
                     fontFamily: "var(--font-display)",
-                    fontSize: "clamp(28px, 4vw, 48px)",
+                    fontSize: "clamp(30px, 4.2vw, 52px)",
                     fontWeight: tokens.weightDisplay,
                     lineHeight: 1,
                     letterSpacing: "-0.02em",

@@ -15,7 +15,7 @@ export default function FeaturedWorkGrid({
   const [hoveredId, setHoveredId] = useState<string | null>(null);
 
   return (
-    <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
+    <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
       {projects.map((project) => {
         const hovered = hoveredId === project._id;
         return (
@@ -62,7 +62,7 @@ export default function FeaturedWorkGrid({
             </div>
 
             {/* Card content */}
-            <div className="p-8">
+            <div className="p-10">
               <div className="flex items-start justify-between gap-4 mb-4">
                 <div>
                   <p

@@ -13,7 +13,7 @@ import Skills from "@/components/about/Skills";
 import AboutCTA from "@/components/about/AboutCTA";
 
 const defaultDescription =
-  "Leonis Studios is a New York web design studio built on craft and performance. Meet Hassan Shirazi, the developer behind every project.";
+  "Leonis Studios is a New York studio building fast, custom websites with SEO and AI search built in. Meet Hassan Shirazi, the person behind every project.";
 
 export async function generateMetadata(): Promise<Metadata> {
   const data: AboutPageData | null = await client

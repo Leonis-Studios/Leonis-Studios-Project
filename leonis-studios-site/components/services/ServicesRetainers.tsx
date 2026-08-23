@@ -27,7 +27,7 @@ export default function ServicesRetainers({
 
   const eyebrow  = section?.eyebrow  || "Ongoing Growth";
   const headline = section?.headline || "Monthly Retainers";
-  const subtext  = section?.subtext  || "Your site launches on day one. A retainer keeps it growing, secure, and ahead of the competition every month after.";
+  const subtext  = section?.subtext  || "Your site launches on day one. A retainer keeps rankings, security, and search visibility improving every month after.";
 
   return (
     <>
@@ -74,7 +74,7 @@ export default function ServicesRetainers({
               <h2
                 style={{
                   fontFamily:    "var(--font-display)",
-                  fontSize:      "clamp(32px, 5vw, 64px)",
+                  fontSize:      "clamp(36px, 5.5vw, 70px)",
                   fontWeight:    tokens.weightDisplay,
                   lineHeight:    0.95,
                   letterSpacing: "-0.025em",

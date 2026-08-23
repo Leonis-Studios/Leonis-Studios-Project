@@ -36,7 +36,7 @@ export default function AboutCTA({ ctaHeadline, ctaSubtext }: Props) {
             <h2
               style={{
                 fontFamily: "var(--font-display)",
-                fontSize: "clamp(32px, 5vw, 64px)",
+                fontSize: "clamp(36px, 5.5vw, 70px)",
                 fontWeight: tokens.weightDisplay,
                 lineHeight: 0.95,
                 letterSpacing: "-0.025em",

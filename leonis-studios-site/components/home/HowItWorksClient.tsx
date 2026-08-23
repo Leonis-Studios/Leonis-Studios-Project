@@ -16,7 +16,7 @@ const DEFAULT_STEPS = [
   {
     title: "Discovery",
     description:
-      "We learn your business, audience, and goals in a focused kickoff call. No briefs, no bloated onboarding — just a direct conversation.",
+      "We learn your business, audience, and goals in a focused kickoff call. No briefs, no bloated onboarding, just a direct conversation.",
   },
   {
     title: "Strategy & Design",
@@ -42,7 +42,7 @@ export default function HowItWorksClient({ howItWorks }: { howItWorks?: HomePage
 
   const eyebrow        = howItWorks?.eyebrow        || "How It Works";
   const headline        = howItWorks?.headline        || "A clear path from idea to launch.";
-  const subtext         = howItWorks?.subtext         || "No guesswork. No disappearing acts. Every project follows the same four-phase process — so you're never in the dark.";
+  const subtext         = howItWorks?.subtext         || "No guesswork, no disappearing acts. Every project follows the same four-phase process, with SEO and site structure built in from day one, so you always know where things stand.";
   const bottomCtaLabel  = howItWorks?.bottomCtaLabel  || "Start Your Project";
   const steps           = howItWorks?.steps?.length ? howItWorks.steps : DEFAULT_STEPS;
 
@@ -100,7 +100,7 @@ export default function HowItWorksClient({ howItWorks }: { howItWorks?: HomePage
         <h2
           style={{
             fontFamily: "var(--font-display)",
-            fontSize: "clamp(32px, 5vw, 64px)",
+            fontSize: "clamp(36px, 5.5vw, 70px)",
             fontWeight: tokens.weightDisplay,
             lineHeight: 0.95,
             letterSpacing: "-0.025em",
@@ -138,7 +138,7 @@ export default function HowItWorksClient({ howItWorks }: { howItWorks?: HomePage
                 onMouseLeave={() => setHoveredIndex(null)}
                 style={{
                   backgroundColor: colors.surfaceDark,
-                  padding: "40px 32px",
+                  padding: "48px 36px",
                   position: "relative",
                   opacity: visible ? undefined : 0,
                   animation: visible

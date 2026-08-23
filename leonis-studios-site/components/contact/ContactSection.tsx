@@ -192,7 +192,7 @@ export default function ContactSection({
                 <ul className="flex flex-col gap-3">
                   {[
                     "A response within one business day",
-                    "No pushy sales tactics — just an honest conversation",
+                    "No pushy sales tactics, just an honest conversation",
                     "A clear outline of scope, timeline, and pricing",
                     "Direct communication, start to finish",
                   ].map((item) => (

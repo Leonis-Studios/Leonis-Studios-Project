@@ -59,20 +59,21 @@ Font families:
   var(--font-body)      — paragraph/body copy only
 
 Font sizes (fluid with clamp — prefer these over arbitrary values):
-  tokens.fontSizes.body       clamp(15px, 1.5vw, 20px)
-  tokens.fontSizes.bodyLarge  clamp(16px, 1.6vw, 21px)
-  tokens.fontSizes.h3         clamp(19px, 2.2vw, 26px)
-  tokens.fontSizes.h3Compact  clamp(16px, 1.5vw, 22px)
+  tokens.fontSizes.body       clamp(16px, 1.6vw, 21px)
+  tokens.fontSizes.bodyLarge  clamp(17px, 1.75vw, 23px)
+  tokens.fontSizes.h3         clamp(21px, 2.5vw, 29px)
+  tokens.fontSizes.h3Compact  clamp(18px, 1.7vw, 24px)
 
-Section headlines: fontSize: "clamp(32px, 5vw, 64px)"
-Hero headline:     fontSize: "clamp(48px, 9vw, 120px)"
+Section headlines: fontSize: "clamp(36px, 5.5vw, 70px)"
+Hero headline (home):        fontSize: "clamp(52px, 9.5vw, 128px)"
+Hero headline (sub-pages):   fontSize: "clamp(52px, 9.5vw, 118px)"
 
 Font weights:
-  tokens.weightDisplay  700   — section h2, hero h1
-  tokens.weightHeading  600   — card h3
-  tokens.weightUI       700   — labels, buttons, nav, eyebrow text
-  tokens.weightBody     600   — all <p> body copy
-  tokens.weightSecondary 600  — secondary/muted paragraphs
+  tokens.weightDisplay  800   — section h2, hero h1
+  tokens.weightHeading  700   — card h3
+  tokens.weightUI       800   — labels, buttons, nav, eyebrow text
+  tokens.weightBody     700   — all <p> body copy
+  tokens.weightSecondary 700  — secondary/muted paragraphs
 ```
 
 ---
@@ -82,7 +83,7 @@ Font weights:
 ### Server vs Client split
 
 - **Server Components**: data fetching (`Services`, `FeaturedWork`, `Footer`). Never add `"use client"` unless browser APIs / state / effects are needed.
-- **Client Components**: interactivity only (`ServicesGrid`, `FeaturedWorkGrid`, `HowItWorks`, `Navbar`, `SandGutter`). Add `"use client"` + explain why at the top.
+- **Client Components**: interactivity only (`ServicesGrid`, `FeaturedWorkGrid`, `HowItWorks`, `BenefitsClient`, `Navbar`, `SandGutter`). Add `"use client"` + explain why at the top.
 - Pattern: Server parent fetches data → passes as props to Client child (e.g., `Services` → `ServicesGrid`).
 
 ### Page layout — `app/(site)/layout.tsx`
@@ -133,6 +134,7 @@ Also renders two `position: absolute` vignette `<div>`s (left + right) that fade
 
 **Rules:**
 - Never place `SandGutter` on the Hero, Marquee, Navbar, or Footer.
+- The home page Benefits section (`BenefitsClient.tsx`, between Marquee and Services) does not use `SandGutter` — it has its own one-shot scroll-triggered "sand curtain" reveal (dense grain field that sweeps away to uncover the section on first scroll into view, then unmounts). Don't add `SandGutter` to it; the two effects aren't meant to combine.
 - When adding a new section to another page (About, Contact), wrap sections in a SandGutter with the appropriate seed for that section's background.
 - See `SAND_THEME.md` for full tuning reference (opacity, speed, path shapes, grain config).
 
@@ -222,7 +224,7 @@ Section padding:   py-24 or py-28 (use py-24 as default)
 Section header:    mb-16 gap-6 (flex with text + subtitle)
 Eyebrow label:     flex items-center gap-4 mb-5 → [8px rule] [text-xs tracking-[0.25em] uppercase accent]
 Grid gap:          gap-px with bg={colors.borderLight or borderDark} as gap colour
-Card padding:      p-10 (standard), p-8 (compact)
+Card padding:      p-12 (standard), p-10 (compact)
 ```
 
 ---

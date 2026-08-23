@@ -18,7 +18,7 @@ export default function ServicesPackages({
 
   const eyebrow  = section?.eyebrow  || "Website Packages";
   const headline = section?.headline || "Choose Your Package";
-  const subtext  = section?.subtext  || "Three focused tiers — each executed with the same uncompromising standard of craft. No templates, no shortcuts.";
+  const subtext  = section?.subtext  || "Three focused tiers, each built with the same uncompromising standard of craft and the same SEO foundation from day one. No templates, no shortcuts.";
 
   return (
     <section
@@ -52,7 +52,7 @@ export default function ServicesPackages({
             <h2
               style={{
                 fontFamily:    "var(--font-display)",
-                fontSize:      "clamp(32px, 5vw, 64px)",
+                fontSize:      "clamp(36px, 5.5vw, 70px)",
                 fontWeight:    tokens.weightDisplay,
                 lineHeight:    0.95,
                 letterSpacing: "-0.025em",

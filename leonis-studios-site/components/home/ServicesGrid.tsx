@@ -73,14 +73,14 @@ export default function ServicesGrid({ services }: { services: Service[] }) {
         </defs>
       </svg>
 
-      <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
+      <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
         {services.map((service, i) => {
           const hovered = hoveredId === service._id;
 
           return (
             <div
               key={service._id}
-              className="relative w-full p-10 flex flex-col overflow-hidden"
+              className="relative w-full p-12 flex flex-col overflow-hidden"
               style={{
                 background: hovered ? colors.bgMuted : colors.bgCard,
                 boxShadow: hovered

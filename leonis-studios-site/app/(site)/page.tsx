@@ -13,6 +13,7 @@ import { HOME_PAGE_QUERY } from "@/sanity/lib/queries";
 import type { HomePageData } from "@/lib/types";
 import Hero             from "@/components/home/Hero";
 import Marquee          from "@/components/home/Marquee";
+import Benefits         from "@/components/home/Benefits";
 import Services         from "@/components/home/Services";
 import HowItWorks       from "@/components/home/HowItWorks";
 import FeaturedWork     from "@/components/home/FeaturedWork";
@@ -116,6 +117,7 @@ export default function HomePage() {
       <JsonLd data={websiteSchema} />
       <Hero />
       <Marquee />
+      <Benefits />
       <Services />
       <HowItWorks />
       <FeaturedWork />

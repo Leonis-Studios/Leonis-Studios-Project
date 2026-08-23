@@ -13,7 +13,7 @@ const siteConfig = {
   name: "Leonis Studios",
   tagline: "Website Building Your Way.",
   description:
-    "Leonis Studios builds high-performance websites, drives search growth, and maintains digital infrastructure for businesses that refuse to settle.",
+    "Leonis Studios builds custom websites optimized for Google, AI search engines, and local search, helping the right customers find your business.",
 
   url: "https://leonisstudios.com", // update when your domain is live
   email: "hassan.shirazi@leonisstudios.com",

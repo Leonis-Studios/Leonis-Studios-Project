@@ -21,7 +21,7 @@ export default async function Services() {
 
   const eyebrow  = homePage?.servicesSection?.eyebrow  || "What We Do";
   const headline = homePage?.servicesSection?.headline || "Our Services";
-  const subtext  = homePage?.servicesSection?.subtext  || "Three focused website packages, each executed with the same uncompromising standard of craft.";
+  const subtext  = homePage?.servicesSection?.subtext  || "Three focused website packages, each built with search visibility as a foundation, not an afterthought.";
 
   return (
     <section id="services" className="bg-white py-24 pb-32" style={{ position: "relative", zIndex: 1, overflow: "hidden" }}>
@@ -43,7 +43,7 @@ export default async function Services() {
             <h2
               style={{
                 fontFamily:    "var(--font-display)",
-                fontSize:      "clamp(32px, 5vw, 64px)",
+                fontSize:      "clamp(36px, 5.5vw, 70px)",
                 fontWeight:    tokens.weightDisplay,
                 lineHeight:    0.95,
                 letterSpacing: "-0.025em",
