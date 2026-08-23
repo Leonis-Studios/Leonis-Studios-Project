@@ -212,6 +212,7 @@ function TagRow({
           <button
             key={item.label}
             type="button"
+            className="leo-tag-btn"
             aria-expanded={isOpen}
             onClick={() => onSelect(item.label)}
             style={{
@@ -226,7 +227,7 @@ function TagRow({
               padding:       "8px 16px",
               display:       "inline-block",
               cursor:        "pointer",
-              transition:    "background 0.2s ease, color 0.2s ease",
+              transition:    "background 0.2s ease, color 0.2s ease, transform 0.25s cubic-bezier(0.16,1,0.3,1), box-shadow 0.25s ease, border-color 0.25s ease",
             }}
           >
             {item.label}
@@ -258,6 +259,41 @@ export default function Skills({ eyebrow: eyebrowProp, techStack, servicesList }
         @keyframes skillPanelIn {
           from { opacity: 0; transform: translateY(-6px); }
           to   { opacity: 1; transform: translateY(0); }
+        }
+        .leo-tag-btn {
+          position: relative;
+          overflow: hidden;
+        }
+        .leo-tag-btn::before {
+          content: "";
+          position: absolute;
+          inset: 0;
+          pointer-events: none;
+          opacity: 0;
+          transition: opacity 0.3s ease;
+          background-image:
+            radial-gradient(circle at 12% 30%, rgba(180,110,0,0.55) 0.6px, transparent 0.6px),
+            radial-gradient(circle at 34% 70%, rgba(180,110,0,0.45) 0.5px, transparent 0.5px),
+            radial-gradient(circle at 58% 25%, rgba(180,110,0,0.5) 0.7px, transparent 0.7px),
+            radial-gradient(circle at 78% 65%, rgba(180,110,0,0.4) 0.5px, transparent 0.5px),
+            radial-gradient(circle at 90% 35%, rgba(180,110,0,0.5) 0.6px, transparent 0.6px);
+          background-size: 18px 18px;
+        }
+        .leo-tag-btn:hover {
+          border-color: rgba(180,110,0,0.6) !important;
+        }
+        .leo-tag-btn:hover::before {
+          opacity: 1;
+        }
+        @media (prefers-reduced-motion: no-preference) {
+          .leo-tag-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 4px 14px rgba(180,110,0,0.25);
+          }
+        }
+        .leo-tag-panel-wrap {
+          display: grid;
+          transition: grid-template-rows 0.4s cubic-bezier(0.16,1,0.3,1);
         }
       `}</style>
       <div className="max-w-7xl mx-auto px-6 lg:px-12">
@@ -299,7 +335,14 @@ export default function Skills({ eyebrow: eyebrowProp, techStack, servicesList }
               variant="tech"
               onSelect={(label) => setOpenTech((prev) => (prev === label ? null : label))}
             />
-            {activeTech && <TagPanel key={activeTech.label} item={activeTech} />}
+            <div
+              className="leo-tag-panel-wrap"
+              style={{ gridTemplateRows: activeTech ? "1fr" : "0fr" }}
+            >
+              <div style={{ overflow: "hidden" }}>
+                {activeTech && <TagPanel key={activeTech.label} item={activeTech} />}
+              </div>
+            </div>
           </div>
 
           {/* Services */}
@@ -322,7 +365,14 @@ export default function Skills({ eyebrow: eyebrowProp, techStack, servicesList }
               variant="service"
               onSelect={(label) => setOpenService((prev) => (prev === label ? null : label))}
             />
-            {activeService && <TagPanel key={activeService.label} item={activeService} />}
+            <div
+              className="leo-tag-panel-wrap"
+              style={{ gridTemplateRows: activeService ? "1fr" : "0fr" }}
+            >
+              <div style={{ overflow: "hidden" }}>
+                {activeService && <TagPanel key={activeService.label} item={activeService} />}
+              </div>
+            </div>
           </div>
 
         </div>
