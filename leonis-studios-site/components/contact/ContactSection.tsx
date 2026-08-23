@@ -64,6 +64,7 @@ export default function ContactSection({
   const [status, setStatus] = useState<Status>("idle");
   const [errorMsg, setErrorMsg] = useState("");
   const [reducedMotion, setReducedMotion] = useState(false);
+  const [glintDone, setGlintDone] = useState(false);
   const { ref: infoRef, inView: infoIn } = useInViewOnce<HTMLDivElement>(0.2);
   const { ref: panelRef, inView: panelIn } = useInViewOnce<HTMLDivElement>(0.15);
 
@@ -131,10 +132,6 @@ export default function ContactSection({
           40%  { opacity: 1; }
           100% { opacity: 0; transform: translateY(6px) scale(1); }
         }
-        @keyframes railItemIn {
-          from { opacity: 0; transform: translateX(-10px); }
-          to   { opacity: 1; transform: translateX(0); }
-        }
         @keyframes panelGlint {
           from { transform: translateX(-160%) skewX(-12deg); opacity: 0; }
           20%  { opacity: 0.8; }
@@ -196,9 +193,10 @@ export default function ContactSection({
                   <div
                     key={row.label}
                     style={{
-                      position: "relative",
-                      opacity: infoIn ? undefined : 0,
-                      animation: infoIn ? `railItemIn 0.5s cubic-bezier(0.16,1,0.3,1) ${0.25 + i * 0.12}s both` : undefined,
+                      position:   "relative",
+                      opacity:    infoIn ? 1 : 0,
+                      transform:  infoIn ? "translateX(0)" : "translateX(-10px)",
+                      transition: `opacity 0.5s cubic-bezier(0.16,1,0.3,1) ${infoIn ? 0.25 + i * 0.12 : 0}s, transform 0.5s cubic-bezier(0.16,1,0.3,1) ${infoIn ? 0.25 + i * 0.12 : 0}s`,
                     }}
                   >
                     <span
@@ -274,8 +272,9 @@ export default function ContactSection({
                         fontWeight: tokens.weightSecondary,
                         color: colors.textSubtle,
                         lineHeight: 1.6,
-                        opacity: infoIn ? undefined : 0,
-                        animation: infoIn ? `railItemIn 0.5s cubic-bezier(0.16,1,0.3,1) ${0.6 + i * 0.08}s both` : undefined,
+                        opacity:    infoIn ? 1 : 0,
+                        transform:  infoIn ? "translateX(0)" : "translateX(-10px)",
+                        transition: `opacity 0.5s cubic-bezier(0.16,1,0.3,1) ${infoIn ? 0.6 + i * 0.08 : 0}s, transform 0.5s cubic-bezier(0.16,1,0.3,1) ${infoIn ? 0.6 + i * 0.08 : 0}s`,
                       }}
                     >
                       <span
@@ -312,9 +311,13 @@ export default function ContactSection({
               transition: "opacity 0.7s cubic-bezier(0.16,1,0.3,1), transform 0.7s cubic-bezier(0.16,1,0.3,1)",
             }}
           >
-            {panelIn && !reducedMotion && (
+            {/* Mounted only while playing — unmounts itself on completion (rather
+                than relying on fill-mode) so there's no resting frame that could
+                snap back to a stuck-opaque overlay across the form. */}
+            {panelIn && !reducedMotion && !glintDone && (
               <span
                 aria-hidden="true"
+                onAnimationEnd={() => setGlintDone(true)}
                 style={{
                   position: "absolute",
                   top: 0,
@@ -361,7 +364,7 @@ export default function ContactSection({
                         height: "3px",
                         borderRadius: "50%",
                         background: "rgba(180,110,0,0.7)",
-                        animation: `settle ${0.6 + (i % 5) * 0.08}s ease ${(i % 6) * 0.05}s 1 both`,
+                        animation: `settle ${0.6 + (i % 5) * 0.08}s ease ${(i % 6) * 0.05}s 1 forwards`,
                         pointerEvents: "none",
                       }}
                     />

@@ -20,6 +20,7 @@ export default function StoryReveal({
 }) {
   const { ref, inView } = useInViewOnce<HTMLDivElement>(0.2);
   const [reduced, setReduced] = useState(false);
+  const [glintDone, setGlintDone] = useState(false);
 
   useEffect(() => {
     setReduced(window.matchMedia("(prefers-reduced-motion: reduce)").matches);
@@ -83,9 +84,15 @@ export default function StoryReveal({
       <div className="lg:sticky lg:top-32" style={{ position: "relative", zIndex: 1 }}>
         <div style={{ position: "relative", overflow: "hidden" }}>
           {quote}
-          {revealed && !reduced && (
+          {/* Mounted only while playing — unmounts itself on completion so
+              there's no resting frame that could snap back to fully opaque
+              over the quote text (a CSS animation with no fill-mode reverts
+              to its unanimated resting style, not to invisible, once it
+              stops applying). */}
+          {revealed && !reduced && !glintDone && (
             <span
               aria-hidden="true"
+              onAnimationEnd={() => setGlintDone(true)}
               style={{
                 position: "absolute",
                 top: 0,

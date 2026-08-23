@@ -9,8 +9,20 @@
 // dark surfaceDark section (SandGutter seed 1, matching HowItWorks/AboutCTA),
 // a faint fault-line vein running behind the grid, and each card carved with
 // two clipped gem corners + a faceted diamond number-badge that catches a
-// one-shot light glint as it crystallizes into view.
+// one-shot light glint on hover.
+//
+// All entrance/interaction motion here is transition-driven off plain state
+// (opacity/transform/border-color), not `animation:` keyframes toggled by a
+// conditional. A CSS animation with no explicit fill-mode reverts to its
+// element's *unanimated* resting style the instant it stops being applied —
+// on `:hover` end, or once a finite-iteration animation completes — so a
+// glint sweep with no resting opacity:0 snaps back to fully opaque instead
+// of disappearing. Transitions have no such "return to default" edge case:
+// the target value IS the resting value. The one deliberately animation-based
+// bit (the badge glint) is mounted only while playing and unmounts itself
+// via onAnimationEnd, so there's nothing left to snap back.
 
+import { useState } from "react";
 import { colors } from "@/lib/colors";
 import { tokens } from "@/lib/tokens";
 import SandGutter from "@/components/SandGutter";
@@ -63,18 +75,10 @@ export default function Values({ eyebrow: eyebrowProp, values }: Props) {
     >
       <SandGutter seed={1} />
       <style>{`
-        @keyframes gemCardIn {
-          from { opacity: 0; transform: translateY(22px) scale(0.97); }
-          to   { opacity: 1; transform: translateY(0) scale(1); }
-        }
         @keyframes gemBadgeGlint {
           from { transform: translateX(-160%) rotate(20deg); opacity: 0; }
           20%  { opacity: 1; }
           to   { transform: translateX(220%) rotate(20deg); opacity: 0; }
-        }
-        @keyframes veinFadeIn {
-          from { opacity: 0; }
-          to   { opacity: 1; }
         }
         .leo-gem-card {
           position: relative;
@@ -91,11 +95,6 @@ export default function Values({ eyebrow: eyebrowProp, values }: Props) {
         }
         @media (prefers-reduced-motion: no-preference) {
           .leo-gem-card:hover::before { opacity: 1; }
-          .leo-gem-card:hover { transform: translateY(-5px); }
-          .leo-gem-card:hover .leo-gem-badge-glint { animation: gemBadgeGlint 0.9s cubic-bezier(0.16,1,0.3,1) 1; }
-        }
-        .leo-gem-card {
-          transition: transform 0.35s cubic-bezier(0.16,1,0.3,1), border-color 0.35s ease;
         }
       `}</style>
 
@@ -134,7 +133,7 @@ export default function Values({ eyebrow: eyebrowProp, values }: Props) {
             zIndex:     0,
             pointerEvents: "none",
             opacity:    headIn ? 1 : 0,
-            animation:  headIn ? "veinFadeIn 1.6s ease 0.2s both" : undefined,
+            transition: "opacity 1.6s ease 0.2s",
           }}
         >
           <svg
@@ -179,18 +178,32 @@ function GemCard({ value, index, offset }: { value: Value; index: number; offset
     delayRange:    [0, 150],
     durationRange: [450, 750],
   });
+  const [hovered, setHovered]   = useState(false);
+  const [glinting, setGlinting] = useState(false);
+
+  function handleEnter() {
+    setHovered(true);
+    if (!glinting && !window.matchMedia("(prefers-reduced-motion: reduce)").matches) {
+      setGlinting(true);
+    }
+  }
 
   return (
     <div
       ref={ref}
       className={`leo-gem-card ${offset ? "lg:mt-14" : ""}`}
+      onMouseEnter={handleEnter}
+      onMouseLeave={() => setHovered(false)}
       style={{
         clipPath:   GEM_CLIP,
         padding:    "40px 36px 36px 36px",
         background: "linear-gradient(155deg, rgba(255,255,255,0.05), rgba(255,255,255,0.015))",
         border:     `1px solid rgba(252,163,17,0.2)`,
-        opacity:    inView ? undefined : 0,
-        animation:  inView ? `gemCardIn 0.6s cubic-bezier(0.16,1,0.3,1) ${index * 90}ms both` : undefined,
+        opacity:    inView ? 1 : 0,
+        transform:  !inView
+          ? "translateY(22px) scale(0.97)"
+          : hovered ? "translateY(-5px) scale(1)" : "translateY(0) scale(1)",
+        transition: `opacity 0.55s cubic-bezier(0.16,1,0.3,1) ${inView ? index * 90 : 0}ms, transform 0.45s cubic-bezier(0.16,1,0.3,1)`,
       }}
     >
       {showCanvas && (
@@ -210,6 +223,7 @@ function GemCard({ value, index, offset }: { value: Value; index: number; offset
           display:   "flex",
           alignItems: "center",
           justifyContent: "center",
+          overflow:  "hidden",
         }}
       >
         <span
@@ -219,20 +233,27 @@ function GemCard({ value, index, offset }: { value: Value; index: number; offset
             fontWeight: tokens.weightUI,
             color:      colors.surfaceDark,
             letterSpacing: "-0.02em",
+            position:   "relative",
+            zIndex:     1,
           }}
         >
           {String(index + 1).padStart(2, "0")}
         </span>
-        <span
-          className="leo-gem-badge-glint"
-          aria-hidden="true"
-          style={{
-            position:  "absolute",
-            inset:     0,
-            background: "linear-gradient(100deg, transparent, rgba(255,255,255,0.75) 45%, transparent)",
-            pointerEvents: "none",
-          }}
-        />
+        {/* Mounted only while playing — unmounts itself on completion so there's
+            no resting frame left to snap back to opaque. */}
+        {glinting && (
+          <span
+            aria-hidden="true"
+            onAnimationEnd={() => setGlinting(false)}
+            style={{
+              position:  "absolute",
+              inset:     0,
+              background: "linear-gradient(100deg, transparent, rgba(255,255,255,0.75) 45%, transparent)",
+              animation: "gemBadgeGlint 0.9s cubic-bezier(0.16,1,0.3,1) 1",
+              pointerEvents: "none",
+            }}
+          />
+        )}
       </div>
 
       <h3
