@@ -80,7 +80,9 @@ export async function generateMetadata({
     alternates: {
       canonical: `${siteConfig.url}/work/${project.slug}`,
     },
-    robots: project.noindex ? { index: false, follow: true } : undefined,
+    // Spread, not `robots: undefined` — an explicit undefined key
+    // overrides the root layout's robots/googleBot directives.
+    ...(project.noindex ? { robots: { index: false, follow: true } } : {}),
   };
 }
 

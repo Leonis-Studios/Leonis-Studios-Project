@@ -57,7 +57,9 @@ export async function generateMetadata(): Promise<Metadata> {
     alternates: {
       canonical: `${siteConfig.url}/blog`,
     },
-    robots: pageSettings?.seo?.noindex ? { index: false, follow: true } : undefined,
+    // Spread, not `robots: undefined` — an explicit undefined key
+    // overrides the root layout's robots/googleBot directives.
+    ...(pageSettings?.seo?.noindex ? { robots: { index: false, follow: true } } : {}),
   };
 }
 
