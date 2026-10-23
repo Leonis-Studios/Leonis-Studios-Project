@@ -26,8 +26,8 @@ export default function ServicesRetainers({
   if (services.length === 0) return null;
 
   const eyebrow  = section?.eyebrow  || "Ongoing Growth";
-  const headline = section?.headline || "Monthly Retainers";
-  const subtext  = section?.subtext  || "Your site launches on day one. A retainer keeps rankings, security, and search visibility improving every month after.";
+  const headline = section?.headline || "Monthly retainers.";
+  const subtext  = section?.subtext  || "Launch gets you on the map. A retainer keeps you climbing, with fresh content, local SEO, and monthly reports so you can watch your rankings and leads grow.";
 
   return (
     <>

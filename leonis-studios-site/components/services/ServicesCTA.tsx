@@ -8,10 +8,10 @@ import SandGutter  from "@/components/SandGutter";
 import type { ServicesPageData } from "@/lib/types";
 
 export default function ServicesCTA({ section }: { section?: ServicesPageData["ctaSection"] }) {
-  const eyebrow             = section?.eyebrow             || "Ready to Start?";
-  const headline            = section?.headline            || "Let's build something worth talking about.";
-  const subtext             = section?.subtext             || "Tell us about your project and we'll respond within 24 hours with a plan and a quote. No commitment required.";
-  const primaryCtaLabel     = section?.primaryCtaLabel     || "Get In Touch";
+  const eyebrow             = section?.eyebrow             || "Not sure which fits?";
+  const headline            = section?.headline            || "Tell us your goals. We'll point you to the right package.";
+  const subtext             = section?.subtext             || "Send a quick note about your business and we'll reply within 24 hours with a recommendation and a quote. No commitment needed.";
+  const primaryCtaLabel     = section?.primaryCtaLabel     || "Get a Free Quote";
   const secondaryCtaLabel   = section?.secondaryCtaLabel   || "See Our Work";
 
   return (

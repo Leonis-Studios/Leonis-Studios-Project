@@ -124,6 +124,7 @@ export default async function BlogPostPage({
       : { "@type": "Organization", name: siteConfig.name },
     publisher: {
       "@type": "Organization",
+      "@id": `${siteConfig.url}/#organization`,
       name: siteConfig.name,
       url: siteConfig.url,
     },

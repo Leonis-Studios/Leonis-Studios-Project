@@ -1,18 +1,19 @@
 import type { Metadata }    from "next";
-import type { ItemList, BreadcrumbList, WithContext } from "schema-dts";
+import type { ItemList, BreadcrumbList, FAQPage, WithContext } from "schema-dts";
 import siteConfig            from "@/site.config";
 import { client }            from "@/sanity/lib/client";
-import { ALL_SERVICES_QUERY, SERVICES_PAGE_QUERY } from "@/sanity/lib/queries";
-import type { Service, ServicesPageData } from "@/lib/types";
+import { ALL_SERVICES_QUERY, SERVICES_PAGE_QUERY, FAQ_ITEMS_QUERY } from "@/sanity/lib/queries";
+import type { Service, ServicesPageData, FaqItem } from "@/lib/types";
 import JsonLd                 from "@/components/JsonLd";
 import ServicesHero          from "@/components/services/ServicesHero";
 import ServicesPackages      from "@/components/services/ServicesPackages";
 import ServicesRetainers     from "@/components/services/ServicesRetainers";
 import ServicesAddons        from "@/components/services/ServicesAddons";
 import ServicesCTA           from "@/components/services/ServicesCTA";
+import ContentFAQ            from "@/components/shared/ContentFAQ";
 
 const defaultDescription =
-  "Leonis Studios offers website packages, retainers, and SEO, GEO, and AEO services for businesses ready to be found in search and AI answers.";
+  "Lead generation website packages with custom design, SEO, and AI search optimization built in. Clear pricing, plus monthly retainers to keep growing.";
 
 export async function generateMetadata(): Promise<Metadata> {
   const servicesPage: ServicesPageData | null = await client
@@ -27,15 +28,15 @@ export async function generateMetadata(): Promise<Metadata> {
     title,
     description,
     keywords: [
-      "web design services",
-      "website packages New York",
-      "monthly retainer web design",
-      "SEO services New York",
-      "Next.js website design",
+      "lead generation website packages",
+      "website design pricing",
+      "SEO web design packages",
+      "GEO and AEO services",
+      "AI search optimization services",
+      "local SEO retainer",
       "small business web design NYC",
-      "Leonis Studios services",
-      "website maintenance",
-      "web development packages",
+      "website maintenance retainer",
+      "Leonis Studios pricing",
     ],
     openGraph: {
       title:       `Services — ${siteConfig.name}`,
@@ -65,6 +66,15 @@ export default async function ServicesPage() {
     .fetch(SERVICES_PAGE_QUERY, {}, { next: { revalidate: 3600 } })
     .catch(() => null);
 
+  // Pricing + process questions answered right next to the prices —
+  // the page most likely to be cited for "how much does X cost" queries.
+  const faqItems: FaqItem[] = await client
+    .fetch(FAQ_ITEMS_QUERY, {}, { next: { revalidate: 3600 } })
+    .catch(() => []);
+  const servicesFaq = faqItems
+    .filter((f) => f.category === "pricing" || f.category === "process")
+    .map((f) => ({ _key: f._id, question: f.question, answer: f.answer }));
+
   const packages  = allServices.filter((s) => s.category === "package");
   const retainers = allServices.filter((s) => s.category === "retainer");
   const addons    = allServices.filter((s) => s.category === "addon");
@@ -86,9 +96,11 @@ export default async function ServicesPage() {
         description:  service.description,
         provider: {
           "@type": "Organization",
+          "@id":   `${siteConfig.url}/#organization`,
           name:    "Leonis Studios",
           url:     siteConfig.url,
         },
+        areaServed: { "@type": "Country", name: "United States" },
         ...(service.startingPrice
           ? {
               offers: {
@@ -113,14 +125,28 @@ export default async function ServicesPage() {
     ],
   };
 
+  const faqSchema: WithContext<FAQPage> | null = servicesFaq.length
+    ? {
+        "@context": "https://schema.org",
+        "@type":    "FAQPage",
+        mainEntity: servicesFaq.map((f) => ({
+          "@type": "Question",
+          name:    f.question,
+          acceptedAnswer: { "@type": "Answer", text: f.answer },
+        })),
+      }
+    : null;
+
   return (
     <>
       <JsonLd data={itemListSchema} />
+      {faqSchema && <JsonLd data={faqSchema} />}
       <JsonLd data={breadcrumbSchema} />
       <ServicesHero hero={servicesPage?.hero} />
       <ServicesPackages  services={packages}  section={servicesPage?.packagesSection} />
       <ServicesRetainers services={retainers} section={servicesPage?.retainersSection} />
       <ServicesAddons    services={addons}    section={servicesPage?.addonsSection} />
+      <ContentFAQ items={servicesFaq} eyebrow="Pricing & Process" headline="Common questions before you start." />
       <ServicesCTA section={servicesPage?.ctaSection} />
     </>
   );

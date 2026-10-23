@@ -12,21 +12,21 @@ import { tokens } from "@/lib/tokens";
 import type { HomePageData } from "@/lib/types";
 
 const DEFAULT_STATS = [
-  { value: "100%", label: "Project Success Rate" },
-  { value: "4", label: "Services Offered" },
-  { value: "48hr", label: "Average Response Time" },
+  { value: "95+", label: "Performance score on every build" },
+  { value: "24hr", label: "Reply to every inquiry" },
+  { value: "3", label: "Ways to get found: SEO, GEO, AEO" },
 ];
 
 export default function HeroClient({ hero }: { hero?: HomePageData["hero"] }) {
   const [pastHero, setPastHero] = useState(false);
 
-  const eyebrow           = hero?.eyebrow           || "Web Design & Search Growth Studio";
-  const headlineLine1     = hero?.headlineLine1     || "Bold.";
-  const headlineLine2     = hero?.headlineLine2     || "Digital.";
-  const headlineAccent    = hero?.headlineAccent    || "Craft.";
-  const subcopy           = hero?.subcopy           || "Leonis Studios builds fast, custom websites and makes sure people actually find them, through Google, AI answer engines, and everywhere search is heading next.";
-  const primaryCtaLabel   = hero?.primaryCtaLabel   || "Start a Project";
-  const secondaryCtaLabel = hero?.secondaryCtaLabel || "View Our Work";
+  const eyebrow           = hero?.eyebrow           || "Lead Generation Websites · SEO · GEO · AEO";
+  const headlineLine1     = hero?.headlineLine1     || "Get Found.";
+  const headlineLine2     = hero?.headlineLine2     || "Get Chosen.";
+  const headlineAccent    = hero?.headlineAccent    || "Get Leads.";
+  const subcopy           = hero?.subcopy           || "We design and build custom websites that show up on Google, get mentioned by AI tools like ChatGPT, and turn the people who land on them into real inquiries.";
+  const primaryCtaLabel   = hero?.primaryCtaLabel   || "Get a Free Quote";
+  const secondaryCtaLabel = hero?.secondaryCtaLabel || "See Our Work";
   const stats             = hero?.stats?.length ? hero.stats : DEFAULT_STATS;
 
   useEffect(() => {

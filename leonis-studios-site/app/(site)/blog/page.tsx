@@ -17,7 +17,7 @@ import siteConfig           from "@/site.config";
 import { colors }           from "@/lib/colors";
 
 const blogDescription =
-  "Insights on web design, Next.js development, and SEO from the Leonis Studios team.";
+  "Plain-English guides on SEO, GEO, AEO, and web design that turns visitors into leads, from the team at Leonis Studios.";
 
 export async function generateMetadata(): Promise<Metadata> {
   const pageSettings: BlogPageSettings | null = await client
@@ -36,11 +36,11 @@ export async function generateMetadata(): Promise<Metadata> {
     title: { absolute: title },
     description,
     keywords: [
+      "SEO tips for small business",
+      "AEO and GEO guide",
+      "AI search optimization",
+      "lead generation website tips",
       "Leonis Studios blog",
-      "web design insights",
-      "Next.js development blog",
-      "SEO tips",
-      "website growth strategy",
     ],
     openGraph: {
       title,

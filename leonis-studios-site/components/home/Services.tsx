@@ -19,9 +19,9 @@ export default async function Services() {
     .fetch(HOME_PAGE_QUERY, {}, { next: { revalidate: 3600 } })
     .catch(() => null);
 
-  const eyebrow  = homePage?.servicesSection?.eyebrow  || "What We Do";
-  const headline = homePage?.servicesSection?.headline || "Our Services";
-  const subtext  = homePage?.servicesSection?.subtext  || "Three focused website packages, each built with search visibility as a foundation, not an afterthought.";
+  const eyebrow  = homePage?.servicesSection?.eyebrow  || "Website Packages";
+  const headline = homePage?.servicesSection?.headline || "Pick your starting point.";
+  const subtext  = homePage?.servicesSection?.subtext  || "Three packages, all built to generate leads. SEO, AI search visibility, and conversion-focused design come standard in every one.";
 
   return (
     <section id="services" className="bg-white py-24 pb-32" style={{ position: "relative", zIndex: 1, overflow: "hidden" }}>
@@ -78,7 +78,7 @@ export default async function Services() {
               textDecoration: "none",
             }}
           >
-            Start a Project →
+            Get a Free Quote →
           </Link>
         </div>
 

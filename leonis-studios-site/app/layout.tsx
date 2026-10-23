@@ -35,7 +35,16 @@ export async function generateMetadata(): Promise<Metadata> {
       description,
       images:      ogImage ? [ogImage] : [],
     },
-    robots: { index: true, follow: true },
+    robots: {
+      index: true,
+      follow: true,
+      googleBot: { index: true, follow: true, "max-image-preview": "large", "max-snippet": -1 },
+    },
+    // Search Console HTML-tag verification. Set GOOGLE_SITE_VERIFICATION
+    // in Vercel to the content="..." value Search Console gives you.
+    ...(process.env.GOOGLE_SITE_VERIFICATION
+      ? { verification: { google: process.env.GOOGLE_SITE_VERIFICATION } }
+      : {}),
     icons: {
       icon: [
         { url: "/icons/favicon-16x16.png", sizes: "16x16", type: "image/png" },

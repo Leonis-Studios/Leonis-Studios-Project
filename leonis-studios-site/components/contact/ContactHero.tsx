@@ -3,10 +3,10 @@ import { tokens } from "@/lib/tokens";
 import type { ContactPageData } from "@/lib/types";
 
 export default function ContactHero({ hero }: { hero?: ContactPageData["hero"] }) {
-  const eyebrow        = hero?.eyebrow        || "Contact";
-  const headlineLine1  = hero?.headlineLine1  || "Start a";
-  const headlineAccent = hero?.headlineAccent || "Project.";
-  const subheading      = hero?.subheading      || "Tell me about what you're building. I'll respond within 24 hours with thoughts, questions, and next steps.";
+  const eyebrow        = hero?.eyebrow        || "Free Quote";
+  const headlineLine1  = hero?.headlineLine1  || "Let's Get You";
+  const headlineAccent = hero?.headlineAccent || "More Leads.";
+  const subheading      = hero?.subheading      || "Tell me a bit about your business and what you want your website to do. I'll reply within 24 hours with ideas, a rough plan, and a quote.";
 
   return (
     <section

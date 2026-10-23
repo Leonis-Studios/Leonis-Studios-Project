@@ -17,8 +17,8 @@ export default function ServicesPackages({
   if (services.length === 0) return null;
 
   const eyebrow  = section?.eyebrow  || "Website Packages";
-  const headline = section?.headline || "Choose Your Package";
-  const subtext  = section?.subtext  || "Three focused tiers, each built with the same uncompromising standard of craft and the same SEO foundation from day one. No templates, no shortcuts.";
+  const headline = section?.headline || "Choose your package.";
+  const subtext  = section?.subtext  || "Every tier includes custom design, on-page SEO, and a clear path to contact you on every page. The difference is how much ground you want to cover.";
 
   return (
     <section

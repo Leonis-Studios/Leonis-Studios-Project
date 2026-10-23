@@ -20,8 +20,8 @@ export default async function FAQ() {
     .catch(() => null);
 
   const eyebrow  = homePage?.faqSection?.eyebrow  || "FAQ";
-  const headline = homePage?.faqSection?.headline || "Frequently asked questions";
-  const intro    = homePage?.faqSection?.intro    || "Everything you need to know about working with Leonis Studios — from pricing and timelines to process and ongoing support.";
+  const headline = homePage?.faqSection?.headline || "Questions we get asked a lot.";
+  const intro    = homePage?.faqSection?.intro    || "Straight answers about pricing, timelines, SEO, and how a website actually brings in leads. Don't see your question? Just ask.";
 
   // FAQPage schema — parsed by Google, Bing, and AI assistants for AEO
   const faqSchema: WithContext<FAQPage> = {

@@ -37,14 +37,15 @@ export async function generateMetadata(): Promise<Metadata> {
     title: { absolute: title },
     description,
     keywords: [
-      "web design studio",
-      "Next.js development agency",
-      "SEO optimization services",
-      "website maintenance",
+      "lead generation websites",
+      "lead generation web design",
+      "SEO web design",
+      "GEO generative engine optimization",
+      "AEO answer engine optimization",
+      "AI search optimization",
       "web design New York",
-      "web developer New York",
-      "high-performance websites",
       "small business web design",
+      "custom website design",
     ],
     openGraph: {
       title:       `${siteConfig.name} — ${siteConfig.tagline}`,
@@ -67,49 +68,73 @@ export async function generateMetadata(): Promise<Metadata> {
 
 export default function HomePage() {
   // ── JSON-LD structured data ──────────────────────────────
-  // Built as untyped literals first, then assigned to schema-dts-typed
-  // consts — some fields here (serviceType on Organization, the
-  // "query-input" SearchAction property Google's docs specify) fall
-  // outside schema-dts's strict shape but are valid, widely-supported
-  // JSON-LD. The indirection keeps the data byte-for-byte identical
-  // to before while still getting a WithContext<T> type on the const.
+  // Built as untyped literals first, then cast to schema-dts types —
+  // a few fields (serviceType on Organization) fall outside schema-dts's
+  // strict shape but are valid, widely-supported JSON-LD.
+  // The @id lets the about page's ProfessionalService node and every
+  // page's publisher reference resolve to this same entity.
+  const sameAs = Object.values(siteConfig.social).filter(Boolean);
   const organizationData = {
     "@context":   "https://schema.org",
     "@type":      "Organization",
+    "@id":        `${siteConfig.url}/#organization`,
     name:         siteConfig.name,
     url:          siteConfig.url,
     logo:         `${siteConfig.url}/logo-square.png`,
+    slogan:       siteConfig.tagline,
     description:  siteConfig.description,
     email:        siteConfig.email,
+    founder: {
+      "@type": "Person",
+      name:    "Hassan Shirazi",
+    },
     address: {
       "@type":         "PostalAddress",
       addressLocality: "New York",
       addressRegion:   "NY",
       addressCountry:  "US",
     },
-    areaServed:   "United States",
+    areaServed:   { "@type": "Country", name: "United States" },
+    contactPoint: {
+      "@type":           "ContactPoint",
+      contactType:       "sales",
+      email:             siteConfig.email,
+      url:               `${siteConfig.url}/contact`,
+      availableLanguage: "English",
+    },
     serviceType: [
-      "Web Design",
+      "Lead Generation Web Design",
       "Web Development",
-      "SEO Optimization",
+      "Search Engine Optimization (SEO)",
+      "Generative Engine Optimization (GEO)",
+      "Answer Engine Optimization (AEO)",
+      "Local SEO",
       "Website Maintenance",
     ],
+    knowsAbout: [
+      "Lead generation websites",
+      "Search engine optimization",
+      "Generative engine optimization",
+      "Answer engine optimization",
+      "AI search visibility",
+      "Local SEO",
+      "Conversion-focused web design",
+      "Next.js",
+    ],
+    ...(sameAs.length ? { sameAs } : {}),
   } as const;
-  const organizationSchema = organizationData as WithContext<Organization>;
+  const organizationSchema = organizationData as unknown as WithContext<Organization>;
 
-  const websiteData = {
-    "@context": "https://schema.org",
-    "@type":    "WebSite",
-    name:       siteConfig.name,
-    url:        siteConfig.url,
+  const websiteSchema: WithContext<WebSite> = {
+    "@context":  "https://schema.org",
+    "@type":     "WebSite",
+    "@id":       `${siteConfig.url}/#website`,
+    name:        siteConfig.name,
+    url:         siteConfig.url,
     description: siteConfig.description,
-    potentialAction: {
-      "@type":       "SearchAction",
-      target:        `${siteConfig.url}/work?q={search_term_string}`,
-      "query-input": "required name=search_term_string",
-    },
-  } as const;
-  const websiteSchema: WithContext<WebSite> = websiteData;
+    inLanguage:  "en-US",
+    publisher:   { "@id": `${siteConfig.url}/#organization` },
+  };
 
   return (
     <>

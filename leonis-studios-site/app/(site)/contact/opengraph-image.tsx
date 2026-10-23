@@ -1,6 +1,7 @@
 import { ImageResponse } from "next/og";
 import { colors } from "@/lib/colors";
 import { tokens } from "@/lib/tokens";
+import siteConfig from "@/site.config";
 
 export const runtime = "edge";
 export const size = { width: 1200, height: 630 };
@@ -80,7 +81,7 @@ export default async function Image() {
               display:       "flex",
             }}
           >
-            Start a Project
+            Get a Free Quote
           </div>
           <div
             style={{
@@ -92,7 +93,7 @@ export default async function Image() {
               display:    "flex",
             }}
           >
-            hello@leonisstudios.com
+            {siteConfig.email}
           </div>
         </div>
       </div>

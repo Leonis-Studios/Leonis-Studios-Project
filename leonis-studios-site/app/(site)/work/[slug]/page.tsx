@@ -109,6 +109,7 @@ export default async function CaseStudyPage({
     datePublished: String(project.year),
     publisher: {
       "@type": "Organization",
+      "@id": `${siteConfig.url}/#organization`,
       name: siteConfig.name,
       url: siteConfig.url,
     },

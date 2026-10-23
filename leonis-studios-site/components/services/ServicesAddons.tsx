@@ -153,9 +153,9 @@ export default function ServicesAddons({
 }) {
   if (services.length === 0) return null;
 
-  const eyebrow  = section?.eyebrow  || "Add-On Services";
-  const headline = section?.headline || "Extend Your Project";
-  const subtext  = section?.subtext  || "Bolt on exactly what you need. Each add-on pairs with any package or retainer to enhance your digital presence.";
+  const eyebrow  = section?.eyebrow  || "Add-Ons";
+  const headline = section?.headline || "Add what you need.";
+  const subtext  = section?.subtext  || "Extra pages, a blog, or another round of revisions. Each one works with any package or retainer.";
 
   return (
     <section

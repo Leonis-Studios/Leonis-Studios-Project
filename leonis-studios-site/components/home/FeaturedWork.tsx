@@ -27,7 +27,7 @@ export default async function FeaturedWork() {
     .catch(() => null);
 
   const eyebrow  = homePage?.featuredWorkSection?.eyebrow  || "Selected Work";
-  const headline = homePage?.featuredWorkSection?.headline || "Recent Projects";
+  const headline = homePage?.featuredWorkSection?.headline || "Sites built to perform.";
 
   return (
     <section className="py-24" style={{ background: colors.bgMuted, position: "relative", zIndex: 1, overflow: "hidden" }}>

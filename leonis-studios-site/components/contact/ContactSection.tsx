@@ -16,10 +16,11 @@ const GEM_CLIP = "polygon(0 0, calc(100% - 26px) 0, 100% 26px, 100% 100%, 26px 1
 const BADGE_CLIP_SMALL = "polygon(50% 0%, 100% 50%, 50% 100%, 0% 50%)";
 
 const SERVICE_OPTIONS = [
-  "Web Design",
-  "Development",
-  "SEO Optimization",
-  "Site Maintenance",
+  "Lead Generation Website",
+  "Website Redesign",
+  "SEO / Local SEO",
+  "AI Search (GEO & AEO)",
+  "Ongoing Maintenance",
   "Other",
 ];
 
@@ -61,6 +62,7 @@ export default function ContactSection({
   const [services, setServices] = useState<string[]>([]);
   const [budget, setBudget] = useState("");
   const [details, setDetails] = useState("");
+  const [website, setWebsite] = useState(""); // honeypot — real visitors never see it
   const [status, setStatus] = useState<Status>("idle");
   const [errorMsg, setErrorMsg] = useState("");
   const [reducedMotion, setReducedMotion] = useState(false);
@@ -94,6 +96,7 @@ export default function ContactSection({
           services,
           budget,
           details,
+          website,
         }),
       });
 
@@ -261,6 +264,7 @@ export default function ContactSection({
                     "A response within one business day",
                     "No pushy sales tactics, just an honest conversation",
                     "A clear outline of scope, timeline, and pricing",
+                    "Ideas for getting you found and getting more leads",
                     "Direct communication, start to finish",
                   ].map((item, i) => (
                     <li
@@ -452,6 +456,20 @@ export default function ContactSection({
                   />
                 </div>
 
+                {/* Honeypot — off-screen and skipped by keyboard/screen readers */}
+                <div aria-hidden="true" style={{ position: "absolute", left: "-10000px", width: "1px", height: "1px", overflow: "hidden" }}>
+                  <label htmlFor="website">Leave this field empty</label>
+                  <input
+                    id="website"
+                    name="website"
+                    type="text"
+                    tabIndex={-1}
+                    autoComplete="off"
+                    value={website}
+                    onChange={(e) => setWebsite(e.target.value)}
+                  />
+                </div>
+
                 {/* Services */}
                 <div>
                   <p style={labelStyle}>Services Needed</p>
@@ -589,7 +607,7 @@ export default function ContactSection({
                       transition: "background 0.2s",
                     }}
                   >
-                    {status === "loading" ? "Sending…" : "Send Message →"}
+                    {status === "loading" ? "Sending…" : "Get My Free Quote →"}
                   </button>
                 </div>
               </form>

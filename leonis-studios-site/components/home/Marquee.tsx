@@ -8,14 +8,17 @@ import { colors } from "@/lib/colors";
 import { tokens } from "@/lib/tokens";
 
 const DEFAULT_ITEMS = [
-  "Web Design",
-  "Next.js Development",
-  "SEO Optimization",
-  "AEO Optimization",
-  "Branding & Identity",
-  "Online Presence Growth",
-  "Monthly Maintenance",
-  "Performance Auditing",
+  "Lead Generation Websites",
+  "SEO",
+  "GEO",
+  "AEO",
+  "Custom Web Design",
+  "Built to Convert",
+  "Local SEO",
+  "AI Search Visibility",
+  "Google Business Profile",
+  "Core Web Vitals",
+  "Monthly Growth Retainers",
 ];
 
 // Minimum number of items rendered in the strip — repeated enough

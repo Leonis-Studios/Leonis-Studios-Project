@@ -121,7 +121,7 @@ export default function Navbar() {
               "
               style={{ fontFamily: "var(--font-display)", fontWeight: tokens.weightUI, background: colors.bgBlack, color: colors.textNavAccent }}
             >
-              <span>Start a Project</span>
+              <span>Get a Free Quote</span>
               {/* Arrow shifts right on hover for a subtle motion cue */}
               <span className="group-hover:translate-x-1 transition-transform duration-200">
                 →
@@ -180,7 +180,7 @@ export default function Navbar() {
             className="mt-2 inline-flex items-center justify-center gap-2 py-3 px-6 text-xs tracking-[0.12em] uppercase"
             style={{ fontFamily: "var(--font-display)", fontWeight: tokens.weightUI, background: colors.bgBlack, color: colors.textNavAccent }}
           >
-            Start a Project →
+            Get a Free Quote →
           </Link>
         </div>
       )}

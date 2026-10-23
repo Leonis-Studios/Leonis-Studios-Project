@@ -130,7 +130,7 @@ export default function AboutCTA({ ctaHeadline, ctaSubtext }: Props) {
                   color: colors.bgLight,
                 }}
               >
-                <span>Start a Project</span>
+                <span>Get a Free Quote</span>
                 <span className="group-hover:translate-x-1 transition-transform duration-200">
                   →
                 </span>

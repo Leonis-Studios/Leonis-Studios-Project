@@ -376,3 +376,15 @@ export const ABOUT_PAGE_QUERY = `
     ${SEO_PROJECTION}
   }
 `;
+// Used by sitemap.ts — real last-edit dates for the static routes,
+// so <lastmod> only changes when the page's content actually does.
+export const PAGE_DATES_QUERY = `
+  {
+    "home":     *[_type == "homePage"][0]._updatedAt,
+    "services": *[_type in ["servicesPage", "service"]] | order(_updatedAt desc)[0]._updatedAt,
+    "about":    *[_type == "aboutPage"][0]._updatedAt,
+    "contact":  *[_type == "contactPage"][0]._updatedAt,
+    "blog":     *[_type in ["blogPage", "post"]] | order(_updatedAt desc)[0]._updatedAt,
+    "work":     *[_type == "caseStudy"] | order(_updatedAt desc)[0]._updatedAt
+  }
+`;

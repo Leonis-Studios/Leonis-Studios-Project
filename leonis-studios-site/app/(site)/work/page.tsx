@@ -17,7 +17,7 @@ import { colors }                 from "@/lib/colors";
 import { tokens }                 from "@/lib/tokens";
 
 const workDescription =
-  "Browse case studies from Leonis Studios — web design, Next.js development, SEO, and more.";
+  "Case studies from Leonis Studios: custom websites built to rank on Google, show up in AI search, and turn visitors into leads.";
 
 export const metadata: Metadata = {
   // Absolute — bypasses the root layout's "%s — {name}" template,
@@ -25,11 +25,11 @@ export const metadata: Metadata = {
   title:       { absolute: `Work — ${siteConfig.name}` },
   description: workDescription,
   keywords: [
+    "lead generation website examples",
     "web design case studies",
+    "SEO website case study",
     "Leonis Studios portfolio",
     "Next.js website examples",
-    "web development case studies New York",
-    "website redesign portfolio",
   ],
   openGraph: {
     title:       `Work — ${siteConfig.name}`,
@@ -161,8 +161,8 @@ export default async function WorkPage() {
               animation:  "fadeUp 0.8s cubic-bezier(0.16, 1, 0.3, 1) 0.4s forwards",
             }}
           >
-            Every project is a collaboration. Here&apos;s a look at what
-            we&apos;ve built — from brand-new launches to full-site rebuilds.
+            Real sites for real businesses, each one built to get found
+            and bring in leads. Here&apos;s what we&apos;ve shipped.
           </p>
 
         </div>

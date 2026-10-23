@@ -11,11 +11,14 @@
 
 const siteConfig = {
   name: "Leonis Studios",
-  tagline: "Website Building Your Way.",
+  tagline: "Websites That Bring In Leads",
   description:
-    "Leonis Studios builds custom websites optimized for Google, AI search engines, and local search, helping the right customers find your business.",
+    "Leonis Studios designs custom websites that turn visitors into leads, built to rank on Google and get recommended by AI tools like ChatGPT.",
 
-  url: "https://leonisstudios.com", // update when your domain is live
+  // Must match the host Vercel serves as primary (the apex redirects
+  // to www). Canonicals, sitemap, and JSON-LD all build from this, so
+  // pointing it at a redirecting host confuses Google's indexing.
+  url: "https://www.leonisstudios.com",
   email: "hassan.shirazi@leonisstudios.com",
   location: "New York, NY",
 

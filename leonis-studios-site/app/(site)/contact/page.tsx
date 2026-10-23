@@ -9,7 +9,7 @@ import ContactHero         from "@/components/contact/ContactHero";
 import ContactSection      from "@/components/contact/ContactSection";
 
 const defaultDescription =
-  "Ready to hire a web designer? Tell Leonis Studios about your project and get a response within 24 hours. Web design quotes for New York small businesses.";
+  "Get a free quote for a website built to generate leads. Tell Leonis Studios about your business and hear back within 24 hours with a plan and pricing.";
 
 export async function generateMetadata(): Promise<Metadata> {
   const contactPage: ContactPageData | null = await client
@@ -24,15 +24,15 @@ export async function generateMetadata(): Promise<Metadata> {
     title,
     description,
     keywords: [
+      "free website quote",
+      "lead generation website quote",
       "hire web designer",
-      "web design quote",
-      "website project inquiry",
-      "web development consultation",
+      "SEO web design quote",
       "New York web design",
-      "Next.js developer for hire",
+      "small business website cost",
     ],
     openGraph: {
-      title:       `Start a Project — ${siteConfig.name}`,
+      title:       `Get a Free Quote — ${siteConfig.name}`,
       description,
       url:         `${siteConfig.url}/contact`,
       type:        "website",
@@ -40,7 +40,7 @@ export async function generateMetadata(): Promise<Metadata> {
     },
     twitter: {
       card:        "summary_large_image",
-      title:       `Start a Project — ${siteConfig.name}`,
+      title:       `Get a Free Quote — ${siteConfig.name}`,
       description,
     },
     alternates: {

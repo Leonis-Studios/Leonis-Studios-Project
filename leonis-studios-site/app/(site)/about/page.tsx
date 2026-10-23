@@ -13,7 +13,7 @@ import Skills from "@/components/about/Skills";
 import AboutCTA from "@/components/about/AboutCTA";
 
 const defaultDescription =
-  "Leonis Studios is a New York studio building fast, custom websites with SEO and AI search built in. Meet Hassan Shirazi, the person behind every project.";
+  "Leonis Studios is a New York web studio building custom, lead-generating websites with SEO, GEO, and AEO built in. Meet founder Hassan Shirazi.";
 
 export async function generateMetadata(): Promise<Metadata> {
   const data: AboutPageData | null = await client
@@ -29,10 +29,10 @@ export async function generateMetadata(): Promise<Metadata> {
     description,
     keywords: [
       "web designer New York",
-      "freelance web developer",
-      "Next.js developer",
+      "lead generation web design studio",
+      "SEO web designer",
+      "AEO and GEO specialist",
       "small business web design",
-      "web design NYC",
       "Hassan Shirazi",
       "Leonis Studios",
     ],
@@ -65,9 +65,10 @@ export default async function AboutPage() {
     "@context": "https://schema.org",
     "@type": "Person",
     name: "Hassan Shirazi",
-    jobTitle: "Web Designer & Developer",
+    jobTitle: "Founder, Web Designer & Developer",
     worksFor: {
       "@type": "Organization",
+      "@id": `${siteConfig.url}/#organization`,
       name: "Leonis Studios",
     },
     url: siteConfig.url,
@@ -78,6 +79,9 @@ export default async function AboutPage() {
       addressCountry: "US",
     },
     knowsAbout: [
+      "Lead Generation Web Design",
+      "Generative Engine Optimization",
+      "Answer Engine Optimization",
       "Web Design",
       "Next.js",
       "TypeScript",
@@ -92,6 +96,7 @@ export default async function AboutPage() {
   const localBusinessData = {
     "@context": "https://schema.org",
     "@type": "ProfessionalService",
+    "@id": `${siteConfig.url}/#organization`,
     name: "Leonis Studios",
     description: siteConfig.description,
     url: siteConfig.url,
@@ -109,9 +114,12 @@ export default async function AboutPage() {
     },
     areaServed: "United States",
     serviceType: [
-      "Web Design",
+      "Lead Generation Web Design",
       "Web Development",
-      "SEO Optimization",
+      "Search Engine Optimization (SEO)",
+      "Generative Engine Optimization (GEO)",
+      "Answer Engine Optimization (AEO)",
+      "Local SEO",
       "Website Maintenance",
     ],
     priceRange: "$$",

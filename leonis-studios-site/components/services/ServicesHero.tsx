@@ -13,10 +13,10 @@ const DEFAULT_CATEGORIES = [
 ];
 
 export default function ServicesHero({ hero }: { hero?: ServicesPageData["hero"] }) {
-  const eyebrow        = hero?.eyebrow        || "What We Offer";
-  const headlineLine1  = hero?.headlineLine1  || "Services Built";
-  const headlineAccent = hero?.headlineAccent || "to Perform.";
-  const subheading      = hero?.subheading      || "From a first website to a fully maintained digital presence, every engagement is built with the same obsessive attention to craft, performance, and getting you found in search and AI answers.";
+  const eyebrow        = hero?.eyebrow        || "Services & Pricing";
+  const headlineLine1  = hero?.headlineLine1  || "Websites That";
+  const headlineAccent = hero?.headlineAccent || "Bring In Leads.";
+  const subheading      = hero?.subheading      || "Every package is built to do one thing well: turn searches into customers. You get custom design, SEO, and AI search optimization from day one, with clear pricing up front.";
   const categories       = hero?.categories?.length ? hero.categories : DEFAULT_CATEGORIES;
 
   return (

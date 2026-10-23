@@ -17,22 +17,22 @@ const DEFAULT_STEPS = [
   {
     title: "Discovery",
     description:
-      "We learn your business, audience, and goals in a focused kickoff call. No briefs, no bloated onboarding, just a direct conversation.",
+      "We talk through your business, your best customers, and what a good lead looks like for you. That conversation shapes the keywords, pages, and calls to action we plan around.",
   },
   {
     title: "Strategy & Design",
     description:
-      "We plan your site architecture and design every page before writing a line of code. You review and approve at every stage.",
+      "We map out the pages people actually search for, then design each one around a single job: getting the visitor to call, book, or send an inquiry. You review and sign off before we build.",
   },
   {
     title: "Build & Optimise",
     description:
-      "Your site is built on Next.js for speed and scale, with Core Web Vitals optimisation, structured data, on-page SEO, and CMS integration from day one.",
+      "We build on Next.js with on-page SEO, schema markup for AI search, fast load times, and a CMS you can edit yourself. Every contact form gets tested before launch.",
   },
   {
     title: "Launch & Grow",
     description:
-      "We handle deployment, verification, and handoff. Retainer clients get ongoing SEO reports, content updates, and performance monitoring.",
+      "We launch, connect Google Search Console and analytics, and show you where your leads come from. Retainer clients get monthly ranking reports and ongoing improvements.",
   },
 ];
 
@@ -42,9 +42,9 @@ export default function HowItWorksClient({ howItWorks }: { howItWorks?: HomePage
   const [hoveredIndex, setHoveredIndex] = useState<number | null>(null);
 
   const eyebrow        = howItWorks?.eyebrow        || "How It Works";
-  const headline        = howItWorks?.headline        || "A clear path from idea to launch.";
-  const subtext         = howItWorks?.subtext         || "No guesswork, no disappearing acts. Every project follows the same four-phase process, with SEO and site structure built in from day one, so you always know where things stand.";
-  const bottomCtaLabel  = howItWorks?.bottomCtaLabel  || "Start Your Project";
+  const headline        = howItWorks?.headline        || "From first call to a site that brings in leads.";
+  const subtext         = howItWorks?.subtext         || "Four clear steps, the same on every project. Search and lead generation are planned in from the start, so you never pay to bolt them on later.";
+  const bottomCtaLabel  = howItWorks?.bottomCtaLabel  || "Get a Free Quote";
   const steps           = howItWorks?.steps?.length ? howItWorks.steps : DEFAULT_STEPS;
 
   useEffect(() => {

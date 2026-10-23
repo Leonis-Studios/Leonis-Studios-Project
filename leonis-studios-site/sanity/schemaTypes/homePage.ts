@@ -84,24 +84,24 @@ export const homePageSchema = defineType({
           ],
           initialValue: [
             {
-              title: "Found in search, not just online",
-              description: "We build sites that rank on Google the right way, with technical SEO, real content, and pages built to be found by the people already searching for what you do.",
+              title: "Ranks on Google for what you sell",
+              description: "We handle the technical SEO, page structure, and content so your site shows up when someone searches for exactly what you offer. Those people are already looking to buy.",
             },
             {
-              title: "Built for AI answer engines",
-              description: "Tools like ChatGPT and Perplexity are answering questions your customers used to Google. We structure your content so those tools can actually find you and recommend you.",
+              title: "Recommended by ChatGPT and AI search",
+              description: "More people now ask ChatGPT, Perplexity, or Google's AI Overviews who to hire. We structure your content and schema so those tools understand your business and name it in their answers.",
             },
             {
-              title: "Visible everywhere people search",
-              description: "Search has spread across maps, voice, social, and AI chat, not just a results page. We set your site up to show up across all of it, wherever your customers are looking.",
+              title: "Answers the questions customers ask",
+              description: "Clear, direct answers to the things your customers type and say out loud, written so featured snippets and voice assistants can quote you word for word.",
             },
             {
-              title: "Design built around your business",
-              description: "No templates stretched to fit. Every site starts from your brand, your customers, and what you actually sell, then gets designed and built from there.",
+              title: "Designed to turn visitors into leads",
+              description: "Modern, custom design with an obvious next step on every page. Strong calls to action and quick forms mean nothing stands between a visitor and your inbox.",
             },
             {
-              title: "A site that keeps earning its place",
-              description: "Launch day is the start, not the finish. We keep an eye on performance, uptime, and content so your site stays fast and current long after it goes live.",
+              title: "Fast, modern, and ready to grow",
+              description: "Built on Next.js with 95+ performance scores, so pages load quickly on any phone. After launch we keep tuning rankings and content so the leads keep coming.",
             },
           ],
         }),

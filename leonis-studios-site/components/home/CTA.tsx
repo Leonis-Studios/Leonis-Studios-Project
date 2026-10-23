@@ -12,10 +12,10 @@ export default async function CTA() {
     .catch(() => null);
 
   const cta                = homePage?.ctaSection;
-  const eyebrow             = cta?.eyebrow             || "Ready to start?";
-  const headline            = cta?.headline            || "Let's build something worth talking about.";
-  const subtext             = cta?.subtext             || "Tell us about your project and we'll come back within 24 hours with a plan and a quote.";
-  const primaryCtaLabel     = cta?.primaryCtaLabel     || "Get In Touch";
+  const eyebrow             = cta?.eyebrow             || "Ready for more leads?";
+  const headline            = cta?.headline            || "Let's build a site that brings in business.";
+  const subtext             = cta?.subtext             || "Tell us about your business and your goals. Within 24 hours you'll get a reply with a plan, a timeline, and a quote. No pressure, no obligation.";
+  const primaryCtaLabel     = cta?.primaryCtaLabel     || "Get a Free Quote";
   const secondaryCtaLabel   = cta?.secondaryCtaLabel   || "See Our Work";
 
   return (
