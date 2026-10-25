@@ -1,0 +1,131 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Privacy Policy · Leonis Studios</title>
+<meta name="description" content="Privacy policy for apps published by Leonis Studios, including Vellis and CodeJump.">
+<style>
+  :root {
+    --bg: #ffffff; --text: #1d1b19; --muted: #5f5953; --rule: #e4dfd8; --accent: #8a6233;
+  }
+  @media (prefers-color-scheme: dark) {
+    :root { --bg: #141210; --text: #ece7e1; --muted: #aaa29a; --rule: #2e2a26; --accent: #d1a873; }
+  }
+  * { box-sizing: border-box; }
+  body {
+    margin: 0; background: var(--bg); color: var(--text);
+    font: 16px/1.6 -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+  }
+  main { max-width: 720px; margin: 0 auto; padding: 40px 16px 64px; }
+  h1 { font-size: 2rem; line-height: 1.2; margin: 0 0 4px; }
+  h2 { font-size: 1.35rem; margin: 40px 0 8px; padding-top: 16px; border-top: 1px solid var(--rule); }
+  h3 { font-size: 1.05rem; margin: 24px 0 6px; }
+  p, li { margin: 0 0 10px; }
+  ul { padding-left: 22px; margin: 0 0 12px; }
+  a { color: var(--accent); }
+  .muted { color: var(--muted); }
+  nav ul { list-style: none; padding: 0; display: flex; flex-wrap: wrap; gap: 8px 20px; }
+</style>
+</head>
+<body>
+<main>
+
+<h1>Privacy Policy</h1>
+<p class="muted">Leonis Studios · Effective October 25, 2026</p>
+
+<p>This policy covers the apps Leonis Studios ("we", "us") publishes on the App Store and Google Play. The general rules below apply to every app, and each app has its own section saying exactly what it stores and what, if anything, leaves your device. Contact: <a href="mailto:hassan.shirazi@leonisstudios.com">hassan.shirazi@leonisstudios.com</a>.</p>
+
+<nav aria-label="Apps covered">
+  <ul>
+    <li><a href="#vellis">Vellis</a></li>
+    <li><a href="#codejump">CodeJump</a></li>
+    <li><a href="#children">Children</a></li>
+    <li><a href="#rights">Your rights</a></li>
+  </ul>
+</nav>
+
+<h2 id="all-apps">For all our apps</h2>
+<ul>
+  <li>No ads, no advertising or analytics SDKs, and no tracking across other companies' apps or websites.</li>
+  <li>We never sell your data or share it for advertising.</li>
+  <li>Your data stays on your device unless an app's section below says otherwise, and anything that does leave is only what's needed for a feature you choose to use.</li>
+  <li>Data stored on your device can be included in your device's own backups, following your device settings. Deleting an app deletes its on-device data.</li>
+  <li>Fonts and other assets are bundled inside the apps; they make no requests to Google Fonts or similar services.</li>
+</ul>
+
+<h2 id="vellis">Vellis</h2>
+<p>Vellis is a workout planner and tracker.</p>
+
+<h3>The short version</h3>
+<ul>
+  <li>Your training data lives on your device. Vellis works fully without an account.</li>
+  <li>Apple Health / Health Connect data is read and written only if you connect it, stays on your device, and is never used for advertising.</li>
+  <li>An account is optional. If you create one, we store your email and the social features you use (handle, friends, shared badges and records, reactions, reports).</li>
+  <li>The AI-written weekly summary is off by default. If you turn it on, a few weekly totals are sent to Anthropic's Claude to write it.</li>
+</ul>
+
+<h3>Data stored only on your device</h3>
+<p>Workouts, sets, routines, schedules, mesocycles, personal records, badges and XP, body measurements (weight, body fat) and progress photos, daily readiness check-ins, nutrition settings (age, sex, height, weight, activity level, diet phase), and your profile (display name, experience level, units). It's stored in the app's local database and is never uploaded by Vellis.</p>
+
+<h3>Apple Health and Health Connect</h3>
+<p>Only if you connect Health from Profile &gt; Privacy &amp; data:</p>
+<ul>
+  <li><strong>Read:</strong> heart rate variability, resting heart rate, and step count, used to calculate your daily readiness score.</li>
+  <li><strong>Write:</strong> your completed workouts (start and end time), so they appear in Health.</li>
+</ul>
+<p>Health data is stored only in the app's local database on your device. It is not sent to our servers or any third party, not used for advertising, marketing or data mining, and Vellis never syncs it to iCloud (it can be part of your device's own encrypted backup). The only exception is the optional AI summary below, which may include your average readiness score for the week (a number calculated partly from Health data) if you turn that feature on. You can revoke access at any time in the Health app (Sharing &gt; Apps &gt; Vellis) or in Health Connect.</p>
+
+<h3>Optional account</h3>
+<p>Creating an account enables friends and sharing. When you create one we store, with our backend provider Supabase:</p>
+<ul>
+  <li>your email address and an account ID (for sign-in);</li>
+  <li>your public handle and avatar choice;</li>
+  <li>friend requests and friendships, and people you block;</li>
+  <li>badges and personal records you choose to share, and reactions you give;</li>
+  <li>in-app notifications about that activity;</li>
+  <li>reports you file about other users or posts, including any details you write.</li>
+</ul>
+<p>Your workouts and other on-device data are not uploaded by signing in. Friends see only your handle, avatar, and what you choose to share.</p>
+
+<h3>Optional AI-written weekly summary</h3>
+<p>Off by default. If you turn it on (Profile &gt; Privacy &amp; data), once a week the app sends your total training volume for this week and last week, your number of new personal records, and your average readiness score to our server, which forwards them to Anthropic's Claude API to write a short summary. Nothing identifying you (name, email, handle) is included. Anthropic processes this under its commercial API terms, which do not allow it to train models on this data. Turn it off at any time and summaries are written on your device again.</p>
+
+<h3>Daily reminders</h3>
+<p>The optional daily reminder is a local notification scheduled on your device. Nothing is sent to us or to a push service to deliver it. Turn it off in Profile &gt; Reminders or in your device's notification settings.</p>
+
+<h3>Deleting your Vellis data</h3>
+<ul>
+  <li><strong>Account and server data:</strong> Profile &gt; Account &gt; Delete account permanently deletes your account and everything stored with it on our servers, and wipes the app's local data.</li>
+  <li><strong>Device data:</strong> delete the app.</li>
+  <li>You can also email us to request deletion or a copy of your data.</li>
+</ul>
+
+<h3>Security</h3>
+<p>Account data is sent over encrypted connections (HTTPS) and protected by per-user access rules on our backend. On-device data is protected by your device's own security.</p>
+
+<h2 id="codejump">CodeJump</h2>
+<p>CodeJump is a puzzle game that teaches coding with short, real-code quests.</p>
+<ul>
+  <li><strong>We collect nothing.</strong> CodeJump has no account, no sign-in, and no connection to our servers or anyone else's. It doesn't ask for your name, email, location, contacts, photos, or any other personal information.</li>
+  <li><strong>On your device only:</strong> your quest scores, attempt history, XP and level, chosen track, settings, and "more like this / less like this" feedback taps. They're kept in the app's local storage and never leave your device.</li>
+  <li><strong>Your code stays with you:</strong> code you write in CodeJump runs inside the app, on your device, in a built-in sandbox with no internet or file access. It is never uploaded.</li>
+  <li><strong>Deleting your data:</strong> use Reset progress on the Home screen, or delete the app.</li>
+</ul>
+
+<h2 id="children">Children</h2>
+<p>CodeJump is made for players of all ages, including children. Because it collects no personal information from anyone, it collects none from children, and it has no ads, in-app purchases, chat, or social features.</p>
+<p>Vellis is not directed to children under 13 (or under 16 in the EU/UK), and we don't knowingly collect their data. If you believe a child has created a Vellis account, email us and we'll delete it.</p>
+
+<h2 id="rights">Your rights</h2>
+<p>Depending on where you live (for example under the GDPR or CCPA), you may have the right to access, correct, delete, or port your personal data, or to object to its processing. Most of our apps keep your data only on your device, where you control it directly. For anything we hold (such as a Vellis account), email us and we'll respond within 30 days.</p>
+
+<h2 id="changes">Changes</h2>
+<p>If this policy changes we'll update the date above and, for material changes, tell you in the affected app. When we release a new app, we'll add its own section here before it's available.</p>
+
+<h2 id="contact">Contact</h2>
+<p>Leonis Studios · <a href="mailto:hassan.shirazi@leonisstudios.com">hassan.shirazi@leonisstudios.com</a></p>
+
+</main>
+</body>
+</html>

@@ -52,6 +52,8 @@ export async function GET() {
   lines.push("");
   lines.push(`${name} is a web design studio based in ${location} that builds custom websites for small and mid-sized businesses across the United States. Every site is built to generate leads: it is designed to rank on Google (SEO), to be cited and recommended by AI assistants such as ChatGPT, Perplexity, Gemini, and Google AI Overviews (GEO, generative engine optimization), and to supply direct answers to customer questions (AEO, answer engine optimization). Sites are built on Next.js with a Sanity CMS, typically score 95+ on performance, and are designed so every page leads visitors toward a call, booking, or inquiry.`);
   lines.push("");
+  lines.push(`${name} also publishes its own mobile apps (Vellis, a workout tracker, and CodeJump, a learn-to-code puzzle game); their privacy policy is at ${siteConfig.url}/privacy.`);
+  lines.push("");
 
   lines.push("## Pages");
   lines.push("");
@@ -61,6 +63,7 @@ export async function GET() {
   lines.push(`- [Blog](${siteConfig.url}/blog): Articles on web design, development, and SEO.`);
   lines.push(`- [About](${siteConfig.url}/about): Background, approach, and tech stack.`);
   lines.push(`- [Contact](${siteConfig.url}/contact): Get in touch to start a project.`);
+  lines.push(`- [App Privacy Policy](${siteConfig.url}/privacy): Privacy policy for the mobile apps ${name} publishes.`);
   lines.push("");
 
   const groups: [string, Service["category"]][] = [

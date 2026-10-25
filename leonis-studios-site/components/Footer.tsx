@@ -108,6 +108,10 @@ export default async function Footer() {
             style={{ fontFamily: "var(--font-body)", fontWeight: tokens.weightBody, color: colors.textSecondaryLight }}
           >
             © {year} {siteConfig.name}. All rights reserved.
+            <span aria-hidden="true"> · </span>
+            <Link href="/privacy" className="underline-offset-4 hover:underline">
+              App Privacy Policy
+            </Link>
           </p>
           {/* The crimson dot is a subtle brand touch —
               it echoes the square logo mark */}
