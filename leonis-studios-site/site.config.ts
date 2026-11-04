@@ -33,6 +33,7 @@ const siteConfig = {
   nav: [
     { label: "Work", href: "/work" },
     { label: "Services", href: "/services" },
+    { label: "Apps", href: "/apps" },
     { label: "Blog", href: "/blog" },
     { label: "About", href: "/about" },
     { label: "Contact", href: "/contact" },

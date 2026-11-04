@@ -17,6 +17,7 @@ import Benefits         from "@/components/home/Benefits";
 import Services         from "@/components/home/Services";
 import HowItWorks       from "@/components/home/HowItWorks";
 import FeaturedWork     from "@/components/home/FeaturedWork";
+import Products         from "@/components/home/Products";
 import FAQ              from "@/components/home/FAQ";
 import CTA              from "@/components/home/CTA";
 import JsonLd           from "@/components/JsonLd";
@@ -148,6 +149,7 @@ export default function HomePage() {
       <Services />
       <HowItWorks />
       <FeaturedWork />
+      <Products />
       <FAQ />
       <CTA />
     </>

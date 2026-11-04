@@ -83,7 +83,7 @@ export default function Navbar() {
           <nav className="hidden md:flex items-center justify-center gap-4 lg:gap-8">
             {siteConfig.nav.map((link) => {
               // isActive highlights the current page link
-              const isActive = pathname === link.href;
+              const isActive = pathname === link.href || (pathname?.startsWith(`${link.href}/`) ?? false);
               return (
                 <Link
                   key={link.href}

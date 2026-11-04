@@ -353,3 +353,100 @@ export interface AboutPageData {
   ctaSubtext?:       string;
   seo?:              Seo;
 }
+// ── Product (app / game) ──────────────────────────────────
+// Leonis-owned products. See sanity/schemaTypes/product.ts.
+export type ProductKind   = "app" | "game";
+export type ProductStatus = "development" | "preorder" | "live" | "retired";
+
+export interface ProductCard {
+  _id:         string;
+  name:        string;
+  slug:        string;
+  kind:        ProductKind;
+  tagline:     string;
+  summary:     string;
+  status:      ProductStatus;
+  platforms?:  string[];
+  priceLabel?: string;
+  icon?:       Partial<SanityImage>;
+}
+
+// Media item on a product page. Images and videos share a list so
+// editors can mix them; `_type` tells the renderer which it is.
+export interface ProductImageMedia {
+  _key:     string;
+  _type:    "productImage";
+  url:      string;
+  alt:      string;
+  caption?: string;
+  width?:   number;
+  height?:  number;
+  lqip?:    string;
+}
+
+export interface ProductVideoMedia {
+  _key:         string;
+  _type:        "productVideo";
+  url?:         string;        // uploaded file
+  youtubeUrl?:  string;
+  poster?:      string;
+  alt:          string;
+  caption?:     string;
+  orientation?: "portrait" | "landscape" | "square";
+  loop:         boolean;
+}
+
+export type ProductMedia = ProductImageMedia | ProductVideoMedia;
+
+export type SectionTone = "auto" | "light" | "muted" | "dark";
+
+export interface ProductFeatureSection {
+  _key:      string;
+  _type:     "productFeature";
+  eyebrow?:  string;
+  heading:   string;
+  body?:     string;
+  bullets?:  string[];
+  media?:    ProductMedia | null;
+  mediaSide: "left" | "right";
+  tone:      SectionTone;
+}
+
+export interface ProductGallerySection {
+  _key:     string;
+  _type:    "productGallery";
+  eyebrow?: string;
+  heading?: string;
+  intro?:   string;
+  items?:   ProductMedia[] | null;
+  layout:   "grid" | "rail";
+  tone:     SectionTone;
+}
+
+export type ProductSection = ProductFeatureSection | ProductGallerySection;
+
+export interface Product extends ProductCard {
+  primaryKeyword?: string;
+  category?:       string;
+  appStoreUrl?:    string;
+  playStoreUrl?:   string;
+  webAppUrl?:      string;
+  isFree?:         boolean;
+  hasWaitlist:     boolean;
+  waitlistPitch?:  string;
+  launchDate?:     string;
+  heroImage?:      SanityImage;
+  heroVideo?:      ProductVideoMedia | null;
+  pillars?:        { _key: string; title: string; description: string }[];
+  sections?:       ProductSection[] | null;
+  screenshots?:    (SanityImage & { _key: string; caption?: string })[];
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  body?:           any[];
+  faq?:            FaqBlockItem[];
+  supportEmail?:   string;
+  privacyAnchor:   string;
+  seoTitle:        string;
+  seoDescription:  string;
+  seoImage?:       string;
+  noindex?:        boolean;
+}

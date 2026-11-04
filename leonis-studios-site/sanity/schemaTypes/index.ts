@@ -7,6 +7,7 @@
 
 import { serviceSchema      } from "./service";
 import { caseStudySchema    } from "./caseStudy";
+import { productSchema      } from "./product";
 import { authorSchema       } from "./author";
 import { siteSettingsSchema } from "./siteSettings";
 import { aboutPageSchema    } from "./aboutPage";
@@ -18,10 +19,17 @@ import { servicesPageSchema } from "./servicesPage";
 import { contactPageSchema  } from "./contactPage";
 import { seoSchema          } from "./objects/seo";
 import { faqBlockSchema     } from "./objects/faqBlock";
+import {
+  productImageSchema,
+  productVideoSchema,
+  productFeatureSchema,
+  productGallerySchema,
+} from "./objects/productMedia";
 
 export const schemaTypes = [
   serviceSchema,
   caseStudySchema,
+  productSchema,
   authorSchema,
   siteSettingsSchema,
   aboutPageSchema,
@@ -33,4 +41,8 @@ export const schemaTypes = [
   contactPageSchema,
   seoSchema,
   faqBlockSchema,
+  productImageSchema,
+  productVideoSchema,
+  productFeatureSchema,
+  productGallerySchema,
 ];

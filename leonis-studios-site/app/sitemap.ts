@@ -1,11 +1,13 @@
 import type { MetadataRoute }                            from "next";
 import { client }                                         from "@/sanity/lib/client";
-import { CASE_STUDY_DATES_QUERY, POST_DATES_QUERY, PAGE_DATES_QUERY } from "@/sanity/lib/queries";
+import { CASE_STUDY_DATES_QUERY, POST_DATES_QUERY, PAGE_DATES_QUERY, PRODUCT_DATES_QUERY } from "@/sanity/lib/queries";
+import { productSections }                                from "@/lib/products";
+import type { ProductKind }                               from "@/lib/types";
 import siteConfig                                         from "@/site.config";
 
 export const revalidate = 3600;
 
-type PageDates = Partial<Record<"home" | "services" | "about" | "contact" | "blog" | "work", string | null>>;
+type PageDates = Partial<Record<"home" | "services" | "about" | "contact" | "blog" | "work" | "apps" | "games", string | null>>;
 
 export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
   const dates: PageDates = await client
@@ -69,5 +71,37 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
     // Sanity unavailable at build time — static routes still work fine
   }
 
-  return [...staticRoutes, ...dynamicRoutes, ...postRoutes];
+  // Products: an index page is listed only once its section has a
+  // product, since /apps and /games 404 while empty.
+  let productRoutes: MetadataRoute.Sitemap = [];
+
+  try {
+    const products: { slug: string; kind: ProductKind; _updatedAt: string; noindex: boolean }[] = await client.fetch(
+      PRODUCT_DATES_QUERY,
+      {},
+      { next: { revalidate: 3600 } }
+    );
+
+    const kinds = [...new Set(products.map((p) => p.kind))].filter((k) => k in productSections);
+    productRoutes = [
+      ...kinds.map((k) => ({
+        url:             `${siteConfig.url}${productSections[k].basePath}`,
+        ...lastMod(k === "app" ? "apps" : "games"),
+        changeFrequency: "monthly" as const,
+        priority:        0.6,
+      })),
+      ...products
+        .filter((p) => !p.noindex && p.kind in productSections)
+        .map((p) => ({
+          url:             `${siteConfig.url}${productSections[p.kind].basePath}/${p.slug}`,
+          lastModified:    new Date(p._updatedAt),
+          changeFrequency: "weekly" as const,
+          priority:        0.7,
+        })),
+    ];
+  } catch {
+    // Sanity unavailable at build time — static routes still work fine
+  }
+
+  return [...staticRoutes, ...dynamicRoutes, ...postRoutes, ...productRoutes];
 }

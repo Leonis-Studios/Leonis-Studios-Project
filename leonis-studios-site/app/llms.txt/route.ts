@@ -13,25 +13,29 @@ import {
   ALL_CASE_STUDIES_QUERY,
   ALL_SERVICES_QUERY,
   FAQ_ITEMS_QUERY,
+  ALL_PRODUCTS_QUERY,
 } from "@/sanity/lib/queries";
-import type { SiteSettings, PostCard, CaseStudyCard, Service, FaqItem } from "@/lib/types";
+import { productPath, productSections, statusLabel } from "@/lib/products";
+import type { SiteSettings, PostCard, CaseStudyCard, Service, FaqItem, ProductCard } from "@/lib/types";
 import siteConfig from "@/site.config";
 
 export const revalidate = 3600;
 
 export async function GET() {
-  const [settings, posts, caseStudies, services, faqs]: [
+  const [settings, posts, caseStudies, services, faqs, products]: [
     SiteSettings | null,
     PostCard[],
     CaseStudyCard[],
     Service[],
     FaqItem[],
+    ProductCard[],
   ] = await Promise.all([
     client.fetch(SITE_SETTINGS_QUERY, {}, { next: { revalidate: 3600 } }).catch(() => null),
     client.fetch(ALL_POSTS_QUERY, {}, { next: { revalidate: 3600 } }).catch(() => []),
     client.fetch(ALL_CASE_STUDIES_QUERY, {}, { next: { revalidate: 3600 } }).catch(() => []),
     client.fetch(ALL_SERVICES_QUERY, {}, { next: { revalidate: 3600 } }).catch(() => []),
     client.fetch(FAQ_ITEMS_QUERY, {}, { next: { revalidate: 3600 } }).catch(() => []),
+    client.fetch(ALL_PRODUCTS_QUERY, {}, { next: { revalidate: 3600 } }).catch(() => []),
   ]);
 
   const price = (s: Service) =>
@@ -102,6 +106,17 @@ export async function GET() {
     lines.push("");
     for (const post of posts) {
       lines.push(`- [${post.title}](${siteConfig.url}/blog/${post.slug}): ${post.excerpt}`);
+    }
+    lines.push("");
+  }
+
+  if (products.length > 0) {
+    lines.push("## Apps and Games");
+    lines.push("");
+    lines.push(`Products ${name} designs, builds, and publishes itself. Each keeps its own name and is published by ${name}.`);
+    lines.push("");
+    for (const p of products) {
+      lines.push(`- [${p.name}](${siteConfig.url}${productPath(p)}) (${productSections[p.kind].singular}, ${statusLabel[p.status].toLowerCase()}): ${p.summary}`);
     }
     lines.push("");
   }

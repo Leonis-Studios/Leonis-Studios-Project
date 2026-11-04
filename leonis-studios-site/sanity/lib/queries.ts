@@ -385,6 +385,128 @@ export const PAGE_DATES_QUERY = `
     "about":    *[_type == "aboutPage"][0]._updatedAt,
     "contact":  *[_type == "contactPage"][0]._updatedAt,
     "blog":     *[_type in ["blogPage", "post"]] | order(_updatedAt desc)[0]._updatedAt,
-    "work":     *[_type == "caseStudy"] | order(_updatedAt desc)[0]._updatedAt
+    "work":     *[_type == "caseStudy"] | order(_updatedAt desc)[0]._updatedAt,
+    "apps":     *[_type == "product" && kind == "app"] | order(_updatedAt desc)[0]._updatedAt,
+    "games":    *[_type == "product" && kind == "game"] | order(_updatedAt desc)[0]._updatedAt
   }
+`;
+
+// ── Products (apps & games) ─────────────────────────────────
+// Media items (images and videos) share one projection so feature
+// sections, galleries, and the hero clip all resolve the same shape.
+const PRODUCT_MEDIA_PROJECTION = `
+  _key,
+  _type,
+  alt,
+  caption,
+  _type == "productImage" => {
+    "url": asset->url,
+    "width": asset->metadata.dimensions.width,
+    "height": asset->metadata.dimensions.height,
+    "lqip": asset->metadata.lqip
+  },
+  _type == "productVideo" => {
+    "url": file.asset->url,
+    youtubeUrl,
+    orientation,
+    "loop": coalesce(loop, true),
+    "poster": poster.asset->url
+  }
+`;
+
+// One `product` type split by `kind`. $kind is "app" or "game".
+// Card projection is shared by the index pages, home strip, footer,
+// and llms.txt so they never disagree about what a product is.
+
+const PRODUCT_CARD_PROJECTION = `
+    _id,
+    name,
+    "slug": slug.current,
+    kind,
+    tagline,
+    summary,
+    status,
+    platforms,
+    priceLabel,
+    "icon": icon { alt, "url": asset->url, "width": asset->metadata.dimensions.width, "height": asset->metadata.dimensions.height }
+`;
+
+export const PRODUCTS_BY_KIND_QUERY = `
+  *[_type == "product" && kind == $kind] | order(order asc, name asc) {
+    ${PRODUCT_CARD_PROJECTION}
+  }
+`;
+
+export const ALL_PRODUCTS_QUERY = `
+  *[_type == "product"] | order(order asc, name asc) {
+    ${PRODUCT_CARD_PROJECTION}
+  }
+`;
+
+export const FEATURED_PRODUCTS_QUERY = `
+  *[_type == "product" && featured == true && status != "retired"] | order(order asc, name asc) {
+    ${PRODUCT_CARD_PROJECTION}
+  }
+`;
+
+export const PRODUCT_BY_SLUG_QUERY = `
+  *[_type == "product" && kind == $kind && slug.current == $slug][0] {
+    ${PRODUCT_CARD_PROJECTION},
+    primaryKeyword,
+    category,
+    appStoreUrl,
+    playStoreUrl,
+    webAppUrl,
+    isFree,
+    "hasWaitlist": defined(waitlistSegmentId) && waitlistSegmentId != "",
+    waitlistPitch,
+    launchDate,
+    "heroImage": heroImage { alt, "url": asset->url, "width": asset->metadata.dimensions.width, "height": asset->metadata.dimensions.height },
+    "heroVideo": select(
+      defined(heroVideo.file.asset) || defined(heroVideo.youtubeUrl) => heroVideo { "_key": "hero", "_type": "productVideo", alt, caption, "url": file.asset->url, youtubeUrl, orientation, "loop": coalesce(loop, true), "poster": poster.asset->url },
+      null
+    ),
+    "pillars": pillars[]{ _key, title, description },
+    "sections": sections[]{
+      _key,
+      _type,
+      eyebrow,
+      heading,
+      "tone": coalesce(tone, "auto"),
+      _type == "productFeature" => {
+        body,
+        bullets,
+        "mediaSide": coalesce(mediaSide, "right"),
+        "media": media[0]{ ${PRODUCT_MEDIA_PROJECTION} }
+      },
+      _type == "productGallery" => {
+        intro,
+        "layout": coalesce(layout, "grid"),
+        "items": items[]{ ${PRODUCT_MEDIA_PROJECTION} }
+      }
+    },
+    "screenshots": screenshots[]{ _key, alt, caption, "url": asset->url, "width": asset->metadata.dimensions.width, "height": asset->metadata.dimensions.height },
+    body,
+    "faq": faq[]{ _key, question, answer },
+    supportEmail,
+    "privacyAnchor": coalesce(privacyAnchor, slug.current),
+    "seoTitle": coalesce(seo.metaTitle, name + " — " + tagline),
+    "seoDescription": coalesce(seo.metaDescription, summary),
+    "seoImage": coalesce(seo.ogImage.asset->url, heroImage.asset->url),
+    "noindex": coalesce(seo.noindex, false)
+  }
+`;
+
+export const PRODUCT_SLUGS_BY_KIND_QUERY = `
+  *[_type == "product" && kind == $kind && defined(slug.current)] { "slug": slug.current }
+`;
+
+export const PRODUCT_DATES_QUERY = `
+  *[_type == "product" && defined(slug.current)] { "slug": slug.current, kind, _updatedAt, "noindex": coalesce(seo.noindex, false) }
+`;
+
+// Server-only: the waitlist API resolves the segment from the slug so
+// clients can never choose which list they're added to.
+export const PRODUCT_WAITLIST_QUERY = `
+  *[_type == "product" && slug.current == $slug][0] { name, status, waitlistSegmentId }
 `;

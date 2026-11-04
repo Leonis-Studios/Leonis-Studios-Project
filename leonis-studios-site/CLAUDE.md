@@ -186,6 +186,14 @@ Always use `revalidate: 3600` (ISR) on page-level fetches. Wrap `.fetch()` calls
 - **`caseStudy.ts`** — title, slug, client, year, summary, services (refs), tags, coverImage, liveUrl, body (Portable Text), results `[{label, value}]`, featured.
 - **`siteSettings.ts`** — singleton: siteName, tagline, metaDescription (≤160), email, location, social links.
 - **`aboutPage.ts`** — singleton: hero, story (Portable Text), profilePhoto, values `[{title, description}]`, approach, techStack, CTA.
+- **`product.ts`** — Leonis-owned apps and games (endorsed brand: own name, "by Leonis Studios"). `kind: app | game` → `/apps/[slug]` or `/games/[slug]`. `status: development | preorder | live | retired` drives the hero CTA (waitlist → store pre-order → download). `waitlistSegmentId` = Resend segment for `/api/waitlist` (resolved server-side from the slug). `sections[]` page builder: `productFeature` (heading/body/bullets + optional one image or video; text-only when empty) and `productGallery` (images/videos; hidden when empty). Media object types live in `objects/productMedia.ts`.
+
+### Products (apps & games)
+
+- Routes are thin wrappers; shared code in `components/products/` (`ProductIndexPage`, `ProductDetailPage` → `ProductDetailView`, `ProductSections`, `ProductArt`, `Reveal`, `VideoClip`, `WaitlistForm`). Labels/paths per kind in `lib/products.ts`.
+- Empty `/apps` or `/games` renders a "first one on the way" state with `noindex` (nav link never 404s).
+- Motion: CSS classes in the Products block of `globals.css` (`.hero-rise`, `.reveal`, `.dune-line`, `.device-float`, `.product-tile`), all disabled under `prefers-reduced-motion`. Don't put `<Reveal>` on a cell of a `gap-px` hairline grid — the grid background shows through while the cell is faded; reveal the cell's contents instead.
+- Store listing URLs: Support URL = `/apps/<slug>#support`, Privacy URL = `/privacy#<privacyAnchor>`. Changing a product slug needs a redirect in `next.config.ts`.
 
 ### Types — `lib/types.ts`
 
