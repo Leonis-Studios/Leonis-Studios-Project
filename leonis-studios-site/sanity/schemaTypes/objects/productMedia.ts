@@ -82,7 +82,14 @@ export const productVideoSchema = defineType({
       title: "Description",
       type: "string",
       description: "What the clip shows, for screen readers.",
-      validation: (Rule) => Rule.required(),
+      // Required only once a clip is attached — an empty video is ignored.
+      validation: (Rule) =>
+        Rule.custom((alt, ctx) => {
+          const v = ctx.parent as
+            | { file?: { asset?: unknown }; youtubeUrl?: string }
+            | undefined;
+          return (v?.file?.asset || v?.youtubeUrl) && !alt ? "Required" : true;
+        }),
     }),
     defineField({ name: "caption", title: "Caption", type: "string" }),
     defineField({
@@ -108,13 +115,15 @@ export const productVideoSchema = defineType({
       initialValue: true,
     }),
   ],
+  // Warning, not error: an empty video is skipped on the site, so it
+  // shouldn't block publishing (e.g. hero recording not shot yet).
   validation: (Rule) =>
     Rule.custom(
       (v: { file?: { asset?: unknown }; youtubeUrl?: string } | undefined) =>
-        v?.file?.asset || v?.youtubeUrl
+        !v || v.file?.asset || v.youtubeUrl
           ? true
-          : "Upload a video file or add a YouTube URL",
-    ),
+          : "No video yet — this will be hidden until you upload a file or add a YouTube URL",
+    ).warning(),
   preview: {
     select: { title: "alt", subtitle: "caption", media: "poster" },
   },
